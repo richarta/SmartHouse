@@ -17,7 +17,7 @@ public class Door {
 
 	}
 	public Door(){
-
+		//edit by Young
 	}
 
 	/**
