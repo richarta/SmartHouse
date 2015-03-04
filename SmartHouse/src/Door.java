@@ -16,7 +16,7 @@ public class Door {
 	public void finalize() throws Throwable {
 
 	}
-	public Door(){
+	public Door() {
 		//edit by Young
 	}
 
