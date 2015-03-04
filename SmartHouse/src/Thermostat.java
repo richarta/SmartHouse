@@ -1,4 +1,4 @@
-package System;
+
 
 
 /**
@@ -39,16 +39,18 @@ public class Thermostat {
 	/**
 	 * 
 	 * @param newName
+	 * @return 
 	 */
-	public setName(String newName){
+	public void setName(String newName){
 
 	}
 
 	/**
 	 * 
 	 * @param newTemp
+	 * @return 
 	 */
-	public setTemp(int newTemp){
+	public void setTemp(int newTemp){
 
 	}
 }//end Thermostat

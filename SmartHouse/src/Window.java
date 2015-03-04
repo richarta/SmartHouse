@@ -1,4 +1,4 @@
-package System;
+
 
 
 /**
@@ -36,15 +36,16 @@ public class Window {
 		return "";
 	}
 
-	public setLock(){
+	public void setLock(){
 
 	}
 
 	/**
 	 * 
 	 * @param newName
+	 * @return 
 	 */
-	public setName(String newName){
+	public void setName(String newName){
 
 	}
 }//end Window

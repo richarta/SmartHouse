@@ -1,4 +1,4 @@
-package System;
+
 
 
 /**
@@ -35,8 +35,9 @@ public abstract class User {
 	 * 
 	 * @param floor
 	 * @param nameRm
+	 * @return 
 	 */
-	public addRoom(int floor, String nameRm){
+	public void addRoom(int floor, String nameRm){
 
 	}
 
@@ -93,8 +94,9 @@ public abstract class User {
 	/**
 	 * 
 	 * @param nameHs
+	 * @return 
 	 */
-	public setHouseName(String nameHs){
+	public void setHouseName(String nameHs){
 
 	}
 }//end User

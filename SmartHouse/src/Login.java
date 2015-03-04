@@ -1,4 +1,4 @@
-package System;
+
 
 
 /**
@@ -15,23 +15,23 @@ public class Login {
 	public void finalize() throws Throwable {
 
 	}
-	public logincheck(){
+	public void logincheck(){
 
 	}
 
-	public loginfail(){
+	public void loginfail(){
 
 	}
 
-	public loginsucceed(){
+	public void loginsucceed(){
 
 	}
 
-	public personalizeHousefile()(){
+	public void personalizeHousefile(){
 
 	}
 
-	public selectionPage()(){
+	public void selectionPage()(){
 
 	}
 }//end Login

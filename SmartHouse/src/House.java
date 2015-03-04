@@ -1,4 +1,6 @@
-package System;
+import java.util.List;
+
+
 
 
 /**
@@ -58,7 +60,7 @@ public abstract class House {
 	 * 
 	 * @param nameHs
 	 */
-	public String getName(nameHs){
+	public String getName(){
 		return "";
 	}
 

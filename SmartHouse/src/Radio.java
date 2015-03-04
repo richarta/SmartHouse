@@ -1,4 +1,4 @@
-package System;
+
 
 
 /**
@@ -48,28 +48,31 @@ public class Radio {
 	/**
 	 * 
 	 * @param newChannel
+	 * @return 
 	 */
-	public setChannel(int newChannel){
+	public void setChannel(int newChannel){
 
 	}
 
 	/**
 	 * 
 	 * @param newName
+	 * @return 
 	 */
-	public setName(String newName){
+	public void setName(String newName){
 
 	}
 
-	public setStatus(){
+	public void setStatus(){
 
 	}
 
 	/**
 	 * 
 	 * @param volume
+	 * @return 
 	 */
-	public setVolume(int volume){
+	public void setVolume(int volume){
 
 	}
 }//end Radio

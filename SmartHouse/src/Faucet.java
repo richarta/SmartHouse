@@ -1,4 +1,4 @@
-package System;
+
 
 
 /**
@@ -23,8 +23,9 @@ public class Faucet {
 	/**
 	 * 
 	 * @param nameFa
+	 * @return 
 	 */
-	public Facuet(String nameFa){
+	public void Facuet(String nameFa){
 
 	}
 
@@ -39,12 +40,13 @@ public class Faucet {
 	/**
 	 * 
 	 * @param newName
+	 * @return 
 	 */
-	public setName(String newName){
+	public void setName(String newName){
 
 	}
 
-	public setStatus(){
+	public void setStatus(){
 
 	}
 }//end Faucet

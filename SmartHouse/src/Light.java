@@ -1,4 +1,4 @@
-package System;
+
 
 
 /**
@@ -39,12 +39,13 @@ public class Light {
 	/**
 	 * 
 	 * @param newName
+	 * @return 
 	 */
-	public setName(String newName){
+	public void setName(String newName){
 
 	}
 
-	public setStatus(){
+	public void setStatus(){
 
 	}
 }//end Light

@@ -1,4 +1,4 @@
-package System;
+
 
 
 /**
@@ -18,19 +18,19 @@ public class Personalize {
 	public void finalize() throws Throwable {
 
 	}
-	public add(){
+	public void add(){
 
 	}
 
-	public addFloors(){
+	public void addFloors(){
 
 	}
 
-	public addHouse(){
+	public void addHouse(){
 
 	}
 
-	public remove(){
+	public void remove(){
 
 	}
 }//end Personalize
