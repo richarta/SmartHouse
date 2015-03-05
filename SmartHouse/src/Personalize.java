@@ -1,13 +1,14 @@
+/*
+ * Course: SE 300-01
+ * Term: Spring 2015
+ * Assignment: SmartHouse Project
+ * Author: Abraham Richart
+ * Date: 05 March 2015
+ */
+
+import java.awt.*;
 import javax.swing.*;
 
-//test 1
-
-
-/**
- * @author Abraham
- * @version 1.0
- * @created 26-Feb-2015 6:23:23 PM
- */
 public class Personalize extends JPanel{
 
 	public House m_House;
@@ -37,10 +38,33 @@ public class Personalize extends JPanel{
 	}
 	
 	public static void main(String[] args){
-		JFrame frame = new JFrame();
-		Login newLog = new Login();
-		frame.add(newLog);
-		frame.setSize(800, 600);
-		frame.setVisible(true);
+		
+		//Make username and password frame and pane
+		JFrame framePersonalize = new JFrame("Username and Password");
+		JPanel panelPersonalize = new JPanel();
+		
+		//Create button, textfields, and labels
+		JButton buttonSave = new JButton("Save");
+		JLabel labelUsername = new JLabel("Username");
+		JLabel labelPassword = new JLabel("Password");
+		JTextField textfieldUsername = new JTextField(20);
+		JTextField textfieldPassword = new JTextField(20);
+		
+		//Set layout for pane
+		panelPersonalize.setLayout(new FlowLayout());
+		
+		//Add labels, textfields, and button to pane in flow order
+		panelPersonalize.add(labelUsername);
+		panelPersonalize.add(textfieldUsername);
+		panelPersonalize.add(labelPassword);
+		panelPersonalize.add(textfieldPassword);
+		panelPersonalize.add(buttonSave);
+		
+		//Add pane to frame
+		framePersonalize.add(panelPersonalize);
+		
+		//Set size of pane and make visible
+		framePersonalize.setSize(300, 175);
+		framePersonalize.setVisible(true);
 	}
 }//end Personalize
