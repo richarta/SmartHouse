@@ -1,5 +1,10 @@
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.SpringLayout;
 
-
+import java.awt.BorderLayout;
 
 /**
  * @author Abraham
@@ -7,10 +12,6 @@
  * @created 26-Feb-2015 6:23:30 PM
  */
 public class SelectionMenu {
-
-	public Login m_Login;
-	public Entertainment m_Entertainment;
-	public Security m_Security;
 
 	public SelectionMenu(){
 
@@ -28,6 +29,12 @@ public class SelectionMenu {
 	}
 
 	public Sel.Sec.Button(){
+		
+	public static void main(String[] args){
+		
+		JFrame frame = new JFrame();
+		frame.setSize(800, 600);
+		frame.setVisible(true);
 
 	}
 }//end SelectionMenu
