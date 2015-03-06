@@ -1,15 +1,39 @@
+import javax.swing.*;
 
 
-
-/**
- * @author Abraham
- * @version 1.0
- * @created 26-Feb-2015 6:23:21 PM
- */
-public class Login {
+public class Login extends JPanel {
 
 	public Login(){
+	JPanel mainPanel = new JPanel();
+	JButton loginB = new JButton("Login");
+	JLabel userPass = new JLabel("Password");
+	JButton register = new JButton("Register");
+	JTextField userField = new JTextField(20);
+	JPasswordField passField = new JPasswordField(20);
+	mainPanel.setLayout(null);
+	mainPanel.setVisible(true);
+	
+	userField.setBounds(188, 132, 160, 25);
+	mainPanel.add(userField);
+	
 
+	userPass.setBounds(101, 168, 80, 25);
+	mainPanel.add(userPass);
+
+	
+	passField.setBounds(188, 168, 160, 25);
+	mainPanel.add(passField);
+
+	loginB.setBounds(188, 204, 80, 25);
+	mainPanel.add(loginB);
+	
+	register.setBounds(268, 204, 80, 25);
+	mainPanel.add(register);
+	
+	JLabel lblUsername = new JLabel("Username");
+	lblUsername.setBounds(101, 137, 61, 14);
+	mainPanel.add(lblUsername);
+	
 	}
 
 	public void finalize() throws Throwable {
@@ -31,7 +55,17 @@ public class Login {
 
 	}
 
-	public void selectionPage()(){
+	public void selectionPage(){
 
+	}
+	
+	public static void main(String[] args){
+		JFrame frame = new JFrame();
+		Login newLog = new Login();
+		newLog.setVisible(true);
+		frame.getContentPane().add(newLog);
+		frame.setSize(800, 600);
+		frame.setVisible(true);
+		
 	}
 }//end Login
