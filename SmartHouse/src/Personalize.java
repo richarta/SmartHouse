@@ -16,7 +16,49 @@ public class Personalize extends JPanel {
 	public Login m_Login;
 
 	public Personalize(){
-
+		
+		//Make username and password frame and pane
+		JFrame frameUNPW = new JFrame("Username and Password");
+		JPanel panelUNPW = new JPanel();
+		
+		//Create button, textfields, and labels
+		JButton buttonSave = new JButton("Save");
+		JLabel labelUsername = new JLabel("Username:");
+		JLabel labelPassword = new JLabel("Password:");
+		JTextField textfieldUsername = new JTextField(20);
+		JTextField textfieldPassword = new JTextField(20);
+		
+		//Set layout for pane
+		panelUNPW.setLayout(new FlowLayout());
+		
+		//Add labels, textfields, and button to pane in flow order
+		panelUNPW.add(labelUsername);
+		panelUNPW.add(textfieldUsername);
+		panelUNPW.add(labelPassword);
+		panelUNPW.add(textfieldPassword);
+		panelUNPW.add(buttonSave);
+		
+		//Add pane to frame
+		frameUNPW.getContentPane().add(panelUNPW);
+		
+		//Set size of size, location, and visibility of frameUNPW
+		frameUNPW.setSize(287, 125);
+		frameUNPW.setLocationRelativeTo(null);
+		frameUNPW.setVisible(true);
+		
+		//Create listener for save button
+		buttonSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Move to new GUI
+				addHouse();
+				
+				//Hide username and password GUI
+				frameUNPW.setVisible(false);
+				
+				//Save username and password in datase
+			}
+		});
 	}
 
 	public void finalize() throws Throwable {
@@ -56,7 +98,7 @@ public class Personalize extends JPanel {
 		panePersonalize.addTab("House", panelHouse);
 		
 		//Add tab pane to frame
-		framePersonalize.add(panePersonalize);
+		framePersonalize.getContentPane().add(panePersonalize);
 		
 		//Set size, location, and visibility of pane
 		framePersonalize.pack();
@@ -79,51 +121,5 @@ public class Personalize extends JPanel {
 
 	public void remove(){
 
-	}
-	
-	public static void main(String[] args){
-		
-		//Make username and password frame and pane
-		JFrame frameUNPW = new JFrame("Username and Password");
-		JPanel panelUNPW = new JPanel();
-		
-		//Create button, textfields, and labels
-		JButton buttonSave = new JButton("Save");
-		JLabel labelUsername = new JLabel("Username:");
-		JLabel labelPassword = new JLabel("Password:");
-		JTextField textfieldUsername = new JTextField(20);
-		JTextField textfieldPassword = new JTextField(20);
-		
-		//Set layout for pane
-		panelUNPW.setLayout(new FlowLayout());
-		
-		//Add labels, textfields, and button to pane in flow order
-		panelUNPW.add(labelUsername);
-		panelUNPW.add(textfieldUsername);
-		panelUNPW.add(labelPassword);
-		panelUNPW.add(textfieldPassword);
-		panelUNPW.add(buttonSave);
-		
-		//Add pane to frame
-		frameUNPW.add(panelUNPW);
-		
-		//Set size of size, location, and visibility of frameUNPW
-		frameUNPW.setSize(300, 175);
-		frameUNPW.setLocationRelativeTo(null);
-		frameUNPW.setVisible(true);
-		
-		//Create listener for save button
-		buttonSave.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				
-				//Move to new GUI
-				addHouse();
-				
-				//Hide username and password GUI
-				frameUNPW.setVisible(false);
-				
-				//Save username and password in datase
-			}
-		});
 	}
 }//end Personalize
