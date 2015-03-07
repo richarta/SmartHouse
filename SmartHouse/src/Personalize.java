@@ -12,6 +12,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Personalize extends JPanel {
+	private static JFrame framePersonalize = new JFrame("Personalize");
+	private static JLabel labelHS = new JLabel();
 	public Personalize() {
 	
 /*
@@ -88,138 +90,137 @@ public class Personalize extends JPanel {
 			}
 		});*/
 		
-		//Make addHouse GUI with House tab and pane
-		JFrame framePersonalize = new JFrame("Personalize");
-		JTabbedPane panePersonalize = new JTabbedPane();
-		JPanel panelHouse = new JPanel();
-		
-		//Create button, textfields and labels
-		JButton buttonSaveHouse = new JButton("Save");
-		JLabel labelHouseName = new JLabel("House Name:");
-		JTextField textfieldHouseName = new JTextField(20);
-		
-		//Set layout for panel
-		panelHouse.setLayout(new FlowLayout());
-		
-		JButton buttonChange = new JButton("Change House Name");
-		panelHouse.remove(textfieldHouseName);
-		panelHouse.remove(buttonSaveHouse);
-		panelHouse.remove(labelHouseName);
-		panelHouse.add(new JLabel("House Name: "));
-		panelHouse.add(new JLabel("nameHouse"));
-		panelHouse.add(buttonChange);
-		
-		JLabel labelFloorName = new JLabel("Floor Name:");
-		JTextField textfieldFloorName = new JTextField(20);
-		JButton buttonAddFloor = new JButton("Add Floor");
-		JPanel panelFloor = new JPanel();
-		panePersonalize.addTab("Floors", panelFloor);
-		panePersonalize.setSelectedIndex(1);
-		panelFloor.setLayout(new FlowLayout());
-		panelFloor.add(labelFloorName);
-		panelFloor.add(textfieldFloorName);
-		panelFloor.add(buttonAddFloor);
-		
-		//Add buttons text fields and labels to pane
-/*		panelHouse.add(labelHouseName);
-		panelHouse.add(textfieldHouseName);
-		panelHouse.add(buttonSaveHouse);*/
-			
-		//Add tab with house panel
-		panePersonalize.addTab("House", panelHouse);
-		
-		//Add tab pane to frame
-		framePersonalize.getContentPane().add(panePersonalize);
-		
-		//Set size, location, and visibility of pane
-		framePersonalize.pack();
-		framePersonalize.setLocationRelativeTo(null);
-		framePersonalize.setVisible(true);
 	}
 
 	public void finalize() throws Throwable {
 
 	}
-
-	public static void addFloor(JFrame framePersonalize, JTabbedPane panePersonalize){
+	
+	public static void changeNameGUI(){
 		
-		//Adjust floor panel
-		JPanel panelRoom = new JPanel();
-		panePersonalize.addTab("Rooms", panelRoom);
-		panePersonalize.setSelectedIndex(2);
+		//Create frame, panel and layout for change name GUI
+		JFrame changeNameHS = new JFrame("Change Name");
+		JPanel panelNameHS = new JPanel();
+		panelNameHS.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameHS.add(new JLabel("New name of House: "));
+		panelNameHS.add(tfNewName);
+		panelNameHS.add(btSave);
+		
+		//Add panel to frame
+		changeNameHS.add(panelNameHS);
+		
+		//Adjust frame
+		changeNameHS.pack();
+		changeNameHS.setVisible(true);
+		changeNameHS.setLocationRelativeTo(null);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//change the house label
+				labelHS.setText(tfNewName.getText());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameHS.setVisible(false);
+				framePersonalize.setVisible(true);
+			}
+		});
+	}
+
+	public static void addFloor(){
+		
 	}
 
 	public static void addHouse(){
 		
-		//Make addHouse GUI with House tab and pane
-		JFrame framePersonalize = new JFrame("Personalize");
+		//Create frame tabbed panes and panels
 		JTabbedPane panePersonalize = new JTabbedPane();
 		JPanel panelHouse = new JPanel();
-		
-		//Create button, text fields and labels
-		JButton buttonSaveHouse = new JButton("Save");
-		JLabel labelHouseName = new JLabel("House Name:");
-		JTextField textfieldHouseName = new JTextField(20);
-		
-		//Set layout for panel
 		panelHouse.setLayout(new FlowLayout());
 		
-		//Add buttons text fields and labels to pane
-		panelHouse.add(labelHouseName);
-		panelHouse.add(textfieldHouseName);
-		panelHouse.add(buttonSaveHouse);
-			
-		//Add tab with house panel
-		panePersonalize.addTab("House", panelHouse);
+		//Create components for initial GUI
+		JLabel labelHouse = new JLabel("House Name: ");
+		JTextField tfHouse = new JTextField(20);
+		JButton btSaveHouse = new JButton("Save");
 		
-		//Add tab pane to frame
+		//Add components to House panel
+		panelHouse.add(labelHouse);
+		panelHouse.add(tfHouse);
+		panelHouse.add(btSaveHouse);
+		panePersonalize.addTab("House", panelHouse);
 		framePersonalize.getContentPane().add(panePersonalize);
 		
-		//Set size, location, and visibility of pane
+		//Make frame visible, adjust size, and put in middle of screen
+		framePersonalize.setVisible(true);
 		framePersonalize.pack();
 		framePersonalize.setLocationRelativeTo(null);
-		framePersonalize.setVisible(true);
 		
-		//Listener for save button
-		buttonSaveHouse.addMouseListener(new MouseAdapter(){
+		//Save house listener
+		btSaveHouse.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
+				//Get String from text field
+				String nameHS = tfHouse.getText();
 				
-				//Get information from text field and store it
-				String nameHouse = textfieldHouseName.getText();
+				panelHouse.remove(labelHouse);
+				panelHouse.remove(tfHouse);
+				panelHouse.remove(btSaveHouse);
 				
-				//Adjust House Pane 
-				JButton buttonChange = new JButton("Change House Name");
-				panelHouse.remove(textfieldHouseName);
-				panelHouse.remove(buttonSaveHouse);
-				panelHouse.remove(labelHouseName);
-				panelHouse.add(new JLabel("House Name: "));
-				panelHouse.add(new JLabel(nameHouse + " "));
-				panelHouse.add(buttonChange);
-				framePersonalize.pack();
+				JButton btChangeHouse = new JButton("Change Name");
+				SpringLayout sl_panelHouse = new SpringLayout();
+				panelHouse.setLayout(sl_panelHouse);
+				JLabel labelHSName = new JLabel("House Name: ");
+				sl_panelHouse.putConstraint(SpringLayout.NORTH, btChangeHouse, -4, SpringLayout.NORTH, labelHSName);
+				sl_panelHouse.putConstraint(SpringLayout.NORTH, labelHSName, 9, SpringLayout.NORTH, panelHouse);
+				sl_panelHouse.putConstraint(SpringLayout.WEST, labelHSName, 10, SpringLayout.WEST, panelHouse);
+				panelHouse.add(labelHSName);
+				labelHS.setText(nameHS);
+				sl_panelHouse.putConstraint(SpringLayout.WEST, labelHS, 6, SpringLayout.EAST, labelHSName);
+				sl_panelHouse.putConstraint(SpringLayout.EAST, labelHS, -123, SpringLayout.EAST, panelHouse);
+				sl_panelHouse.putConstraint(SpringLayout.WEST, btChangeHouse, 6, SpringLayout.EAST, labelHS);
+				sl_panelHouse.putConstraint(SpringLayout.NORTH, labelHS, 0, SpringLayout.NORTH, labelHSName);
+				panelHouse.add(labelHS);
+				panelHouse.add(btChangeHouse);
 				
-				//Create Panel for the Floor tab and set it as the index
+				JTabbedPane paneFloor = new JTabbedPane();
+				sl_panelHouse.putConstraint(SpringLayout.EAST, btChangeHouse, 0, SpringLayout.EAST, paneFloor);
+				sl_panelHouse.putConstraint(SpringLayout.NORTH, paneFloor, 33, SpringLayout.NORTH, panelHouse);
+				sl_panelHouse.putConstraint(SpringLayout.WEST, paneFloor, 5, SpringLayout.WEST, panelHouse);
 				JPanel panelFloor = new JPanel();
-				JLabel labelFloorName = new JLabel("Floor Name:");
-				JTextField textfieldFloorName = new JTextField(20);
-				JButton buttonAddFloor = new JButton("Add Floor");
-				panePersonalize.addTab("Floors", panelFloor);
-				panePersonalize.setSelectedIndex(1);
 				panelFloor.setLayout(new FlowLayout());
-				panelFloor.add(labelFloorName);
-				panelFloor.add(textfieldFloorName);
-				panelFloor.add(buttonAddFloor);
-				framePersonalize.pack();
+				JLabel labelFloor = new JLabel("Floor Name: ");
+				JTextField tfFloor = new JTextField(20);
+				JButton btAddFloor = new JButton("Add Floor");
+				panelFloor.add(labelFloor);
+				panelFloor.add(tfFloor);
+				panelFloor.add(btAddFloor);
+				paneFloor.addTab("Floors", panelFloor);
+				panelHouse.add(paneFloor);
 				
-				//Listener for add floor button
-				buttonAddFloor.addMouseListener(new MouseAdapter(){
+				framePersonalize.setBounds(0, 0, 435, 170);
+				framePersonalize.setLocationRelativeTo(null);
+				
+				//Listener to change house name
+				btChangeHouse.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e){
-						addFloor(framePersonalize, panePersonalize);
+						//Set personalize frame to invisible
+						framePersonalize.setVisible(false);
+						
+						//Call method to change name
+						changeNameGUI();
 					}
 				});
 				
-				//Update User Class
-				
-				//Listener for change house name button
+				btAddFloor.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						//Run Add floor method
+						addFloor();
+					}
+				});
 			}
 		});
 	}
