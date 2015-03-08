@@ -11,13 +11,14 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Personalize extends JPanel {
+	
 	//Declare needed variables for scope of methods
 	private static String nameHS;
 	private static JFrame framePersonalize = new JFrame("Personalize");
 	private static JLabel labelHS = new JLabel();
 	public static JTabbedPane paneFloor = new JTabbedPane();
 	public static JTabbedPane paneRoom = new JTabbedPane();
-	private static JTabbedPane paneAdditions = new JTabbedPane();
+	public static JTabbedPane paneAdditions = new JTabbedPane();
 	private static JPanel panelFloor = new JPanel();
 	private static JPanel panelRoom = new JPanel();
 	private static int floorCounter = 1, roomCounter = 1;
@@ -180,7 +181,7 @@ public class Personalize extends JPanel {
 		panelRoom.add(tfNameRM);
 		panelRoom.add(btAddRM);
 		
-		//Develop tabbed pane tabs
+		//Develop room tabbed pane tabs
 		JTabbedPane paneRoom = new JTabbedPane();
 		sl_panelFLC.putConstraint(SpringLayout.WEST, btRemoveFL, 0, SpringLayout.WEST, paneRoom);
 		sl_panelFLC.putConstraint(SpringLayout.WEST, paneRoom, 0, SpringLayout.WEST, panelFLC);
@@ -215,10 +216,10 @@ public class Personalize extends JPanel {
 		if (floorCounter == 6){
 			paneFloor.setEnabledAt(0, false);
 		}
-		
-		framePersonalize.setResizable(true);
+
 		framePersonalize.setBounds(0,0,460,200);
 		framePersonalize.setLocationRelativeTo(null);
+		framePersonalize.setResizable(false);
 		
 		//Listener to change floor name
 		btChangeNameFL.addMouseListener(new MouseAdapter(){
@@ -248,6 +249,28 @@ public class Personalize extends JPanel {
 				--floorCounter;
 			}
 		});
+		
+		//Listener to add room
+		btAddRM.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//create room object
+				
+				//call add room method
+				addRoom(tfNameRM.getText());
+				
+				//set room text field to nothing
+				tfNameRM.setText("");
+			}
+		});
+	}
+	
+	public static void addRoom(String nameRM){
+		
+	}
+
+	public static void changeRoom(){
+		
 	}
 	
 	public static void changeFloor(){
@@ -315,7 +338,7 @@ public class Personalize extends JPanel {
 			public void mouseClicked(MouseEvent e){
 				
 				//Get String from text field
-				String nameHS = tfHouse.getText();
+				nameHS = tfHouse.getText();
 				
 				//Remove Components from house panel
 				panelHouse.remove(labelHouse);
