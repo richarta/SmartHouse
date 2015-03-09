@@ -1,3 +1,10 @@
+/*
+ * Course: SE 300-01
+ * Term: Spring 2015
+ * Assignment: SmartHouse Project
+ * Author: Timothy Bernier
+ * Date: 09 March 2015
+ */
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
