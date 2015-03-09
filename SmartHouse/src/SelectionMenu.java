@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -5,7 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import net.miginfocom.swing.MigLayout;
+
 import java.awt.GridLayout;
 import java.awt.CardLayout;
 
