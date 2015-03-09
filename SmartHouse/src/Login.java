@@ -1,10 +1,12 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
 
-public class Login extends JPanel implements ActionListener {
+public class Login extends JPanel 
+{
 
 	public Login(){
 
@@ -34,11 +36,33 @@ public class Login extends JPanel implements ActionListener {
 
 	loginB.setBounds(188, 204, 80, 25);
 	mainPanel.add(loginB);
-	loginB.addActionListener(this); 
+	
+	loginB.addMouseListener(new MouseAdapter(){
+		public void mouseClicked(MouseEvent e){
+			
+			//Check username and pass
+			
+			//if correct
+			//hide login
+			mainPanel.setVisible(false);
+			//open main menu
+			SelectionMenu menu = new SelectionMenu();
+			menu.setVisible(true);
+		}
+	}); 
 	
 	register.setBounds(268, 204, 80, 25);
 	mainPanel.add(register);
-	register.addActionListener(this); 
+	register.addMouseListener(new MouseAdapter(){
+		public void mouseClicked(MouseEvent e){
+			
+			//hide login
+			mainPanel.setVisible(false);
+			
+			//create setup menu
+			Personalize setup = new Personalize();
+		}
+	}); 
 	
 	JLabel lblUsername = new JLabel("Username");
 	lblUsername.setBounds(101, 137, 61, 14);
@@ -70,21 +94,6 @@ public class Login extends JPanel implements ActionListener {
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == loginB)
-		{
-			this.setVisible(false);
-			SelectionMenu menu = new SelectionMenu();
-			menu.setVisible(true);
-		}
-		if(e.getSource() == register)
-		{
-			this.setVisible(false);
-			Personalize setup = new Personalize();
-			setup.setVisible(true);
-		}
-	}
 	
 
 
