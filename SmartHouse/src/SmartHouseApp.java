@@ -12,7 +12,7 @@ public class SmartHouseApp {
 		//Run Login Page without creating a Login object
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new Login();
+				Login login = new Login();
 			}
 		});
 	}
