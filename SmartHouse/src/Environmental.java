@@ -84,7 +84,7 @@ public class Environmental extends JFrame {
 		tempSlider.setPaintTrack(true);
 		tempSlider.setMajorTickSpacing(20);
 		tempSlider.setMinorTickSpacing(5);
-		tempSlider.setBounds(10,40,200,50);
+		tempSlider.setBounds(36,66,200,50);
 		
 		tempSlider.addChangeListener(new ChangeListener(){
 			public void stateChanged (ChangeEvent e){
