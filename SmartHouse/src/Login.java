@@ -60,6 +60,7 @@ public class Login extends JPanel
 			
 			//create setup menu
 			Personalize setup = new Personalize();
+			setup.setVisible(true);
 		}
 	}); 
 	
