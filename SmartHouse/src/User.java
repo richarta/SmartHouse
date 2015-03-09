@@ -111,12 +111,12 @@ public abstract class User {
 		pass = nPass;
 	}
 	
-	public String getUsername()
+	public String getUsername(String u)
 	{
 		return username;
 	}
 	
-	public String getPass()
+	public String getPass(String p)
 	{
 		return pass;
 	}

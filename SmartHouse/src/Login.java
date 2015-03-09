@@ -8,7 +8,6 @@
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -72,7 +71,12 @@ public class Login extends JFrame
 	loginB.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
 			
-			//Check username and pass
+			//Check username
+			String user = userField.getText();
+			String pass = userPass.getText();
+			String loginCheck = getUser()
+			
+			
 			
 			//if correct hide login
 			frame.setVisible(false);
