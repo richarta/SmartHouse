@@ -3,6 +3,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Login extends JFrame 
@@ -18,40 +20,46 @@ public class Login extends JFrame
 
 	JButton loginB = new JButton("Login");
 	JLabel userPass = new JLabel("Password");
-	sl_mainPanel.putConstraint(SpringLayout.SOUTH, userPass, -101, SpringLayout.SOUTH, mainPanel);
+	sl_mainPanel.putConstraint(SpringLayout.WEST, userPass, 77, SpringLayout.WEST, mainPanel);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, userPass, -173, SpringLayout.SOUTH, mainPanel);
 	JButton register = new JButton("Register");
-	sl_mainPanel.putConstraint(SpringLayout.SOUTH, register, -89, SpringLayout.SOUTH, mainPanel);
+	register.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+		}
+	});
+	sl_mainPanel.putConstraint(SpringLayout.WEST, register, 244, SpringLayout.WEST, mainPanel);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, register, -161, SpringLayout.SOUTH, mainPanel);
 	JTextField userField = new JTextField(20);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, loginB, -100, SpringLayout.NORTH, userField);
+	sl_mainPanel.putConstraint(SpringLayout.NORTH, userField, 60, SpringLayout.NORTH, mainPanel);
+	sl_mainPanel.putConstraint(SpringLayout.WEST, userField, 164, SpringLayout.WEST, mainPanel);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, userField, -173, SpringLayout.SOUTH, mainPanel);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, loginB, -125, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.WEST, loginB, 0, SpringLayout.WEST, userField);
-	sl_mainPanel.putConstraint(SpringLayout.SOUTH, loginB, -28, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, register, 0, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, userPass, 0, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.EAST, register, 0, SpringLayout.EAST, userField);
 	sl_mainPanel.putConstraint(SpringLayout.EAST, userPass, 0, SpringLayout.EAST, userField);
-	sl_mainPanel.putConstraint(SpringLayout.NORTH, userField, 132, SpringLayout.NORTH, mainPanel);
-	sl_mainPanel.putConstraint(SpringLayout.SOUTH, userField, -101, SpringLayout.SOUTH, mainPanel);
-	sl_mainPanel.putConstraint(SpringLayout.EAST, userField, -136, SpringLayout.EAST, mainPanel);
 
 	JPasswordField passField = new JPasswordField(20);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, passField, -64, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.WEST, passField, 0, SpringLayout.WEST, userField);
-	sl_mainPanel.putConstraint(SpringLayout.SOUTH, passField, -3, SpringLayout.NORTH, userField);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, passField, -75, SpringLayout.NORTH, userField);
 	mainPanel.setLayout(null);
 	mainPanel.setVisible(true);
 	
-	userField.setBounds(188, 132, 160, 25);
+	userField.setBounds(188, 82, 160, 25);
 	mainPanel.add(userField);
 	
 
-	userPass.setBounds(101, 168, 80, 25);
+	userPass.setBounds(101, 118, 80, 25);
 	mainPanel.add(userPass);
 
 	
-	passField.setBounds(188, 168, 160, 25);
+	passField.setBounds(188, 118, 160, 25);
 	mainPanel.add(passField);
 
-	loginB.setBounds(188, 204, 80, 25);
+	loginB.setBounds(188, 154, 80, 25);
 	mainPanel.add(loginB);
 	
 	loginB.addMouseListener(new MouseAdapter(){
@@ -67,7 +75,7 @@ public class Login extends JFrame
 		}
 	}); 
 	
-	register.setBounds(268, 204, 80, 25);
+	register.setBounds(268, 154, 80, 25);
 	mainPanel.add(register);
 	register.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
@@ -82,9 +90,10 @@ public class Login extends JFrame
 	
 	JLabel lblUsername = new JLabel("Username");
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, lblUsername, 5, SpringLayout.NORTH, userField);
-	sl_mainPanel.putConstraint(SpringLayout.SOUTH, lblUsername, -17, SpringLayout.NORTH, userPass);
+	sl_mainPanel.putConstraint(SpringLayout.WEST, lblUsername, 77, SpringLayout.WEST, mainPanel);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, lblUsername, -89, SpringLayout.NORTH, userPass);
 	sl_mainPanel.putConstraint(SpringLayout.EAST, lblUsername, 0, SpringLayout.EAST, userField);
-	lblUsername.setBounds(101, 137, 61, 14);
+	lblUsername.setBounds(101, 87, 61, 14);
 	mainPanel.add(lblUsername);
 	
 	frame.getContentPane().add(mainPanel);
