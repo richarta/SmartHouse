@@ -42,8 +42,7 @@ public class Login extends JPanel
 			
 			//Check username and pass
 			
-			//if correct
-			//hide login
+			//if correct hide login
 			mainPanel.setVisible(false);
 			//open main menu
 			SelectionMenu menu = new SelectionMenu();
