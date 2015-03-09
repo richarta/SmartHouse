@@ -1,6 +1,4 @@
 
-
-
 /**
  * @author Abraham
  * @version 1.0
@@ -17,7 +15,7 @@ public class Window {
 
 	}
 	public Window(){
-
+		// a square light moves through, andrew carosi
 	}
 
 	/**
