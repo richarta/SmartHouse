@@ -5,11 +5,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 
-public class Login extends JPanel 
+public class Login extends JFrame 
 {
 
 	public Login(){
-
+	JFrame frame = new JFrame();
+	frame.setSize(800, 600);
+		
 	SpringLayout sl_mainPanel = new SpringLayout();
 	JPanel mainPanel = new JPanel(sl_mainPanel);
 
@@ -43,10 +45,10 @@ public class Login extends JPanel
 			//Check username and pass
 			
 			//if correct hide login
-			mainPanel.setVisible(false);
+			frame.setVisible(false);
 			//open main menu
 			SelectionMenu menu = new SelectionMenu();
-			menu.setVisible(true);
+			
 		}
 	}); 
 	
@@ -56,11 +58,10 @@ public class Login extends JPanel
 		public void mouseClicked(MouseEvent e){
 			
 			//hide login
-			mainPanel.setVisible(false);
+			frame.setVisible(false);
 			
 			//create setup menu
 			Personalize setup = new Personalize();
-			setup.setVisible(true);
 		}
 	}); 
 	
@@ -68,7 +69,8 @@ public class Login extends JPanel
 	lblUsername.setBounds(101, 137, 61, 14);
 	mainPanel.add(lblUsername);
 	
-	
+	frame.add(mainPanel);
+	frame.setVisible(true);
 	}
 
 	public void finalize() throws Throwable {
