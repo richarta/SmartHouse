@@ -10,7 +10,7 @@ public class Login extends JFrame
 
 	public Login(){
 	JFrame frame = new JFrame();
-	frame.setSize(800, 600);
+	frame.setSize(500, 297);
 		
 	SpringLayout sl_mainPanel = new SpringLayout();
 	JPanel mainPanel = new JPanel(sl_mainPanel);
@@ -18,10 +18,25 @@ public class Login extends JFrame
 
 	JButton loginB = new JButton("Login");
 	JLabel userPass = new JLabel("Password");
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, userPass, -101, SpringLayout.SOUTH, mainPanel);
 	JButton register = new JButton("Register");
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, register, -89, SpringLayout.SOUTH, mainPanel);
 	JTextField userField = new JTextField(20);
+	sl_mainPanel.putConstraint(SpringLayout.NORTH, loginB, -125, SpringLayout.NORTH, userField);
+	sl_mainPanel.putConstraint(SpringLayout.WEST, loginB, 0, SpringLayout.WEST, userField);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, loginB, -28, SpringLayout.NORTH, userField);
+	sl_mainPanel.putConstraint(SpringLayout.NORTH, register, 0, SpringLayout.NORTH, userField);
+	sl_mainPanel.putConstraint(SpringLayout.NORTH, userPass, 0, SpringLayout.NORTH, userField);
+	sl_mainPanel.putConstraint(SpringLayout.EAST, register, 0, SpringLayout.EAST, userField);
+	sl_mainPanel.putConstraint(SpringLayout.EAST, userPass, 0, SpringLayout.EAST, userField);
+	sl_mainPanel.putConstraint(SpringLayout.NORTH, userField, 132, SpringLayout.NORTH, mainPanel);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, userField, -101, SpringLayout.SOUTH, mainPanel);
+	sl_mainPanel.putConstraint(SpringLayout.EAST, userField, -136, SpringLayout.EAST, mainPanel);
 
 	JPasswordField passField = new JPasswordField(20);
+	sl_mainPanel.putConstraint(SpringLayout.NORTH, passField, -64, SpringLayout.NORTH, userField);
+	sl_mainPanel.putConstraint(SpringLayout.WEST, passField, 0, SpringLayout.WEST, userField);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, passField, -3, SpringLayout.NORTH, userField);
 	mainPanel.setLayout(null);
 	mainPanel.setVisible(true);
 	
@@ -66,10 +81,13 @@ public class Login extends JFrame
 	}); 
 	
 	JLabel lblUsername = new JLabel("Username");
+	sl_mainPanel.putConstraint(SpringLayout.NORTH, lblUsername, 5, SpringLayout.NORTH, userField);
+	sl_mainPanel.putConstraint(SpringLayout.SOUTH, lblUsername, -17, SpringLayout.NORTH, userPass);
+	sl_mainPanel.putConstraint(SpringLayout.EAST, lblUsername, 0, SpringLayout.EAST, userField);
 	lblUsername.setBounds(101, 137, 61, 14);
 	mainPanel.add(lblUsername);
 	
-	frame.add(mainPanel);
+	frame.getContentPane().add(mainPanel);
 	frame.setVisible(true);
 	}
 
