@@ -1,8 +1,10 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 
-public class Login extends JPanel {
+public class Login extends JPanel implements ActionListener {
 
 	public Login(){
 
@@ -32,13 +34,16 @@ public class Login extends JPanel {
 
 	loginB.setBounds(188, 204, 80, 25);
 	mainPanel.add(loginB);
+	loginB.addActionListener(this); 
 	
 	register.setBounds(268, 204, 80, 25);
 	mainPanel.add(register);
+	register.addActionListener(this); 
 	
 	JLabel lblUsername = new JLabel("Username");
 	lblUsername.setBounds(101, 137, 61, 14);
 	mainPanel.add(lblUsername);
+	
 	
 	}
 
@@ -64,16 +69,23 @@ public class Login extends JPanel {
 	public void selectionPage(){
 
 	}
-	
-	public static void main(String[] args){
-		JFrame frame = new JFrame();
-		Login newLog = new Login();
 
-		newLog.setVisible(true);
-
-		frame.getContentPane().add(newLog);
-		frame.setSize(800, 600);
-		frame.setVisible(true);
-		
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == loginB)
+		{
+			this.setVisible(false);
+			SelectionMenu menu = new SelectionMenu();
+			menu.setVisible(true);
+		}
+		if(e.getSource() == register)
+		{
+			this.setVisible(false);
+			Personalize setup = new Personalize();
+			setup.setVisible(true);
+		}
 	}
+	
+
+
 }//end Login
