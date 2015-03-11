@@ -520,8 +520,14 @@ public class Personalize extends JPanel {
 						btnRemoveFL.setEnabled(true);
 						
 						//Change frame size
-						framePersonalize.setBounds(0, 0, 450, 280);
-						framePersonalize.setLocationRelativeTo(null);
+						if (roomCounter == 0){
+							framePersonalize.setBounds(0, 0, 450, 280);
+							framePersonalize.setLocationRelativeTo(null);
+						}
+						else {
+							framePersonalize.setBounds(0, 0, 450, 440);
+							framePersonalize.setLocationRelativeTo(null);
+						}
 					}
 				});
 				
