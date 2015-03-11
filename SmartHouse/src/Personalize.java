@@ -8,7 +8,9 @@
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 public class Personalize extends JPanel {
 	
@@ -16,433 +18,14 @@ public class Personalize extends JPanel {
 	private static String nameHS;
 	private static JFrame framePersonalize = new JFrame("Personalize");
 	private static JLabel labelHS = new JLabel();
-	public static JTabbedPane paneFloor = new JTabbedPane();
-	public static JTabbedPane paneRoom = new JTabbedPane();
-	public static JTabbedPane paneAdditions = new JTabbedPane();
-	private static JPanel panelFloor = new JPanel();
-	private static JPanel panelRoom = new JPanel();
-	private static int floorCounter = 1, roomCounter = 1;
+	private static int floorCounter = 0, roomCounter = 0;
+	private static JTextField tfNameRM, tfNameFL;
+	private static JComboBox<String> cbFloors = new JComboBox<String>();
+	private static JComboBox<String> cbRooms = new JComboBox<String>();
+	private static JComboBox<String> cbAdditions = new JComboBox<String>();
 	
 	public Personalize() {
 	
-/*		//Make username and password frame and pane
-		JFrame frameUNPW = new JFrame("Username and Password");
-		JPanel panelUNPW = new JPanel();
-			
-		//Create button, textfields, and labels
-		JButton buttonSave = new JButton("Save");
-		JLabel labelUsername = new JLabel("Username:");
-		JLabel labelPassword = new JLabel("Password:");
-		JTextField textfieldUsername = new JTextField(20);
-		JTextField textfieldPassword = new JTextField(20);
-		SpringLayout sl_panelUNPW = new SpringLayout();
-			
-		//Adjust Placement of components
-		sl_panelUNPW.putConstraint(SpringLayout.WEST, buttonSave, 196, SpringLayout.WEST, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.EAST, buttonSave, 0, SpringLayout.EAST, textfieldUsername);
-		sl_panelUNPW.putConstraint(SpringLayout.EAST, labelPassword, 0, SpringLayout.EAST, labelUsername);
-		sl_panelUNPW.putConstraint(SpringLayout.EAST, labelUsername, -6, SpringLayout.WEST, textfieldUsername);
-		sl_panelUNPW.putConstraint(SpringLayout.WEST, labelPassword, 6, SpringLayout.WEST, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.NORTH, textfieldUsername, 8, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.SOUTH, textfieldUsername, -10, SpringLayout.NORTH, textfieldPassword);
-		sl_panelUNPW.putConstraint(SpringLayout.WEST, textfieldPassword, 87, SpringLayout.WEST, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.WEST, labelUsername, 6, SpringLayout.WEST, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.WEST, textfieldUsername, 87, SpringLayout.WEST, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.SOUTH, buttonSave, 93, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.EAST, textfieldUsername, -10, SpringLayout.EAST, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.EAST, textfieldPassword, -10, SpringLayout.EAST, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.NORTH, textfieldPassword, 38, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.NORTH, buttonSave, 68, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.NORTH, labelPassword, 28, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.SOUTH, labelPassword, 68, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.NORTH, labelUsername, 0, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.SOUTH, labelUsername, 34, SpringLayout.NORTH, panelUNPW);
-		panelUNPW.setLayout(sl_panelUNPW);
-			
-		//Add labels, text fields, and button to pane in flow order
-		panelUNPW.add(labelUsername);
-		panelUNPW.add(textfieldUsername);
-		panelUNPW.add(labelPassword);
-		panelUNPW.add(textfieldPassword);
-		
-		//Add space label for spring layout left of save button
-		JLabel label = new JLabel("");
-		sl_panelUNPW.putConstraint(SpringLayout.NORTH, label, 68, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.WEST, label, 0, SpringLayout.WEST, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.SOUTH, label, 102, SpringLayout.NORTH, panelUNPW);
-		sl_panelUNPW.putConstraint(SpringLayout.EAST, label, 137, SpringLayout.WEST, panelUNPW);
-		panelUNPW.add(label);
-		panelUNPW.add(buttonSave);
-		
-		//Add pane to frame
-		frameUNPW.getContentPane().add(panelUNPW);
-		
-		//Set size of size, location, and visibility of frameUNPW
-		frameUNPW.setSize(323, 142);
-		frameUNPW.setLocationRelativeTo(null);
-		frameUNPW.setVisible(true);
-		frameUNPW.setResizable(false);
-		
-		//Create listener for save button
-		buttonSave.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				
-				//dispose username and password GUI
-				frameUNPW.dispose();
-				
-				//Move to new GUI
-				addHouse();
-
-				//Save username and password in database
-			}
-		});*/
-		
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-	
-	public static void changeHouseGUI(){
-		
-		//Create frame, panel and layout for change name GUI
-		JFrame changeNameHS = new JFrame("Change Name");
-		JPanel panelNameHS = new JPanel();
-		panelNameHS.setLayout(new FlowLayout());
-		
-		//Create and add Components
-		JTextField tfNewName = new JTextField(20);
-		JButton btSave = new JButton("Save");
-		panelNameHS.add(new JLabel("New name of House: "));
-		panelNameHS.add(tfNewName);
-		panelNameHS.add(btSave);
-		
-		//Add panel to frame
-		changeNameHS.getContentPane().add(panelNameHS);
-		
-		//Adjust frame
-		changeNameHS.pack();
-		changeNameHS.setVisible(true);
-		changeNameHS.setLocationRelativeTo(null);
-		changeNameHS.setResizable(false);
-		
-		//Add Listener
-		btSave.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				
-				//change nameHS
-				nameHS = tfNewName.getText();
-				
-				//change the house label
-				labelHS.setText(tfNewName.getText());
-				
-				//Hide the change name GUI and display the personalize GUI
-				changeNameHS.dispose();
-				framePersonalize.setVisible(true);
-			}
-		});
-	}
-
-	public static void addFloor(String nameFL){
-		
-		//Set title of next index to name of floor
-		paneFloor.setTitleAt(floorCounter, nameFL);
-		paneFloor.setEnabledAt(floorCounter, true);
-		
-		//Create new panel for created floors
-		JPanel panelFLC = new JPanel();
-		JButton btRemoveFL = new JButton("Remove Floor");
-		JButton btChangeNameFL = new JButton("Change Floor Name");
-		SpringLayout sl_panelFLC = new SpringLayout();
-		sl_panelFLC.putConstraint(SpringLayout.NORTH, btRemoveFL, 5, SpringLayout.NORTH, panelFLC);
-		sl_panelFLC.putConstraint(SpringLayout.NORTH, btChangeNameFL, 0, SpringLayout.NORTH, btRemoveFL);
-		sl_panelFLC.putConstraint(SpringLayout.WEST, btChangeNameFL, 6, SpringLayout.EAST, btRemoveFL);
-		panelFLC.setLayout(sl_panelFLC);
-		panelFLC.add(btRemoveFL);
-		panelFLC.add(btChangeNameFL);
-		
-		//Add buttons labels and text fields for room panel
-		JPanel panelRoom = new JPanel();
-		SpringLayout sl_panelRoom = new SpringLayout();
-		panelRoom.setLayout(sl_panelRoom);
-		JLabel label = new JLabel("Room Name: ");
-		sl_panelRoom.putConstraint(SpringLayout.NORTH, label, 9, SpringLayout.NORTH, panelRoom);
-		sl_panelRoom.putConstraint(SpringLayout.WEST, label, 5, SpringLayout.WEST, panelRoom);
-		panelRoom.add(label);
-		JTextField tfNameRM = new JTextField(20);
-		sl_panelRoom.putConstraint(SpringLayout.NORTH, tfNameRM, 6, SpringLayout.NORTH, panelRoom);
-		sl_panelRoom.putConstraint(SpringLayout.WEST, tfNameRM, 81, SpringLayout.WEST, panelRoom);
-		JButton btAddRM = new JButton("Add Room");
-		sl_panelRoom.putConstraint(SpringLayout.SOUTH, tfNameRM, 0, SpringLayout.SOUTH, btAddRM);
-		sl_panelRoom.putConstraint(SpringLayout.EAST, tfNameRM, -6, SpringLayout.WEST, btAddRM);
-		sl_panelRoom.putConstraint(SpringLayout.NORTH, btAddRM, -4, SpringLayout.NORTH, label);
-		sl_panelRoom.putConstraint(SpringLayout.EAST, btAddRM, -7, SpringLayout.EAST, panelRoom);
-		sl_panelRoom.putConstraint(SpringLayout.WEST, btAddRM, -112, SpringLayout.EAST, panelRoom);
-		panelRoom.add(tfNameRM);
-		panelRoom.add(btAddRM);
-		
-		//Develop room tabbed pane tabs
-		JTabbedPane paneRoom = new JTabbedPane();
-		sl_panelFLC.putConstraint(SpringLayout.WEST, btRemoveFL, 0, SpringLayout.WEST, paneRoom);
-		sl_panelFLC.putConstraint(SpringLayout.WEST, paneRoom, 0, SpringLayout.WEST, panelFLC);
-		sl_panelFLC.putConstraint(SpringLayout.SOUTH, paneRoom, 95, SpringLayout.NORTH, panelFLC);
-		sl_panelFLC.putConstraint(SpringLayout.EAST, paneRoom, 0, SpringLayout.EAST, panelFLC);
-		sl_panelFLC.putConstraint(SpringLayout.NORTH, paneRoom, 33, SpringLayout.NORTH, panelFLC);
-		paneRoom.addTab("Add Room", panelRoom);
-		paneRoom.addTab(null, null);
-		paneRoom.addTab(null, null);
-		paneRoom.addTab(null, null);
-		paneRoom.addTab(null, null);
-		paneRoom.addTab(null, null);
-		
-		//Disable tabs set aside for room creation
-		for(int i = 1; i <= 5; ++i){
-			paneRoom.setEnabledAt(i, false);
-		}
-		
-		//add tabbed pane to the flc panel
-		panelFLC.add(paneRoom);
-		
-		//Add to current index
-		paneFloor.setComponentAt(floorCounter, panelFLC);
-		
-		//Set newly made floor as current index
-		paneFloor.setSelectedIndex(floorCounter);
-		
-		//increment floor counter
-		++floorCounter;
-		
-		//Do not allow more floors to be added after allowable tabs have been filled
-		if (floorCounter == 6){
-			paneFloor.setEnabledAt(0, false);
-		}
-
-		framePersonalize.setBounds(0,0,460,200);
-		framePersonalize.setLocationRelativeTo(null);
-		framePersonalize.setResizable(false);
-		
-		//Listener to change floor name
-		btChangeNameFL.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				
-				//Set personalize frame to invisible
-				framePersonalize.setVisible(false);
-				
-				//Call method to change name
-				changeFloor();
-			}
-		});
-		
-		//Listener to remove floor
-		btRemoveFL.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				
-				//remove tab
-				paneFloor.remove(paneFloor.getSelectedIndex());
-				
-				//add new tab
-				paneFloor.addTab(null, null);
-				paneFloor.setEnabledAt(5, false);
-				paneFloor.setSelectedIndex(0);
-				
-				//decrement floor counter
-				--floorCounter;
-			}
-		});
-		
-		//Listener to add room
-		btAddRM.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				
-				//create room object
-				
-				//call add room method
-				addRoom(tfNameRM.getText());
-				
-				//set room text field to nothing
-				tfNameRM.setText("");
-			}
-		});
-	}
-	
-	public static void addRoom(String nameRM){
-		
-	}
-
-	public static void changeRoom(){
-		
-	}
-	
-	public static void changeFloor(){
-		
-		//Create frame, panel and layout for change name GUI
-		JFrame changeNameFL = new JFrame("Change Floor Name");
-		JPanel panelNameFL = new JPanel();
-		panelNameFL.setLayout(new FlowLayout());
-		
-		//Create and add Components
-		JTextField tfNewName = new JTextField(20);
-		JButton btSave = new JButton("Save");
-		panelNameFL.add(new JLabel("New name of Floor: "));
-		panelNameFL.add(tfNewName);
-		panelNameFL.add(btSave);
-		
-		//Add panel to frame
-		changeNameFL.getContentPane().add(panelNameFL);
-		
-		//Adjust frame
-		changeNameFL.pack();
-		changeNameFL.setVisible(true);
-		changeNameFL.setLocationRelativeTo(null);
-		changeNameFL.setResizable(false);
-		
-		//Add Listener
-		btSave.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				
-				//Change Name of Floor
-				paneFloor.setTitleAt(paneFloor.getSelectedIndex(), tfNewName.getText());
-				
-				//Hide the change name GUI and display the personalize GUI
-				changeNameFL.dispose();
-				framePersonalize.setVisible(true);
-			}
-		});
-	}
-
-	public static void addHouse(){
-		
-		//Create house panel
-		JPanel panelHouse = new JPanel();
-		panelHouse.setLayout(new FlowLayout());
-		
-		//Create components for initial GUI
-		JLabel labelHouse = new JLabel("House Name: ");
-		JTextField tfHouse = new JTextField(20);
-		JButton btSaveHouse = new JButton("Save");
-		
-		//Add components to House panel
-		panelHouse.add(labelHouse);
-		panelHouse.add(tfHouse);
-		panelHouse.add(btSaveHouse);
-		framePersonalize.getContentPane().add(panelHouse);
-		
-		//Make frame visible, adjust size, and put in middle of screen
-		framePersonalize.setVisible(true);
-		framePersonalize.pack();
-		framePersonalize.setLocationRelativeTo(null);
-		framePersonalize.setResizable(false);
-		
-		//Save house listener
-		btSaveHouse.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				
-				//Get String from text field
-				nameHS = tfHouse.getText();
-				
-				//Remove Components from house panel
-				panelHouse.remove(labelHouse);
-				panelHouse.remove(tfHouse);
-				panelHouse.remove(btSaveHouse);
-				
-				//Create and add new components to house panel
-				JButton btChangeHouse = new JButton("Change");
-				SpringLayout sl_panelHouse = new SpringLayout();
-				panelHouse.setLayout(sl_panelHouse);
-				JLabel labelHSName = new JLabel("House Name: ");
-				sl_panelHouse.putConstraint(SpringLayout.NORTH, btChangeHouse, -4, SpringLayout.NORTH, labelHSName);
-				sl_panelHouse.putConstraint(SpringLayout.NORTH, labelHSName, 9, SpringLayout.NORTH, panelHouse);
-				sl_panelHouse.putConstraint(SpringLayout.WEST, labelHSName, 10, SpringLayout.WEST, panelHouse);
-				panelHouse.add(labelHSName);
-				labelHS.setText(nameHS);
-				sl_panelHouse.putConstraint(SpringLayout.WEST, labelHS, 6, SpringLayout.EAST, labelHSName);
-				sl_panelHouse.putConstraint(SpringLayout.EAST, labelHS, -123, SpringLayout.EAST, panelHouse);
-				sl_panelHouse.putConstraint(SpringLayout.WEST, btChangeHouse, 6, SpringLayout.EAST, labelHS);
-				sl_panelHouse.putConstraint(SpringLayout.NORTH, labelHS, 0, SpringLayout.NORTH, labelHSName);
-				panelHouse.add(labelHS);
-				panelHouse.add(btChangeHouse);
-				
-				//Create tabbed pane within house panel and add floor panel to tab
-				sl_panelHouse.putConstraint(SpringLayout.EAST, btChangeHouse, -10, SpringLayout.EAST, paneFloor);
-				sl_panelHouse.putConstraint(SpringLayout.NORTH, paneFloor, 33, SpringLayout.NORTH, panelHouse);
-				sl_panelHouse.putConstraint(SpringLayout.WEST, paneFloor, 0, SpringLayout.WEST, panelHouse);
-				sl_panelHouse.putConstraint(SpringLayout.EAST, paneFloor, 0, SpringLayout.EAST, panelHouse);
-				sl_panelHouse.putConstraint(SpringLayout.SOUTH, paneFloor, 0, SpringLayout.SOUTH, panelHouse);
-				JLabel labelFloor = new JLabel("Floor Name: ");
-				JTextField tfFloor = new JTextField(20);
-				JButton btAddFloor = new JButton("Add Floor");
-				SpringLayout sl_panelFloor = new SpringLayout();
-				sl_panelFloor.putConstraint(SpringLayout.SOUTH, tfFloor, 0, SpringLayout.SOUTH, btAddFloor);
-				sl_panelFloor.putConstraint(SpringLayout.WEST, btAddFloor, -114, SpringLayout.EAST, panelFloor);
-				sl_panelFloor.putConstraint(SpringLayout.EAST, btAddFloor, -7, SpringLayout.EAST, panelFloor);
-				sl_panelFloor.putConstraint(SpringLayout.NORTH, tfFloor, -3, SpringLayout.NORTH, labelFloor);
-				sl_panelFloor.putConstraint(SpringLayout.WEST, tfFloor, 0, SpringLayout.EAST, labelFloor);
-				sl_panelFloor.putConstraint(SpringLayout.EAST, tfFloor, -6, SpringLayout.WEST, btAddFloor);
-				sl_panelFloor.putConstraint(SpringLayout.NORTH, btAddFloor, -4, SpringLayout.NORTH, labelFloor);
-				sl_panelFloor.putConstraint(SpringLayout.NORTH, labelFloor, 9, SpringLayout.NORTH, panelFloor);
-				sl_panelFloor.putConstraint(SpringLayout.WEST, labelFloor, 10, SpringLayout.WEST, panelFloor);
-				panelFloor.setLayout(sl_panelFloor);
-				panelFloor.add(labelFloor);
-				panelFloor.add(tfFloor);
-				panelFloor.add(btAddFloor);
-				
-				//Add tabs for limited amount of floors
-				paneFloor.addTab("Add Floor", panelFloor);
-				paneFloor.addTab(null, null);
-				paneFloor.addTab(null, null);
-				paneFloor.addTab(null, null);
-				paneFloor.addTab(null, null);
-				paneFloor.addTab(null, null);
-				
-				//Disable tabs meant for other floors
-				for(int i = 1; i <= 5; ++i){
-					paneFloor.setEnabledAt(i, false);
-				}
-				
-				//add tabbed pane to house panel
-				panelHouse.add(paneFloor);
-				
-				//Set up pane on screen
-				framePersonalize.setBounds(0, 0, 415, 150);
-				framePersonalize.setLocationRelativeTo(null);
-				framePersonalize.setResizable(false);
-				
-				//Listener to change house name
-				btChangeHouse.addMouseListener(new MouseAdapter(){
-					public void mouseClicked(MouseEvent e){
-						//Set personalize frame to invisible
-						framePersonalize.setVisible(false);
-						
-						//Call method to change name
-						changeHouseGUI();
-					}
-				});
-				
-				btAddFloor.addMouseListener(new MouseAdapter(){
-					public void mouseClicked(MouseEvent e){
-						
-						//Create floor class
-						
-						//Run Add floor method
-						addFloor(tfFloor.getText());
-						
-						//Delete text in textfield
-						tfFloor.setText("");
-					}
-				});
-			}
-		});
-		
-		//add exit listener
-		framePersonalize.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
-	}
-
-	public static void main(String[] args){
-		
 		//Make username and password frame and pane
 		JFrame frameUNPW = new JFrame("Username and Password");
 		JPanel panelUNPW = new JPanel();
@@ -496,7 +79,7 @@ public class Personalize extends JPanel {
 		frameUNPW.getContentPane().add(panelUNPW);
 		
 		//Set size of size, location, and visibility of frameUNPW
-		frameUNPW.setSize(323, 142);
+		frameUNPW.setSize(323, 133);
 		frameUNPW.setLocationRelativeTo(null);
 		frameUNPW.setVisible(true);
 		frameUNPW.setResizable(false);
@@ -512,8 +95,553 @@ public class Personalize extends JPanel {
 				addHouse();
 
 				//Save username and password in database
+				
 			}
 		});
 	}
 
+	public void finalize() throws Throwable {
+
+	}
+	
+	public static void changeHouseGUI(){
+		
+		//Create frame, panel and layout for change name GUI
+		JFrame changeNameHS = new JFrame("Change House Name");
+		JPanel panelNameHS = new JPanel();
+		panelNameHS.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameHS.add(new JLabel("New name of House: "));
+		panelNameHS.add(tfNewName);
+		panelNameHS.add(btSave);
+		
+		//Add panel to frame
+		changeNameHS.getContentPane().add(panelNameHS);
+		
+		//Adjust frame
+		changeNameHS.pack();
+		changeNameHS.setVisible(true);
+		changeNameHS.setLocationRelativeTo(null);
+		changeNameHS.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//change nameHS
+				nameHS = tfNewName.getText();
+				
+				//change the house label
+				labelHS.setText(tfNewName.getText());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameHS.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
+	}
+
+	public static void addFloor(String nameFL){
+		
+		//Add floor to combo box
+		cbFloors.addItem(tfNameFL.getText());
+		cbFloors.setSelectedIndex(cbFloors.getItemCount() - 1);
+		
+		//Erase text from floor name text field
+		tfNameFL.setText("");		
+	}
+	
+	public static void removeFloor(){
+		
+		//Remove floor from combo box
+		cbFloors.removeItem(cbFloors.getSelectedItem());
+	}
+	
+	public static void changeFloorGUI(){
+		
+		//Create frame, panel and layout for change floor GUI
+		JFrame changeNameFL = new JFrame("Change Floor Name");
+		JPanel panelNameFL = new JPanel();
+		panelNameFL.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameFL.add(new JLabel("New name of Floor: "));
+		panelNameFL.add(tfNewName);
+		panelNameFL.add(btSave);
+		
+		//Add panel to frame
+		changeNameFL.getContentPane().add(panelNameFL);
+		
+		//Adjust frame
+		changeNameFL.pack();
+		changeNameFL.setVisible(true);
+		changeNameFL.setLocationRelativeTo(null);
+		changeNameFL.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Change item in combo box
+				cbFloors.insertItemAt(tfNewName.getText(), cbFloors.getSelectedIndex());
+				cbFloors.removeItemAt(cbFloors.getSelectedIndex());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameFL.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
+	}
+	
+	public static void addRoom(String nameRM){
+		
+		//Add floor to combo box
+		cbRooms.addItem(tfNameRM.getText());
+		cbRooms.setSelectedIndex(cbRooms.getItemCount() - 1);
+		
+		//Erase text from floor name text field
+		tfNameRM.setText("");	
+	}
+
+	public static void removeRoom(){
+		
+		//Remove floor from combo box
+		cbRooms.removeItem(cbRooms.getSelectedItem());
+	}
+	
+	public static void changeRoomGUI(){
+		
+		//Create frame, panel and layout for change floor GUI
+		JFrame changeNameRM = new JFrame("Change Room Name");
+		JPanel panelNameRM = new JPanel();
+		panelNameRM.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameRM.add(new JLabel("New name of Room: "));
+		panelNameRM.add(tfNewName);
+		panelNameRM.add(btSave);
+		
+		//Add panel to frame
+		changeNameRM.getContentPane().add(panelNameRM);
+		
+		//Adjust frame
+		changeNameRM.pack();
+		changeNameRM.setVisible(true);
+		changeNameRM.setLocationRelativeTo(null);
+		changeNameRM.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Change item in combo box
+				cbRooms.insertItemAt(tfNewName.getText(), cbRooms.getSelectedIndex());
+				cbRooms.removeItemAt(cbRooms.getSelectedIndex());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameRM.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
+	}
+	
+	public static void changeFloor(){
+		
+	}
+
+	public static void addHouse(){
+		
+		//Create house panel
+		JPanel panelPersonalize = new JPanel();
+		panelPersonalize.setLayout(new FlowLayout());
+		
+		//Set exit on close
+		framePersonalize.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//Create components for initial GUI
+		JLabel labelHouse = new JLabel("House Name: ");
+		JTextField tfHouse = new JTextField(20);
+		JButton btSaveHouse = new JButton("Save");
+		
+		//Add components to House panel
+		panelPersonalize.add(labelHouse);
+		panelPersonalize.add(tfHouse);
+		panelPersonalize.add(btSaveHouse);
+		framePersonalize.getContentPane().add(panelPersonalize);
+		
+		//Make frame visible, adjust size, and put in middle of screen
+		framePersonalize.setVisible(true);
+		framePersonalize.pack();
+		framePersonalize.setLocationRelativeTo(null);
+		framePersonalize.setResizable(false);
+		
+		//Save house listener
+		btSaveHouse.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Get String from text field
+				nameHS = tfHouse.getText();
+				
+				//Remove Components from personalize panel
+				panelPersonalize.removeAll();
+				
+				//Adjust personalize frame
+				framePersonalize.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				SpringLayout springLayout = new SpringLayout();
+				framePersonalize.getContentPane().setLayout(springLayout);
+				
+				//Create House Panel and add to personalize frame
+				JLabel lblHouseName = new JLabel("House Name: ");
+				springLayout.putConstraint(SpringLayout.NORTH, lblHouseName, 13, SpringLayout.NORTH, framePersonalize.getContentPane());
+				springLayout.putConstraint(SpringLayout.WEST, lblHouseName, 10, SpringLayout.WEST, framePersonalize.getContentPane());
+				framePersonalize.getContentPane().add(lblHouseName);
+				
+				labelHS.setText(nameHS);
+				springLayout.putConstraint(SpringLayout.NORTH, labelHS, 0, SpringLayout.NORTH, lblHouseName);
+				springLayout.putConstraint(SpringLayout.WEST, labelHS, 6, SpringLayout.EAST, lblHouseName);
+				framePersonalize.getContentPane().add(labelHS);
+				
+				JButton btChangeHouse = new JButton("Change House Name");
+				springLayout.putConstraint(SpringLayout.NORTH, btChangeHouse, 10, SpringLayout.NORTH, framePersonalize.getContentPane());
+				springLayout.putConstraint(SpringLayout.NORTH, labelHS, 4, SpringLayout.NORTH, btChangeHouse);
+				springLayout.putConstraint(SpringLayout.EAST, btChangeHouse, -10, SpringLayout.EAST, framePersonalize.getContentPane());
+				framePersonalize.getContentPane().add(btChangeHouse);
+				
+				//Create and add floor panel to personalize panel
+				JPanel panelFloor = new JPanel();
+				springLayout.putConstraint(SpringLayout.NORTH, panelFloor, 10, SpringLayout.SOUTH, btChangeHouse);
+				springLayout.putConstraint(SpringLayout.SOUTH, panelFloor, 130, SpringLayout.NORTH, btChangeHouse);
+				springLayout.putConstraint(SpringLayout.WEST, panelFloor, 0, SpringLayout.WEST, framePersonalize.getContentPane());
+				springLayout.putConstraint(SpringLayout.EAST, panelFloor, 0, SpringLayout.EAST, framePersonalize.getContentPane());
+				framePersonalize.getContentPane().add(panelFloor);
+				
+				SpringLayout sl_panelFloor = new SpringLayout();
+				panelFloor.setLayout(sl_panelFloor);
+				
+				JLabel lblNewFloor = new JLabel("New Floor: ");
+				sl_panelFloor.putConstraint(SpringLayout.NORTH, lblNewFloor, 11, SpringLayout.NORTH, panelFloor);
+				sl_panelFloor.putConstraint(SpringLayout.WEST, lblNewFloor, 10, SpringLayout.WEST, panelFloor);
+				panelFloor.add(lblNewFloor);
+				
+				tfNameFL = new JTextField();
+				sl_panelFloor.putConstraint(SpringLayout.NORTH, tfNameFL, 11, SpringLayout.NORTH, panelFloor);
+				sl_panelFloor.putConstraint(SpringLayout.WEST, tfNameFL, 6, SpringLayout.EAST, lblNewFloor);
+				panelFloor.add(tfNameFL);
+				tfNameFL.setColumns(10);
+				
+				JButton btnAddFloor = new JButton("Add Floor");
+				sl_panelFloor.putConstraint(SpringLayout.EAST, tfNameFL, -6, SpringLayout.WEST, btnAddFloor);
+				sl_panelFloor.putConstraint(SpringLayout.NORTH, btnAddFloor, 8, SpringLayout.NORTH, panelFloor);
+				sl_panelFloor.putConstraint(SpringLayout.EAST, btnAddFloor, -10, SpringLayout.EAST, panelFloor);
+				panelFloor.add(btnAddFloor);
+				
+				sl_panelFloor.putConstraint(SpringLayout.NORTH, cbFloors, 6, SpringLayout.SOUTH, tfNameFL);
+				sl_panelFloor.putConstraint(SpringLayout.WEST, cbFloors, 0, SpringLayout.WEST, tfNameFL);
+				sl_panelFloor.putConstraint(SpringLayout.EAST, cbFloors, 0, SpringLayout.EAST, tfNameFL);
+				panelFloor.add(cbFloors);
+				
+				JButton btnRemoveFL = new JButton("Remove Selected Floor");
+				sl_panelFloor.putConstraint(SpringLayout.NORTH, btnRemoveFL, 6, SpringLayout.SOUTH, cbFloors);
+				sl_panelFloor.putConstraint(SpringLayout.WEST, btnRemoveFL, 0, SpringLayout.WEST, lblNewFloor);
+				panelFloor.add(btnRemoveFL);
+				btnRemoveFL.setEnabled(false);
+				
+				JButton btnChangeFL = new JButton("Change Selected Floor Name");
+				sl_panelFloor.putConstraint(SpringLayout.NORTH, btnChangeFL, 6, SpringLayout.SOUTH, cbFloors);
+				sl_panelFloor.putConstraint(SpringLayout.EAST, btnChangeFL, 0, SpringLayout.EAST, btnAddFloor);
+				panelFloor.add(btnChangeFL);
+				btnChangeFL.setEnabled(false);
+				
+				//Create Panel for adding a room
+				JPanel panelRoom = new JPanel();
+				springLayout.putConstraint(SpringLayout.NORTH, panelRoom, 10, SpringLayout.SOUTH, panelFloor);
+				springLayout.putConstraint(SpringLayout.WEST, panelRoom, 0, SpringLayout.WEST, panelFloor);
+				springLayout.putConstraint(SpringLayout.SOUTH, panelRoom, 105, SpringLayout.SOUTH, panelFloor);
+				springLayout.putConstraint(SpringLayout.EAST, panelRoom, 0, SpringLayout.EAST, panelFloor);
+				framePersonalize.getContentPane().add(panelRoom);
+				SpringLayout sl_panelRoom = new SpringLayout();
+				panelRoom.setLayout(sl_panelRoom);
+				
+				JLabel lblNewRoom = new JLabel("New Room: ");
+				sl_panelRoom.putConstraint(SpringLayout.NORTH, lblNewRoom, 10, SpringLayout.NORTH, panelRoom);
+				sl_panelRoom.putConstraint(SpringLayout.WEST, lblNewRoom, 10, SpringLayout.WEST, panelRoom);
+				panelRoom.add(lblNewRoom);
+				
+				JButton btnAddRoom = new JButton("Add Room");
+				sl_panelRoom.putConstraint(SpringLayout.NORTH, btnAddRoom, -4, SpringLayout.NORTH, lblNewRoom);
+				panelRoom.add(btnAddRoom);
+				
+				tfNameRM = new JTextField();
+				sl_panelRoom.putConstraint(SpringLayout.NORTH, tfNameRM, -3, SpringLayout.NORTH, lblNewRoom);
+				sl_panelRoom.putConstraint(SpringLayout.WEST, tfNameRM, 2, SpringLayout.EAST, lblNewRoom);
+				sl_panelRoom.putConstraint(SpringLayout.EAST, tfNameRM, -6, SpringLayout.WEST, btnAddRoom);
+				panelRoom.add(tfNameRM);
+				tfNameRM.setColumns(10);
+				
+				sl_panelRoom.putConstraint(SpringLayout.NORTH, cbRooms, 6, SpringLayout.SOUTH, tfNameRM);
+				sl_panelRoom.putConstraint(SpringLayout.WEST, cbRooms, 0, SpringLayout.WEST, tfNameRM);
+				sl_panelRoom.putConstraint(SpringLayout.EAST, cbRooms, 0, SpringLayout.EAST, tfNameRM);
+				panelRoom.add(cbRooms);
+				
+				JButton btnRemoveRM = new JButton("Remove Room");
+				sl_panelRoom.putConstraint(SpringLayout.WEST, btnRemoveRM, 0, SpringLayout.WEST, lblNewRoom);
+				panelRoom.add(btnRemoveRM);
+				btnRemoveRM.setEnabled(false);
+				
+				JButton btnChangeRoomName = new JButton("Change Room Name");
+				sl_panelRoom.putConstraint(SpringLayout.NORTH, btnChangeRoomName, 6, SpringLayout.SOUTH, cbRooms);
+				sl_panelRoom.putConstraint(SpringLayout.EAST, btnAddRoom, 0, SpringLayout.EAST, btnChangeRoomName);
+				sl_panelRoom.putConstraint(SpringLayout.WEST, btnChangeRoomName, 130, SpringLayout.EAST, btnRemoveRM);
+				sl_panelRoom.putConstraint(SpringLayout.EAST, btnChangeRoomName, -10, SpringLayout.EAST, panelRoom);
+				sl_panelRoom.putConstraint(SpringLayout.NORTH, btnRemoveRM, 0, SpringLayout.NORTH, btnChangeRoomName);
+				panelRoom.add(btnChangeRoomName);
+				btnChangeRoomName.setEnabled(false);
+				
+				//Add Additions panel
+				JPanel panelAdditions = new JPanel();
+				springLayout.putConstraint(SpringLayout.NORTH, panelAdditions, 6, SpringLayout.SOUTH, panelRoom);
+				springLayout.putConstraint(SpringLayout.SOUTH, panelAdditions, -39, SpringLayout.SOUTH, framePersonalize.getContentPane());
+				springLayout.putConstraint(SpringLayout.WEST, panelAdditions, 0, SpringLayout.WEST, framePersonalize.getContentPane());
+				springLayout.putConstraint(SpringLayout.EAST, panelAdditions, 0, SpringLayout.EAST, panelFloor);
+				framePersonalize.getContentPane().add(panelAdditions);
+				SpringLayout sl_panelAdditions = new SpringLayout();
+				panelAdditions.setLayout(sl_panelAdditions);
+				
+				JButton btnAdd = new JButton("Add");
+				panelAdditions.add(btnAdd);
+				
+				JButton btnRemove = new JButton("Remove");
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, btnRemove, 0, SpringLayout.NORTH, btnAdd);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, btnRemove, 6, SpringLayout.EAST, btnAdd);
+				panelAdditions.add(btnRemove);
+				
+				JButton btnChangeNM = new JButton("Change Name");
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, btnChangeNM, 0, SpringLayout.NORTH, btnAdd);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, btnChangeNM, 6, SpringLayout.EAST, btnRemove);
+				panelAdditions.add(btnChangeNM);
+				
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, btnAdd, 0, SpringLayout.WEST, cbAdditions);
+				sl_panelAdditions.putConstraint(SpringLayout.EAST, cbAdditions, -137, SpringLayout.EAST, panelAdditions);
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, cbAdditions, 10, SpringLayout.NORTH, panelAdditions);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, cbAdditions, 10, SpringLayout.WEST, panelAdditions);
+				panelAdditions.add(cbAdditions);
+				
+				//add components to addition combo box
+				cbAdditions.addItem("Door");
+				cbAdditions.addItem("Window");
+				cbAdditions.addItem("Light");
+				cbAdditions.addItem("Television");
+				cbAdditions.addItem("Radio");
+				cbAdditions.addItem("Faucet");
+				
+				JLabel lblAddition = new JLabel("Addition Name: ");
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, lblAddition, 0, SpringLayout.NORTH, cbAdditions);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, lblAddition, 6, SpringLayout.EAST, cbAdditions);
+				panelAdditions.add(lblAddition);
+				
+				JLabel lblAdditionName = new JLabel("Specific Name");
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, lblAdditionName, 6, SpringLayout.SOUTH, lblAddition);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, lblAdditionName, 0, SpringLayout.WEST, lblAddition);
+				panelAdditions.add(lblAdditionName);
+				
+				JTextField textField = new JTextField();
+				sl_panelAdditions.putConstraint(SpringLayout.EAST, textField, -137, SpringLayout.EAST, panelAdditions);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, textField, 10, SpringLayout.WEST, panelAdditions);
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, btnAdd, 6, SpringLayout.SOUTH, textField);
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, cbAdditions);
+				panelAdditions.add(textField);
+				textField.setColumns(10);
+				
+				JLabel label = new JLabel("Specific Name");
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, label, 6, SpringLayout.SOUTH, lblAdditionName);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, label, 0, SpringLayout.WEST, lblAddition);
+				panelAdditions.add(label);
+				
+				JLabel label_1 = new JLabel("Specific Name");
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, label_1, 6, SpringLayout.SOUTH, label);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, label_1, 0, SpringLayout.WEST, lblAddition);
+				panelAdditions.add(label_1);
+				
+				JLabel label_2 = new JLabel("Specific Name");
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, label_2, 6, SpringLayout.SOUTH, label_1);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, label_2, 0, SpringLayout.WEST, lblAddition);
+				panelAdditions.add(label_2);
+				
+				JButton btnFinish = new JButton("Finish");
+				springLayout.putConstraint(SpringLayout.NORTH, btnFinish, 5, SpringLayout.SOUTH, panelAdditions);
+				springLayout.putConstraint(SpringLayout.EAST, btnFinish, -5, SpringLayout.EAST, panelAdditions);
+				framePersonalize.getContentPane().add(btnFinish);
+				btnFinish.setEnabled(true);
+				
+				//Format personalize frame
+				framePersonalize.setBounds(0, 0, 450, 175);
+				framePersonalize.setVisible(true);
+				framePersonalize.setLocationRelativeTo(null);
+				
+				//Listener to change house name
+				btChangeHouse.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Disable personalize frame
+						framePersonalize.setEnabled(false);
+						
+						//Call method to change name
+						changeHouseGUI();
+					}
+				});
+				
+				//Listener to add Floor
+				btnAddFloor.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Disable add floor button when fifth floor is being added
+						if (floorCounter == 4){
+							btnAddFloor.setEnabled(false);
+						}
+						
+						//Call add floor method
+						addFloor(tfNameFL.getText());
+						
+						//Increment floor counter
+						++floorCounter;
+						
+						//Enable change floor name and remove floor button
+						btnChangeFL.setEnabled(true);
+						btnRemoveFL.setEnabled(true);
+						
+						//Change frame size
+						if (roomCounter == 0){
+							framePersonalize.setBounds(0, 0, 450, 280);
+							framePersonalize.setLocationRelativeTo(null);
+						}
+						else {
+							framePersonalize.setBounds(0, 0, 450, 440);
+							framePersonalize.setLocationRelativeTo(null);
+						}
+					}
+				});
+				
+				//Listener to remove floor
+				btnRemoveFL.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Remove room panel and disable change and remove floor and button if no more floors will be left
+						if(floorCounter == 1){
+							framePersonalize.setBounds(0, 0, 450, 175);
+							framePersonalize.setLocationRelativeTo(null);
+							btnChangeFL.setEnabled(false);
+							btnRemoveFL.setEnabled(false);
+						}
+						
+						//Enable add floor button if there a floor can be added
+						if(floorCounter == 5){
+							btnAddFloor.setEnabled(true);
+						}
+						
+						//Call remove floor method
+						removeFloor();
+						
+						//Decrement floor counter
+						--floorCounter;
+					}
+				});
+				
+				//Change floor listener
+				btnChangeFL.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Disable personalize frame
+						framePersonalize.setEnabled(false);
+						
+						//Call change floor name method
+						changeFloorGUI();
+					}
+				});
+				
+				//Add Room Listener
+				btnAddRoom.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Disable add floor button when fifth floor is being added
+						if (roomCounter == 4){
+							btnAddRoom.setEnabled(false);
+						}
+						
+						//Call add floor method
+						addRoom(tfNameFL.getText());
+						
+						//Increment floor counter
+						++roomCounter;
+						
+						//Enable change floor name and remove floor button
+						btnChangeRoomName.setEnabled(true);
+						btnRemoveRM.setEnabled(true);
+						
+						//Change frame size
+						framePersonalize.setBounds(0, 0, 450, 440);
+						framePersonalize.setLocationRelativeTo(null);
+					}
+				});
+
+				//Remove room listener
+				btnRemoveRM.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Remove room panel and disable change and remove floor and button if no more floors will be left
+						if(roomCounter == 1){
+							framePersonalize.setBounds(0, 0, 450, 280);
+							framePersonalize.setLocationRelativeTo(null);
+							btnChangeRoomName.setEnabled(false);
+							btnRemoveRM.setEnabled(false);
+						}
+						
+						//Enable add floor button if there a floor can be added
+						if(roomCounter == 5){
+							btnAddRoom.setEnabled(true);
+						}
+						
+						//Call remove floor method
+						removeRoom();
+						
+						//Decrement floor counter
+						--roomCounter;
+					}
+				});
+
+				//Change room listener
+				btnChangeRoomName.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Disable personalize frame
+						framePersonalize.setEnabled(false);
+						
+						//Call change floor name method
+						changeRoomGUI();
+					}
+				});
+
+				//Finish listener
+				btnFinish.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//call selection menu class
+						new SelectionMenu();
+						
+						//dispose of personalization frame
+						framePersonalize.dispose();
+					}
+				});
+			}
+		});
+	}
 }//end Personalize

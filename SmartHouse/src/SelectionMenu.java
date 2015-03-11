@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -5,16 +6,17 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import net.miginfocom.swing.MigLayout;
+
 import java.awt.GridLayout;
 import java.awt.CardLayout;
 
 	public class SelectionMenu extends JPanel{
+		
+		private static JFrame frame = new JFrame("Main Menu");
 		//Tim added comment for hands on quiz
 		
 		public SelectionMenu() {
 			
-
 			JFrame frame;
 			JButton envrbtn,secbtn,entbtn;
 			JPanel panel;
@@ -46,31 +48,58 @@ import java.awt.CardLayout;
 			secbtn = new JButton("Security");
 			secbtn.setBounds(325, 211, 125, 50);
 			panel.add(secbtn);
+			
+			entbtn.addActionListener(new ActionListener() {
 
+				public void actionPerformed(ActionEvent e1) {
+					frame.setVisible(false);
+					new Entertainment();
+					
+				}
+			});
+
+			secbtn.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e1) {
+					frame.setVisible(false);
+					new Security();
+					
+				}
+			});
+			
+			envrbtn.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e2) {
+					frame.setVisible(false);
+					new Environmental();
+				}
+			});
+			
+			logout.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e3) {
+					frame.setVisible(false);
+					new Login();
+				}
+			});
+			
+			helpbtn.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e4) {
+
+				}
+			});
+			
 			frame.setVisible(true);
 			
 		}
 		
-	//	public void finalize() throws Throwable {
-
-	//	}
-	//	public Sel.Ent.Button(){
-
-		//}
-
-		//public Sel.env.Button(){
-
-		//}
-
-		//public Sel.Sec.Button(){
-			
-		//}
 		public static void main(String[] args){
 
 			new SelectionMenu();
 
 		}
 
-
 	}
-//QUIZ
+
+	

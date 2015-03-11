@@ -11,6 +11,8 @@ public abstract class User {
 	private String floorFile;
 	private House house;
 	private String houseFile;
+	private String username;
+	private String pass;
 	public Login m_Login;
 
 	public User(){
@@ -27,8 +29,8 @@ public abstract class User {
 	 * @param status
 	 * @param typeDv
 	 */
-	public int addDevice(String nameRm, String nameDv, String [] status, int typeDv){
-		return 0;
+	public void addDevice(String nameRm, String nameDv, String status, int typeDv){
+		
 	}
 
 	/**
@@ -47,8 +49,8 @@ public abstract class User {
 	 * @param nameDv
 	 * @param newStatus
 	 */
-	public int changeDvStatus(String nameRm, String nameDv, String [] newStatus){
-		return 0;
+	public void changeDvStatus(String nameRm, String nameDv, String [] newStatus){
+		
 	}
 
 	/**
@@ -56,8 +58,8 @@ public abstract class User {
 	 * @param floor
 	 * @param newNameRm
 	 */
-	public int changeRoomName(int floor, String newNameRm){
-		return 0;
+	public void changeRoomName(int floor, String newNameRm){
+		
 	}
 
 	/**
@@ -65,8 +67,8 @@ public abstract class User {
 	 * @param nameRm
 	 * @param nameDv
 	 */
-	public int deleteDevice(String nameRm, String nameDv){
-		return 0;
+	public void deleteDevice(String nameRm, String nameDv){
+	
 	}
 
 	/**
@@ -74,8 +76,8 @@ public abstract class User {
 	 * @param floor
 	 * @param nameRm
 	 */
-	public int deleteRoom(int floor, String nameRm){
-		return 0;
+	public void deleteRoom(int floor, String nameRm){
+		
 	}
 
 	/**
@@ -83,12 +85,12 @@ public abstract class User {
 	 * @param nameRm
 	 * @param nameDv
 	 */
-	public String [] getDvStatus(String nameRm, String nameDv){
+	public String getDvStatus(String nameRm, String nameDv){
 		return null;
 	}
 
 	public String getHouseName(){
-		return "";
+		return null;
 	}
 
 	/**
@@ -98,5 +100,24 @@ public abstract class User {
 	 */
 	public void setHouseName(String nameHs){
 
+	}
+	
+	public void setUsername(String user){
+		username = user;		
+	}
+	
+	public void setPassword(String nPass)
+	{
+		pass = nPass;
+	}
+	
+	public String getUsername(String u)
+	{
+		return username;
+	}
+	
+	public String getPass(String p)
+	{
+		return pass;
 	}
 }//end User
