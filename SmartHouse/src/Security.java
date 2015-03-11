@@ -1,11 +1,18 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 
 
 
@@ -17,51 +24,77 @@ import javax.swing.JTabbedPane;
  */
 public class Security extends JFrame {
 
-	private boolean doors;
-	private boolean lockdown;
-	private boolean windows;
+	private static JFrame frame = new JFrame("Security");
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				Security frame = new Security();
-				frame.setVisible(true);
-			}
-		});
+		new Security();
 	}
 	
-	public Security(){
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
-		setTitle("Security Controls");
+	public Security(){JFrame frame;
+	 JButton lockdown;
+	 JPanel center;
+	    JPanel east;
+	    JPanel south;
+   //Create and set up the window.
+	 
+	center = new JPanel();
+	center.setVisible(true);
+	east = new JPanel();
+	east.setVisible(true);
+	south = new JPanel();
+	south.setVisible(true);
+	
+	frame = new JFrame("Security");
+   
+   frame.setSize(new Dimension(800, 600));
+   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel mainPanel = new JPanel();
-		getContentPane().add(mainPanel);
-		mainPanel.setLayout(new BorderLayout());
+   frame.getContentPane().setLayout(new BorderLayout());
+   
+  
+   frame.getContentPane().add(south, BorderLayout.SOUTH);
+   frame.getContentPane().add(east, BorderLayout.EAST);
+   frame.getContentPane().add(center, BorderLayout.CENTER);
+   center.setLayout(new GridLayout(0,1));
+   center.add(new JLabel("Doors"),BorderLayout.CENTER);
+   center.add(addItem("door1"),BorderLayout.CENTER);
+   center.add(addItem("door2"),BorderLayout.CENTER);
+   center.add(addItem("door3"),BorderLayout.CENTER);
+   center.add(new JLabel("Window"),BorderLayout.CENTER);
+   center.add(addItem("Window1"),BorderLayout.CENTER);
+   center.add(addItem("Window2"),BorderLayout.CENTER);
+    lockdown=new JButton("Lockdown");
+   lockdown.setPreferredSize(new Dimension(100,175));
+   east.add(lockdown);
+   south.add(new JTextField(40));
 
-
-		JPanel	panel1 = new JPanel();
-		JPanel	panel2 = new JPanel();
-		JPanel	panel3 = new JPanel();
-		
-		
-		ArrayList<JPanel> panelList = new ArrayList<JPanel>();
-		panelList.add(panel1);
-		panelList.add(panel2);
-		panelList.add(panel3);
-		
-		JTabbedPane tabPane = new JTabbedPane();
-		
-		int nFloor = 3;
-		for (int i=0; i<nFloor; i++){
-			tabPane.addTab( "Floor "+ (i+1), panelList.get(i));
-			mainPanel.add(tabPane);}
+   //Display the window
+   frame.pack();
+   frame.setVisible(true);
 	}
-
-	public void floorPanel(JPanel panel)
-	{
-		
-	}
+	private static JPanel addItem(String d)
+	 {
+		//Create items
+		    JPanel item = new JPanel(new FlowLayout());
+		    item.setPreferredSize(new Dimension(400, 50));
+		    item.add(new JLabel(d+"  "));
+		    JRadioButton lock = new JRadioButton("Lock");
+		    JRadioButton unlock = new JRadioButton("Unlock");
+		    JRadioButton open = new JRadioButton("open");
+		    JRadioButton close = new JRadioButton("Close");
+		    ButtonGroup group = new ButtonGroup();
+		    group.add(lock);
+		    group.add(unlock);
+		    ButtonGroup group2 = new ButtonGroup();
+		    group2.add(open);
+		    group2.add(close);
+		    item.add(lock);
+		    item.add(unlock);
+		    item.add(close);
+		    item.add(open);
+		    item.setVisible(true);
+		    return item;
+	 }
 	
 	public void finalize() throws Throwable {	}
 	//public Sec.Alert(){	}
