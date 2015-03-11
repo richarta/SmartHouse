@@ -74,7 +74,7 @@ public class Login extends JFrame
 			//Check username
 			String user = userField.getText();
 			String pass = userPass.getText();
-			String loginCheck = getUser()
+			//String loginCheck = getUser()
 			
 			
 			
