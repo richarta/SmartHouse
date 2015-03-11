@@ -149,7 +149,7 @@ public class Environmental{
 		frm.add(roomLabel);
 		
         // Set Frame
-        frm.setTitle("메뉴예제");
+        frm.setTitle("Environmental Controls");
         frm.setLocation(120, 120);
         frm.setSize(820,530);
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
