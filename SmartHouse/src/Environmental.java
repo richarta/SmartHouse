@@ -36,10 +36,10 @@ import javax.swing.event.ChangeListener;
 public class Environmental{
 	
 	// Test Launching GUI
-	
+	/**
 	public static void main(String[] args) {
        new Environmental();
-   }
+   } //*/
 	
 	// Initialize
 	private int nFloor = 3;
