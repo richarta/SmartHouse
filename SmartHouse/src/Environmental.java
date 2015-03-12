@@ -31,12 +31,16 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import java.awt.SystemColor;
  
 
 public class Environmental{
 	
 	// Test Launching GUI
-	/**
+	///**
 	public static void main(String[] args) {
        new Environmental();
    } //*/
@@ -53,9 +57,10 @@ public class Environmental{
     private JPanel [][] roomPanels = new JPanel[nFloor][10];
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel roomLabel = new JLabel("Select the Room from Menu");
+    private final JPanel panel_2 = new JPanel();
     
     public Environmental() {	    	
-    	frm.setLayout(null);
+    	frm.getContentPane().setLayout(null);
     	
     	// These would be given by parameter later
         nRoom[0] = 2;
@@ -106,14 +111,14 @@ public class Environmental{
 	    	            	
 	    	            	// Show new JPanel
 	    	            	panel = roomPanels[i][j];
-	    	            	panel.setBounds(10, 10, 800, 500);
+	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
 	    	            	roomLabel.setText("[" + nameRoom[i][j] + " was selected]");
 	    	            	roomLabel.setBounds(630, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-	    	        		frm.add(roomLabel);
+	    	        		frm.getContentPane().add(roomLabel);
 	    	        		
-	    	            	frm.add(panel);
+	    	            	frm.getContentPane().add(panel);
 	    	            	frm.repaint();
 	    	            	frm.revalidate();
     	            	}
@@ -131,7 +136,9 @@ public class Environmental{
 
         // Set every component
         frm.setJMenuBar(menuBar);
-        frm.add(panel);
+        frm.getContentPane().add(panel);
+		menuBtn.setBackground(SystemColor.info);
+		menuBtn.setForeground(Color.BLACK);
         
         // 'return to menu' button
 		menuBtn.setBounds(20, 410, 150, 23);
@@ -141,12 +148,16 @@ public class Environmental{
             	new SelectionMenu();
             }
         });
-		frm.add(menuBtn);
+		frm.getContentPane().add(menuBtn);
 		
 		// room label
 		roomLabel.setBounds(180, 100, 500, 40);
 		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		frm.add(roomLabel);
+		frm.getContentPane().add(roomLabel);
+		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
+		panel_2.setBounds(12, 391, 778, 2);
+		
+		frm.getContentPane().add(panel_2);
 		
         // Set Frame
         frm.setTitle("Environmental Controls");
@@ -178,7 +189,7 @@ public class Environmental{
 		// First Column
 		JLabel tempLabel = new JLabel("Temerature (70F)");
 		tempLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tempLabel.setBounds(45,10,200,23);
+		tempLabel.setBounds(65,20,200,23);
 		panel.add(tempLabel);
 		
 		JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 70);
@@ -187,7 +198,7 @@ public class Environmental{
 		tempSlider.setPaintTrack(true);
 		tempSlider.setMajorTickSpacing(20);
 		tempSlider.setMinorTickSpacing(5);
-		tempSlider.setBounds(10,40,200,50);
+		tempSlider.setBounds(30,50,200,50);
 		
 		tempSlider.addChangeListener(new ChangeListener(){
 			public void stateChanged (ChangeEvent e){
@@ -198,19 +209,19 @@ public class Environmental{
 		panel.add(tempSlider);
 		
 		JButton psBtn = new JButton("Power Saver");
-		psBtn.setBounds(300, 400, 200, 23);
+		psBtn.setBounds(305, 410, 200, 23);
 		panel.add(psBtn);
 		
 		// Second Column
 		JLabel lightLabel = new JLabel("Lights");
 		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lightLabel.setBounds(395,10,200,23);
+		lightLabel.setBounds(400,20,200,23);
 		panel.add(lightLabel);
 		
 		ArrayList<JRadioButton> lArray = new ArrayList<JRadioButton>();
 		for(int k=0; k<nLight; k++){
 			JRadioButton button = new JRadioButton(lightName[k]);
-			button.setBounds(385,40+30*k,200,23);
+			button.setBounds(390,50+30*k,100,23);
 			button.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	System.out.print(button.getText());
@@ -225,13 +236,13 @@ public class Environmental{
 		// Third Column
 		JLabel faucetLabel = new JLabel("Faucets");
 		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		faucetLabel.setBounds(615,10,200,23);
+		faucetLabel.setBounds(640,20,200,23);
 		panel.add(faucetLabel);
 		
 		ArrayList<JRadioButton> fArray = new ArrayList<JRadioButton>();
 		for(int k=0; k<nFaucet; k++){
 			JRadioButton button = new JRadioButton(faucetName[k]);
-			button.setBounds(605,40+30*k,200,23);
+			button.setBounds(630,50+30*k,200,23);
 			button.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	System.out.print(button.getText());
@@ -268,7 +279,7 @@ public class Environmental{
 		// First Column
 		JLabel tempLabel = new JLabel("Temasdture (70F)");
 		tempLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tempLabel.setBounds(45,10,200,23);
+		tempLabel.setBounds(65,20,200,23);
 		panel.add(tempLabel);
 		
 		JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 70);
@@ -277,7 +288,7 @@ public class Environmental{
 		tempSlider.setPaintTrack(true);
 		tempSlider.setMajorTickSpacing(20);
 		tempSlider.setMinorTickSpacing(5);
-		tempSlider.setBounds(10,40,200,50);
+		tempSlider.setBounds(30,50,200,50);
 		
 		tempSlider.addChangeListener(new ChangeListener(){
 			public void stateChanged (ChangeEvent e){
@@ -288,19 +299,19 @@ public class Environmental{
 		panel.add(tempSlider);
 		
 		JButton psBtn = new JButton("Power Saver");
-		psBtn.setBounds(300, 400, 200, 23);
+		psBtn.setBounds(305, 410, 200, 23);
 		panel.add(psBtn);
 		
 		// Second Column
 		JLabel lightLabel = new JLabel("Lights");
 		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lightLabel.setBounds(395,10,200,23);
+		lightLabel.setBounds(400,20,200,23);
 		panel.add(lightLabel);
 		
 		ArrayList<JRadioButton> lArray = new ArrayList<JRadioButton>();
 		for(int k=0; k<nLight; k++){
 			JRadioButton button = new JRadioButton(lightName[k]);
-			button.setBounds(385,40+30*k,200,23);
+			button.setBounds(390,50+30*k,200,23);
 			button.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	System.out.print(button.getText());
@@ -315,13 +326,13 @@ public class Environmental{
 		// Third Column
 		JLabel faucetLabel = new JLabel("Faucets");
 		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		faucetLabel.setBounds(615,10,200,23);
+		faucetLabel.setBounds(640,20,200,23);
 		panel.add(faucetLabel);
 		
 		ArrayList<JRadioButton> fArray = new ArrayList<JRadioButton>();
 		for(int k=0; k<nFaucet; k++){
 			JRadioButton button = new JRadioButton(faucetName[k]);
-			button.setBounds(605,40+30*k,200,23);
+			button.setBounds(630,50+30*k,200,23);
 			button.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	System.out.print(button.getText());
