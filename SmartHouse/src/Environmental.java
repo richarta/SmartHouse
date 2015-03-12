@@ -36,12 +36,11 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.SystemColor;
  
-
 public class Environmental{
 	
 	// Test Launching GUI
 	/**
-	public static void main(String[] args) {
+	Wpublic static void main(String[] args) {
        new Environmental();
    } //*/
 	
@@ -51,7 +50,7 @@ public class Environmental{
     private int iFloorChoosed;
     private int iRoomChoosed;
 	private String [][] nameRoom = new String[nFloor][10];
-    private JFrame frm = new JFrame();
+    private JFrame EnvFrm = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
@@ -62,8 +61,8 @@ public class Environmental{
     private final JPanel panel_2 = new JPanel();
     
     public Environmental() {	    	
-    	frm.getContentPane().setLayout(null);
-    	
+    	EnvFrm.getContentPane().setLayout(null);
+    	EnvFrm.setResizable(false);
     	// These would be given by parameter later
         nRoom[0] = 2;
         nRoom[1] = 1;
@@ -102,27 +101,26 @@ public class Environmental{
     	            	if (e.getStateChange() == ItemEvent.SELECTED){
 	    	            	
     	            		// Get floor and room index
-	    	            	String s = radioBtnMenu.getName();
-	    	            	iFloorChoosed = Character.getNumericValue(s.charAt(0));
-	    	            	iRoomChoosed = Character.getNumericValue(s.charAt(1));
+	    	            	iFloorChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(0));
+	    	            	iRoomChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(1));
 	    	            	
 	    	            	// Remove JPanel
-	    	            	frm.remove(panel);
-	    	            	frm.repaint();
-	    	            	frm.revalidate();
+	    	            	EnvFrm.remove(panel);
+	    	            	EnvFrm.repaint();
+	    	            	EnvFrm.revalidate();
 	    	            	
 	    	            	// Show new JPanel
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("[" + nameRoom[iFloorChoosed][iRoomChoosed] + " was selected]");
-	    	            	roomLabel.setBounds(630, 410, 200, 23);
+	    	            	roomLabel.setText("[Floor "+ (iFloorChoosed+1) +", " + nameRoom[iFloorChoosed][iRoomChoosed] + " is selected]");
+	    	            	roomLabel.setBounds(610, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-	    	        		frm.getContentPane().add(roomLabel);
+	    	        		EnvFrm.getContentPane().add(roomLabel);
 	    	        		
-	    	            	frm.getContentPane().add(panel);
-	    	            	frm.repaint();
-	    	            	frm.revalidate();
+	    	            	EnvFrm.getContentPane().add(panel);
+	    	            	EnvFrm.repaint();
+	    	            	EnvFrm.revalidate();
     	            	}
     	            }
     	        });
@@ -137,8 +135,8 @@ public class Environmental{
         }
 
         // Set every component
-        frm.setJMenuBar(menuBar);
-        frm.getContentPane().add(panel);
+        EnvFrm.setJMenuBar(menuBar);
+        EnvFrm.getContentPane().add(panel);
 		menuBtn.setBackground(SystemColor.info);
 		menuBtn.setForeground(Color.BLACK);
         
@@ -146,32 +144,31 @@ public class Environmental{
 		menuBtn.setBounds(20, 410, 150, 23);
 		menuBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	frm.setVisible(false);
+            	EnvFrm.setVisible(false);
             	new SelectionMenu();
             }
         });
-		frm.getContentPane().add(menuBtn);
+		EnvFrm.getContentPane().add(menuBtn);
 		
 		// room label
 		roomLabel.setBounds(180, 100, 500, 40);
 		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		frm.getContentPane().add(roomLabel);
+		EnvFrm.getContentPane().add(roomLabel);
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		panel_2.setBounds(12, 391, 778, 2);
 		
-		frm.getContentPane().add(panel_2);
+		EnvFrm.getContentPane().add(panel_2);
 		
         // Set Frame
-        frm.setTitle("Environmental Controls");
-        frm.setLocation(120, 120);
-        frm.setSize(820,530);
-        frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frm.setVisible(true);
+        EnvFrm.setTitle("Environmental Controls");
+        EnvFrm.setLocation(120, 120);
+        EnvFrm.setSize(820,530);
+        EnvFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        EnvFrm.setVisible(true);
     }
 
     public JPanel generateRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
 		//Later, it would get by method
-
     	JPanel panel = new JPanel();
     	
 		int nLight = 3;
@@ -211,7 +208,7 @@ public class Environmental{
 		panel.add(tempSlider);
 		
 		JButton psBtn = new JButton("Power Saver");
-		psBtn.setBounds(305, 410, 200, 23);
+		psBtn.setBounds(305, 350, 200, 30);
 		panel.add(psBtn);
 		
 		// Second Column
@@ -264,16 +261,18 @@ public class Environmental{
 
     	JPanel panel = new JPanel();
     	
-		int nLight = 3;
+		int nLight = 2;
 		String [] lightName = new String[nLight]; 
-		lightName[0] = "Lasdht1";
-		lightName[1] = "Lisdft2";
-		lightName[2] = "Lidsft3";
+		lightName[0] = "BBBasdht1";
+		lightName[1] = "asdfdft2";
 		
-		int nFaucet = 2;
+		int nFaucet = 5;
 		String [] faucetName = new String[nFaucet]; 
 		faucetName[0] = "Fafet1";
 		faucetName[1] = "FFbwecet2";
+		faucetName[2] = "123bwecet3";
+		faucetName[3] = "ABbwecet4";
+		faucetName[4] = "@@bwecet5";
 		
 		//Make panel
 		panel.setLayout(null);
@@ -301,7 +300,7 @@ public class Environmental{
 		panel.add(tempSlider);
 		
 		JButton psBtn = new JButton("Power Saver");
-		psBtn.setBounds(305, 410, 200, 23);
+		psBtn.setBounds(305, 350, 200, 30);
 		panel.add(psBtn);
 		
 		// Second Column
