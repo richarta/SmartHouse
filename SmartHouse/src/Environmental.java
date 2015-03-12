@@ -40,7 +40,7 @@ import java.awt.SystemColor;
 public class Environmental{
 	
 	// Test Launching GUI
-	///**
+	/**
 	public static void main(String[] args) {
        new Environmental();
    } //*/
@@ -48,6 +48,8 @@ public class Environmental{
 	// Initialize
 	private int nFloor = 3;
 	private int [] nRoom = new int[nFloor];
+    private int iFloorChoosed;
+    private int iRoomChoosed;
 	private String [][] nameRoom = new String[nFloor][10];
     private JFrame frm = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
@@ -99,10 +101,10 @@ public class Environmental{
     	            public void itemStateChanged(ItemEvent e) {
     	            	if (e.getStateChange() == ItemEvent.SELECTED){
 	    	            	
-	    	            	int i,j;
+    	            		// Get floor and room index
 	    	            	String s = radioBtnMenu.getName();
-	    	            	i = Character.getNumericValue(s.charAt(0));
-	    	            	j = Character.getNumericValue(s.charAt(1));
+	    	            	iFloorChoosed = Character.getNumericValue(s.charAt(0));
+	    	            	iRoomChoosed = Character.getNumericValue(s.charAt(1));
 	    	            	
 	    	            	// Remove JPanel
 	    	            	frm.remove(panel);
@@ -110,10 +112,10 @@ public class Environmental{
 	    	            	frm.revalidate();
 	    	            	
 	    	            	// Show new JPanel
-	    	            	panel = roomPanels[i][j];
+	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("[" + nameRoom[i][j] + " was selected]");
+	    	            	roomLabel.setText("[" + nameRoom[iFloorChoosed][iRoomChoosed] + " was selected]");
 	    	            	roomLabel.setBounds(630, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 	    	        		frm.getContentPane().add(roomLabel);
