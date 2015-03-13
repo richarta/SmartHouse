@@ -3,7 +3,7 @@
  * Term: Spring 2015
  * Assignment: SmartHouse Project
  * Author: Young J. Park
- * Date: 11 March 2015
+ * Date: 12 March 2015
  */
 
 import java.awt.BorderLayout; 
@@ -59,10 +59,12 @@ public class Environmental{
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel roomLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
+    boolean [][] powersaver = new boolean[nFloor][10];
     
     public Environmental() {	    	
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);
+    	
     	// These would be given by parameter later
         nRoom[0] = 2;
         nRoom[1] = 1;
@@ -78,10 +80,10 @@ public class Environmental{
         // Generate a panel for each room
         for (int i=0; i<nFloor; i++){
         	for(int j=0; j<nRoom[i]; j++){
-        	roomPanels[i][j] = generateRoomPanel(i,j);
+        	roomPanels[i][j] = generateEnvRoomPanel(i,j);
         	}
         }
-        roomPanels[0][1] = generateRoomPanel2(0,0); // Different Panel for test
+        roomPanels[0][1] = generateEnvRoomPanel2(0,0); // Different Panel for test
         
      // For each floor
         for (int i=0; i<nFloor; i++){
@@ -154,9 +156,10 @@ public class Environmental{
 		roomLabel.setBounds(180, 100, 500, 40);
 		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		EnvFrm.getContentPane().add(roomLabel);
+		
+		// Border
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		panel_2.setBounds(12, 391, 778, 2);
-		
 		EnvFrm.getContentPane().add(panel_2);
 		
         // Set Frame
@@ -167,9 +170,8 @@ public class Environmental{
         EnvFrm.setVisible(true);
     }
 
-    public JPanel generateRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
+    public JPanel generateEnvRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
 		//Later, it would get by method
-    	JPanel panel = new JPanel();
     	
 		int nLight = 3;
 		String [] lightName = new String[nLight]; 
@@ -186,6 +188,7 @@ public class Environmental{
 		panel.setLayout(null);
 
 		// First Column
+		// Thermostat
 		JLabel tempLabel = new JLabel("Temerature (70F)");
 		tempLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tempLabel.setBounds(65,20,200,23);
@@ -198,20 +201,38 @@ public class Environmental{
 		tempSlider.setMajorTickSpacing(20);
 		tempSlider.setMinorTickSpacing(5);
 		tempSlider.setBounds(30,50,200,50);
-		
 		tempSlider.addChangeListener(new ChangeListener(){
 			public void stateChanged (ChangeEvent e){
 	            tempLabel.setText("Temerature (" + tempSlider.getValue() + "F)");
 			}
 		});
-		
 		panel.add(tempSlider);
 		
-		JButton psBtn = new JButton("Power Saver");
+		// Powersaver
+		powersaver[iFloor][iRoom] = false;
+		JButton psBtn = new JButton("Power Saver ON");
+		psBtn.setBackground(new Color(60, 179, 113));
+		psBtn.setForeground(Color.BLACK);
 		psBtn.setBounds(305, 350, 200, 30);
+		psBtn.addActionListener (new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	if (powersaver[iFloor][iRoom]) {
+            		powersaver[iFloor][iRoom] = false;
+            		psBtn.setText("Power Saver ON");
+            		psBtn.setBackground(new Color(60, 179, 113));
+            	}
+            	else {
+            		powersaver[iFloor][iRoom] = true;
+            		psBtn.setText("Power Saver OFF");
+            		psBtn.setBackground(SystemColor.inactiveCaption);
+            		
+            	}
+            }
+        });
 		panel.add(psBtn);
 		
 		// Second Column
+		// Lights
 		JLabel lightLabel = new JLabel("Lights");
 		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lightLabel.setBounds(400,20,200,23);
@@ -227,12 +248,12 @@ public class Environmental{
 	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
 	            }
 	        });
-		
 			lArray.add(button);
 			panel.add(button);
 		}
 		
 		// Third Column
+		// Faucets
 		JLabel faucetLabel = new JLabel("Faucets");
 		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		faucetLabel.setBounds(640,20,200,23);
@@ -256,7 +277,8 @@ public class Environmental{
 		return panel;
 	}
     
-    public JPanel generateRoomPanel2(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
+    // Test Panel
+    public JPanel generateEnvRoomPanel2(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
 		//Later, it would get by method
 
     	JPanel panel = new JPanel();
@@ -299,8 +321,26 @@ public class Environmental{
 		
 		panel.add(tempSlider);
 		
-		JButton psBtn = new JButton("Power Saver");
+		powersaver[iFloor][iRoom] = false;
+		JButton psBtn = new JButton("Power Saver ON");
+		psBtn.setBackground(new Color(60, 179, 113));
+		psBtn.setForeground(Color.BLACK);
 		psBtn.setBounds(305, 350, 200, 30);
+		psBtn.addActionListener (new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	if (powersaver[iFloor][iRoom]) {
+            		powersaver[iFloor][iRoom] = false;
+            		psBtn.setText("Power Saver ON");
+            		psBtn.setBackground(new Color(60, 179, 113));
+            	}
+            	else {
+            		powersaver[iFloor][iRoom] = true;
+            		psBtn.setText("Power Saver OFF");
+            		psBtn.setBackground(SystemColor.inactiveCaption);
+            		
+            	}
+            }
+        });
 		panel.add(psBtn);
 		
 		// Second Column

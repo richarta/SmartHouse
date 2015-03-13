@@ -1,69 +1,351 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+/*
+ * Course: SE 300-01 
+ * Term: Spring 2015
+ * Assignment: SmartHouse Project
+ * Author: Young J. Park
+ * Date: 12 March 2015
+ */
+
+import java.awt.BorderLayout; 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import java.awt.GridLayout;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSlider;
+import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
 
-
-
-
-/**
- * @author Abraham
- * @version 1.0
- * @created 26-Feb-2015 6:23:08 PM
- */
-public class Entertainment extends JFrame {
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				Environmental frame = new Environmental();
-				frame.setVisible(true);
-			}
-		});
-	}
+import java.awt.Color;
+import java.awt.SystemColor;
+ 
+public class Entertainment{
 	
-	private boolean mood;
-	private boolean stereo;
-	private String tele;
+	// Test Launching GUI
+	/**
+	Wpublic static void main(String[] args) {
+       new Environmental();
+   } //*/
+	
+	// Initialize
+	private int nFloor = 3;
+	private int [] nRoom = new int[nFloor];
+    private int iFloorChoosed;
+    private int iRoomChoosed;
+	private String [][] nameRoom = new String[nFloor][10];
+    private JFrame EntFrm = new JFrame();
+    private JMenuBar menuBar = new JMenuBar();
+    private ButtonGroup grop = new ButtonGroup();
+    private ArrayList<JMenu> menus = new ArrayList<JMenu>();
+    private JPanel panel = new JPanel();
+    private JPanel [][] roomPanels = new JPanel[nFloor][10];
+    private JButton menuBtn = new JButton("Return to Menu");
+    private JLabel roomLabel = new JLabel("Select the Room from Menu");
+    private final JPanel panel_2 = new JPanel();
+    boolean [][] powersaver = new boolean[nFloor][10];
+    
+    public Entertainment() {	    	
+    	EntFrm.getContentPane().setLayout(null);
+    	EntFrm.setResizable(false);
+    	
+    	// These would be given by parameter later
+        nRoom[0] = 2;
+        nRoom[1] = 1;
+        nRoom[2] = 3;
+        
+        nameRoom[0][0] = "Dining";
+        nameRoom[0][1] = "Room";
+        nameRoom[1][0] = "Living";
+        nameRoom[2][0] = "Bed1";
+        nameRoom[2][1] = "Bed2";
+        nameRoom[2][2] = "Bed3";
+        
+        // Generate a panel for each room
+        for (int i=0; i<nFloor; i++){
+        	for(int j=0; j<nRoom[i]; j++){
+        	roomPanels[i][j] = generateEntRoomPanel(i,j);
+        	}
+        }
+        roomPanels[0][1] = generateEntRoomPanel2(0,0); // Different Panel for test
+        
+     // For each floor
+        for (int i=0; i<nFloor; i++){
+    		// Generate menu for each floor
+        	JMenu fileMenu = new JMenu("Floor " + (i+1));
+        	menus.add(fileMenu);
+        	
+        	// For each room
+        	for(int j=0; j<nRoom[i]; j++){
+        		// Generate menu-item for each room
+        		JRadioButtonMenuItem radioBtnMenu = new JRadioButtonMenuItem(nameRoom[i][j]);
+        		radioBtnMenu.setName(i+""+j); // give a name to room. e.g. Second room on first floor is "12". Third room of second floor is "23"
+        		
+        		// If you click each room, JFrame shows a panel for the selected room
+        		radioBtnMenu.addItemListener(new ItemListener() {
+    	            public void itemStateChanged(ItemEvent e) {
+    	            	if (e.getStateChange() == ItemEvent.SELECTED){
+	    	            	
+    	            		// Get floor and room index
+	    	            	iFloorChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(0));
+	    	            	iRoomChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(1));
+	    	            	
+	    	            	// Remove JPanel
+	    	            	EntFrm.remove(panel);
+	    	            	EntFrm.repaint();
+	    	            	EntFrm.revalidate();
+	    	            	
+	    	            	// Show new JPanel
+	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
+	    	            	panel.setBounds(0, 0, 800, 500);
+	    	            	
+	    	            	roomLabel.setText("[Floor "+ (iFloorChoosed+1) +", " + nameRoom[iFloorChoosed][iRoomChoosed] + " is selected]");
+	    	            	roomLabel.setBounds(610, 410, 200, 23);
+	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+	    	        		EntFrm.getContentPane().add(roomLabel);
+	    	        		
+	    	            	EntFrm.getContentPane().add(panel);
+	    	            	EntFrm.repaint();
+	    	            	EntFrm.revalidate();
+    	            	}
+    	            }
+    	        });
+        		
+        		// Group buttons and add into menu
+        		grop.add(radioBtnMenu);
+        		fileMenu.add(radioBtnMenu);
+        	}
+        	
+        	// Add menu into menu bar
+        	menuBar.add(fileMenu);
+        }
 
-	public Entertainment(){
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
-		setTitle("Entertainment Controls");
-
-		JPanel mainPanel = new JPanel();
-		getContentPane().add(mainPanel);
-		mainPanel.setLayout(new GridLayout(3,2));
-
-
-		JPanel	panel1 = new JPanel();
-		JPanel	panel2 = new JPanel();
-		JPanel	panel3 = new JPanel();
+        // Set every component
+        EntFrm.setJMenuBar(menuBar);
+        EntFrm.getContentPane().add(panel);
+		menuBtn.setBackground(SystemColor.info);
+		menuBtn.setForeground(Color.BLACK);
+        
+        // 'return to menu' button
+		menuBtn.setBounds(20, 410, 150, 23);
+		menuBtn.addActionListener (new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	EntFrm.setVisible(false);
+            	new SelectionMenu();
+            }
+        });
+		EntFrm.getContentPane().add(menuBtn);
 		
-		ArrayList<JPanel> panelList = new ArrayList<JPanel>();
-		panelList.add(panel1);
-		panelList.add(panel2);
-		panelList.add(panel3);
+		// room label
+		roomLabel.setBounds(180, 100, 500, 40);
+		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		EntFrm.getContentPane().add(roomLabel);
+		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
+		panel_2.setBounds(12, 391, 778, 2);
 		
-		JTabbedPane tabPane = new JTabbedPane();
+		EntFrm.getContentPane().add(panel_2);
 		
-		int nFloor = 3;
-		for (int i=0; i<nFloor; i++){
-			tabPane.addTab( "Floor "+ (i+1), panelList.get(i));
-			mainPanel.add(tabPane);
+        // Set Frame
+        EntFrm.setTitle("Environmental Controls");
+        EntFrm.setLocation(120, 120);
+        EntFrm.setSize(820,530);
+        EntFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        EntFrm.setVisible(true);
+    }
+
+    public JPanel generateEntRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
+    	JPanel panel = new JPanel();
+    	
+		//Later, it would get by method
+
+		int nRadio = 3;
+		String [] radioName = new String[nRadio]; 
+		radioName[0] = "Radio1";
+		radioName[1] = "Radio2";
+		radioName[2] = "Radio3";
+		
+		int nTV = 2;
+		String [] TVName = new String[nTV]; 
+		TVName[0] = "TV1";
+		TVName[1] = "FFTV2";
+		
+		//
+        JLabel lblVolume = new JLabel("Volume");
+        JLabel tvLabel = new JLabel("Televisions");
+		JLabel radioLabel = new JLabel("Radio");
+		JLabel lblVolume_2 = new JLabel("Volume");
+		
+		tvLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		tvLabel.setBounds(27, 30, 90, 16);
+		panel.add(tvLabel);
+		
+		radioLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		radioLabel.setBounds(27, 206, 90, 16);
+		panel.add(radioLabel);
+		
+		lblVolume.setBounds(470, 31, 51, 16);
+		lblVolume_2.setBounds(470, 206, 51, 16);
+		panel.add(lblVolume);
+		panel.add(lblVolume_2);
+		
+		//Make panel
+		panel.setLayout(null);
+
+		// TVs
+		for(int k=0; k<nTV; k++){
+			JRadioButton tvlbl = new JRadioButton(TVName[k]);
+			tvlbl.setBounds(27, 59+30*k, 150, 16);		
+			/*
+			tvlbl.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	System.out.print(button.getText());
+	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
+	            }
+	        });*/
+			panel.add(tvlbl);
+			
+			JRadioButton rdbtnNewRadioButton = new JRadioButton("On");
+			rdbtnNewRadioButton.setBounds(215, 55+30*k, 51, 25);
+			panel.add(rdbtnNewRadioButton);
+			
+			JRadioButton rdbtnOff = new JRadioButton("Off");
+			rdbtnOff.setBounds(270, 55+30*k, 63, 25);
+			panel.add(rdbtnOff);
+			
+			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+			volSlider.setSize(130, 23);
+			volSlider.setLocation(430, 57+30*k);
+			panel.add(volSlider);
 		}
+		
+		// Radio		
+		for(int k=0; k<nRadio; k++){
+			JRadioButton radiolbl = new JRadioButton(radioName[k]);
+			radiolbl.setBounds(27, 235+30*k, 150, 16);
+			panel.add(radiolbl);
+			
+			JRadioButton rdbtnNewRadioButton = new JRadioButton("On");
+			rdbtnNewRadioButton.setBounds(215, 231+30*k, 51, 25);
+			panel.add(rdbtnNewRadioButton);
+			
+			JRadioButton rdbtnOff = new JRadioButton("Off");
+			rdbtnOff.setBounds(270, 231+30*k, 63, 25);
+			panel.add(rdbtnOff);
+			
+			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+			volSlider.setSize(130, 23);
+			volSlider.setLocation(430, 232+30*k);
+			panel.add(volSlider);
+		}
+		
+		return panel;
 	}
+    
+    // Test Panel
+    public JPanel generateEntRoomPanel2(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
+		//Later, it would get by method
 
-	public void finalize() throws Throwable {	}
-	//public Ent.Control.Mood(){	}
+    	JPanel panel = new JPanel();
+    	
+		int nRadio = 2;
+		String [] radioName = new String[nRadio]; 
+		radioName[0] = "BBBasdht1";
+		radioName[1] = "asdfdft2";
+		
+		int nTV = 5;
+		String [] TVName = new String[nTV]; 
+		TVName[0] = "Fafet1";
+		TVName[1] = "FFbwecet2";
+		TVName[2] = "123bwecet3";
+		TVName[3] = "ABbwecet4";
+		TVName[4] = "@@bwecet5";
+		
+		//Make panel
+		panel.setLayout(null);
 
-	//public Ent.Control.Stereo(){	}
-
-	//public Ent.Control.Tele(){	}
-
-	//public Ent.Menu.Button(){	}
-}//end Entertainment
+		// First Column
+		// TVs
+		JLabel TVLabel = new JLabel("TVs");
+		TVLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		TVLabel.setBounds(60,20,200,23);
+		panel.add(TVLabel);
+		
+		ArrayList<JRadioButton> fArray = new ArrayList<JRadioButton>();
+		for(int k=0; k<nTV; k++){
+			JRadioButton button = new JRadioButton(TVName[k]);
+			button.setBounds(50,50+30*k,200,23);
+			button.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	System.out.print(button.getText());
+	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
+	            }
+			});
+			
+			fArray.add(button);
+			panel.add(button);
+		}
+		
+		powersaver[iFloor][iRoom] = false;
+		JButton psBtn = new JButton("Power Saver ON");
+		psBtn.setBackground(new Color(60, 179, 113));
+		psBtn.setForeground(Color.BLACK);
+		psBtn.setBounds(305, 350, 200, 30);
+		psBtn.addActionListener (new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	if (powersaver[iFloor][iRoom]) {
+            		powersaver[iFloor][iRoom] = false;
+            		psBtn.setText("Power Saver ON");
+            		psBtn.setBackground(new Color(60, 179, 113));
+            	}
+            	else {
+            		powersaver[iFloor][iRoom] = true;
+            		psBtn.setText("Power Saver OFF");
+            		psBtn.setBackground(SystemColor.inactiveCaption);
+            		
+            	}
+            }
+        });
+		panel.add(psBtn);
+		
+		// Second Column
+		JLabel radioLabel = new JLabel("Radios");
+		radioLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		radioLabel.setBounds(400,20,200,23);
+		panel.add(radioLabel);
+		
+		ArrayList<JRadioButton> lArray = new ArrayList<JRadioButton>();
+		for(int k=0; k<nRadio; k++){
+			JRadioButton button = new JRadioButton(radioName[k]);
+			button.setBounds(390,50+30*k,200,23);
+			button.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	System.out.print(button.getText());
+	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
+	            }
+	        });
+		
+			lArray.add(button);
+			panel.add(button);
+		}
+		
+		return panel;
+    }
+}

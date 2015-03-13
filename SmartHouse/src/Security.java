@@ -51,7 +51,6 @@ public class Security extends JFrame {
 
 	frame.getContentPane().setLayout(new BorderLayout());
 
-
 	frame.getContentPane().add(south, BorderLayout.SOUTH);
 	frame.getContentPane().add(east, BorderLayout.EAST);
 	frame.getContentPane().add(center, BorderLayout.CENTER);
