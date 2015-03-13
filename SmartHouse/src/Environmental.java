@@ -83,7 +83,7 @@ public class Environmental{
         	roomPanels[i][j] = generateEnvRoomPanel(i,j);
         	}
         }
-        roomPanels[0][1] = generateEnvRoomPanel2(0,0); // Different Panel for test
+        roomPanels[0][1] = generateTestRoomPanel(0,0); // Different Panel for test
         
      // For each floor
         for (int i=0; i<nFloor; i++){
@@ -278,7 +278,7 @@ public class Environmental{
 	}
     
     // Test Panel
-    public JPanel generateEnvRoomPanel2(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
+    public JPanel generateTestRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
 		//Later, it would get by method
 
     	JPanel panel = new JPanel();

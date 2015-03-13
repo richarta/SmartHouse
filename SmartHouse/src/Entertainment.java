@@ -85,7 +85,7 @@ public class Entertainment{
         	roomPanels[i][j] = generateEntRoomPanel(i,j);
         	}
         }
-        roomPanels[0][1] = generateEntRoomPanel2(0,0); // Different Panel for test
+        roomPanels[0][1] = generateTestRoomPanel(0,0); // Different Panel for test
         
      // For each floor
         for (int i=0; i<nFloor; i++){
@@ -164,7 +164,7 @@ public class Entertainment{
 		EntFrm.getContentPane().add(panel_2);
 		
         // Set Frame
-        EntFrm.setTitle("Environmental Controls");
+        EntFrm.setTitle("Entertainment Controls");
         EntFrm.setLocation(120, 120);
         EntFrm.setSize(820,530);
         EntFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -211,7 +211,7 @@ public class Entertainment{
 
 		// TVs
 		for(int k=0; k<nTV; k++){
-			JRadioButton tvlbl = new JRadioButton(TVName[k]);
+			JLabel tvlbl = new JLabel(TVName[k]);
 			tvlbl.setBounds(27, 59+30*k, 150, 16);		
 			/*
 			tvlbl.addItemListener(new ItemListener() {
@@ -222,13 +222,17 @@ public class Entertainment{
 	        });*/
 			panel.add(tvlbl);
 			
-			JRadioButton rdbtnNewRadioButton = new JRadioButton("On");
-			rdbtnNewRadioButton.setBounds(215, 55+30*k, 51, 25);
-			panel.add(rdbtnNewRadioButton);
+			JRadioButton onButton = new JRadioButton("On");
+			onButton.setBounds(215, 55+30*k, 51, 25);
+			panel.add(onButton);
 			
-			JRadioButton rdbtnOff = new JRadioButton("Off");
-			rdbtnOff.setBounds(270, 55+30*k, 63, 25);
-			panel.add(rdbtnOff);
+			JRadioButton offButton = new JRadioButton("Off");
+			offButton.setBounds(270, 55+30*k, 63, 25);
+			panel.add(offButton);
+
+			ButtonGroup group = new ButtonGroup();
+			group.add(onButton);
+			group.add(offButton);
 			
 			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
 			volSlider.setSize(130, 23);
@@ -238,17 +242,21 @@ public class Entertainment{
 		
 		// Radio		
 		for(int k=0; k<nRadio; k++){
-			JRadioButton radiolbl = new JRadioButton(radioName[k]);
+			JLabel radiolbl = new JLabel(radioName[k]);
 			radiolbl.setBounds(27, 235+30*k, 150, 16);
 			panel.add(radiolbl);
 			
-			JRadioButton rdbtnNewRadioButton = new JRadioButton("On");
-			rdbtnNewRadioButton.setBounds(215, 231+30*k, 51, 25);
-			panel.add(rdbtnNewRadioButton);
+			JRadioButton onButton = new JRadioButton("On");
+			onButton.setBounds(215, 231+30*k, 51, 25);
+			panel.add(onButton);
 			
-			JRadioButton rdbtnOff = new JRadioButton("Off");
-			rdbtnOff.setBounds(270, 231+30*k, 63, 25);
-			panel.add(rdbtnOff);
+			JRadioButton offButton = new JRadioButton("Off");
+			offButton.setBounds(270, 231+30*k, 63, 25);
+			panel.add(offButton);
+			
+			ButtonGroup group = new ButtonGroup();
+			group.add(onButton);
+			group.add(offButton);
 			
 			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
 			volSlider.setSize(130, 23);
@@ -260,7 +268,7 @@ public class Entertainment{
 	}
     
     // Test Panel
-    public JPanel generateEntRoomPanel2(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
+    public JPanel generateTestRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
 		//Later, it would get by method
 
     	JPanel panel = new JPanel();
