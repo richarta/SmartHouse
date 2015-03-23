@@ -18,7 +18,7 @@ public class Floor {
 	public void finalize() throws Throwable {
 
 	}
-	public void Floor(){
+	public Floor(){
 
 	}
 
@@ -26,7 +26,7 @@ public class Floor {
 	 * 
 	 * @param nameFl
 	 */
-	public void Floor(String nameFl){
+	public Floor(String nameFl){
 
 	}
 

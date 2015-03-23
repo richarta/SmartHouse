@@ -1,6 +1,8 @@
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
@@ -56,6 +58,35 @@ public abstract class User {
 			e.printStackTrace();
 		}
 	}
+
+	public void openHouseStatus(){
+		
+		try {
+			
+			//open file
+			FileInputStream saveFile = new FileInputStream(username + ".sav");
+			
+			//open input stream
+			ObjectInputStream save = new ObjectInputStream(saveFile);
+			
+			//read object
+			house = (House) save.readObject();
+			
+			//close file
+			save.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void addDevice(String nameRm, String nameDv, String status, int typeDv){
 		
 	}

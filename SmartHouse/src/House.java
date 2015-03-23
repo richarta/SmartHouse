@@ -41,7 +41,9 @@ public abstract class House {
 	 * @param nameFl
 	 */
 	public void addFloor(String nameFl){
-
+		
+		//add floor to floor list
+		floorList.add(new Floor(nameFl));
 	}
 
 	/**
@@ -53,7 +55,8 @@ public abstract class House {
 	}
 
 	public List<Floor> getFloorList(){
-		return null;
+		//return floorList
+		return floorList;
 	}
 
 	/**
@@ -68,8 +71,10 @@ public abstract class House {
 	 * 
 	 * @param nameFl
 	 */
-	public void removeFloor(String nameFl){
-
+	public void removeFloor(int index){
+		
+		//remove floor at selected index
+		floorList.remove(index);
 	}
 
 	/**

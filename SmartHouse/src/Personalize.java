@@ -163,7 +163,7 @@ public class Personalize extends JPanel {
 		cbFloors.removeItem(cbFloors.getSelectedItem());
 		
 		//Remove floor from house class
-		
+		house.removeFloor(cbFloors.getSelectedIndex());
 	}
 	
 	public static void changeFloorGUI(){
@@ -201,6 +201,9 @@ public class Personalize extends JPanel {
 				changeNameFL.dispose();
 				framePersonalize.setEnabled(true);
 				framePersonalize.setVisible(true);
+				
+				//change floor name in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).setName(tfNewName.getText());
 			}
 		});
 	}
