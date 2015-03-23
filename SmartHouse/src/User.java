@@ -1,4 +1,7 @@
-
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 
 /**
@@ -29,6 +32,30 @@ public abstract class User {
 	 * @param status
 	 * @param typeDv
 	 */
+	
+	public void saveHouseStatus(){
+		
+		//Open file in try block
+		try {
+			FileOutputStream saveFile = new FileOutputStream(username + ".sav");
+			
+			//create object to save objects to file
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			
+			//save floor information
+			save.writeObject(house);
+			
+			//close file
+			save.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void addDevice(String nameRm, String nameDv, String status, int typeDv){
 		
 	}

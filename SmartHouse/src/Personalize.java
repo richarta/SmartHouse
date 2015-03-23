@@ -8,9 +8,7 @@
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 public class Personalize extends JPanel {
 	
@@ -23,6 +21,7 @@ public class Personalize extends JPanel {
 	private static JComboBox<String> cbFloors = new JComboBox<String>();
 	private static JComboBox<String> cbRooms = new JComboBox<String>();
 	private static JComboBox<String> cbAdditions = new JComboBox<String>();
+	private static House house;
 	
 	public Personalize() {
 	
@@ -152,13 +151,19 @@ public class Personalize extends JPanel {
 		cbFloors.setSelectedIndex(cbFloors.getItemCount() - 1);
 		
 		//Erase text from floor name text field
-		tfNameFL.setText("");		
+		tfNameFL.setText("");
+		
+		//add floor to house class
+		house.addFloor(nameFL);
 	}
 	
 	public static void removeFloor(){
 		
 		//Remove floor from combo box
 		cbFloors.removeItem(cbFloors.getSelectedItem());
+		
+		//Remove floor from house class
+		
 	}
 	
 	public static void changeFloorGUI(){
