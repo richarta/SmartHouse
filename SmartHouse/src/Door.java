@@ -1,15 +1,13 @@
-//Added Comment to door for quiz
 
-
-/**aaaaaaaa
- * @author Abraham111
+/**
+ * @author YoungJin
  * @version 1.0
- * @created 26-Feb-2015 6:23:05 PM
+ * @created 25-Mar-2015
  */
 public class Door {
 
-	private String lock;
-	private boolean nameDr;
+	private boolean lock;
+	private String nameDr;
 
 
 
@@ -17,7 +15,8 @@ public class Door {
 
 	}
 	public Door() {
-		//edit by Young
+		lock = true;
+		nameDr = "Door";
 	}
 
 	/**
@@ -25,26 +24,29 @@ public class Door {
 	 * @param nameDr
 	 */
 	public Door(String nameDr){
-
+		this.nameDr = nameDr;
 	}
 
 	public boolean getLock(){
-		return false;
+		return lock;
 	}
 
 	public String getName(){
-		return "";
+		return nameDr;
 	}
 
-	public void setLock(){
-
+	/**
+	 * @param newLock new lock state
+	 */
+	public void setLock(boolean newLock){
+		lock = newLock;
 	}
 
 	/**
 	 * 
-	 * @param newName
+	 * @param newName new name of door
 	 */
 	public void setName(String newName){
-
+		nameDr = newName;
 	}
 }//end Door
