@@ -29,7 +29,7 @@ public class Room {
 	public void finalize() throws Throwable {
 
 	}
-	public void Room(){
+	public Room(){
 
 	}
 
@@ -37,7 +37,7 @@ public class Room {
 	 * 
 	 * @param nameRm
 	 */
-	public void Room(String nameRm){
+	public Room(String nameRm){
 
 	}
 

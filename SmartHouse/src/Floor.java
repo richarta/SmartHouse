@@ -1,26 +1,19 @@
 import java.util.ArrayList;
 
-
-/**
- * @author Abraham
- * @version 1.0
- * @created 26-Feb-2015 6:23:14 PM
- */
 public class Floor {
-
+	
+	//declare variables
 	private String nameFl;
 	private ArrayList<Room> roomList = new ArrayList<>();
-	public Hallway m_Hallway;
-	public Room m_Room;
-
-
 
 	public void finalize() throws Throwable {
 
 	}
 
 	public Floor(){
-
+		
+		//set name of floor
+		nameFl = "FLOOR";
 	}
 
 	public Floor(String newName){
@@ -30,7 +23,9 @@ public class Floor {
 	}
 
 	public void addRoom(String nameRm){
-
+		
+		//add floor to list
+		roomList.add(new Room(nameRm));
 	}
 
 	public String getName(){
@@ -45,8 +40,10 @@ public class Floor {
 		return roomList;
 	}
 
-	public void removeRoom(String nameRm){
-
+	public void removeRoom(int index){
+		
+		//remove room from list
+		roomList.remove(index);
 	}
 
 	public void setName(String newName){
