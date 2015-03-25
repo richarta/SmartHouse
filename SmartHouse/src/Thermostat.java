@@ -2,14 +2,14 @@
 
 
 /**
- * @author Abraham
+ * @author YoungJin
  * @version 1.0
- * @created 26-Feb-2015 6:23:35 PM
+ * @created 26-Mar-2015
  */
 public class Thermostat {
 
-	private int nameTh;
-	private String temperature;
+	private String nameTh;
+	private int temperature;
 
 
 
@@ -18,39 +18,41 @@ public class Thermostat {
 	}
 	/**
 	 * 
-	 * @param nameTh
+	 * @param nameTh name of thermostat
 	 */
 	public Thermostat(String nameTh){
-
+		this.nameTh = nameTh;
+		this.temperature = 70;
 	}
 
 	public Thermostat(){
-
+		this.nameTh = "Thermostat";
+		this.temperature = 70;
 	}
 
 	public String getName(){
-		return "";
+		return this.nameTh;
 	}
 
 	public int getTemp(){
-		return 0;
+		return this.temperature;
 	}
 
 	/**
 	 * 
-	 * @param newName
+	 * @param newName new name of thermostat
 	 * @return 
 	 */
 	public void setName(String newName){
-
+		this.nameTh = newName;
 	}
 
 	/**
 	 * 
-	 * @param newTemp
+	 * @param newTemp new temperature of thermostat
 	 * @return 
 	 */
 	public void setTemp(int newTemp){
-
+		this.temperature = newTemp;
 	}
 }//end Thermostat
