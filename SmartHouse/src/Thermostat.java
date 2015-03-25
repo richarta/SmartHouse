@@ -4,7 +4,7 @@
 /**
  * @author YoungJin
  * @version 1.0
- * @created 26-Mar-2015
+ * @created 25-Mar-2015
  */
 public class Thermostat {
 
@@ -22,20 +22,20 @@ public class Thermostat {
 	 */
 	public Thermostat(String nameTh){
 		this.nameTh = nameTh;
-		this.temperature = 70;
+		temperature = 70;
 	}
 
 	public Thermostat(){
-		this.nameTh = "Thermostat";
-		this.temperature = 70;
+		nameTh = "Thermostat";
+		temperature = 70;
 	}
 
 	public String getName(){
-		return this.nameTh;
+		return nameTh;
 	}
 
 	public int getTemp(){
-		return this.temperature;
+		return temperature;
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class Thermostat {
 	 * @return 
 	 */
 	public void setName(String newName){
-		this.nameTh = newName;
+		nameTh = newName;
 	}
 
 	/**
@@ -53,6 +53,6 @@ public class Thermostat {
 	 * @return 
 	 */
 	public void setTemp(int newTemp){
-		this.temperature = newTemp;
+		temperature = newTemp;
 	}
 }//end Thermostat
