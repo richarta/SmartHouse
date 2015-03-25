@@ -43,6 +43,12 @@ public class House{
 		return floorList;
 	}
 
+	public Thermostat getThermostat(){
+		
+		//return thermostat
+		return thermostat;
+	} 
+	
 	public String getName(){
 		
 		//return house name
