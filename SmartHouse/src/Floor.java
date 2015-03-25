@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.ArrayList;
 
 
 /**
@@ -9,7 +9,7 @@ import java.util.List;
 public class Floor {
 
 	private String nameFl;
-	private List<Room> roomList;
+	private ArrayList<Room> roomList = new ArrayList<>();
 	public Hallway m_Hallway;
 	public Room m_Room;
 
@@ -18,47 +18,40 @@ public class Floor {
 	public void finalize() throws Throwable {
 
 	}
+
 	public Floor(){
 
 	}
 
-	/**
-	 * 
-	 * @param nameFl
-	 */
-	public Floor(String nameFl){
-
+	public Floor(String newName){
+		
+		//set name of floor
+		nameFl = newName;
 	}
 
-	/**
-	 * 
-	 * @param nameRm
-	 */
 	public void addRoom(String nameRm){
 
 	}
 
 	public String getName(){
-		return "";
+		
+		//return name of floor
+		return nameFl;
 	}
 
-	public List<Room> getRoomList(){
-		return null;
+	public ArrayList<Room> getRoomList(){
+		
+		//return list
+		return roomList;
 	}
 
-	/**
-	 * 
-	 * @param nameRm
-	 */
 	public void removeRoom(String nameRm){
 
 	}
 
-	/**
-	 * 
-	 * @param newName
-	 */
 	public void setName(String newName){
-
+		
+		//set name of floor
+		nameFl = newName;
 	}
 }//end Floor

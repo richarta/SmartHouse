@@ -1,3 +1,5 @@
+
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -5,12 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
-/**
- * @author Abraham
- * @version 1.0
- * @created 26-Feb-2015 6:23:37 PM
- */
 public abstract class User {
 
 	private String floorFile;

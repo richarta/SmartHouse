@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Personalize extends JPanel {
+public class Personalize extends JPanel{
 	
 	//Declare needed variables for scope of methods
 	private static String nameHS;
@@ -21,7 +21,7 @@ public class Personalize extends JPanel {
 	private static JComboBox<String> cbFloors = new JComboBox<String>();
 	private static JComboBox<String> cbRooms = new JComboBox<String>();
 	private static JComboBox<String> cbAdditions = new JComboBox<String>();
-	private static House house;
+	private static House house = new House();
 	
 	public Personalize() {
 	
@@ -136,6 +136,9 @@ public class Personalize extends JPanel {
 				//change the house label
 				labelHS.setText(tfNewName.getText());
 				
+				//change name in house class
+				house.setName(tfNewName.getText());
+				
 				//Hide the change name GUI and display the personalize GUI
 				changeNameHS.dispose();
 				framePersonalize.setEnabled(true);
@@ -144,17 +147,17 @@ public class Personalize extends JPanel {
 		});
 	}
 
-	public static void addFloor(String nameFL){
+	public static void addFloor(){
 		
 		//Add floor to combo box
 		cbFloors.addItem(tfNameFL.getText());
 		cbFloors.setSelectedIndex(cbFloors.getItemCount() - 1);
 		
+		//add floor in house class
+		house.addFloor(tfNameFL.getText());
+		
 		//Erase text from floor name text field
 		tfNameFL.setText("");
-		
-		//add floor to house class
-		house.addFloor(nameFL);
 	}
 	
 	public static void removeFloor(){
@@ -193,6 +196,13 @@ public class Personalize extends JPanel {
 		btSave.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				
+				System.out.println(house.getFloorList().get(cbFloors.getSelectedIndex()).getName());
+				
+				//change name of floor in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).setName(tfNewName.getText());
+				
+				System.out.println(house.getFloorList().get(cbFloors.getSelectedIndex()).getName());
+				
 				//Change item in combo box
 				cbFloors.insertItemAt(tfNewName.getText(), cbFloors.getSelectedIndex());
 				cbFloors.removeItemAt(cbFloors.getSelectedIndex());
@@ -201,9 +211,6 @@ public class Personalize extends JPanel {
 				changeNameFL.dispose();
 				framePersonalize.setEnabled(true);
 				framePersonalize.setVisible(true);
-				
-				//change floor name in house class
-				house.getFloorList().get(cbFloors.getSelectedIndex()).setName(tfNewName.getText());
 			}
 		});
 	}
@@ -299,6 +306,12 @@ public class Personalize extends JPanel {
 				
 				//Get String from text field
 				nameHS = tfHouse.getText();
+				
+				//Set house name
+				house.setName(tfHouse.getText());
+				
+				//Add thermostat to house
+				house.addThermostat("Thermostat");
 				
 				//Remove Components from personalize panel
 				panelPersonalize.removeAll();
@@ -518,7 +531,7 @@ public class Personalize extends JPanel {
 						}
 						
 						//Call add floor method
-						addFloor(tfNameFL.getText());
+						addFloor();
 						
 						//Increment floor counter
 						++floorCounter;
