@@ -1,77 +1,84 @@
-//television comment
 
 /**
- * @author Abraham
+ * @author YoungJin
  * @version 1.0
- * @created 26-Feb-2015 6:23:33 PM
+ * @created 25-Mar-2015
  */
 public class Television {
 
 	private int channel;
-	private int nameTv;
-	private String status;
-
-
+	private String nameTv;
+	private boolean status;
+	private int volume;
 
 	public void finalize() throws Throwable {
 
 	}
-	public Television(){
-
-	}
-
 	/**
 	 * 
-	 * @param nameTv
+	 * @param nameTv name of television
 	 */
 	public Television(String nameTv){
+		this.nameTv = nameTv;
+		channel = 10;
+		status = false;
+		volume = 50;
+	}
 
+	public Television(){
+		nameTv = "Television";
+		channel = 10;
+		status = false;
+		volume = 50;
 	}
 
 	public int getChannel(){
-		return 0;
+		return channel;
 	}
 
 	public String getName(){
-		return "";
+		return nameTv;
 	}
 
 	public boolean getStatus(){
-		return false;
+		return status;
 	}
 
 	public int getVolume(){
-		return 0;
+		return volume;
 	}
 
 	/**
 	 * 
-	 * @param newChannel
+	 * @param newChannel new channel of television
 	 * @return 
 	 */
 	public void setChannel(int newChannel){
-
+		channel = newChannel;
 	}
 
 	/**
 	 * 
-	 * @param newName
+	 * @param newName new name of television
 	 * @return 
 	 */
 	public void setName(String newName){
-
+		nameTv = newName;
 	}
 
-	public void setStatus(){
-
+	/**
+	 * @param newStatus new status of television
+	 */
+	public void setStatus(boolean newStatus){
+		status = newStatus;
 	}
 
 	/**
 	 * 
-	 * @param volume
+	 * @param newVolume new volume of television
 	 * @return 
 	 */
-	public void setVolume(int volume){
-
+	public void setVolume(int newVolume){
+		volume = newVolume;
 	}
 }//end Television
