@@ -1,6 +1,4 @@
 
-
-
 /**
  * @author Abraham
  * @version 1.0
@@ -9,9 +7,7 @@
 public class Light {
 
 	private String nameLg;
-	private boolean status;
-
-
+	private boolean lightStatus;
 
 	public void finalize() throws Throwable {
 
@@ -20,32 +16,20 @@ public class Light {
 
 	}
 
-	/**
-	 * 
-	 * @param nameLg
-	 */
-	public Light(String nameLg){
-
+	public void setlightName(String nameLg){
+		this.nameLg = nameLg;
 	}
 
-	public String getName(){
-		return "";
+	public String getlightName(){
+		return nameLg;
 	}
 
-	public boolean getStatus(){
-		return false;
+	public void setLightStatus(boolean lightStatus){
+		this.lightStatus = lightStatus;
 	}
 
-	/**
-	 * 
-	 * @param newName
-	 * @return 
-	 */
-	public void setName(String newName){
-
+	public boolean getLightStatus(){
+		return lightStatus;
 	}
 
-	public void setStatus(){
-
-	}
-}//end Light
+}

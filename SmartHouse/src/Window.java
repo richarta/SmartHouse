@@ -6,44 +6,29 @@
  */
 public class Window {
 
-	private boolean lock;
-	private String nameWd;
-
-
+	private boolean lockWid;
+	private String nameWid;
 
 	public void finalize() throws Throwable {
 
 	}
 	public Window(){
-		// a square light moves through, andrew carosi
-	}
-
-	/**
-	 * 
-	 * @param nameWd
-	 */
-	public Window(String nameWd){
 
 	}
 
 	public boolean getLock(){
-		return false;
+		return lockWid;
 	}
 
 	public String getName(){
-		return "";
+		return nameWid;
 	}
 
-	public void setLock(){
-
+	public void setLock(boolean lock){
+		this.lockWid = lock;
 	}
-
-	/**
-	 * 
-	 * @param newName
-	 * @return 
-	 */
-	public void setName(String newName){
-
+	
+	public void setName(String name){
+		this.nameWid = name;
 	}
-}//end Window
+}
