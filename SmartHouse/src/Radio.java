@@ -1,78 +1,84 @@
 
-
-
 /**
- * @author Abraham
+ * @author YoungJin
  * @version 1.0
- * @created 26-Feb-2015 6:23:24 PM
+ * @created 25-Mar-2015
  */
 public class Radio {
 
 	private int channel;
 	private String nameRd;
 	private boolean status;
-
-
+	private int volume;
 
 	public void finalize() throws Throwable {
 
 	}
 	/**
 	 * 
-	 * @param nameRd
+	 * @param nameRd name of Radio
 	 */
 	public Radio(String nameRd){
-
+		this.nameRd = nameRd;
+		channel = 100;
+		status = false;
+		volume = 50;
 	}
 
 	public Radio(){
-
+		nameRd = "Radio";
+		channel = 100;
+		status = false;
+		volume = 50;
 	}
 
 	public int getChannel(){
-		return 0;
+		return channel;
 	}
 
 	public String getName(){
-		return "";
+		return nameRd;
 	}
 
 	public boolean getStatus(){
-		return false;
+		return status;
 	}
 
 	public int getVolume(){
-		return 0;
+		return volume;
 	}
 
 	/**
 	 * 
-	 * @param newChannel
+	 * @param newChannel new channel of radio
 	 * @return 
 	 */
 	public void setChannel(int newChannel){
-
+		channel = newChannel;
 	}
 
 	/**
 	 * 
-	 * @param newName
+	 * @param newName new name of radio
 	 * @return 
 	 */
 	public void setName(String newName){
-
+		nameRd = newName;
 	}
 
-	public void setStatus(){
-
+	/**
+	 * @param newStatus new status of radio
+	 */
+	public void setStatus(boolean newStatus){
+		status = newStatus;
 	}
 
 	/**
 	 * 
-	 * @param volume
+	 * @param newVolume new volume of radio
 	 * @return 
 	 */
-	public void setVolume(int volume){
-
+	public void setVolume(int newVolume){
+		volume = newVolume;
 	}
 }//end Radio
