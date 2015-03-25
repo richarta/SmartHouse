@@ -196,12 +196,8 @@ public class Personalize extends JPanel{
 		btSave.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				
-				System.out.println(house.getFloorList().get(cbFloors.getSelectedIndex()).getName());
-				
 				//change name of floor in house class
 				house.getFloorList().get(cbFloors.getSelectedIndex()).setName(tfNewName.getText());
-				
-				System.out.println(house.getFloorList().get(cbFloors.getSelectedIndex()).getName());
 				
 				//Change item in combo box
 				cbFloors.insertItemAt(tfNewName.getText(), cbFloors.getSelectedIndex());
@@ -217,9 +213,12 @@ public class Personalize extends JPanel{
 	
 	public static void addRoom(String nameRM){
 		
-		//Add floor to combo box
+		//Add room to combo box
 		cbRooms.addItem(tfNameRM.getText());
 		cbRooms.setSelectedIndex(cbRooms.getItemCount() - 1);
+		
+		//add room to house class
+		house.getFloorList().get(cbFloors.getSelectedIndex()).addRoom(nameRM);
 		
 		//Erase text from floor name text field
 		tfNameRM.setText("");	

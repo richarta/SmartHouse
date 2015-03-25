@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,13 +11,13 @@ import java.util.List;
  */
 public class Room {
 
-	private List<Door> doorList;
-	private List<Faucet> faucetList;
-	private List<Light> lightList;
+	private ArrayList<Door> doorList = new ArrayList<>();
+	private ArrayList<Faucet> faucetList = new ArrayList<>();
+	private ArrayList<Light> lightList = new ArrayList<>();
 	private String nameRm;
-	private List<Radio> radioList;
-	private List<Television> televisionList;
-	private List<Window> windowList;
+	private ArrayList<Radio> radioList = new ArrayList<>();
+	private ArrayList<Television> televisionList = new ArrayList<>();
+	private ArrayList<Window> windowList = new ArrayList<>();
 	public Window m_Window;
 	public Door m_Door;
 	public Television m_Television;
@@ -30,7 +31,9 @@ public class Room {
 
 	}
 	public Room(){
-
+		
+		//set default name of room
+		nameRm = "ROOM";
 	}
 
 	/**
@@ -38,7 +41,9 @@ public class Room {
 	 * @param nameRm
 	 */
 	public Room(String nameRm){
-
+		
+		//set name of room
+		setName(nameRm);
 	}
 
 	/**
@@ -89,32 +94,44 @@ public class Room {
 
 	}
 
-	public List<Door> getDoorList(){
-		return null;
+	public ArrayList<Door> getDoorList(){
+		
+		//return door list
+		return doorList;
 	}
 
-	public List<Faucet> getFaucetList(){
-		return null;
+	public ArrayList<Faucet> getFaucetList(){
+		
+		//return door list
+		return faucetList;
 	}
 
-	public List<Light> getLightList(){
-		return null;
+	public ArrayList<Light> getLightList(){
+		
+		//return light list
+		return lightList;
 	}
 
-	public List<Radio> getListRadio(){
-		return null;
+	public ArrayList<Radio> getListRadio(){
+
+		//return radio list
+		return radioList;
 	}
 
 	public String getName(){
 		return "";
 	}
 
-	public List<Television> getTelevisionList(){
-		return null;
+	public ArrayList<Television> getTelevisionList(){
+
+		//return television list
+		return televisionList;
 	}
 
 	public List<Window> getWindowList(){
-		return null;
+
+		//return window list
+		return windowList;
 	}
 
 	/**

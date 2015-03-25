@@ -1,6 +1,8 @@
 import java.util.List;
 
-
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 
 /**
@@ -14,12 +16,17 @@ public class Hallway {
 	private String nameHw;
 	public Light m_Light;
 
-
+	private JFrame jframe = new JFrame();
 
 	public void finalize() throws Throwable {
 
 	}
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public void Hallway(){
+		jframe.setTitle("Hallway");
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 

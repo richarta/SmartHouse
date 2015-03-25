@@ -83,77 +83,16 @@ public abstract class User {
 		}
 	}
 	
-	public void addDevice(String nameRm, String nameDv, String status, int typeDv){
+	public House getHouse(){
 		
+		//return house
+		return house;
 	}
-
-	/**
-	 * 
-	 * @param floor
-	 * @param nameRm
-	 * @return 
-	 */
-	public void addRoom(int floor, String nameRm){
-
-	}
-
-	/**
-	 * 
-	 * @param nameRm
-	 * @param nameDv
-	 * @param newStatus
-	 */
-	public void changeDvStatus(String nameRm, String nameDv, String [] newStatus){
-		
-	}
-
-	/**
-	 * 
-	 * @param floor
-	 * @param newNameRm
-	 */
-	public void changeRoomName(int floor, String newNameRm){
-		
-	}
-
-	/**
-	 * 
-	 * @param nameRm
-	 * @param nameDv
-	 */
-	public void deleteDevice(String nameRm, String nameDv){
 	
-	}
-
-	/**
-	 * 
-	 * @param floor
-	 * @param nameRm
-	 */
-	public void deleteRoom(int floor, String nameRm){
+	public void setHouse(House newHouse){
 		
-	}
-
-	/**
-	 * 
-	 * @param nameRm
-	 * @param nameDv
-	 */
-	public String getDvStatus(String nameRm, String nameDv){
-		return null;
-	}
-
-	public String getHouseName(){
-		return null;
-	}
-
-	/**
-	 * 
-	 * @param nameHs
-	 * @return 
-	 */
-	public void setHouseName(String nameHs){
-
+		//Set House
+		house = newHouse;
 	}
 	
 	public void setUsername(String user){
