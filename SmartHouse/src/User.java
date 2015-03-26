@@ -104,13 +104,13 @@ public abstract class User {
 		pass = nPass;
 	}
 	
-	public String getUsername(String u)
+	public boolean checkUsername(String u)
 	{
-		return username;
+		return true;
 	}
 	
-	public String getPass(String p)
+	public boolean checkPass(String p)
 	{
-		return pass;
+		return true;
 	}
 }//end User
