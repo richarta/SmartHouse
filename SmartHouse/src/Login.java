@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 
@@ -83,11 +85,16 @@ public class Login extends JFrame
 			user = userField.getText();
 			pass = userPass.getText();
 						
-			if(loginCheck(user, pass))
-			{
-				frame.setVisible(false);
-				//open main menu
-				SelectionMenu menu = new SelectionMenu();
+			try {
+				if(loginCheck(user, pass))
+				{
+					frame.setVisible(false);
+					//open main menu
+					SelectionMenu menu = new SelectionMenu();
+				}
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			
 		}
@@ -118,8 +125,13 @@ public class Login extends JFrame
 	frame.setVisible(true);
 	}
 
-	public boolean loginCheck(String u, String p){
-	return true;
+	public boolean loginCheck(String u, String p) throws IOException{
+		 if(User.checkLogin(u, p))
+		 {
+			 return true;
+		 }
+		 else 
+			 return false;
 
 	}
 

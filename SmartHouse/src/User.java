@@ -111,7 +111,7 @@ public abstract class User {
 		return true;
 	}
 	
-	public boolean checkLogin(String u, String p) throws IOException
+	public static boolean checkLogin(String u, String p) throws IOException
 	{
 		try{
 		FileReader inputFile = new FileReader(u + ".txt");
