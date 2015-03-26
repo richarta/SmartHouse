@@ -8,14 +8,22 @@
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 
 public class Login extends JFrame 
 {
 
+	private String user;
+	private String pass;
+	
 	public Login(){
 	JFrame frame = new JFrame();
 	frame.setSize(500, 297);
@@ -71,17 +79,16 @@ public class Login extends JFrame
 	loginB.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
 			
-			//Check username
-			String user = userField.getText();
-			String pass = userPass.getText();
-			//String loginCheck = getUser()
-			
-			
-			
-			//if correct hide login
-			frame.setVisible(false);
-			//open main menu
-			SelectionMenu menu = new SelectionMenu();
+			//Check username/pass
+			user = userField.getText();
+			pass = userPass.getText();
+						
+			if(loginCheck(user, pass))
+			{
+				frame.setVisible(false);
+				//open main menu
+				SelectionMenu menu = new SelectionMenu();
+			}
 			
 		}
 	}); 
@@ -111,10 +118,8 @@ public class Login extends JFrame
 	frame.setVisible(true);
 	}
 
-	public void finalize() throws Throwable {
-
-	}
-	public void logincheck(){
+	public boolean loginCheck(String u, String p){
+	return true;
 
 	}
 
