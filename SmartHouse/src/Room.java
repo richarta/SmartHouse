@@ -75,7 +75,7 @@ public class Room {
 	 * @param nameRd
 	 */
 	public void addRadio(String nameRd){
-
+		radioList.add(new Radio(nameRd));
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class Room {
 	 * @param nameTv
 	 */
 	public void addTelevision(String nameTv){
-
+		televisionList.add(new Television(nameTv));
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class Room {
 	}
 
 	public String getName(){
-		return "";
+		return nameRm;
 	}
 
 	public ArrayList<Television> getTelevisionList(){
@@ -187,6 +187,6 @@ public class Room {
 	 * @param newName
 	 */
 	public void setName(String newName){
-
+		nameRm = newName;
 	}
 }//end Room

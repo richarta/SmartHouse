@@ -48,8 +48,9 @@ public class Entertainment{
 	
 	// Initialize
 	private House house = new House();
+	//private House house = User.getHouse();
+	
 	private int nFloor = 2;
-	// private House house = User.getHouse();
 	// private int nFloor = house.getFloorList().size();
 	
 	private int [] nRoom = new int[nFloor];
@@ -105,7 +106,6 @@ public class Entertainment{
         	roomPanels[i][j] = generateEntRoomPanel(i,j);
         	}
         }
-     //   roomPanels[0][1] = generateTestRoomPanel(0,0); // Different Panel for test
         
      // For each floor
         for (int i=0; i<nFloor; i++){
@@ -257,6 +257,14 @@ public class Entertainment{
 			volSlider.setSize(130, 23);
 			volSlider.setLocation(430, 57+30*k);
 			panel.add(volSlider);
+			
+			if (house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(k).getStatus())
+				onButton.setSelected(true);
+			else
+				offButton.setSelected(true);
+			
+			volSlider.setValue(house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(k).getVolume());
+				
 		}
 		
 		// Radio		
@@ -281,6 +289,13 @@ public class Entertainment{
 			volSlider.setSize(130, 23);
 			volSlider.setLocation(430, 232+30*k);
 			panel.add(volSlider);
+			
+			if (house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(k).getStatus())
+				onButton.setSelected(true);
+			else
+				offButton.setSelected(true);
+			
+			volSlider.setValue(house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(k).getVolume());
 		}
 		
 		return panel;

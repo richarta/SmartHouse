@@ -12,7 +12,7 @@ import java.io.ObjectOutputStream;
 public abstract class User {
 
 	private String floorFile;
-	private House house;
+	private static House house;
 	private String houseFile;
 	private String username;
 	private String pass;
@@ -85,7 +85,7 @@ public abstract class User {
 		}
 	}
 	
-	public House getHouse(){
+	public static House getHouse(){
 		
 		//return house
 		return house;
