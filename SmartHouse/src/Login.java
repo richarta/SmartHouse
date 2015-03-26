@@ -118,9 +118,6 @@ public class Login extends JFrame
 	frame.setVisible(true);
 	}
 
-	public void finalize() throws Throwable {
-
-	}
 	public boolean loginCheck(String u, String p){
 	return true;
 
