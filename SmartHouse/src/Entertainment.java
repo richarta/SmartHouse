@@ -105,7 +105,6 @@ public class Entertainment{
         	roomPanels[i][j] = generateEntRoomPanel(i,j);
         	}
         }
-     //   roomPanels[0][1] = generateTestRoomPanel(0,0); // Different Panel for test
         
      // For each floor
         for (int i=0; i<nFloor; i++){
