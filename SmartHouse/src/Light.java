@@ -13,7 +13,13 @@ public class Light {
 
 	}
 	public Light(){
-
+		nameLg = "Light";
+		lightStatus = false;
+	}
+	
+	public Light(String nameLg){
+		this.nameLg = nameLg;
+		lightStatus = false;
 	}
 
 	public void setlightName(String nameLg){

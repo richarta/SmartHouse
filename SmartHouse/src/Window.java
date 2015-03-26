@@ -13,9 +13,15 @@ public class Window {
 
 	}
 	public Window(){
-
+		nameWid = "Window";
+		lockWid = true;
 	}
-
+	
+	public Window(String nameWid){
+		this.nameWid = nameWid;
+		lockWid = true;
+	}
+	
 	public boolean getLock(){
 		return lockWid;
 	}
