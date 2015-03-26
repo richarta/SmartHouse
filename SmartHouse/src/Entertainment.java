@@ -42,12 +42,16 @@ public class Entertainment{
 	
 	// Test Launching GUI
 	/**
-	Wpublic static void main(String[] args) {
+	public static void main(String[] args) {
        new Environmental();
    } //*/
 	
 	// Initialize
-	private int nFloor = 3;
+	private House house = new House();
+	private int nFloor = 2;
+	// private House house = User.getHouse();
+	// private int nFloor = house.getFloorList().size();
+	
 	private int [] nRoom = new int[nFloor];
     private int iFloorChoosed;
     private int iRoomChoosed;
@@ -63,34 +67,50 @@ public class Entertainment{
     private final JPanel panel_2 = new JPanel();
     boolean [][] powersaver = new boolean[nFloor][10];
     
-    public Entertainment() {	    	
+    public Entertainment() {
+    	// Sample House
+    	house.addFloor("Floor1");
+    	house.addFloor("Floor2");
+    	house.getFloorList().get(0).addRoom("dining");
+    	house.getFloorList().get(0).addRoom("Living");
+    	house.getFloorList().get(1).addRoom("bed");
+    	house.getFloorList().get(0).getRoomList().get(0).addRadio("Radio1");
+    	house.getFloorList().get(0).getRoomList().get(0).addRadio("Radio2");
+    	house.getFloorList().get(0).getRoomList().get(1).addRadio("Radio3");
+    	house.getFloorList().get(1).getRoomList().get(0).addRadio("Radio4");
+    	house.getFloorList().get(1).getRoomList().get(0).addRadio("Radio5");
+    	house.getFloorList().get(1).getRoomList().get(0).addRadio("Radio6");
+    	house.getFloorList().get(0).getRoomList().get(0).addTelevision("TV@1");
+    	house.getFloorList().get(0).getRoomList().get(1).addTelevision("TV@2");
+    	house.getFloorList().get(0).getRoomList().get(1).addTelevision("TV@3");
+    	house.getFloorList().get(0).getRoomList().get(1).addTelevision("TV@4");
+    	house.getFloorList().get(1).getRoomList().get(0).addTelevision("TV@5");
+    	house.getFloorList().get(1).getRoomList().get(0).addTelevision("TV@6");
+    	
+    	//
     	EntFrm.getContentPane().setLayout(null);
     	EntFrm.setResizable(false);
     	
-    	// These would be given by parameter later
-        nRoom[0] = 2;
-        nRoom[1] = 1;
-        nRoom[2] = 3;
-        
-        nameRoom[0][0] = "Dining";
-        nameRoom[0][1] = "Room";
-        nameRoom[1][0] = "Living";
-        nameRoom[2][0] = "Bed1";
-        nameRoom[2][1] = "Bed2";
-        nameRoom[2][2] = "Bed3";
-        
+    	//Initialize
+    	for (int i=0; i<nFloor; i++){
+    		nRoom[i] = house.getFloorList().get(i).getRoomList().size();
+    		for (int j=0; j<nRoom[i]; j++){
+    			nameRoom[i][j] = house.getFloorList().get(0).getRoomList().get(j).getName();
+    		}
+    	}
+       
         // Generate a panel for each room
         for (int i=0; i<nFloor; i++){
         	for(int j=0; j<nRoom[i]; j++){
         	roomPanels[i][j] = generateEntRoomPanel(i,j);
         	}
         }
-        roomPanels[0][1] = generateTestRoomPanel(0,0); // Different Panel for test
+     //   roomPanels[0][1] = generateTestRoomPanel(0,0); // Different Panel for test
         
      // For each floor
         for (int i=0; i<nFloor; i++){
     		// Generate menu for each floor
-        	JMenu fileMenu = new JMenu("Floor " + (i+1));
+        	JMenu fileMenu = new JMenu(house.getFloorList().get(0).getName());
         	menus.add(fileMenu);
         	
         	// For each room
@@ -117,7 +137,7 @@ public class Entertainment{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("[Floor "+ (iFloorChoosed+1) +", " + nameRoom[iFloorChoosed][iRoomChoosed] + " is selected]");
+	    	            	roomLabel.setText("["+house.getFloorList().get(0).getName()+"] " + nameRoom[iFloorChoosed][iRoomChoosed] + " is selected]");
 	    	            	roomLabel.setBounds(610, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 	    	        		EntFrm.getContentPane().add(roomLabel);
@@ -171,21 +191,20 @@ public class Entertainment{
         EntFrm.setVisible(true);
     }
 
-    public JPanel generateEntRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
+    public JPanel generateEntRoomPanel(int iFloor, int iRoom){
+    	// Initialize
     	JPanel panel = new JPanel();
-    	
-		//Later, it would get by method
-
-		int nRadio = 3;
+		int nRadio = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().size();
 		String [] radioName = new String[nRadio]; 
-		radioName[0] = "Radio1";
-		radioName[1] = "Radio2";
-		radioName[2] = "Radio3";
-		
-		int nTV = 2;
+		for(int i=0; i<nRadio; i++){
+			radioName[i] = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(i).getName();
+		}
+	
+		int nTV = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().size();
 		String [] TVName = new String[nTV]; 
-		TVName[0] = "TV1";
-		TVName[1] = "FFTV2";
+		for(int i=0; i<nTV; i++){
+			TVName[i] = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(i).getName();
+		}
 		
 		//
         JLabel lblVolume = new JLabel("Volume");
