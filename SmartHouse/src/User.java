@@ -1,8 +1,10 @@
 
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -109,8 +111,23 @@ public abstract class User {
 		return true;
 	}
 	
-	public boolean checkPass(String p)
+	public boolean checkLogin(String u, String p) throws IOException
 	{
-		return true;
+		try{
+		FileReader inputFile = new FileReader(u + ".txt");
+		BufferedReader bufferReader = new BufferedReader(inputFile);
+		if(bufferReader.readLine().equals(p)){
+			return true;
+		}
+		else
+			return false;
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		
 	}
 }//end User
