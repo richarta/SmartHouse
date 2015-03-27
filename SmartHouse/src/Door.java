@@ -40,6 +40,7 @@ public class Door {
 	 */
 	public void setLock(boolean newLock){
 		lock = newLock;
+		User.saveHouseStatus();
 	}
 
 	/**
@@ -48,5 +49,6 @@ public class Door {
 	 */
 	public void setName(String newName){
 		nameDr = newName;
+		User.saveHouseStatus();
 	}
 }//end Door

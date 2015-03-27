@@ -46,9 +46,11 @@ public class Faucet {
 	 */
 	public void setName(String newName){
 		nameFa = newName;
+		User.saveHouseStatus();
 	}
 
 	public void setStatus(boolean newStatus){
 		status = newStatus;
+		User.saveHouseStatus();
 	}
 }//end Faucet
