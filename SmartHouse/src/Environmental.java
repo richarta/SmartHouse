@@ -212,7 +212,7 @@ public class Environmental{
 		tempLabel.setBounds(65,20,200,23);
 		panel.add(tempLabel);
 		
-		JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 70);
+		JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, 70);
 		tempSlider.setPaintLabels(true);
 		tempSlider.setPaintTicks(true);
 		tempSlider.setPaintTrack(true);
@@ -294,115 +294,4 @@ public class Environmental{
 		
 		return panel;
 	}
-    
-    // Test Panel
-    public JPanel generateTestRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
-		//Later, it would get by method
-
-    	JPanel panel = new JPanel();
-    	
-		int nLight = 2;
-		String [] lightName = new String[nLight]; 
-		lightName[0] = "BBBasdht1";
-		lightName[1] = "asdfdft2";
-		
-		int nFaucet = 5;
-		String [] faucetName = new String[nFaucet]; 
-		faucetName[0] = "Fafet1";
-		faucetName[1] = "FFbwecet2";
-		faucetName[2] = "123bwecet3";
-		faucetName[3] = "ABbwecet4";
-		faucetName[4] = "@@bwecet5";
-		
-		//Make panel
-		panel.setLayout(null);
-
-		// First Column
-		JLabel tempLabel = new JLabel("Temasdture (70F)");
-		tempLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tempLabel.setBounds(65,20,200,23);
-		panel.add(tempLabel);
-		
-		JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 70);
-		tempSlider.setPaintLabels(true);
-		tempSlider.setPaintTicks(true);
-		tempSlider.setPaintTrack(true);
-		tempSlider.setMajorTickSpacing(20);
-		tempSlider.setMinorTickSpacing(5);
-		tempSlider.setBounds(30,50,200,50);
-		
-		tempSlider.addChangeListener(new ChangeListener(){
-			public void stateChanged (ChangeEvent e){
-	            tempLabel.setText("Temerature (" + tempSlider.getValue() + "F)");
-			}
-		});
-		
-		panel.add(tempSlider);
-		
-		powersaver[iFloor][iRoom] = false;
-		JButton psBtn = new JButton("Power Saver ON");
-		psBtn.setBackground(new Color(60, 179, 113));
-		psBtn.setForeground(Color.BLACK);
-		psBtn.setBounds(305, 350, 200, 30);
-		psBtn.addActionListener (new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	if (powersaver[iFloor][iRoom]) {
-            		powersaver[iFloor][iRoom] = false;
-            		psBtn.setText("Power Saver ON");
-            		psBtn.setBackground(new Color(60, 179, 113));
-            	}
-            	else {
-            		powersaver[iFloor][iRoom] = true;
-            		psBtn.setText("Power Saver OFF");
-            		psBtn.setBackground(SystemColor.inactiveCaption);
-            		
-            	}
-            }
-        });
-		panel.add(psBtn);
-		
-		// Second Column
-		JLabel lightLabel = new JLabel("Lights");
-		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lightLabel.setBounds(400,20,200,23);
-		panel.add(lightLabel);
-		
-		ArrayList<JRadioButton> lArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nLight; k++){
-			JRadioButton button = new JRadioButton(lightName[k]);
-			button.setBounds(390,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-	        });
-		
-			lArray.add(button);
-			panel.add(button);
-		}
-		
-		// Third Column
-		JLabel faucetLabel = new JLabel("Faucets");
-		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		faucetLabel.setBounds(640,20,200,23);
-		panel.add(faucetLabel);
-		
-		ArrayList<JRadioButton> fArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nFaucet; k++){
-			JRadioButton button = new JRadioButton(faucetName[k]);
-			button.setBounds(630,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-			});
-			
-			fArray.add(button);
-			panel.add(button);
-		}
-		
-		return panel;
-    }
 }

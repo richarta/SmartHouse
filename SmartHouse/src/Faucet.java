@@ -26,7 +26,7 @@ public class Faucet {
 	 * @param nameFa
 	 * @return 
 	 */
-	public void Facuet(String nameFa){
+	public Faucet(String nameFa){
 		this.nameFa = nameFa;
 		status = false;
 	}
