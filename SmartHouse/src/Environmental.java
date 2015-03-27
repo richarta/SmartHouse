@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -197,7 +198,10 @@ public class Environmental{
     	JLabel lightLabel = new JLabel("Lights");
     	JLabel faucetLabel = new JLabel("Faucets");
     	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
-    	
+    	ImageIcon img_lightON = new ImageIcon("light_on.png");
+    	ImageIcon img_lightOFF = new ImageIcon("light_off.png");
+    	ImageIcon img_faucetON = new ImageIcon("faucet_on.png");
+    	ImageIcon img_faucetOFF = new ImageIcon("faucet_off.png");
     	
 		panel.setLayout(null);
 		
@@ -275,14 +279,19 @@ public class Environmental{
 			JRadioButton onButton = new JRadioButton("On");
 			JRadioButton offButton = new JRadioButton("Off");
 			ButtonGroup group = new ButtonGroup();
+			JLabel imageLight = new JLabel(img_lightOFF);
 			
-			lightlbl.setBounds(27, 59+30*k, 150, 16);		
+			lightlbl.setBounds(47, 59+30*k, 150, 16);		
 			panel.add(lightlbl);
+			
+			imageLight.setBounds(27, 59+30*k, 15, 15);
+			panel.add(imageLight);
 			
 			onButton.setBounds(115, 55+30*k, 51, 25);
 			onButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		imageLight.setIcon(img_lightON);
 	            		light.setLightStatus(true);
 	            	}
 	            }
@@ -293,6 +302,7 @@ public class Environmental{
 			offButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		imageLight.setIcon(img_lightOFF);
 	            		light.setLightStatus(false);
 	            	}
 	            }
@@ -315,15 +325,20 @@ public class Environmental{
 			JRadioButton onButton = new JRadioButton("On");
 			JRadioButton offButton = new JRadioButton("Off");
 			ButtonGroup group = new ButtonGroup();
+			JLabel imageFaucet = new JLabel(img_faucetOFF);
 			
 			faucetlbl.setBounds(305, 59+30*k, 150, 16);		
 			panel.add(faucetlbl);
+			
+			imageFaucet.setBounds(365, 59+30*k, 15, 15);
+			panel.add(imageFaucet);
 			
 			onButton.setBounds(393, 55+30*k, 51, 25);
 			onButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		faucet.setStatus(true);
+	            		imageFaucet.setIcon(img_faucetON);
 	            	}
 	            }
 	        });
@@ -334,6 +349,7 @@ public class Environmental{
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		faucet.setStatus(false);
+	            		imageFaucet.setIcon(img_faucetOFF);
 	            	}
 	            }
 	        });

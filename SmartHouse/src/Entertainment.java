@@ -41,7 +41,7 @@ import java.awt.SystemColor;
 public class Entertainment{
 	
 	// Test Launching GUI
-	/**
+	///**
 	public static void main(String[] args) {
        new Entertainment();
     } //*/
@@ -194,6 +194,7 @@ public class Entertainment{
 		JLabel lblVolume_2 = new JLabel("Volume");
 		JLabel lblChannel = new JLabel("Channel");
 		JLabel lblChannel_2 = new JLabel("Channel");
+		
 		Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
 		
 		// Set labels
