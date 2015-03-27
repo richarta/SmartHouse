@@ -20,14 +20,14 @@ public class Television {
 	 */
 	public Television(String nameTv){
 		this.nameTv = nameTv;
-		channel = 10;
+		channel = 100;
 		status = false;
 		volume = 50;
 	}
 
 	public Television(){
 		nameTv = "Television";
-		channel = 10;
+		channel = 100;
 		status = false;
 		volume = 50;
 	}
