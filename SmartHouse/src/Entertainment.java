@@ -41,10 +41,10 @@ import java.awt.SystemColor;
 public class Entertainment{
 	
 	// Test Launching GUI
-	/**
+	///**
 	public static void main(String[] args) {
-       new Environmental();
-   } //*/
+       new Entertainment();
+    } //*/
 	
 	// Initialize
 	private House house = new House();
@@ -96,7 +96,7 @@ public class Entertainment{
     	for (int i=0; i<nFloor; i++){
     		nRoom[i] = house.getFloorList().get(i).getRoomList().size();
     		for (int j=0; j<nRoom[i]; j++){
-    			nameRoom[i][j] = house.getFloorList().get(0).getRoomList().get(j).getName();
+    			nameRoom[i][j] = house.getFloorList().get(i).getRoomList().get(j).getName();
     		}
     	}
        
@@ -110,7 +110,7 @@ public class Entertainment{
      // For each floor
         for (int i=0; i<nFloor; i++){
     		// Generate menu for each floor
-        	JMenu fileMenu = new JMenu(house.getFloorList().get(0).getName());
+        	JMenu fileMenu = new JMenu(house.getFloorList().get(i).getName());
         	menus.add(fileMenu);
         	
         	// For each room
@@ -211,6 +211,8 @@ public class Entertainment{
         JLabel tvLabel = new JLabel("Televisions");
 		JLabel radioLabel = new JLabel("Radio");
 		JLabel lblVolume_2 = new JLabel("Volume");
+		JLabel lblChannel = new JLabel("Channel");
+		JLabel lblChannel_2 = new JLabel("Channel");
 		
 		tvLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tvLabel.setBounds(27, 30, 90, 16);
@@ -224,6 +226,11 @@ public class Entertainment{
 		lblVolume_2.setBounds(470, 206, 51, 16);
 		panel.add(lblVolume);
 		panel.add(lblVolume_2);
+		
+		lblChannel.setBounds(670, 31, 51, 16);
+		lblChannel_2.setBounds(670, 206, 51, 16);
+		panel.add(lblChannel);
+		panel.add(lblChannel_2);
 		
 		//Make panel
 		panel.setLayout(null);
@@ -253,10 +260,15 @@ public class Entertainment{
 			group.add(onButton);
 			group.add(offButton);
 			
-			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 2000, 0);
 			volSlider.setSize(130, 23);
 			volSlider.setLocation(430, 57+30*k);
 			panel.add(volSlider);
+			
+			JSlider chnSlider = new JSlider(JSlider.HORIZONTAL, 0, 2000, 0);
+			chnSlider.setSize(130, 23);
+			chnSlider.setLocation(630, 57+30*k);
+			panel.add(chnSlider);
 			
 			if (house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(k).getStatus())
 				onButton.setSelected(true);
@@ -264,7 +276,18 @@ public class Entertainment{
 				offButton.setSelected(true);
 			
 			volSlider.setValue(house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(k).getVolume());
-				
+			chnSlider.setValue(house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(k).getChannel());	
+			
+			JLabel chnLabel = new JLabel(""+chnSlider.getValue());
+			chnLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			chnLabel.setBounds(765, 57+30*k, 90, 16);
+			panel.add(chnLabel);
+			
+			chnSlider.addChangeListener(new ChangeListener(){
+				public void stateChanged (ChangeEvent e){
+		            chnLabel.setText(""+chnSlider.getValue());
+				}
+			});
 		}
 		
 		// Radio		
@@ -290,104 +313,32 @@ public class Entertainment{
 			volSlider.setLocation(430, 232+30*k);
 			panel.add(volSlider);
 			
+			JSlider chnSlider = new JSlider(JSlider.HORIZONTAL, 0, 200, 0);
+			chnSlider.setSize(130, 23);
+			chnSlider.setLocation(630, 232+30*k);
+			panel.add(chnSlider);
+		
 			if (house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(k).getStatus())
 				onButton.setSelected(true);
 			else
 				offButton.setSelected(true);
 			
 			volSlider.setValue(house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(k).getVolume());
+			chnSlider.setValue(house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(k).getChannel());	
+			
+			JLabel chnLabel = new JLabel(""+chnSlider.getValue());
+			chnLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			chnLabel.setBounds(765, 232+30*k, 90, 16);
+			panel.add(chnLabel);
+			
+			chnSlider.addChangeListener(new ChangeListener(){
+				public void stateChanged (ChangeEvent e){
+		            chnLabel.setText(""+chnSlider.getValue());
+				}
+			});
+		
 		}
 		
 		return panel;
 	}
-    
-    // Test Panel
-    public JPanel generateTestRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
-		//Later, it would get by method
-
-    	JPanel panel = new JPanel();
-    	
-		int nRadio = 2;
-		String [] radioName = new String[nRadio]; 
-		radioName[0] = "BBBasdht1";
-		radioName[1] = "asdfdft2";
-		
-		int nTV = 5;
-		String [] TVName = new String[nTV]; 
-		TVName[0] = "Fafet1";
-		TVName[1] = "FFbwecet2";
-		TVName[2] = "123bwecet3";
-		TVName[3] = "ABbwecet4";
-		TVName[4] = "@@bwecet5";
-		
-		//Make panel
-		panel.setLayout(null);
-
-		// First Column
-		// TVs
-		JLabel TVLabel = new JLabel("TVs");
-		TVLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		TVLabel.setBounds(60,20,200,23);
-		panel.add(TVLabel);
-		
-		ArrayList<JRadioButton> fArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nTV; k++){
-			JRadioButton button = new JRadioButton(TVName[k]);
-			button.setBounds(50,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-			});
-			
-			fArray.add(button);
-			panel.add(button);
-		}
-		
-		powersaver[iFloor][iRoom] = false;
-		JButton psBtn = new JButton("Power Saver ON");
-		psBtn.setBackground(new Color(60, 179, 113));
-		psBtn.setForeground(Color.BLACK);
-		psBtn.setBounds(305, 350, 200, 30);
-		psBtn.addActionListener (new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	if (powersaver[iFloor][iRoom]) {
-            		powersaver[iFloor][iRoom] = false;
-            		psBtn.setText("Power Saver ON");
-            		psBtn.setBackground(new Color(60, 179, 113));
-            	}
-            	else {
-            		powersaver[iFloor][iRoom] = true;
-            		psBtn.setText("Power Saver OFF");
-            		psBtn.setBackground(SystemColor.inactiveCaption);
-            		
-            	}
-            }
-        });
-		panel.add(psBtn);
-		
-		// Second Column
-		JLabel radioLabel = new JLabel("Radios");
-		radioLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		radioLabel.setBounds(400,20,200,23);
-		panel.add(radioLabel);
-		
-		ArrayList<JRadioButton> lArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nRadio; k++){
-			JRadioButton button = new JRadioButton(radioName[k]);
-			button.setBounds(390,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-	        });
-		
-			lArray.add(button);
-			panel.add(button);
-		}
-		
-		return panel;
-    }
 }
