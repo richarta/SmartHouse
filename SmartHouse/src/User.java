@@ -11,10 +11,8 @@ import java.io.ObjectOutputStream;
 
 public abstract class User {
 
-	private String floorFile;
 	private static House house;
-	private String houseFile;
-	private String username;
+	private static String username;
 	private String pass;
 	public Login m_Login;
 
@@ -33,7 +31,7 @@ public abstract class User {
 	 * @param typeDv
 	 */
 	
-	public void saveHouseStatus(){
+	public static void saveHouseStatus(){
 		
 		//Open file in try block
 		try {

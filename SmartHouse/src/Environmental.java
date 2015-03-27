@@ -225,22 +225,22 @@ public class Environmental{
 		
 		// Powersaver
 		powersaver[iFloor][iRoom] = false;
-		JButton psBtn = new JButton("Power Saver ON");
-		psBtn.setBackground(new Color(60, 179, 113));
+		JButton psBtn = new JButton("Power Saver is OFF");
+		psBtn.setBackground(SystemColor.inactiveCaption);
 		psBtn.setForeground(Color.BLACK);
 		psBtn.setBounds(305, 350, 200, 30);
 		psBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	if (powersaver[iFloor][iRoom]) {
             		powersaver[iFloor][iRoom] = false;
-            		psBtn.setText("Power Saver ON");
-            		psBtn.setBackground(new Color(60, 179, 113));
+            		psBtn.setText("Power Saver is OFF");
+            		psBtn.setBackground(SystemColor.inactiveCaption);
+            		
             	}
             	else {
             		powersaver[iFloor][iRoom] = true;
-            		psBtn.setText("Power Saver OFF");
-            		psBtn.setBackground(SystemColor.inactiveCaption);
-            		
+            		psBtn.setText("Power Saver is ON");
+            		psBtn.setBackground(new Color(60, 179, 113));
             	}
             }
         });
