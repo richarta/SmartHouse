@@ -33,19 +33,21 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+
 import java.awt.Color;
 import java.awt.SystemColor;
  
 public class Environmental{
 	
 	// Test Launching GUI
-	/**
-	Wpublic static void main(String[] args) {
+	///**
+	public static void main(String[] args) {
        new Environmental();
    } //*/
 	
 	// Initialize
-	private int nFloor = 3;
+	private House house = new House();
+	private int nFloor = 2;
 	private int [] nRoom = new int[nFloor];
     private int iFloorChoosed;
     private int iRoomChoosed;
@@ -62,33 +64,48 @@ public class Environmental{
     boolean [][] powersaver = new boolean[nFloor][10];
     
     public Environmental() {	    	
+    	// Sample House
+    	house.addFloor("Floor1");
+    	house.addFloor("Floor2");
+    	house.getFloorList().get(0).addRoom("dining");
+    	house.getFloorList().get(0).addRoom("Living");
+    	house.getFloorList().get(1).addRoom("bed");
+    	house.getFloorList().get(0).getRoomList().get(0).addLight("Light1");
+    	house.getFloorList().get(0).getRoomList().get(0).addLight("Light2");
+    	house.getFloorList().get(0).getRoomList().get(1).addLight("Light3");
+    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light4");
+    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light5");
+    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light6");
+    	house.getFloorList().get(0).getRoomList().get(0).addFaucet("Faucet@1");
+    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@2");
+    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@3");
+    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@4");
+    	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@5");
+    	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@6");
+    	
+    	//
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);
     	
-    	// These would be given by parameter later
-        nRoom[0] = 2;
-        nRoom[1] = 1;
-        nRoom[2] = 3;
-        
-        nameRoom[0][0] = "Dining";
-        nameRoom[0][1] = "Room";
-        nameRoom[1][0] = "Living";
-        nameRoom[2][0] = "Bed1";
-        nameRoom[2][1] = "Bed2";
-        nameRoom[2][2] = "Bed3";
-        
+    	//Initialize
+    	for (int i=0; i<nFloor; i++){
+    		nRoom[i] = house.getFloorList().get(i).getRoomList().size();
+    		for (int j=0; j<nRoom[i]; j++){
+    			nameRoom[i][j] = house.getFloorList().get(i).getRoomList().get(j).getName();
+    		}
+    	}
+       
         // Generate a panel for each room
         for (int i=0; i<nFloor; i++){
         	for(int j=0; j<nRoom[i]; j++){
         	roomPanels[i][j] = generateEnvRoomPanel(i,j);
         	}
         }
-        roomPanels[0][1] = generateTestRoomPanel(0,0); // Different Panel for test
         
      // For each floor
         for (int i=0; i<nFloor; i++){
     		// Generate menu for each floor
-        	JMenu fileMenu = new JMenu("Floor " + (i+1));
+        	JMenu fileMenu = new JMenu(house.getFloorList().get(i).getName());
         	menus.add(fileMenu);
         	
         	// For each room
@@ -115,7 +132,7 @@ public class Environmental{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("[Floor "+ (iFloorChoosed+1) +", " + nameRoom[iFloorChoosed][iRoomChoosed] + " is selected]");
+	    	            	roomLabel.setText("["+house.getFloorList().get(0).getName()+"] " + nameRoom[iFloorChoosed][iRoomChoosed] + " is selected]");
 	    	            	roomLabel.setBounds(610, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 	    	        		EnvFrm.getContentPane().add(roomLabel);
@@ -150,43 +167,44 @@ public class Environmental{
             	new SelectionMenu();
             }
         });
+		
 		EnvFrm.getContentPane().add(menuBtn);
 		
 		// room label
 		roomLabel.setBounds(180, 100, 500, 40);
 		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		EnvFrm.getContentPane().add(roomLabel);
-		
-		// Border
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		panel_2.setBounds(12, 391, 778, 2);
+		
 		EnvFrm.getContentPane().add(panel_2);
 		
         // Set Frame
-        EnvFrm.setTitle("Environmental Controls");
+        EnvFrm.setTitle("Entertainment Controls");
         EnvFrm.setLocation(120, 120);
         EnvFrm.setSize(820,530);
         EnvFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        EnvFrm.setVisible(true);
+        EnvFrm.setVisible(true);  
     }
+    
 
     public JPanel generateEnvRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
-		//Later, it would get by method
-    	
-		int nLight = 3;
-		String [] lightName = new String[nLight]; 
-		lightName[0] = "Light1";
-		lightName[1] = "Light2";
-		lightName[2] = "Light3";
-		
-		int nFaucet = 2;
-		String [] faucetName = new String[nFaucet]; 
-		faucetName[0] = "Faucet1";
-		faucetName[1] = "FFFaucet2";
-		
 		//Make panel
+    	JPanel panel = new JPanel();
 		panel.setLayout(null);
-
+    	
+		int nLight = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getLightList().size();
+		String [] lightName = new String[nLight]; 
+		for (int i = 0 ; i< nLight; i++){
+			lightName[i] = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getLightList().get(i).getlightName();
+		}
+		
+		int nFaucet = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getFaucetList().size();
+		String [] faucetName = new String[nFaucet];
+		for (int i = 0 ; i< nFaucet; i++){
+			faucetName[i] = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getFaucetList().get(i).getName();
+		}
+		
 		// First Column
 		// Thermostat
 		JLabel tempLabel = new JLabel("Temerature (70F)");

@@ -59,7 +59,7 @@ public class Room {
 	 * @param nameFa
 	 */
 	public void addFaucet(String nameFa){
-
+		faucetList.add(new Faucet(nameFa));
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class Room {
 	 * @param nameLg
 	 */
 	public void addLight(String nameLg){
-
+		lightList.add(new Light(nameLg));
 	}
 
 	/**
