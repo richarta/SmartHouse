@@ -22,12 +22,12 @@ public class Thermostat {
 	 */
 	public Thermostat(String nameTh){
 		this.nameTh = nameTh;
-		temperature = 70;
+		temperature = 80;
 	}
 
 	public Thermostat(){
 		nameTh = "Thermostat";
-		temperature = 70;
+		temperature = 80;
 	}
 
 	public String getName(){

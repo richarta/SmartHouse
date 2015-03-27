@@ -18,6 +18,7 @@ public class Room {
 	private ArrayList<Radio> radioList = new ArrayList<>();
 	private ArrayList<Television> televisionList = new ArrayList<>();
 	private ArrayList<Window> windowList = new ArrayList<>();
+	public Thermostat m_Thermostat;
 	public Window m_Window;
 	public Door m_Door;
 	public Television m_Television;
@@ -50,8 +51,12 @@ public class Room {
 	 * 
 	 * @param nameDr
 	 */
+	public void addThermostat(String nameTh){
+		m_Thermostat = new Thermostat(nameTh);
+	}
+	
 	public void addDoor(String nameDr){
-
+		doorList.add(new Door(nameDr));
 	}
 
 	/**
@@ -91,9 +96,13 @@ public class Room {
 	 * @param nameWd
 	 */
 	public void addWindow(String nameWd){
-
+		windowList.add(new Window(nameWd));
 	}
-
+	
+	public Thermostat getThermostat(){
+		return m_Thermostat;
+	}
+	
 	public ArrayList<Door> getDoorList(){
 		
 		//return door list

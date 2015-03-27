@@ -70,6 +70,9 @@ public class Environmental{
     	house.getFloorList().get(0).addRoom("dining");
     	house.getFloorList().get(0).addRoom("Living");
     	house.getFloorList().get(1).addRoom("bed");
+    	house.getFloorList().get(0).getRoomList().get(0).addThermostat("Thermo");
+    	house.getFloorList().get(0).getRoomList().get(1).addThermostat("Thermo");
+    	house.getFloorList().get(1).getRoomList().get(0).addThermostat("Thermo");
     	house.getFloorList().get(0).getRoomList().get(0).addLight("Light1");
     	house.getFloorList().get(0).getRoomList().get(0).addLight("Light2");
     	house.getFloorList().get(0).getRoomList().get(1).addLight("Light3");
@@ -186,13 +189,15 @@ public class Environmental{
      * @param iRoom index of room
      * @return JPanel of Environmental control of the i-th room on i-th floor
      */
-    public JPanel generateEnvRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
+    public JPanel generateEnvRoomPanel(int iFloor, int iRoom){
+    	Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
     	JPanel panel = new JPanel();
-    	JLabel tempLabel = new JLabel("Temerature (70F)");
-    	JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, 70);
+    	JLabel tempLabel = new JLabel("Temerature (" + room.getThermostat().getTemp() + "F)");
+    	JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, room.getThermostat().getTemp());
     	JLabel lightLabel = new JLabel("Lights");
     	JLabel faucetLabel = new JLabel("Faucets");
-    	Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
+    	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
+    	
     	
 		panel.setLayout(null);
 		
@@ -218,6 +223,7 @@ public class Environmental{
 		tempSlider.setBounds(580,50,200,50);
 		tempSlider.addChangeListener(new ChangeListener(){
 			public void stateChanged (ChangeEvent e){
+				room.getThermostat().setTemp(tempSlider.getValue());
 	            tempLabel.setText("Temerature (" + tempSlider.getValue() + "F)");
 			}
 		});
@@ -241,6 +247,22 @@ public class Environmental{
             		powersaver[iFloor][iRoom] = true;
             		psBtn.setText("Power Saver is ON");
             		psBtn.setBackground(new Color(60, 179, 113));
+            		
+            		room.getThermostat().setTemp(70);
+            		tempSlider.setValue(70);
+            		tempLabel.setText("Temerature (70F)");
+            		
+            		for (int i=0; i<offBtnList.size(); i++){
+            			offBtnList.get(i).setSelected(true);
+            		}
+            		
+            		for (int i=0; i<room.getFaucetList().size(); i++){
+            			room.getFaucetList().get(i).setStatus(false);
+            		}
+            		
+            		for (int i=0; i<room.getLightList().size(); i++){
+            			room.getLightList().get(i).setLightStatus(false);
+            		}
             	}
             }
         });
@@ -275,6 +297,7 @@ public class Environmental{
 	            	}
 	            }
 	        });
+			offBtnList.add(offButton);
 			panel.add(offButton);
 			
 			if (light.getLightStatus())
@@ -314,6 +337,7 @@ public class Environmental{
 	            	}
 	            }
 	        });
+			offBtnList.add(offButton);
 			panel.add(offButton);
 			
 			if (faucet.getStatus())
