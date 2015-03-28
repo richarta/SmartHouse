@@ -41,7 +41,7 @@ import java.awt.SystemColor;
 public class Entertainment{
 	
 	// Test Launching GUI
-	///**
+	/**
 	public static void main(String[] args) {
        new Entertainment();
     } //*/
