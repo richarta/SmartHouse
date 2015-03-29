@@ -49,10 +49,8 @@ public class Environmental{
 	// Initialize
 	private House house = new House();
 	private int nFloor = 2;
-	private int [] nRoom = new int[nFloor];
     private int iFloorChoosed;
     private int iRoomChoosed;
-	private String [][] nameRoom = new String[nFloor][10];
     private JFrame EnvFrm = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
@@ -63,6 +61,7 @@ public class Environmental{
     private JLabel roomLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     boolean [][] powersaver = new boolean[nFloor][10];
+    JButton helpbtn = new JButton("Help");
     
     public Environmental() {	    	
     	// Sample House
@@ -175,6 +174,15 @@ public class Environmental{
 		panel_2.setBounds(12, 391, 778, 2);
 		
 		EnvFrm.getContentPane().add(panel_2);
+		
+		// help button
+		helpbtn.setBounds(330, 410, 150, 23);
+		helpbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e4) {
+				SelectionMenu.help();
+			}
+		});
+		EnvFrm.add(helpbtn);
 		
         // Set Frame
         EnvFrm.setTitle("Environmental Controls");

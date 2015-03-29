@@ -65,6 +65,7 @@ public class Entertainment{
     private JLabel roomLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     boolean [][] powersaver = new boolean[nFloor][10];
+    JButton helpbtn = new JButton("Help");
     
     public Entertainment() {
     	// Sample House
@@ -172,6 +173,15 @@ public class Entertainment{
 		
 		EntFrm.getContentPane().add(panel_2);
 		
+		// help button
+		helpbtn.setBounds(330, 410, 150, 23);
+		helpbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e4) {
+				SelectionMenu.help();
+			}
+		});
+		EntFrm.add(helpbtn);
+				
         // Set Frame
         EntFrm.setTitle("Entertainment Controls");
         EntFrm.setLocation(120, 120);
