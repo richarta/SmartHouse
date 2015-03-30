@@ -138,7 +138,7 @@ public class Room {
 	}
 
 	public List<Window> getWindowList(){
-
+		
 		//return window list
 		return windowList;
 	}
