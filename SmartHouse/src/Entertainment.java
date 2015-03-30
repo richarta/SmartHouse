@@ -43,8 +43,8 @@ public class Entertainment{
 	// Test Launching GUI
 	/**
 	public static void main(String[] args) {
-       new Environmental();
-   } //*/
+       new Entertainment();
+    } //*/
 	
 	// Initialize
 	private House house = new House();
@@ -53,10 +53,8 @@ public class Entertainment{
 	private int nFloor = 2;
 	// private int nFloor = house.getFloorList().size();
 	
-	private int [] nRoom = new int[nFloor];
     private int iFloorChoosed;
     private int iRoomChoosed;
-	private String [][] nameRoom = new String[nFloor][10];
     private JFrame EntFrm = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
@@ -67,6 +65,7 @@ public class Entertainment{
     private JLabel roomLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     boolean [][] powersaver = new boolean[nFloor][10];
+    JButton helpbtn = new JButton("Help");
     
     public Entertainment() {
     	// Sample House
@@ -88,21 +87,12 @@ public class Entertainment{
     	house.getFloorList().get(1).getRoomList().get(0).addTelevision("TV@5");
     	house.getFloorList().get(1).getRoomList().get(0).addTelevision("TV@6");
     	
-    	//
     	EntFrm.getContentPane().setLayout(null);
     	EntFrm.setResizable(false);
-    	
-    	//Initialize
-    	for (int i=0; i<nFloor; i++){
-    		nRoom[i] = house.getFloorList().get(i).getRoomList().size();
-    		for (int j=0; j<nRoom[i]; j++){
-    			nameRoom[i][j] = house.getFloorList().get(0).getRoomList().get(j).getName();
-    		}
-    	}
        
         // Generate a panel for each room
         for (int i=0; i<nFloor; i++){
-        	for(int j=0; j<nRoom[i]; j++){
+        	for(int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
         	roomPanels[i][j] = generateEntRoomPanel(i,j);
         	}
         }
@@ -110,13 +100,13 @@ public class Entertainment{
      // For each floor
         for (int i=0; i<nFloor; i++){
     		// Generate menu for each floor
-        	JMenu fileMenu = new JMenu(house.getFloorList().get(0).getName());
+        	JMenu fileMenu = new JMenu(house.getFloorList().get(i).getName());
         	menus.add(fileMenu);
         	
         	// For each room
-        	for(int j=0; j<nRoom[i]; j++){
+        	for(int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
         		// Generate menu-item for each room
-        		JRadioButtonMenuItem radioBtnMenu = new JRadioButtonMenuItem(nameRoom[i][j]);
+        		JRadioButtonMenuItem radioBtnMenu = new JRadioButtonMenuItem(house.getFloorList().get(i).getRoomList().get(j).getName());
         		radioBtnMenu.setName(i+""+j); // give a name to room. e.g. Second room on first floor is "12". Third room of second floor is "23"
         		
         		// If you click each room, JFrame shows a panel for the selected room
@@ -137,7 +127,7 @@ public class Entertainment{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("["+house.getFloorList().get(0).getName()+"] " + nameRoom[iFloorChoosed][iRoomChoosed] + " is selected]");
+	    	            	roomLabel.setText("["+house.getFloorList().get(0).getName()+"] " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
 	    	            	roomLabel.setBounds(610, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 	    	        		EntFrm.getContentPane().add(roomLabel);
@@ -183,6 +173,15 @@ public class Entertainment{
 		
 		EntFrm.getContentPane().add(panel_2);
 		
+		// help button
+		helpbtn.setBounds(330, 410, 150, 23);
+		helpbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e4) {
+				SelectionMenu.help();
+			}
+		});
+		EntFrm.add(helpbtn);
+				
         // Set Frame
         EntFrm.setTitle("Entertainment Controls");
         EntFrm.setLocation(120, 120);
@@ -191,26 +190,25 @@ public class Entertainment{
         EntFrm.setVisible(true);
     }
 
+    /**
+     * @param iFloor index of Floor
+     * @param iRoom index of room
+     * @return JPanel of Entertainment control of the i-th room on i-th floor
+     */
     public JPanel generateEntRoomPanel(int iFloor, int iRoom){
-    	// Initialize
+
     	JPanel panel = new JPanel();
-		int nRadio = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().size();
-		String [] radioName = new String[nRadio]; 
-		for(int i=0; i<nRadio; i++){
-			radioName[i] = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(i).getName();
-		}
-	
-		int nTV = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().size();
-		String [] TVName = new String[nTV]; 
-		for(int i=0; i<nTV; i++){
-			TVName[i] = house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(i).getName();
-		}
-		
-		//
         JLabel lblVolume = new JLabel("Volume");
         JLabel tvLabel = new JLabel("Televisions");
 		JLabel radioLabel = new JLabel("Radio");
 		JLabel lblVolume_2 = new JLabel("Volume");
+		JLabel lblChannel = new JLabel("Channel");
+		JLabel lblChannel_2 = new JLabel("Channel");
+		
+		Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
+		
+		// Set labels
+		panel.setLayout(null);
 		
 		tvLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tvLabel.setBounds(27, 30, 90, 16);
@@ -225,169 +223,149 @@ public class Entertainment{
 		panel.add(lblVolume);
 		panel.add(lblVolume_2);
 		
-		//Make panel
-		panel.setLayout(null);
+		lblChannel.setBounds(670, 31, 51, 16);
+		lblChannel_2.setBounds(670, 206, 51, 16);
+		panel.add(lblChannel);
+		panel.add(lblChannel_2);
+		
 
 		// TVs
-		for(int k=0; k<nTV; k++){
-			JLabel tvlbl = new JLabel(TVName[k]);
+		for(int k=0; k<room.getTelevisionList().size(); k++){
+			Television TV = room.getTelevisionList().get(k);
+			JLabel tvlbl = new JLabel(room.getTelevisionList().get(k).getName());
+			JRadioButton onButton = new JRadioButton("On");
+			JRadioButton offButton = new JRadioButton("Off");
+			ButtonGroup group = new ButtonGroup();
+			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 2000, TV.getVolume());
+			JSlider chnSlider = new JSlider(JSlider.HORIZONTAL, 0, 2000, TV.getChannel());
+			JLabel chnLabel = new JLabel(""+chnSlider.getValue());
+			
 			tvlbl.setBounds(27, 59+30*k, 150, 16);		
-			/*
-			tvlbl.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-	        });*/
 			panel.add(tvlbl);
 			
-			JRadioButton onButton = new JRadioButton("On");
 			onButton.setBounds(215, 55+30*k, 51, 25);
+			onButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		TV.setStatus(true);
+	            	}
+	            }
+	        });
 			panel.add(onButton);
-			
-			JRadioButton offButton = new JRadioButton("Off");
-			offButton.setBounds(270, 55+30*k, 63, 25);
-			panel.add(offButton);
 
-			ButtonGroup group = new ButtonGroup();
-			group.add(onButton);
-			group.add(offButton);
+			offButton.setBounds(270, 55+30*k, 63, 25);
+			offButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		TV.setStatus(false);
+	            	}
+	            }
+	        });
+			panel.add(offButton);
 			
-			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-			volSlider.setSize(130, 23);
-			volSlider.setLocation(430, 57+30*k);
-			panel.add(volSlider);
-			
-			if (house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(k).getStatus())
+			if (TV.getStatus())
 				onButton.setSelected(true);
 			else
 				offButton.setSelected(true);
 			
-			volSlider.setValue(house.getFloorList().get(iFloor).getRoomList().get(iRoom).getTelevisionList().get(k).getVolume());
-				
+			group.add(onButton);
+			group.add(offButton);
+			
+			volSlider.setSize(130, 23);
+			volSlider.setLocation(430, 57+30*k);
+			volSlider.addChangeListener(new ChangeListener(){
+				public void stateChanged (ChangeEvent e){
+		           TV.setVolume(volSlider.getValue());
+				}
+			});
+			panel.add(volSlider);
+
+			chnSlider.setSize(130, 23);
+			chnSlider.setLocation(630, 57+30*k);
+			chnSlider.addChangeListener(new ChangeListener(){
+				public void stateChanged (ChangeEvent e){
+		           TV.setChannel(chnSlider.getValue());
+				}
+			});
+			panel.add(chnSlider);
+			
+			chnLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			chnLabel.setBounds(765, 57+30*k, 90, 16);
+			panel.add(chnLabel);
+			
+			chnSlider.addChangeListener(new ChangeListener(){
+				public void stateChanged (ChangeEvent e){
+		            chnLabel.setText(""+chnSlider.getValue());
+				}
+			});
 		}
 		
 		// Radio		
-		for(int k=0; k<nRadio; k++){
-			JLabel radiolbl = new JLabel(radioName[k]);
+		for(int k=0; k<room.getListRadio().size(); k++){
+			Radio Radio = room.getListRadio().get(k);
+			JLabel radiolbl = new JLabel(room.getListRadio().get(k).getName());
+			JRadioButton onButton = new JRadioButton("On");
+			JRadioButton offButton = new JRadioButton("Off");
+			ButtonGroup group = new ButtonGroup();
+			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, Radio.getVolume());
+			JSlider chnSlider = new JSlider(JSlider.HORIZONTAL, 0, 200, Radio.getChannel());
+			JLabel chnLabel = new JLabel(""+chnSlider.getValue());
+			
 			radiolbl.setBounds(27, 235+30*k, 150, 16);
 			panel.add(radiolbl);
 			
-			JRadioButton onButton = new JRadioButton("On");
 			onButton.setBounds(215, 231+30*k, 51, 25);
+			onButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		Radio.setStatus(true);
+	            	}
+	            }
+	        });
 			panel.add(onButton);
-			
-			JRadioButton offButton = new JRadioButton("Off");
+						
 			offButton.setBounds(270, 231+30*k, 63, 25);
+			offButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		Radio.setStatus(false);
+	            	}
+	            }
+	        });
 			panel.add(offButton);
-			
-			ButtonGroup group = new ButtonGroup();
+						
 			group.add(onButton);
 			group.add(offButton);
 			
-			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-			volSlider.setSize(130, 23);
-			volSlider.setLocation(430, 232+30*k);
-			panel.add(volSlider);
-			
-			if (house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(k).getStatus())
+			if (Radio.getStatus())
 				onButton.setSelected(true);
 			else
-				offButton.setSelected(true);
+				offButton.setSelected(true);	
+						
+			volSlider.setSize(130, 23);
+			volSlider.setLocation(430, 232+30*k);
+			volSlider.addChangeListener(new ChangeListener(){
+				public void stateChanged (ChangeEvent e){
+		           Radio.setVolume(volSlider.getValue());
+				}
+			});
+			panel.add(volSlider);
+				
+			chnLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			chnLabel.setBounds(765, 232+30*k, 90, 16);
+			panel.add(chnLabel);
 			
-			volSlider.setValue(house.getFloorList().get(iFloor).getRoomList().get(iRoom).getListRadio().get(k).getVolume());
+			chnSlider.setSize(130, 23);
+			chnSlider.setLocation(630, 232+30*k);
+			chnSlider.addChangeListener(new ChangeListener(){
+				public void stateChanged (ChangeEvent e){
+		           Radio.setChannel(chnSlider.getValue());
+		           chnLabel.setText(""+chnSlider.getValue());
+				}
+			});
+			panel.add(chnSlider);			
 		}
 		
 		return panel;
 	}
-    
-    // Test Panel
-    public JPanel generateTestRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
-		//Later, it would get by method
-
-    	JPanel panel = new JPanel();
-    	
-		int nRadio = 2;
-		String [] radioName = new String[nRadio]; 
-		radioName[0] = "BBBasdht1";
-		radioName[1] = "asdfdft2";
-		
-		int nTV = 5;
-		String [] TVName = new String[nTV]; 
-		TVName[0] = "Fafet1";
-		TVName[1] = "FFbwecet2";
-		TVName[2] = "123bwecet3";
-		TVName[3] = "ABbwecet4";
-		TVName[4] = "@@bwecet5";
-		
-		//Make panel
-		panel.setLayout(null);
-
-		// First Column
-		// TVs
-		JLabel TVLabel = new JLabel("TVs");
-		TVLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		TVLabel.setBounds(60,20,200,23);
-		panel.add(TVLabel);
-		
-		ArrayList<JRadioButton> fArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nTV; k++){
-			JRadioButton button = new JRadioButton(TVName[k]);
-			button.setBounds(50,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-			});
-			
-			fArray.add(button);
-			panel.add(button);
-		}
-		
-		powersaver[iFloor][iRoom] = false;
-		JButton psBtn = new JButton("Power Saver ON");
-		psBtn.setBackground(new Color(60, 179, 113));
-		psBtn.setForeground(Color.BLACK);
-		psBtn.setBounds(305, 350, 200, 30);
-		psBtn.addActionListener (new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	if (powersaver[iFloor][iRoom]) {
-            		powersaver[iFloor][iRoom] = false;
-            		psBtn.setText("Power Saver ON");
-            		psBtn.setBackground(new Color(60, 179, 113));
-            	}
-            	else {
-            		powersaver[iFloor][iRoom] = true;
-            		psBtn.setText("Power Saver OFF");
-            		psBtn.setBackground(SystemColor.inactiveCaption);
-            		
-            	}
-            }
-        });
-		panel.add(psBtn);
-		
-		// Second Column
-		JLabel radioLabel = new JLabel("Radios");
-		radioLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		radioLabel.setBounds(400,20,200,23);
-		panel.add(radioLabel);
-		
-		ArrayList<JRadioButton> lArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nRadio; k++){
-			JRadioButton button = new JRadioButton(radioName[k]);
-			button.setBounds(390,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-	        });
-		
-			lArray.add(button);
-			panel.add(button);
-		}
-		
-		return panel;
-    }
 }

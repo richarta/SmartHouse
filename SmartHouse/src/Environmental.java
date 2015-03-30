@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -33,6 +34,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+
 import java.awt.Color;
 import java.awt.SystemColor;
  
@@ -40,16 +42,15 @@ public class Environmental{
 	
 	// Test Launching GUI
 	/**
-	Wpublic static void main(String[] args) {
+	public static void main(String[] args) {
        new Environmental();
    } //*/
 	
 	// Initialize
-	private int nFloor = 3;
-	private int [] nRoom = new int[nFloor];
+	private House house = new House();
+	private int nFloor = 2;
     private int iFloorChoosed;
     private int iRoomChoosed;
-	private String [][] nameRoom = new String[nFloor][10];
     private JFrame EnvFrm = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
@@ -60,41 +61,54 @@ public class Environmental{
     private JLabel roomLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     boolean [][] powersaver = new boolean[nFloor][10];
+    JButton helpbtn = new JButton("Help");
     
     public Environmental() {	    	
+    	// Sample House
+    	house.addFloor("Floor1");
+    	house.addFloor("Floor2");
+    	house.getFloorList().get(0).addRoom("dining");
+    	house.getFloorList().get(0).addRoom("Living");
+    	house.getFloorList().get(1).addRoom("bed");
+    	house.getFloorList().get(0).getRoomList().get(0).addThermostat("Thermo");
+    	house.getFloorList().get(0).getRoomList().get(1).addThermostat("Thermo");
+    	house.getFloorList().get(1).getRoomList().get(0).addThermostat("Thermo");
+    	house.getFloorList().get(0).getRoomList().get(0).addLight("Light1");
+    	house.getFloorList().get(0).getRoomList().get(0).addLight("Light2");
+    	house.getFloorList().get(0).getRoomList().get(1).addLight("Light3");
+    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light4");
+    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light5");
+    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light6");
+    	house.getFloorList().get(0).getRoomList().get(0).addFaucet("Faucet@1");
+    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@2");
+    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@3");
+    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@4");
+    	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@5");
+    	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@6");
+    	
+    	//
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);
-    	
-    	// These would be given by parameter later
-        nRoom[0] = 2;
-        nRoom[1] = 1;
-        nRoom[2] = 3;
-        
-        nameRoom[0][0] = "Dining";
-        nameRoom[0][1] = "Room";
-        nameRoom[1][0] = "Living";
-        nameRoom[2][0] = "Bed1";
-        nameRoom[2][1] = "Bed2";
-        nameRoom[2][2] = "Bed3";
-        
+    	EnvFrm.getContentPane().setLayout(null);
+    	EnvFrm.setResizable(false);
+       
         // Generate a panel for each room
         for (int i=0; i<nFloor; i++){
-        	for(int j=0; j<nRoom[i]; j++){
+        	for(int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
         	roomPanels[i][j] = generateEnvRoomPanel(i,j);
         	}
         }
-        roomPanels[0][1] = generateTestRoomPanel(0,0); // Different Panel for test
         
      // For each floor
         for (int i=0; i<nFloor; i++){
     		// Generate menu for each floor
-        	JMenu fileMenu = new JMenu("Floor " + (i+1));
+        	JMenu fileMenu = new JMenu(house.getFloorList().get(i).getName());
         	menus.add(fileMenu);
         	
         	// For each room
-        	for(int j=0; j<nRoom[i]; j++){
+        	for(int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
         		// Generate menu-item for each room
-        		JRadioButtonMenuItem radioBtnMenu = new JRadioButtonMenuItem(nameRoom[i][j]);
+        		JRadioButtonMenuItem radioBtnMenu = new JRadioButtonMenuItem(house.getFloorList().get(i).getRoomList().get(j).getName());
         		radioBtnMenu.setName(i+""+j); // give a name to room. e.g. Second room on first floor is "12". Third room of second floor is "23"
         		
         		// If you click each room, JFrame shows a panel for the selected room
@@ -115,7 +129,7 @@ public class Environmental{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("[Floor "+ (iFloorChoosed+1) +", " + nameRoom[iFloorChoosed][iRoomChoosed] + " is selected]");
+	    	            	roomLabel.setText("["+house.getFloorList().get(0).getName()+"] " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
 	    	            	roomLabel.setBounds(610, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 	    	        		EnvFrm.getContentPane().add(roomLabel);
@@ -156,11 +170,19 @@ public class Environmental{
 		roomLabel.setBounds(180, 100, 500, 40);
 		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		EnvFrm.getContentPane().add(roomLabel);
-		
-		// Border
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		panel_2.setBounds(12, 391, 778, 2);
+		
 		EnvFrm.getContentPane().add(panel_2);
+		
+		// help button
+		helpbtn.setBounds(330, 410, 150, 23);
+		helpbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e4) {
+				SelectionMenu.help();
+			}
+		});
+		EnvFrm.add(helpbtn);
 		
         // Set Frame
         EnvFrm.setTitle("Environmental Controls");
@@ -169,40 +191,51 @@ public class Environmental{
         EnvFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         EnvFrm.setVisible(true);
     }
+    
 
-    public JPanel generateEnvRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
-		//Later, it would get by method
+    /**
+     * @param iFloor index of Floor
+     * @param iRoom index of room
+     * @return JPanel of Environmental control of the i-th room on i-th floor
+     */
+    public JPanel generateEnvRoomPanel(int iFloor, int iRoom){
+    	Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
+    	JPanel panel = new JPanel();
+    	JLabel tempLabel = new JLabel("Temerature (" + room.getThermostat().getTemp() + "F)");
+    	JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, room.getThermostat().getTemp());
+    	JLabel lightLabel = new JLabel("Lights");
+    	JLabel faucetLabel = new JLabel("Faucets");
+    	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
+    	ImageIcon img_lightON = new ImageIcon("light_on.png");
+    	ImageIcon img_lightOFF = new ImageIcon("light_off.png");
+    	ImageIcon img_faucetON = new ImageIcon("faucet_on.png");
+    	ImageIcon img_faucetOFF = new ImageIcon("faucet_off.png");
     	
-		int nLight = 3;
-		String [] lightName = new String[nLight]; 
-		lightName[0] = "Light1";
-		lightName[1] = "Light2";
-		lightName[2] = "Light3";
-		
-		int nFaucet = 2;
-		String [] faucetName = new String[nFaucet]; 
-		faucetName[0] = "Faucet1";
-		faucetName[1] = "FFFaucet2";
-		
-		//Make panel
 		panel.setLayout(null);
-
-		// First Column
+		
+		// Set labels;
+		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lightLabel.setBounds(27, 30, 90, 16);
+		panel.add(lightLabel);
+		
+		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		faucetLabel.setBounds(305, 30, 90, 16);
+		panel.add(faucetLabel);
+		
 		// Thermostat
-		JLabel tempLabel = new JLabel("Temerature (70F)");
 		tempLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tempLabel.setBounds(65,20,200,23);
+		tempLabel.setBounds(600,20,200,23);
 		panel.add(tempLabel);
 		
-		JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 70);
 		tempSlider.setPaintLabels(true);
 		tempSlider.setPaintTicks(true);
 		tempSlider.setPaintTrack(true);
 		tempSlider.setMajorTickSpacing(20);
 		tempSlider.setMinorTickSpacing(5);
-		tempSlider.setBounds(30,50,200,50);
+		tempSlider.setBounds(580,50,200,50);
 		tempSlider.addChangeListener(new ChangeListener(){
 			public void stateChanged (ChangeEvent e){
+				room.getThermostat().setTemp(tempSlider.getValue());
 	            tempLabel.setText("Temerature (" + tempSlider.getValue() + "F)");
 			}
 		});
@@ -210,181 +243,136 @@ public class Environmental{
 		
 		// Powersaver
 		powersaver[iFloor][iRoom] = false;
-		JButton psBtn = new JButton("Power Saver ON");
-		psBtn.setBackground(new Color(60, 179, 113));
+		JButton psBtn = new JButton("Power Saver is OFF");
+		psBtn.setBackground(SystemColor.inactiveCaption);
 		psBtn.setForeground(Color.BLACK);
 		psBtn.setBounds(305, 350, 200, 30);
 		psBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	if (powersaver[iFloor][iRoom]) {
             		powersaver[iFloor][iRoom] = false;
-            		psBtn.setText("Power Saver ON");
-            		psBtn.setBackground(new Color(60, 179, 113));
+            		psBtn.setText("Power Saver is OFF");
+            		psBtn.setBackground(SystemColor.inactiveCaption);
+            		
             	}
             	else {
             		powersaver[iFloor][iRoom] = true;
-            		psBtn.setText("Power Saver OFF");
-            		psBtn.setBackground(SystemColor.inactiveCaption);
+            		psBtn.setText("Power Saver is ON");
+            		psBtn.setBackground(new Color(60, 179, 113));
             		
+            		room.getThermostat().setTemp(70);
+            		tempSlider.setValue(70);
+            		tempLabel.setText("Temerature (70F)");
+            		
+            		for (int i=0; i<offBtnList.size(); i++){
+            			offBtnList.get(i).setSelected(true);
+            		}
+            		
+            		for (int i=0; i<room.getFaucetList().size(); i++){
+            			room.getFaucetList().get(i).setStatus(false);
+            		}
+            		
+            		for (int i=0; i<room.getLightList().size(); i++){
+            			room.getLightList().get(i).setLightStatus(false);
+            		}
             	}
             }
         });
 		panel.add(psBtn);
 		
-		// Second Column
 		// Lights
-		JLabel lightLabel = new JLabel("Lights");
-		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lightLabel.setBounds(400,20,200,23);
-		panel.add(lightLabel);
-		
-		ArrayList<JRadioButton> lArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nLight; k++){
-			JRadioButton button = new JRadioButton(lightName[k]);
-			button.setBounds(390,50+30*k,100,23);
-			button.addItemListener(new ItemListener() {
+		for(int k=0; k<room.getLightList().size(); k++){
+			Light light = room.getLightList().get(k);
+			JLabel lightlbl = new JLabel(room.getLightList().get(k).getlightName());
+			JRadioButton onButton = new JRadioButton("On");
+			JRadioButton offButton = new JRadioButton("Off");
+			ButtonGroup group = new ButtonGroup();
+			JLabel imageLight = new JLabel(img_lightOFF);
+			
+			lightlbl.setBounds(47, 59+30*k, 150, 16);		
+			panel.add(lightlbl);
+			
+			imageLight.setBounds(27, 59+30*k, 15, 15);
+			panel.add(imageLight);
+			
+			onButton.setBounds(115, 55+30*k, 51, 25);
+			onButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		imageLight.setIcon(img_lightON);
+	            		light.setLightStatus(true);
+	            	}
 	            }
 	        });
-			lArray.add(button);
-			panel.add(button);
-		}
-		
-		// Third Column
-		// Faucets
-		JLabel faucetLabel = new JLabel("Faucets");
-		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		faucetLabel.setBounds(640,20,200,23);
-		panel.add(faucetLabel);
-		
-		ArrayList<JRadioButton> fArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nFaucet; k++){
-			JRadioButton button = new JRadioButton(faucetName[k]);
-			button.setBounds(630,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
+			panel.add(onButton);
+
+			offButton.setBounds(170, 55+30*k, 63, 25);
+			offButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		imageLight.setIcon(img_lightOFF);
+	            		light.setLightStatus(false);
+	            	}
 	            }
-			});
+	        });
+			offBtnList.add(offButton);
+			panel.add(offButton);
 			
-			fArray.add(button);
-			panel.add(button);
+			if (light.getLightStatus())
+				onButton.setSelected(true);
+			else
+				offButton.setSelected(true);
+			
+			group.add(onButton);
+			group.add(offButton);
+		}
+		// Faucets
+		for(int k=0; k<room.getFaucetList().size(); k++){
+			Faucet faucet = room.getFaucetList().get(k);
+			JLabel faucetlbl = new JLabel(room.getFaucetList().get(k).getName());
+			JRadioButton onButton = new JRadioButton("On");
+			JRadioButton offButton = new JRadioButton("Off");
+			ButtonGroup group = new ButtonGroup();
+			JLabel imageFaucet = new JLabel(img_faucetOFF);
+			
+			faucetlbl.setBounds(305, 59+30*k, 150, 16);		
+			panel.add(faucetlbl);
+			
+			imageFaucet.setBounds(365, 59+30*k, 15, 15);
+			panel.add(imageFaucet);
+			
+			onButton.setBounds(393, 55+30*k, 51, 25);
+			onButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		faucet.setStatus(true);
+	            		imageFaucet.setIcon(img_faucetON);
+	            	}
+	            }
+	        });
+			panel.add(onButton);
+
+			offButton.setBounds(448, 55+30*k, 63, 25);
+			offButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		faucet.setStatus(false);
+	            		imageFaucet.setIcon(img_faucetOFF);
+	            	}
+	            }
+	        });
+			offBtnList.add(offButton);
+			panel.add(offButton);
+			
+			if (faucet.getStatus())
+				onButton.setSelected(true);
+			else
+				offButton.setSelected(true);
+			
+			group.add(onButton);
+			group.add(offButton);
 		}
 		
 		return panel;
 	}
-    
-    // Test Panel
-    public JPanel generateTestRoomPanel(int iFloor, int iRoom){ // Later, it would get parameter 'int nFloor'
-		//Later, it would get by method
-
-    	JPanel panel = new JPanel();
-    	
-		int nLight = 2;
-		String [] lightName = new String[nLight]; 
-		lightName[0] = "BBBasdht1";
-		lightName[1] = "asdfdft2";
-		
-		int nFaucet = 5;
-		String [] faucetName = new String[nFaucet]; 
-		faucetName[0] = "Fafet1";
-		faucetName[1] = "FFbwecet2";
-		faucetName[2] = "123bwecet3";
-		faucetName[3] = "ABbwecet4";
-		faucetName[4] = "@@bwecet5";
-		
-		//Make panel
-		panel.setLayout(null);
-
-		// First Column
-		JLabel tempLabel = new JLabel("Temasdture (70F)");
-		tempLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tempLabel.setBounds(65,20,200,23);
-		panel.add(tempLabel);
-		
-		JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 70);
-		tempSlider.setPaintLabels(true);
-		tempSlider.setPaintTicks(true);
-		tempSlider.setPaintTrack(true);
-		tempSlider.setMajorTickSpacing(20);
-		tempSlider.setMinorTickSpacing(5);
-		tempSlider.setBounds(30,50,200,50);
-		
-		tempSlider.addChangeListener(new ChangeListener(){
-			public void stateChanged (ChangeEvent e){
-	            tempLabel.setText("Temerature (" + tempSlider.getValue() + "F)");
-			}
-		});
-		
-		panel.add(tempSlider);
-		
-		powersaver[iFloor][iRoom] = false;
-		JButton psBtn = new JButton("Power Saver ON");
-		psBtn.setBackground(new Color(60, 179, 113));
-		psBtn.setForeground(Color.BLACK);
-		psBtn.setBounds(305, 350, 200, 30);
-		psBtn.addActionListener (new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	if (powersaver[iFloor][iRoom]) {
-            		powersaver[iFloor][iRoom] = false;
-            		psBtn.setText("Power Saver ON");
-            		psBtn.setBackground(new Color(60, 179, 113));
-            	}
-            	else {
-            		powersaver[iFloor][iRoom] = true;
-            		psBtn.setText("Power Saver OFF");
-            		psBtn.setBackground(SystemColor.inactiveCaption);
-            		
-            	}
-            }
-        });
-		panel.add(psBtn);
-		
-		// Second Column
-		JLabel lightLabel = new JLabel("Lights");
-		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lightLabel.setBounds(400,20,200,23);
-		panel.add(lightLabel);
-		
-		ArrayList<JRadioButton> lArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nLight; k++){
-			JRadioButton button = new JRadioButton(lightName[k]);
-			button.setBounds(390,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-	        });
-		
-			lArray.add(button);
-			panel.add(button);
-		}
-		
-		// Third Column
-		JLabel faucetLabel = new JLabel("Faucets");
-		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		faucetLabel.setBounds(640,20,200,23);
-		panel.add(faucetLabel);
-		
-		ArrayList<JRadioButton> fArray = new ArrayList<JRadioButton>();
-		for(int k=0; k<nFaucet; k++){
-			JRadioButton button = new JRadioButton(faucetName[k]);
-			button.setBounds(630,50+30*k,200,23);
-			button.addItemListener(new ItemListener() {
-	            public void itemStateChanged(ItemEvent e) {
-	            	System.out.print(button.getText());
-	            	System.out.println(e.getStateChange() == ItemEvent.SELECTED ? " SELECTED" : " DESELECTED");
-	            }
-			});
-			
-			fArray.add(button);
-			panel.add(button);
-		}
-		
-		return panel;
-    }
 }

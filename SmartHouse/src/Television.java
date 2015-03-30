@@ -20,14 +20,14 @@ public class Television {
 	 */
 	public Television(String nameTv){
 		this.nameTv = nameTv;
-		channel = 10;
+		channel = 100;
 		status = false;
 		volume = 50;
 	}
 
 	public Television(){
 		nameTv = "Television";
-		channel = 10;
+		channel = 100;
 		status = false;
 		volume = 50;
 	}
@@ -55,6 +55,7 @@ public class Television {
 	 */
 	public void setChannel(int newChannel){
 		channel = newChannel;
+		User.saveHouseStatus();
 	}
 
 	/**
@@ -64,6 +65,7 @@ public class Television {
 	 */
 	public void setName(String newName){
 		nameTv = newName;
+		User.saveHouseStatus();
 	}
 
 	/**
@@ -71,6 +73,7 @@ public class Television {
 	 */
 	public void setStatus(boolean newStatus){
 		status = newStatus;
+		User.saveHouseStatus();
 	}
 
 	/**
@@ -80,5 +83,6 @@ public class Television {
 	 */
 	public void setVolume(int newVolume){
 		volume = newVolume;
+		User.saveHouseStatus();
 	}
 }//end Television

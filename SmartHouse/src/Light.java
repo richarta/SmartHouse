@@ -24,6 +24,7 @@ public class Light {
 
 	public void setlightName(String nameLg){
 		this.nameLg = nameLg;
+		User.saveHouseStatus();
 	}
 
 	public String getlightName(){
@@ -32,6 +33,7 @@ public class Light {
 
 	public void setLightStatus(boolean lightStatus){
 		this.lightStatus = lightStatus;
+		User.saveHouseStatus();
 	}
 
 	public boolean getLightStatus(){

@@ -55,6 +55,7 @@ public class Radio {
 	 */
 	public void setChannel(int newChannel){
 		channel = newChannel;
+		User.saveHouseStatus();
 	}
 
 	/**
@@ -64,6 +65,7 @@ public class Radio {
 	 */
 	public void setName(String newName){
 		nameRd = newName;
+		User.saveHouseStatus();
 	}
 
 	/**
@@ -71,6 +73,7 @@ public class Radio {
 	 */
 	public void setStatus(boolean newStatus){
 		status = newStatus;
+		User.saveHouseStatus();
 	}
 
 	/**
@@ -80,5 +83,6 @@ public class Radio {
 	 */
 	public void setVolume(int newVolume){
 		volume = newVolume;
+		User.saveHouseStatus();
 	}
 }//end Radio

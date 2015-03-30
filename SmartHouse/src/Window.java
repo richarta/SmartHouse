@@ -32,9 +32,11 @@ public class Window {
 
 	public void setLock(boolean lock){
 		this.lockWid = lock;
+		User.saveHouseStatus();
 	}
 	
 	public void setName(String name){
 		this.nameWid = name;
+		User.saveHouseStatus();
 	}
 }

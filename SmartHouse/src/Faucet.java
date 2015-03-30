@@ -17,7 +17,8 @@ public class Faucet {
 
 	}
 	public Faucet(){
-
+		nameFa ="Faucet";
+		status = false;
 	}
 
 	/**
@@ -25,16 +26,17 @@ public class Faucet {
 	 * @param nameFa
 	 * @return 
 	 */
-	public void Facuet(String nameFa){
-
+	public Faucet(String nameFa){
+		this.nameFa = nameFa;
+		status = false;
 	}
 
 	public String getName(){
-		return "";
+		return nameFa;
 	}
 
 	public boolean getStatus(){
-		return false;
+		return status;
 	}
 
 	/**
@@ -43,10 +45,12 @@ public class Faucet {
 	 * @return 
 	 */
 	public void setName(String newName){
-
+		nameFa = newName;
+		User.saveHouseStatus();
 	}
 
-	public void setStatus(){
-
+	public void setStatus(boolean newStatus){
+		status = newStatus;
+		User.saveHouseStatus();
 	}
 }//end Faucet

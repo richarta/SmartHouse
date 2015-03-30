@@ -22,12 +22,12 @@ public class Thermostat {
 	 */
 	public Thermostat(String nameTh){
 		this.nameTh = nameTh;
-		temperature = 70;
+		temperature = 80;
 	}
 
 	public Thermostat(){
 		nameTh = "Thermostat";
-		temperature = 70;
+		temperature = 80;
 	}
 
 	public String getName(){
@@ -45,6 +45,7 @@ public class Thermostat {
 	 */
 	public void setName(String newName){
 		nameTh = newName;
+		User.saveHouseStatus();
 	}
 
 	/**
@@ -54,5 +55,6 @@ public class Thermostat {
 	 */
 	public void setTemp(int newTemp){
 		temperature = newTemp;
+		User.saveHouseStatus();
 	}
 }//end Thermostat
