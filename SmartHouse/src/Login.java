@@ -94,8 +94,7 @@ public class Login extends JFrame
 					User.openHouseStatus(user);
 				}
 				else{
-					JOptionPane.showInputDialog(null, "You have entered either an invalid account name or password", "Login Failed");
-				}
+					JOptionPane.showMessageDialog(null, "You have entered an invalid username or password.", "alert", JOptionPane.ERROR_MESSAGE);				}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
