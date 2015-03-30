@@ -57,7 +57,7 @@ public abstract class User {
 		}
 	}
 
-	public void openHouseStatus(){
+	public static void openHouseStatus(String username){
 		
 		try {
 			

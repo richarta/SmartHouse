@@ -91,6 +91,7 @@ public class Login extends JFrame
 					frame.setVisible(false);
 					//open main menu
 					SelectionMenu menu = new SelectionMenu();
+					User.openHouseStatus(user);
 				}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
