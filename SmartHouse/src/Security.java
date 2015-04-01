@@ -34,7 +34,7 @@ public class Security{
 	/**
 	public static void main(String[] args) {
        new Security();
-   } //*/
+    } //*/
 	
 	// Initialize
 	private House house = new House();
@@ -194,7 +194,7 @@ public class Security{
     	JLabel doorLabel = new JLabel("Doors");
     	JLabel windowLabel = new JLabel("Windows");
     	JButton lockBtn = new JButton("Lock Down");
-    	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
+    	ArrayList <JRadioButton> lockBtnList = new ArrayList<JRadioButton>();
     	ImageIcon img_doorON = new ImageIcon("door_on.png");
     	ImageIcon img_doorOFF = new ImageIcon("door_off.png");
     	ImageIcon img_windowON = new ImageIcon("window_on.png");
@@ -217,8 +217,8 @@ public class Security{
 		lockBtn.setBounds(305, 350, 200, 30);
 		lockBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	for (int i=0; i<offBtnList.size(); i++){
-            		offBtnList.get(i).setSelected(true);
+            	for (int i=0; i<lockBtnList.size(); i++){
+            		lockBtnList.get(i).setSelected(true);
             	}
             		
             	for (int i=0; i<room.getWindowList().size(); i++){
@@ -236,8 +236,8 @@ public class Security{
 		for(int k=0; k<room.getDoorList().size(); k++){
 			Door door = room.getDoorList().get(k);
 			JLabel doorlbl = new JLabel(room.getDoorList().get(k).getName());
-			JRadioButton onButton = new JRadioButton("On");
-			JRadioButton offButton = new JRadioButton("Off");
+			JRadioButton unlockButton = new JRadioButton("Unlock");
+			JRadioButton lockButton = new JRadioButton("Lock");
 			ButtonGroup group = new ButtonGroup();
 			JLabel imageDoor = new JLabel(img_doorOFF);
 			
@@ -247,8 +247,8 @@ public class Security{
 			imageDoor.setBounds(27, 59+30*k, 15, 15);
 			panel.add(imageDoor);
 			
-			onButton.setBounds(115, 55+30*k, 51, 25);
-			onButton.addItemListener(new ItemListener() {
+			unlockButton.setBounds(115, 55+30*k, 70, 25);
+			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageDoor.setIcon(img_doorON);
@@ -256,10 +256,10 @@ public class Security{
 	            	}
 	            }
 	        });
-			panel.add(onButton);
+			panel.add(unlockButton);
 
-			offButton.setBounds(170, 55+30*k, 63, 25);
-			offButton.addItemListener(new ItemListener() {
+			lockButton.setBounds(190, 55+30*k, 63, 25);
+			lockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageDoor.setIcon(img_doorOFF);
@@ -267,24 +267,24 @@ public class Security{
 	            	}
 	            }
 	        });
-			offBtnList.add(offButton);
-			panel.add(offButton);
+			lockBtnList.add(lockButton);
+			panel.add(lockButton);
 			
 			if (door.getLock())
-				onButton.setSelected(true);
+				unlockButton.setSelected(true);
 			else
-				offButton.setSelected(true);
+				lockButton.setSelected(true);
 			
-			group.add(onButton);
-			group.add(offButton);
+			group.add(unlockButton);
+			group.add(lockButton);
 		}
 		
 		// Windows
 		for(int k=0; k<room.getWindowList().size(); k++){
 			Window window = room.getWindowList().get(k);
 			JLabel windowlbl = new JLabel(room.getWindowList().get(k).getName());
-			JRadioButton onButton = new JRadioButton("On");
-			JRadioButton offButton = new JRadioButton("Off");
+			JRadioButton unlockButton = new JRadioButton("Unlock");
+			JRadioButton lockButton = new JRadioButton("Lock");
 			ButtonGroup group = new ButtonGroup();
 			JLabel imageWindow = new JLabel(img_windowOFF);
 			
@@ -294,8 +294,8 @@ public class Security{
 			imageWindow.setBounds(365, 59+30*k, 15, 15);
 			panel.add(imageWindow);
 			
-			onButton.setBounds(393, 55+30*k, 51, 25);
-			onButton.addItemListener(new ItemListener() {
+			unlockButton.setBounds(393, 55+30*k, 70, 25);
+			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		window.setLock(true);
@@ -303,10 +303,10 @@ public class Security{
 	            	}
 	            }
 	        });
-			panel.add(onButton);
+			panel.add(unlockButton);
 
-			offButton.setBounds(448, 55+30*k, 63, 25);
-			offButton.addItemListener(new ItemListener() {
+			lockButton.setBounds(460, 55+30*k, 63, 25);
+			lockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		window.setLock(false);
@@ -314,21 +314,23 @@ public class Security{
 	            	}
 	            }
 	        });
-			offBtnList.add(offButton);
-			panel.add(offButton);
+			lockBtnList.add(lockButton);
+			panel.add(lockButton);
 			
 			if (window.getLock())
-				onButton.setSelected(true);
+				unlockButton.setSelected(true);
 			else
-				offButton.setSelected(true);
+				lockButton.setSelected(true);
 			
-			group.add(onButton);
-			group.add(offButton);
+			group.add(unlockButton);
+			group.add(lockButton);
 		}
 		
 		return panel;
 	}
 }
+
+// Andrew's Code
 /**
 import java.awt.BorderLayout; 
 import java.awt.Dimension;

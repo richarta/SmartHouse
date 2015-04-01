@@ -47,6 +47,7 @@ public class Entertainment{
     } //*/
 	
 	// Initialize
+	
 	private House house = new House();
 	//private House house = User.getHouse();
 	
