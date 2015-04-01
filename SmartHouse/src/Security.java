@@ -3,7 +3,7 @@
  * Term: Spring 2015
  * Assignment: SmartHouse Project
  * Author: Young J. Park
- * Date: 1 April 2015
+ * Date: 01 April 2015
  */
 import java.awt.Font;
 import java.awt.event.ActionEvent;
