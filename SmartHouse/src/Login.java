@@ -83,7 +83,7 @@ public class Login extends JFrame
 			
 			//Check username/pass
 			user = userField.getText();
-			pass = userPass.getText();
+			pass = passField.getText();
 						
 			try {
 				if(loginCheck(user, pass))
