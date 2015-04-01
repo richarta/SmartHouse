@@ -41,7 +41,7 @@ import java.awt.SystemColor;
 public class Environmental{
 	
 	// Test Launching GUI
-	/**
+	///**
 	public static void main(String[] args) {
        new Environmental();
    } //*/
@@ -205,6 +205,8 @@ public class Environmental{
     public JPanel generateEnvRoomPanel(int iFloor, int iRoom){
     	Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
     	JPanel panel = new JPanel();
+    	// JLabel background = new JLabel(new ImageIcon("background.jpg"));
+    	// background.setBounds(0, 0, 830, 530);
     	JLabel tempLabel = new JLabel("Temerature (" + room.getThermostat().getTemp() + "F)");
     	JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, room.getThermostat().getTemp());
     	JLabel lightLabel = new JLabel("Lights");
@@ -220,16 +222,16 @@ public class Environmental{
 		
 		// Set labels;
 		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lightLabel.setBounds(27, 30, 90, 16);
+		lightLabel.setBounds(100, 20, 90, 20);
 		panel.add(lightLabel);
 		
 		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		faucetLabel.setBounds(305, 30, 90, 16);
+		faucetLabel.setBounds(375, 20, 90, 20);
 		panel.add(faucetLabel);
 		
 		// Thermostat
 		tempLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tempLabel.setBounds(600,20,200,23);
+		tempLabel.setBounds(615,20,200,23);
 		panel.add(tempLabel);
 		
 		tempSlider.setPaintLabels(true);
@@ -339,10 +341,10 @@ public class Environmental{
 			ButtonGroup group = new ButtonGroup();
 			JLabel imageFaucet = new JLabel(img_faucetOFF);
 			
-			faucetlbl.setBounds(305, 59+30*k, 150, 16);		
+			faucetlbl.setBounds(325, 59+30*k, 150, 16);		
 			panel.add(faucetlbl);
 			
-			imageFaucet.setBounds(365, 59+30*k, 15, 15);
+			imageFaucet.setBounds(305, 59+30*k, 15, 15);
 			panel.add(imageFaucet);
 			
 			onButton.setBounds(393, 55+30*k, 51, 25);
@@ -376,7 +378,6 @@ public class Environmental{
 			group.add(onButton);
 			group.add(offButton);
 		}
-		
 		return panel;
 	}
 }
