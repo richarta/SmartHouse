@@ -48,7 +48,11 @@ public class Environmental{
 	
 	// Initialize
 	private House house = new House();
+	//private House house = User.getHouse();
+		
 	private int nFloor = 2;
+	// private int nFloor = house.getFloorList().size();
+	
     private int iFloorChoosed;
     private int iRoomChoosed;
     private JFrame EnvFrm = new JFrame();
@@ -205,6 +209,7 @@ public class Environmental{
     	JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, room.getThermostat().getTemp());
     	JLabel lightLabel = new JLabel("Lights");
     	JLabel faucetLabel = new JLabel("Faucets");
+    	JButton psBtn = new JButton("Power Saver is OFF");
     	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
     	ImageIcon img_lightON = new ImageIcon("light_on.png");
     	ImageIcon img_lightOFF = new ImageIcon("light_off.png");
@@ -243,7 +248,6 @@ public class Environmental{
 		
 		// Powersaver
 		powersaver[iFloor][iRoom] = false;
-		JButton psBtn = new JButton("Power Saver is OFF");
 		psBtn.setBackground(SystemColor.inactiveCaption);
 		psBtn.setForeground(Color.BLACK);
 		psBtn.setBounds(305, 350, 200, 30);
