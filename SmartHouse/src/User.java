@@ -1,6 +1,7 @@
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -112,7 +113,8 @@ public abstract class User {
 	public static boolean checkLogin(String u, String p) throws IOException
 	{
 		try{
-		FileReader inputFile = new FileReader(u + ".txt");
+		File file = new File (u + ".txt");
+		FileReader inputFile = new FileReader(file);
 		BufferedReader bufferReader = new BufferedReader(inputFile);
 		if(bufferReader.readLine().equals(p)){
 			return true;
