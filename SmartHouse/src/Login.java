@@ -97,7 +97,7 @@ public class Login extends JFrame
 					JOptionPane.showMessageDialog(null, "You have entered an invalid username or password.", "alert", JOptionPane.ERROR_MESSAGE);				}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				
 			}
 			
 		}
