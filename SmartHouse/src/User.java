@@ -118,6 +118,7 @@ public abstract class User {
 		BufferedReader bufferReader = new BufferedReader(inputFile);
 		if(bufferReader.readLine().equals(p)){
 			openHouseStatus(u);
+			bufferReader.close();
 			return true;
 		}
 		else
