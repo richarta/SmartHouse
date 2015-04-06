@@ -9,12 +9,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 
 public abstract class User {
 
 	private static House house;
 	private static String username;
-	private String pass;
+	private static String pass;
 	public Login m_Login;
 
 	public User(){
@@ -96,13 +97,31 @@ public abstract class User {
 		house = newHouse;
 	}
 	
-	public void setUsername(String user){
-		username = user;		
+	public static void setUsername(String user) throws FileNotFoundException{
+		
+		//Set username
+		username = user;
+		
+		//create text file with username title
+		File file = new File(username + ".txt");
+		if(file.exists()){
+			
+		}
+		else{
+			PrintWriter printwriter = new PrintWriter(file);
+			printwriter.close();
+		}
 	}
 	
-	public void setPassword(String nPass)
-	{
+	public static void setPassword(String nPass) throws FileNotFoundException{
+		
+		//Set password
 		pass = nPass;
+		
+		//write password to file
+		PrintWriter printwriter = new PrintWriter(username + ".txt");
+		printwriter.print(pass);
+		printwriter.close();
 	}
 	
 	public boolean checkUsername(String u)

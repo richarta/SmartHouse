@@ -8,6 +8,8 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+
 import javax.swing.*;
 
 public class Personalize extends JPanel{
@@ -86,6 +88,20 @@ public class Personalize extends JPanel{
 		//Create listener for save button
 		buttonSave.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
+				
+				//Pass username and password textfield to user method
+				try {
+					User.setUsername(textfieldUsername.getText());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					User.setPassword(textfieldPassword.getText());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				//dispose username and password GUI
 				frameUNPW.dispose();
