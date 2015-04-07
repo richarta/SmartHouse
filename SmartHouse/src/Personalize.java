@@ -9,6 +9,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -754,6 +755,16 @@ public class Personalize extends JPanel{
 						
 						//dispose of personalization frame
 						framePersonalize.dispose();
+					}
+				});
+				
+				//Set up proper rooms in room combo box when a floor is selected
+				cbFloors.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						
+						//get room information from house class
+						ArrayList<Room> roomList = house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList();
+						
 					}
 				});
 			}
