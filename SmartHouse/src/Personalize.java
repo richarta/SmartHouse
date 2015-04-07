@@ -291,7 +291,77 @@ public class Personalize extends JPanel{
 		});
 	}
 	
+	public static void addDoor(){
+		
+	}
 	
+	public static void removeDoor(){
+		
+	}
+	
+	public static void changeDoorGUI(){
+		
+	}
+	
+	public static void addWindow(){
+		
+	}
+	
+	public static void removeWindow(){
+		
+	}
+	
+	public static void changeWindowGUI(){
+		
+	}
+	
+	public static void addTV(){
+		
+	}
+	
+	public static void removeTV(){
+		
+	}
+	
+	public static void changeTVGUI(){
+		
+	}
+	
+	public static void addLight(){
+		
+	}
+	
+	public static void removeLight(){
+		
+	}
+	
+	public static void changeLightGUI(){
+		
+	}
+	
+	public static void addRadio(){
+		
+	}
+	
+	public static void removeRadio(){
+		
+	}
+	
+	public static void changeRadioGUI(){
+		
+	}
+	
+	public static void addFaucet(){
+		
+	}
+	
+	public static void removeFaucet(){
+		
+	}
+	
+	public static void changeFaucetGUI(){
+		
+	}
 	
 	public static void addHouse(){
 		
