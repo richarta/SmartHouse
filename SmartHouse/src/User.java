@@ -91,7 +91,7 @@ public abstract class User {
 		return house;
 	}
 	
-	public void setHouse(House newHouse){
+	public static void setHouse(House newHouse){
 		
 		//Set House
 		house = newHouse;

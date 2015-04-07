@@ -236,14 +236,17 @@ public class Personalize extends JPanel{
 		//add room to house class
 		house.getFloorList().get(cbFloors.getSelectedIndex()).addRoom(nameRM);
 		
-		//Erase text from floor name text field
+		//Erase text from room name text field
 		tfNameRM.setText("");	
 	}
 
 	public static void removeRoom(){
 		
-		//Remove floor from combo box
+		//Remove room from combo box
 		cbRooms.removeItem(cbRooms.getSelectedItem());
+		
+		//Remove room from house class
+		house.getFloorList().get(cbFloors.getSelectedIndex()).removeRoom(cbRooms.getSelectedIndex());
 	}
 	
 	public static void changeRoomGUI(){
@@ -273,6 +276,9 @@ public class Personalize extends JPanel{
 		btSave.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				
+				//Change name in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).setName(tfNewName.getText());
+				
 				//Change item in combo box
 				cbRooms.insertItemAt(tfNewName.getText(), cbRooms.getSelectedIndex());
 				cbRooms.removeItemAt(cbRooms.getSelectedIndex());
@@ -285,10 +291,8 @@ public class Personalize extends JPanel{
 		});
 	}
 	
-	public static void changeFloor(){
-		
-	}
-
+	
+	
 	public static void addHouse(){
 		
 		//Create house panel
@@ -517,7 +521,7 @@ public class Personalize extends JPanel{
 				springLayout.putConstraint(SpringLayout.NORTH, btnFinish, 5, SpringLayout.SOUTH, panelAdditions);
 				springLayout.putConstraint(SpringLayout.EAST, btnFinish, -5, SpringLayout.EAST, panelAdditions);
 				framePersonalize.getContentPane().add(btnFinish);
-				btnFinish.setEnabled(true);
+				btnFinish.setEnabled(false);
 				
 				//Format personalize frame
 				framePersonalize.setBounds(0, 0, 450, 175);
@@ -622,6 +626,7 @@ public class Personalize extends JPanel{
 						//Enable change floor name and remove floor button
 						btnChangeRoomName.setEnabled(true);
 						btnRemoveRM.setEnabled(true);
+						btnFinish.setEnabled(true);
 						
 						//Change frame size
 						framePersonalize.setBounds(0, 0, 450, 440);
@@ -639,6 +644,7 @@ public class Personalize extends JPanel{
 							framePersonalize.setLocationRelativeTo(null);
 							btnChangeRoomName.setEnabled(false);
 							btnRemoveRM.setEnabled(false);
+							btnFinish.setEnabled(false);
 						}
 						
 						//Enable add floor button if there a floor can be added
@@ -669,6 +675,9 @@ public class Personalize extends JPanel{
 				//Finish listener
 				btnFinish.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e){
+						
+						//Save house
+						User.setHouse(house);
 						
 						//call selection menu class
 						new SelectionMenu();
