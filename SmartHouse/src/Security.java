@@ -1,9 +1,9 @@
 /*
- * Course: SE 300-01 
+ * Course: SE 300-01
  * Term: Spring 2015
  * Assignment: SmartHouse Project
  * Author: Young J. Park, Andrew
- * Date: 01 April 2015
+ * Date: 09 April 2015
  */
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -32,7 +32,7 @@ import java.awt.SystemColor;
 public class Security{
 	
 	// Test Launching GUI
-	///**
+	/**
 	public static void main(String[] args) {
        new Security();
     } //*/

@@ -1,9 +1,9 @@
 /*
- * Course: SE 300-01 
+ * Course: SE 300-01
  * Term: Spring 2015
  * Assignment: SmartHouse Project
  * Author: Young J. Park
- * Date: 12 March 2015
+ * Date: 09 April 2015
  */
 
 import java.awt.Font;
@@ -35,7 +35,7 @@ import java.awt.SystemColor;
 public class Entertainment{
 	
 	// Test Launching GUI
-	///**
+	/**
 	public static void main(String[] args) {
        new Entertainment();
     } //*/
