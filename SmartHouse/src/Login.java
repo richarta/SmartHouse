@@ -19,7 +19,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-
 public class Login extends JFrame 
 {
 
@@ -128,6 +127,12 @@ public class Login extends JFrame
 	frame.setVisible(true);
 	}
 
+	/**
+	 * @param u - username taken from login field
+	 * @param p - password taken from password field
+	 * @return
+	 * @throws IOException - checks for file not found as username check
+	 */
 	public boolean loginCheck(String u, String p) throws IOException{
 		 if(User.checkLogin(u, p))
 		 {
@@ -135,22 +140,6 @@ public class Login extends JFrame
 		 }
 		 else 
 			 return false;
-
-	}
-
-	public void loginfail(){
-
-	}
-
-	public void loginsucceed(){
-
-	}
-
-	public void personalizeHousefile(){
-
-	}
-
-	public void selectionPage(){
 
 	}
 
