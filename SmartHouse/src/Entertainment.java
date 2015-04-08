@@ -6,40 +6,29 @@
  * Date: 12 March 2015
  */
 
-import java.awt.BorderLayout; 
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSlider;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
-
 import java.awt.Color;
 import java.awt.SystemColor;
- 
+
 public class Entertainment{
 	
 	// Test Launching GUI
@@ -246,7 +235,7 @@ public class Entertainment{
 			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 2000, TV.getVolume());
 			JSlider chnSlider = new JSlider(JSlider.HORIZONTAL, 0, 2000, TV.getChannel());
 			JLabel chnLabel = new JLabel(""+chnSlider.getValue());
-			JLabel imagetv = new JLabel(img_tvOFF);
+			JLabel imagetv = new JLabel(TV.getStatus() ? img_tvON : img_tvOFF);
 			
 			tvlbl.setBounds(47, 59+30*k, 150, 16);		
 			panel.add(tvlbl);
@@ -323,7 +312,7 @@ public class Entertainment{
 			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, Radio.getVolume());
 			JSlider chnSlider = new JSlider(JSlider.HORIZONTAL, 0, 200, Radio.getChannel());
 			JLabel chnLabel = new JLabel(""+chnSlider.getValue());
-			JLabel imageRadio = new JLabel(img_radioOFF);
+			JLabel imageRadio = new JLabel(Radio.getStatus() ? img_radioON : img_radioOFF);
 			
 			radiolbl.setBounds(47, 235+30*k, 150, 16);
 			panel.add(radiolbl);

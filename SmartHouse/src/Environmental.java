@@ -6,35 +6,26 @@
  * Date: 12 March 2015
  */
 
-import java.awt.BorderLayout; 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSlider;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
-
 import java.awt.Color;
 import java.awt.SystemColor;
  
@@ -293,7 +284,7 @@ public class Environmental{
 			JRadioButton onButton = new JRadioButton("On");
 			JRadioButton offButton = new JRadioButton("Off");
 			ButtonGroup group = new ButtonGroup();
-			JLabel imageLight = new JLabel(img_lightOFF);
+			JLabel imageLight = new JLabel(light.getLightStatus() ? img_lightON : img_lightOFF);
 			
 			lightlbl.setBounds(47, 59+30*k, 150, 16);		
 			panel.add(lightlbl);
@@ -339,7 +330,7 @@ public class Environmental{
 			JRadioButton onButton = new JRadioButton("On");
 			JRadioButton offButton = new JRadioButton("Off");
 			ButtonGroup group = new ButtonGroup();
-			JLabel imageFaucet = new JLabel(img_faucetOFF);
+			JLabel imageFaucet = new JLabel(faucet.getStatus() ? img_faucetON : img_faucetOFF);
 			
 			faucetlbl.setBounds(325, 59+30*k, 150, 16);		
 			panel.add(faucetlbl);
