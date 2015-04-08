@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,9 +24,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.border.EtchedBorder;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 
@@ -54,7 +57,7 @@ public class Entertainment{
     private JPanel panel = new JPanel();
     private JPanel [][] roomPanels = new JPanel[nFloor][10];
     private JButton menuBtn = new JButton("Return to Menu");
-    private JLabel roomLabel = new JLabel("Select the Room from Menu");
+    private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     boolean [][] powersaver = new boolean[nFloor][10];
     JButton helpbtn = new JButton("Help");
@@ -119,10 +122,11 @@ public class Entertainment{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("["+house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
-	    	            	roomLabel.setBounds(610, 410, 200, 23);
-	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-	    	        		EntFrm.getContentPane().add(roomLabel);
+	    	            	// Change the title to show room selected
+	    	            	String s = house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName();
+	    	            	EntFrm.setTitle("Environmental Controls - " + s);
+	    	        		
+	    	        		dirLabel.setVisible(false);
 	    	        		
 	    	            	EntFrm.getContentPane().add(panel);
 	    	            	EntFrm.repaint();
@@ -156,13 +160,14 @@ public class Entertainment{
         });
 		EntFrm.getContentPane().add(menuBtn);
 		
-		// room label
-		roomLabel.setBounds(180, 100, 500, 40);
-		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		EntFrm.getContentPane().add(roomLabel);
+		// Main menu label
+		dirLabel.setBounds(180, 100, 500, 40);
+		dirLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		EntFrm.getContentPane().add(dirLabel);
+		
+		// Border
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		panel_2.setBounds(12, 391, 778, 2);
-		
 		EntFrm.getContentPane().add(panel_2);
 		
 		// help button
@@ -196,6 +201,7 @@ public class Entertainment{
 		JLabel lblVolume_2 = new JLabel("Volume");
 		JLabel lblChannel = new JLabel("Channel");
 		JLabel lblChannel_2 = new JLabel("Channel");
+		JLabel actionLabel = new JLabel("");
 		ImageIcon img_tvON = new ImageIcon("tv_on.png");
     	ImageIcon img_tvOFF = new ImageIcon("tv_off.png");
     	ImageIcon img_radioON = new ImageIcon("radio_on.png");
@@ -224,7 +230,11 @@ public class Entertainment{
 		panel.add(lblChannel);
 		panel.add(lblChannel_2);
 		
-
+		actionLabel.setFont(new Font("Tahoma", Font.ITALIC, 13));
+		actionLabel.setBounds(580, 410, 200, 23);
+		actionLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		panel.add(actionLabel);
+		
 		// TVs
 		for(int k=0; k<room.getTelevisionList().size(); k++){
 			Television TV = room.getTelevisionList().get(k);
@@ -249,6 +259,7 @@ public class Entertainment{
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imagetv.setIcon(img_tvON);
 	            		TV.setStatus(true);
+	            		actionLabel.setText(TV.getName() + " is ON ");
 	            	}
 	            }
 	        });
@@ -260,6 +271,7 @@ public class Entertainment{
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imagetv.setIcon(img_tvOFF);
 	            		TV.setStatus(false);
+	            		actionLabel.setText(TV.getName() + " is OFF ");
 	            	}
 	            }
 	        });
@@ -278,6 +290,7 @@ public class Entertainment{
 			volSlider.addChangeListener(new ChangeListener(){
 				public void stateChanged (ChangeEvent e){
 		           TV.setVolume(volSlider.getValue());
+		           actionLabel.setText(TV.getName() + " volume changed ");
 				}
 			});
 			panel.add(volSlider);
@@ -287,6 +300,7 @@ public class Entertainment{
 			chnSlider.addChangeListener(new ChangeListener(){
 				public void stateChanged (ChangeEvent e){
 		           TV.setChannel(chnSlider.getValue());
+		           actionLabel.setText(TV.getName() + " channel changed ");
 				}
 			});
 			panel.add(chnSlider);
@@ -326,6 +340,7 @@ public class Entertainment{
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageRadio.setIcon(img_radioON);
 	            		Radio.setStatus(true);
+	            		actionLabel.setText(Radio.getName() + " is ON ");
 	            	}
 	            }
 	        });
@@ -337,6 +352,7 @@ public class Entertainment{
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageRadio.setIcon(img_radioOFF);
 	            		Radio.setStatus(false);
+	            		actionLabel.setText(Radio.getName() + " is OFF ");
 	            	}
 	            }
 	        });
@@ -355,6 +371,7 @@ public class Entertainment{
 			volSlider.addChangeListener(new ChangeListener(){
 				public void stateChanged (ChangeEvent e){
 		           Radio.setVolume(volSlider.getValue());
+		           actionLabel.setText(Radio.getName() + " volume changed ");
 				}
 			});
 			panel.add(volSlider);
@@ -369,11 +386,13 @@ public class Entertainment{
 				public void stateChanged (ChangeEvent e){
 		           Radio.setChannel(chnSlider.getValue());
 		           chnLabel.setText(""+chnSlider.getValue());
+		           actionLabel.setText(Radio.getName() + " channel changed ");
 				}
 			});
 			panel.add(chnSlider);			
 		}
 		
+		actionLabel.setText("");
 		return panel;
 	}
 }

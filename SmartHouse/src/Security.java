@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +22,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
+
 import java.awt.Color;
 import java.awt.SystemColor;
  
@@ -50,7 +53,7 @@ public class Security{
     private JPanel panel = new JPanel();
     private JPanel [][] roomPanels = new JPanel[nFloor][10];
     private JButton menuBtn = new JButton("Return to Menu");
-    private JLabel roomLabel = new JLabel("Select the Room from Menu");
+    private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     JButton helpbtn = new JButton("Help");
     
@@ -117,10 +120,11 @@ public class Security{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("["+house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
-	    	            	roomLabel.setBounds(610, 410, 200, 23);
-	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-	    	        		SecFrm.getContentPane().add(roomLabel);
+	    	            	// Change the title to show room selected
+	    	            	String s = house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName();
+	    	            	SecFrm.setTitle("Environmental Controls - " + s);
+	    	        		
+	    	        		dirLabel.setVisible(false);
 	    	        		
 	    	            	SecFrm.getContentPane().add(panel);
 	    	            	SecFrm.repaint();
@@ -154,13 +158,14 @@ public class Security{
         });
 		SecFrm.getContentPane().add(menuBtn);
 		
-		// room label
-		roomLabel.setBounds(180, 100, 500, 40);
-		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		SecFrm.getContentPane().add(roomLabel);
+		// Main menu label
+		dirLabel.setBounds(180, 100, 500, 40);
+		dirLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		SecFrm.getContentPane().add(dirLabel);
+		
+		// Border
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		panel_2.setBounds(12, 391, 778, 2);
-		
 		SecFrm.getContentPane().add(panel_2);
 		
 		// help button
@@ -191,12 +196,13 @@ public class Security{
     	JPanel panel = new JPanel();
     	JLabel doorLabel = new JLabel("Doors");
     	JLabel windowLabel = new JLabel("Windows");
+    	JLabel actionLabel = new JLabel("");
     	JButton lockBtn = new JButton("Lock Down");
     	ArrayList <JRadioButton> lockBtnList = new ArrayList<JRadioButton>();
-    	ImageIcon img_doorOpen = new ImageIcon("door_open.png");
-    	ImageIcon img_doorClosed = new ImageIcon("door_closed.png");
-    	ImageIcon img_windowOpen = new ImageIcon("window_open.png");
-    	ImageIcon img_windowClosed = new ImageIcon("window_closed.png");
+    	ImageIcon img_doorUnlocked = new ImageIcon("door_unlocked.png");
+    	ImageIcon img_doorLocked = new ImageIcon("door_locked.png");
+    	ImageIcon img_windowUnlocked = new ImageIcon("window_unlocked.png");
+    	ImageIcon img_windowLocked = new ImageIcon("window_locked.png");
     	
 		panel.setLayout(null);
 		
@@ -208,6 +214,11 @@ public class Security{
 		windowLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		windowLabel.setBounds(405, 30, 90, 16);
 		panel.add(windowLabel);
+		
+		actionLabel.setFont(new Font("Tahoma", Font.ITALIC, 13));
+		actionLabel.setBounds(580, 410, 200, 23);
+		actionLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		panel.add(actionLabel);
 		
 		// Lockdown
 		lockBtn.setBackground(new Color(60, 179, 113));
@@ -237,7 +248,7 @@ public class Security{
 			JRadioButton unlockButton = new JRadioButton("Unlocked");
 			JRadioButton lockButton = new JRadioButton("Locked");
 			ButtonGroup group = new ButtonGroup();
-			JLabel imageDoor = new JLabel(door.getLock() ? img_doorClosed : img_doorOpen);
+			JLabel imageDoor = new JLabel(door.getLock() ? img_doorLocked : img_doorUnlocked);
 			
 			doorlbl.setBounds(47, 59+30*k, 150, 16);		
 			panel.add(doorlbl);
@@ -249,8 +260,9 @@ public class Security{
 			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		imageDoor.setIcon(img_doorOpen);
+	            		imageDoor.setIcon(img_doorUnlocked);
 	            		door.setLock(false);
+	            		actionLabel.setText(door.getName() + " is unlocked ");
 	            	}
 	            }
 	        });
@@ -260,8 +272,9 @@ public class Security{
 			lockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		imageDoor.setIcon(img_doorClosed);
+	            		imageDoor.setIcon(img_doorLocked);
 	            		door.setLock(true);
+	            		actionLabel.setText(door.getName() + " is locked ");
 	            	}
 	            }
 	        });
@@ -284,7 +297,7 @@ public class Security{
 			JRadioButton unlockButton = new JRadioButton("Unlocked");
 			JRadioButton lockButton = new JRadioButton("Locked");
 			ButtonGroup group = new ButtonGroup();
-			JLabel imageWindow = new JLabel(window.getLock() ? img_windowClosed : img_windowOpen);
+			JLabel imageWindow = new JLabel(window.getLock() ? img_windowLocked : img_windowUnlocked);
 			
 			windowlbl.setBounds(425, 59+30*k, 150, 16);		
 			panel.add(windowlbl);
@@ -297,7 +310,8 @@ public class Security{
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		window.setLock(false);
-	            		imageWindow.setIcon(img_windowOpen);
+	            		imageWindow.setIcon(img_windowUnlocked);
+	            		actionLabel.setText(window.getName() + " is unlocked ");
 	            	}
 	            }
 	        });
@@ -308,7 +322,8 @@ public class Security{
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		window.setLock(true);
-	            		imageWindow.setIcon(img_windowClosed);
+	            		imageWindow.setIcon(img_windowLocked);
+	            		actionLabel.setText(window.getName() + " is locked ");
 	            	}
 	            }
 	        });
@@ -324,6 +339,7 @@ public class Security{
 			group.add(lockButton);
 		}
 		
+		actionLabel.setText("");
 		return panel;
 	}
 }
