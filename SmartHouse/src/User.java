@@ -129,6 +129,13 @@ public abstract class User {
 		return true;
 	}
 	
+	/**
+	 * @author Timothy Bernier
+	 * @param u - username from login to compare to .txt file name
+	 * @param p - password from login to compare to .txt password
+	 * @return - boolean to confirm if login matches .txt parameters
+	 * @throws IOException - check for fileNotFoundException, if found login failed
+	 */
 	public static boolean checkLogin(String u, String p) throws IOException
 	{
 		try{
