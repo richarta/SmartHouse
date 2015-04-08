@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -59,7 +60,6 @@ public class Entertainment{
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
-    boolean [][] powersaver = new boolean[nFloor][10];
     JButton helpbtn = new JButton("Help");
     
     public Entertainment() {
@@ -202,6 +202,8 @@ public class Entertainment{
 		JLabel lblChannel = new JLabel("Channel");
 		JLabel lblChannel_2 = new JLabel("Channel");
 		JLabel actionLabel = new JLabel("");
+		JButton psBtn = new JButton("Power Saver is OFF");
+		ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
 		ImageIcon img_tvON = new ImageIcon("tv_on.png");
     	ImageIcon img_tvOFF = new ImageIcon("tv_off.png");
     	ImageIcon img_radioON = new ImageIcon("radio_on.png");
@@ -234,6 +236,30 @@ public class Entertainment{
 		actionLabel.setBounds(580, 410, 200, 23);
 		actionLabel.setHorizontalAlignment(SwingConstants.TRAILING);
 		panel.add(actionLabel);
+		
+		// Power saver
+		psBtn.setBackground(new Color(60, 179, 113));
+		psBtn.setForeground(Color.BLACK);
+		psBtn.setBounds(305, 350, 200, 30);
+		psBtn.addActionListener (new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i=0; i<offBtnList.size(); i++){
+					offBtnList.get(i).setSelected(true);
+				}
+
+				for (int i=0; i<room.getTelevisionList().size(); i++){
+					room.getTelevisionList().get(i).setStatus(false);
+				}
+
+				for (int i=0; i<room.getListRadio().size(); i++){
+					room.getListRadio().get(i).setStatus(false);
+				}
+
+				actionLabel.setText("Power Saver is activated ");
+				
+			}
+		});
+		panel.add(psBtn);
 		
 		// TVs
 		for(int k=0; k<room.getTelevisionList().size(); k++){
@@ -275,6 +301,7 @@ public class Entertainment{
 	            	}
 	            }
 	        });
+			offBtnList.add(offButton);
 			panel.add(offButton);
 			
 			if (TV.getStatus())
@@ -356,6 +383,7 @@ public class Entertainment{
 	            	}
 	            }
 	        });
+			offBtnList.add(offButton);
 			panel.add(offButton);
 						
 			group.add(onButton);

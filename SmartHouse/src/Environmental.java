@@ -58,7 +58,6 @@ public class Environmental{
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
-    boolean [][] powersaver = new boolean[nFloor][10];
     JButton helpbtn = new JButton("Help");
     
     public Environmental() {	    	
@@ -206,7 +205,7 @@ public class Environmental{
     	JLabel lightLabel = new JLabel("Lights");
     	JLabel faucetLabel = new JLabel("Faucets");
         JLabel actionLabel = new JLabel("");
-    	JButton psBtn = new JButton("Power Saver is OFF");
+    	JButton psBtn = new JButton("Power Saver");
     	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
     	ImageIcon img_lightON = new ImageIcon("light_on.png");
     	ImageIcon img_lightOFF = new ImageIcon("light_off.png");
@@ -249,43 +248,29 @@ public class Environmental{
 		});
 		panel.add(tempSlider);
 		
-		// Powersaver
-		powersaver[iFloor][iRoom] = false;
-		psBtn.setBackground(SystemColor.inactiveCaption);
+		// Power saver
+		psBtn.setBackground(new Color(60, 179, 113));
 		psBtn.setForeground(Color.BLACK);
 		psBtn.setBounds(305, 350, 200, 30);
 		psBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	if (powersaver[iFloor][iRoom]) {
-            		powersaver[iFloor][iRoom] = false;
-            		psBtn.setText("Power Saver is OFF");
-            		psBtn.setBackground(SystemColor.inactiveCaption);
-            		
-            		actionLabel.setText("Power Saver is deactivated ");
-            	}
-            	else {
-            		powersaver[iFloor][iRoom] = true;
-            		psBtn.setText("Power Saver is ON");
-            		psBtn.setBackground(new Color(60, 179, 113));
-            		
-            		room.getThermostat().setTemp(70);
-            		tempSlider.setValue(70);
-            		tempLabel.setText("Temerature (70F)");
-  		
-            		for (int i=0; i<offBtnList.size(); i++){
-            			offBtnList.get(i).setSelected(true);
-            		}
-            		
-            		for (int i=0; i<room.getFaucetList().size(); i++){
-            			room.getFaucetList().get(i).setStatus(false);
-            		}
-            		
-            		for (int i=0; i<room.getLightList().size(); i++){
-            			room.getLightList().get(i).setLightStatus(false);
-            		}
-            		
-            		actionLabel.setText("Power Saver is activated ");
-            	}
+        		room.getThermostat().setTemp(70);
+        		tempSlider.setValue(70);
+        		tempLabel.setText("Temerature (70F)");
+		
+        		for (int i=0; i<offBtnList.size(); i++){
+        			offBtnList.get(i).setSelected(true);
+        		}
+        		
+        		for (int i=0; i<room.getFaucetList().size(); i++){
+        			room.getFaucetList().get(i).setStatus(false);
+        		}
+        		
+        		for (int i=0; i<room.getLightList().size(); i++){
+        			room.getLightList().get(i).setLightStatus(false);
+        		}
+        		
+        		actionLabel.setText("Power Saver is activated ");
             }
         });
 		panel.add(psBtn);
