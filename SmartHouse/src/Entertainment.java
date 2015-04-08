@@ -207,6 +207,10 @@ public class Entertainment{
 		JLabel lblVolume_2 = new JLabel("Volume");
 		JLabel lblChannel = new JLabel("Channel");
 		JLabel lblChannel_2 = new JLabel("Channel");
+		ImageIcon img_tvON = new ImageIcon("tv_on.png");
+    	ImageIcon img_tvOFF = new ImageIcon("tv_off.png");
+    	ImageIcon img_radioON = new ImageIcon("radio_on.png");
+    	ImageIcon img_radioOFF = new ImageIcon("radio_off.png");
 		
 		Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
 		
@@ -242,14 +246,19 @@ public class Entertainment{
 			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 2000, TV.getVolume());
 			JSlider chnSlider = new JSlider(JSlider.HORIZONTAL, 0, 2000, TV.getChannel());
 			JLabel chnLabel = new JLabel(""+chnSlider.getValue());
+			JLabel imagetv = new JLabel(img_tvOFF);
 			
-			tvlbl.setBounds(27, 59+30*k, 150, 16);		
+			tvlbl.setBounds(47, 59+30*k, 150, 16);		
 			panel.add(tvlbl);
+			
+			imagetv.setBounds(27, 59+30*k, 15, 15);
+			panel.add(imagetv);
 			
 			onButton.setBounds(215, 55+30*k, 51, 25);
 			onButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		imagetv.setIcon(img_tvON);
 	            		TV.setStatus(true);
 	            	}
 	            }
@@ -260,6 +269,7 @@ public class Entertainment{
 			offButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		imagetv.setIcon(img_tvOFF);
 	            		TV.setStatus(false);
 	            	}
 	            }
@@ -313,14 +323,19 @@ public class Entertainment{
 			JSlider volSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, Radio.getVolume());
 			JSlider chnSlider = new JSlider(JSlider.HORIZONTAL, 0, 200, Radio.getChannel());
 			JLabel chnLabel = new JLabel(""+chnSlider.getValue());
+			JLabel imageRadio = new JLabel(img_radioOFF);
 			
-			radiolbl.setBounds(27, 235+30*k, 150, 16);
+			radiolbl.setBounds(47, 235+30*k, 150, 16);
 			panel.add(radiolbl);
+			
+			imageRadio.setBounds(27, 235+30*k, 15, 15);
+			panel.add(imageRadio);
 			
 			onButton.setBounds(215, 231+30*k, 51, 25);
 			onButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		imageRadio.setIcon(img_radioON);
 	            		Radio.setStatus(true);
 	            	}
 	            }
@@ -331,6 +346,7 @@ public class Entertainment{
 			offButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		imageRadio.setIcon(img_radioOFF);
 	            		Radio.setStatus(false);
 	            	}
 	            }
