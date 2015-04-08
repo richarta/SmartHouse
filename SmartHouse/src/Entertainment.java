@@ -32,7 +32,7 @@ import java.awt.SystemColor;
 public class Entertainment{
 	
 	// Test Launching GUI
-	/**
+	///**
 	public static void main(String[] args) {
        new Entertainment();
     } //*/
@@ -119,7 +119,7 @@ public class Entertainment{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("["+house.getFloorList().get(0).getName()+"] " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
+	    	            	roomLabel.setText("["+house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
 	    	            	roomLabel.setBounds(610, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 	    	        		EntFrm.getContentPane().add(roomLabel);

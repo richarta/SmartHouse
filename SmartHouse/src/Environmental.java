@@ -32,7 +32,7 @@ import java.awt.SystemColor;
 public class Environmental{
 	
 	// Test Launching GUI
-	/**
+	///**
 	public static void main(String[] args) {
        new Environmental();
    } //*/
@@ -53,7 +53,8 @@ public class Environmental{
     private JPanel panel = new JPanel();
     private JPanel [][] roomPanels = new JPanel[nFloor][10];
     private JButton menuBtn = new JButton("Return to Menu");
-    private JLabel roomLabel = new JLabel("Select the Room from Menu");
+    private JLabel dirLabel = new JLabel("Select the Room from Menu");
+    private JLabel roomLabel = new JLabel("");
     private final JPanel panel_2 = new JPanel();
     boolean [][] powersaver = new boolean[nFloor][10];
     JButton helpbtn = new JButton("Help");
@@ -124,10 +125,12 @@ public class Environmental{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("["+house.getFloorList().get(0).getName()+"] " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
+	    	            	roomLabel.setText("["+house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
 	    	            	roomLabel.setBounds(610, 410, 200, 23);
 	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 	    	        		EnvFrm.getContentPane().add(roomLabel);
+	    	        		
+	    	        		dirLabel.setVisible(false);
 	    	        		
 	    	            	EnvFrm.getContentPane().add(panel);
 	    	            	EnvFrm.repaint();
@@ -162,9 +165,9 @@ public class Environmental{
 		EnvFrm.getContentPane().add(menuBtn);
 		
 		// room label
-		roomLabel.setBounds(180, 100, 500, 40);
-		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		EnvFrm.getContentPane().add(roomLabel);
+		dirLabel.setBounds(180, 100, 500, 40);
+		dirLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		EnvFrm.getContentPane().add(dirLabel);
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		panel_2.setBounds(12, 391, 778, 2);
 		
@@ -202,6 +205,7 @@ public class Environmental{
     	JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, room.getThermostat().getTemp());
     	JLabel lightLabel = new JLabel("Lights");
     	JLabel faucetLabel = new JLabel("Faucets");
+        JLabel actionLabel = new JLabel("");
     	JButton psBtn = new JButton("Power Saver is OFF");
     	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
     	ImageIcon img_lightON = new ImageIcon("light_on.png");
@@ -213,12 +217,16 @@ public class Environmental{
 		
 		// Set labels;
 		lightLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lightLabel.setBounds(100, 20, 90, 20);
+		lightLabel.setBounds(33, 20, 90, 20);
 		panel.add(lightLabel);
 		
 		faucetLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		faucetLabel.setBounds(375, 20, 90, 20);
+		faucetLabel.setBounds(305, 20, 90, 20);
 		panel.add(faucetLabel);
+		
+		actionLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		actionLabel.setBounds(310, 435, 200, 23);
+		panel.add(actionLabel);
 		
 		// Thermostat
 		tempLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -235,6 +243,7 @@ public class Environmental{
 			public void stateChanged (ChangeEvent e){
 				room.getThermostat().setTemp(tempSlider.getValue());
 	            tempLabel.setText("Temerature (" + tempSlider.getValue() + "F)");
+	            actionLabel.setText("Temperature was changed");
 			}
 		});
 		panel.add(tempSlider);
@@ -251,6 +260,7 @@ public class Environmental{
             		psBtn.setText("Power Saver is OFF");
             		psBtn.setBackground(SystemColor.inactiveCaption);
             		
+            		actionLabel.setText("Power Saver is deactivated");
             	}
             	else {
             		powersaver[iFloor][iRoom] = true;
@@ -260,6 +270,8 @@ public class Environmental{
             		room.getThermostat().setTemp(70);
             		tempSlider.setValue(70);
             		tempLabel.setText("Temerature (70F)");
+
+            		actionLabel.setText("Power Saver is activated");
             		
             		for (int i=0; i<offBtnList.size(); i++){
             			offBtnList.get(i).setSelected(true);
@@ -298,6 +310,8 @@ public class Environmental{
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageLight.setIcon(img_lightON);
 	            		light.setLightStatus(true);
+
+	            		actionLabel.setText(light.getlightName() + " is ON");
 	            	}
 	            }
 	        });
@@ -309,6 +323,8 @@ public class Environmental{
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageLight.setIcon(img_lightOFF);
 	            		light.setLightStatus(false);
+	            		
+	            		actionLabel.setText(light.getlightName() + " is OFF");
 	            	}
 	            }
 	        });
@@ -344,6 +360,8 @@ public class Environmental{
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		faucet.setStatus(true);
 	            		imageFaucet.setIcon(img_faucetON);
+	            		
+	            		actionLabel.setText(faucet.getName() + " is ON");
 	            	}
 	            }
 	        });
@@ -355,6 +373,8 @@ public class Environmental{
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		faucet.setStatus(false);
 	            		imageFaucet.setIcon(img_faucetOFF);
+	            		
+	            		actionLabel.setText(faucet.getName() + " is OFF");
 	            	}
 	            }
 	        });

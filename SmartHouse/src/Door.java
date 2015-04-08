@@ -24,6 +24,7 @@ public class Door {
 	 * @param nameDr
 	 */
 	public Door(String nameDr){
+		lock = true;
 		this.nameDr = nameDr;
 	}
 
