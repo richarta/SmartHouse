@@ -1,3 +1,5 @@
+import javax.swing.JFrame;
+
 /*
  * Course: SE 300-01
  * Term: Spring 2015
@@ -13,6 +15,7 @@ public class SmartHouseApp {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				Login login = new Login();
+				login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		});
 	}
