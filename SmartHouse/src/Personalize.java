@@ -19,8 +19,7 @@ public class Personalize extends JPanel{
 	private static String nameHS;
 	private static JFrame framePersonalize = new JFrame("Personalize");
 	private static JLabel labelHS = new JLabel();
-	private static int floorCounter = 0, roomCounter = 0;
-	private static JTextField tfNameRM, tfNameFL;
+	private static JTextField tfNameRM, tfNameFL, textField;
 	private static JComboBox<String> cbFloors = new JComboBox<String>();
 	private static JComboBox<String> cbRooms = new JComboBox<String>();
 	private static JComboBox<String> cbAdditions = new JComboBox<String>();
@@ -166,24 +165,26 @@ public class Personalize extends JPanel{
 
 	public static void addFloor(){
 		
-		//Add floor to combo box
-		cbFloors.addItem(tfNameFL.getText());
-		cbFloors.setSelectedIndex(cbFloors.getItemCount() - 1);
-		
 		//add floor in house class
 		house.addFloor(tfNameFL.getText());
 		
+		//Add floor to combo box
+		cbFloors.addItem(tfNameFL.getText());
+		
 		//Erase text from floor name text field
 		tfNameFL.setText("");
+		
+		//Set newly created floor as selected index
+		cbFloors.setSelectedIndex(cbFloors.getItemCount() - 1);
 	}
 	
 	public static void removeFloor(){
 		
-		//Remove floor from combo box
-		cbFloors.removeItem(cbFloors.getSelectedItem());
-		
 		//Remove floor from house class
 		house.removeFloor(cbFloors.getSelectedIndex());
+		
+		//Remove floor from combo box
+		cbFloors.removeItem(cbFloors.getSelectedItem());
 	}
 	
 	public static void changeFloorGUI(){
@@ -228,26 +229,26 @@ public class Personalize extends JPanel{
 		});
 	}
 	
-	public static void addRoom(String nameRM){
+	public static void addRoom(){
+		
+		//add room to house class
+		house.getFloorList().get(cbFloors.getSelectedIndex()).addRoom(tfNameRM.getText());
 		
 		//Add room to combo box
 		cbRooms.addItem(tfNameRM.getText());
 		cbRooms.setSelectedIndex(cbRooms.getItemCount() - 1);
 		
-		//add room to house class
-		house.getFloorList().get(cbFloors.getSelectedIndex()).addRoom(nameRM);
-		
 		//Erase text from room name text field
-		tfNameRM.setText("");	
+		tfNameRM.setText("");
 	}
 
 	public static void removeRoom(){
 		
-		//Remove room from combo box
-		cbRooms.removeItem(cbRooms.getSelectedItem());
-		
 		//Remove room from house class
 		house.getFloorList().get(cbFloors.getSelectedIndex()).removeRoom(cbRooms.getSelectedIndex());
+		
+		//Remove room from combo box
+		cbRooms.removeItem(cbRooms.getSelectedItem());
 	}
 	
 	public static void changeRoomGUI(){
@@ -294,6 +295,8 @@ public class Personalize extends JPanel{
 	
 	public static void addDoor(){
 		
+		//add door to house instance
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addDoor(textField.getText());
 	}
 	
 	public static void removeDoor(){
@@ -306,6 +309,8 @@ public class Personalize extends JPanel{
 	
 	public static void addWindow(){
 		
+		//add window to house instance
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addWindow(textField.getText());
 	}
 	
 	public static void removeWindow(){
@@ -318,6 +323,8 @@ public class Personalize extends JPanel{
 	
 	public static void addTV(){
 		
+		//add television to house instance
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addTelevision(textField.getText());
 	}
 	
 	public static void removeTV(){
@@ -330,6 +337,8 @@ public class Personalize extends JPanel{
 	
 	public static void addLight(){
 		
+		//add light to house instance
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addLight(textField.getText());
 	}
 	
 	public static void removeLight(){
@@ -342,6 +351,8 @@ public class Personalize extends JPanel{
 	
 	public static void addRadio(){
 		
+		//add radio to house instance
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addRadio(textField.getText());
 	}
 	
 	public static void removeRadio(){
@@ -354,6 +365,8 @@ public class Personalize extends JPanel{
 	
 	public static void addFaucet(){
 		
+		//add faucet to house instance
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addFaucet(textField.getText());
 	}
 	
 	public static void removeFaucet(){
@@ -547,25 +560,26 @@ public class Personalize extends JPanel{
 				sl_panelAdditions.putConstraint(SpringLayout.WEST, cbAdditions, 10, SpringLayout.WEST, panelAdditions);
 				panelAdditions.add(cbAdditions);
 				
-				//add components to addition combo box
+				//add components to addition combo box and set the door as the selected item
 				cbAdditions.addItem("Door");
 				cbAdditions.addItem("Window");
 				cbAdditions.addItem("Light");
 				cbAdditions.addItem("Television");
 				cbAdditions.addItem("Radio");
 				cbAdditions.addItem("Faucet");
+				cbAdditions.setSelectedIndex(0);
 				
-				JLabel lblAddition = new JLabel("Addition Name: ");
+				JLabel lblAddition = new JLabel("Door: ");
 				sl_panelAdditions.putConstraint(SpringLayout.NORTH, lblAddition, 0, SpringLayout.NORTH, cbAdditions);
 				sl_panelAdditions.putConstraint(SpringLayout.WEST, lblAddition, 6, SpringLayout.EAST, cbAdditions);
 				panelAdditions.add(lblAddition);
 				
-				JLabel lblAdditionName = new JLabel("Specific Name");
+				JLabel lblAdditionName = new JLabel("");
 				sl_panelAdditions.putConstraint(SpringLayout.NORTH, lblAdditionName, 6, SpringLayout.SOUTH, lblAddition);
 				sl_panelAdditions.putConstraint(SpringLayout.WEST, lblAdditionName, 0, SpringLayout.WEST, lblAddition);
 				panelAdditions.add(lblAdditionName);
 				
-				JTextField textField = new JTextField();
+				textField = new JTextField();
 				sl_panelAdditions.putConstraint(SpringLayout.EAST, textField, -137, SpringLayout.EAST, panelAdditions);
 				sl_panelAdditions.putConstraint(SpringLayout.WEST, textField, 10, SpringLayout.WEST, panelAdditions);
 				sl_panelAdditions.putConstraint(SpringLayout.NORTH, btnAdd, 6, SpringLayout.SOUTH, textField);
@@ -573,17 +587,17 @@ public class Personalize extends JPanel{
 				panelAdditions.add(textField);
 				textField.setColumns(10);
 				
-				JLabel label = new JLabel("Specific Name");
+				JLabel label = new JLabel("");
 				sl_panelAdditions.putConstraint(SpringLayout.NORTH, label, 6, SpringLayout.SOUTH, lblAdditionName);
 				sl_panelAdditions.putConstraint(SpringLayout.WEST, label, 0, SpringLayout.WEST, lblAddition);
 				panelAdditions.add(label);
 				
-				JLabel label_1 = new JLabel("Specific Name");
+				JLabel label_1 = new JLabel("");
 				sl_panelAdditions.putConstraint(SpringLayout.NORTH, label_1, 6, SpringLayout.SOUTH, label);
 				sl_panelAdditions.putConstraint(SpringLayout.WEST, label_1, 0, SpringLayout.WEST, lblAddition);
 				panelAdditions.add(label_1);
 				
-				JLabel label_2 = new JLabel("Specific Name");
+				JLabel label_2 = new JLabel("");
 				sl_panelAdditions.putConstraint(SpringLayout.NORTH, label_2, 6, SpringLayout.SOUTH, label_1);
 				sl_panelAdditions.putConstraint(SpringLayout.WEST, label_2, 0, SpringLayout.WEST, lblAddition);
 				panelAdditions.add(label_2);
@@ -616,29 +630,20 @@ public class Personalize extends JPanel{
 					public void mouseClicked(MouseEvent e){
 						
 						//Disable add floor button when fifth floor is being added
-						if (floorCounter == 4){
+						if (house.getFloorList().size() == 4){
 							btnAddFloor.setEnabled(false);
 						}
 						
 						//Call add floor method
 						addFloor();
 						
-						//Increment floor counter
-						++floorCounter;
-						
 						//Enable change floor name and remove floor button
 						btnChangeFL.setEnabled(true);
 						btnRemoveFL.setEnabled(true);
 						
 						//Change frame size
-						if (roomCounter == 0){
-							framePersonalize.setBounds(0, 0, 450, 280);
-							framePersonalize.setLocationRelativeTo(null);
-						}
-						else {
-							framePersonalize.setBounds(0, 0, 450, 440);
-							framePersonalize.setLocationRelativeTo(null);
-						}
+						framePersonalize.setBounds(0, 0, 450, 280);
+						framePersonalize.setLocationRelativeTo(null);
 					}
 				});
 				
@@ -647,7 +652,7 @@ public class Personalize extends JPanel{
 					public void mouseClicked(MouseEvent e){
 						
 						//Remove room panel and disable change and remove floor and button if no more floors will be left
-						if(floorCounter == 1){
+						if(house.getFloorList().size() == 1){
 							framePersonalize.setBounds(0, 0, 450, 175);
 							framePersonalize.setLocationRelativeTo(null);
 							btnChangeFL.setEnabled(false);
@@ -655,15 +660,12 @@ public class Personalize extends JPanel{
 						}
 						
 						//Enable add floor button if there a floor can be added
-						if(floorCounter == 5){
+						if(house.getFloorList().size() == 5){
 							btnAddFloor.setEnabled(true);
 						}
 						
 						//Call remove floor method
 						removeFloor();
-						
-						//Decrement floor counter
-						--floorCounter;
 					}
 				});
 				
@@ -684,15 +686,12 @@ public class Personalize extends JPanel{
 					public void mouseClicked(MouseEvent e){
 						
 						//Disable add floor button when fifth floor is being added
-						if (roomCounter == 4){
+						if (house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().size() == 4){
 							btnAddRoom.setEnabled(false);
 						}
 						
 						//Call add floor method
-						addRoom(tfNameFL.getText());
-						
-						//Increment floor counter
-						++roomCounter;
+						addRoom();
 						
 						//Enable change floor name and remove floor button
 						btnChangeRoomName.setEnabled(true);
@@ -702,6 +701,9 @@ public class Personalize extends JPanel{
 						//Change frame size
 						framePersonalize.setBounds(0, 0, 450, 440);
 						framePersonalize.setLocationRelativeTo(null);
+						
+						//set addition selected listener
+						cbAdditions.setSelectedIndex(0);
 					}
 				});
 
@@ -710,7 +712,7 @@ public class Personalize extends JPanel{
 					public void mouseClicked(MouseEvent e){
 						
 						//Remove room panel and disable change and remove floor and button if no more floors will be left
-						if(roomCounter == 1){
+						if(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().size() == 1){
 							framePersonalize.setBounds(0, 0, 450, 280);
 							framePersonalize.setLocationRelativeTo(null);
 							btnChangeRoomName.setEnabled(false);
@@ -718,16 +720,13 @@ public class Personalize extends JPanel{
 							btnFinish.setEnabled(false);
 						}
 						
-						//Enable add floor button if there a floor can be added
-						if(roomCounter == 5){
+						//Enable add room button if there is a room that can be added
+						if(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().size() == 5){
 							btnAddRoom.setEnabled(true);
 						}
 						
 						//Call remove floor method
 						removeRoom();
-						
-						//Decrement floor counter
-						--roomCounter;
 					}
 				});
 
@@ -758,15 +757,285 @@ public class Personalize extends JPanel{
 					}
 				});
 				
-				//Set up proper rooms in room combo box when a floor is selected
-				cbFloors.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
+				//Set up listener for add button
+				btnAdd.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
 						
-						//get room information from house class
-						ArrayList<Room> roomList = house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList();
-						
+						switch(cbAdditions.getSelectedIndex()){
+						case 0: //Door
+							addDoor();
+							textField.setText("");
+							break;
+						case 1: //Window
+							addWindow();
+							textField.setText("");
+							break;
+						case 2: //Light
+							addLight();
+							textField.setText("");
+							break;
+						case 3: //Television
+							addTV();
+							textField.setText("");
+							break;
+						case 4: //Radio
+							addRadio();
+							textField.setText("");
+							break;
+						case 5: //Faucet
+							addFaucet();
+							textField.setText("");
+							break;
+						}
 					}
 				});
+				
+				//Set up proper rooms in room combo box when a floor is selected
+				cbFloors.addItemListener(new ItemListener(){
+					public void itemStateChanged(ItemEvent e){
+						
+						if (e.getStateChange() == ItemEvent.SELECTED){
+							
+							//get room information from house class
+							if (house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().size() == 0){
+								
+								//Enable change floor name and remove floor button
+								btnChangeRoomName.setEnabled(false);
+								btnRemoveRM.setEnabled(false);
+								
+								//Change frame size
+								framePersonalize.setBounds(0, 0, 450, 280);
+								framePersonalize.setLocationRelativeTo(null);
+								cbRooms.removeAllItems();
+							}
+							else {
+								
+								//Enable change floor name and remove floor button
+								btnChangeRoomName.setEnabled(true);
+								btnRemoveRM.setEnabled(true);
+								
+								//Change frame size
+								framePersonalize.setBounds(0, 0, 450, 440);
+								framePersonalize.setLocationRelativeTo(null);
+								
+								cbRooms.removeAllItems();
+								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().size(); ++i){
+									cbRooms.addItem(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(i).getName());
+								}
+							}
+						}
+					}
+				});
+
+				//Set up proper item additions combo box
+				cbAdditions.addItemListener(new ItemListener(){
+					public void itemStateChanged(ItemEvent event){
+						
+						if (event.getStateChange() == ItemEvent.SELECTED){
+							
+							//Change name of Addition label
+							lblAddition.setText(cbAdditions.getItemAt(cbAdditions.getSelectedIndex()) + ": ");
+							
+							//Add names of additions to panel
+							switch(cbAdditions.getSelectedIndex()){
+							
+							case 0: //Door
+								
+								//Remove addition names
+								lblAdditionName.setText("");
+								label.setText("");
+								label_1.setText("");
+								label_2.setText("");
+								
+								int d = house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().size();
+								switch(d){
+								case 0:
+									break;
+								case 1:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(0).getName());
+									break;
+								case 2:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(1).getName());
+									break;
+								case 3:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(2).getName());
+									break;
+								case 4:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(2).getName());
+									label_2.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(3).getName());
+									break;
+								}
+								break;
+							case 1: //Window
+								
+								//Remove addition names
+								lblAdditionName.setText("");
+								label.setText("");
+								label_1.setText("");
+								label_2.setText("");
+								
+								int w = house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().size();
+								switch(w){
+								case 0:
+									break;
+								case 1:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(0).getName());
+									break;
+								case 2:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(1).getName());
+									break;
+								case 3:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(2).getName());
+									break;
+								case 4:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(2).getName());
+									label_2.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(3).getName());
+									break;
+								}
+								break;
+							case 2: //Light
+								
+								//Remove addition names
+								lblAdditionName.setText("");
+								label.setText("");
+								label_1.setText("");
+								label_2.setText("");
+								
+								int l = house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().size();
+								switch(l){
+								case 0:
+									break;
+								case 1:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getlightName());
+									break;
+								case 2:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getlightName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getlightName());
+									break;
+								case 3:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getlightName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getlightName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(2).getlightName());
+									break;
+								case 4:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getlightName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getlightName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(2).getlightName());
+									label_2.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(3).getlightName());
+									break;
+								}
+								break;
+							case 3: //Television
+								
+								//Remove addition names
+								lblAdditionName.setText("");
+								label.setText("");
+								label_1.setText("");
+								label_2.setText("");
+								
+								int tv = house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().size();
+								switch(tv){
+								case 0:
+									break;
+								case 1:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(0).getName());
+									break;
+								case 2:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(1).getName());
+									break;
+								case 3:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(2).getName());
+									break;
+								case 4:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(2).getName());
+									label_2.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(3).getName());
+									break;
+								}
+								break;
+							case 4: //Radio
+								
+								//Remove addition names
+								lblAdditionName.setText("");
+								label.setText("");
+								label_1.setText("");
+								label_2.setText("");
+								
+								int r = house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().size();
+								switch(r){
+								case 0:
+									break;
+								case 1:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(0).getName());
+									break;
+								case 2:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(1).getName());
+									break;
+								case 3:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(2).getName());
+									break;
+								case 4:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(2).getName());
+									label_2.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(3).getName());
+									break;
+								}
+								break;
+							case 5: //Faucet
+								
+								//Remove addition names
+								lblAdditionName.setText("");
+								label.setText("");
+								label_1.setText("");
+								label_2.setText("");
+								
+								int f = house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().size();
+								switch(f){
+								case 0:
+									break;
+								case 1:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(0).getName());
+									break;
+								case 2:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(1).getName());
+									break;
+								case 3:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(2).getName());
+									break;
+								case 4:
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(2).getName());
+									label_2.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(3).getName());
+									break;
+								}
+								break;
+							}
+						}
+					}
+				});
+			
 			}
 		});
 	}
