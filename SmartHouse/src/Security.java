@@ -237,6 +237,8 @@ public class Security{
             	for (int i=0; i<room.getDoorList().size(); i++){
             		room.getDoorList().get(i).setLock(false);
             	}
+            	
+            	actionLabel.setText("Lockdown is activated ");
             }
         });
 		panel.add(lockBtn);

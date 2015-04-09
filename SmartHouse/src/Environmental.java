@@ -96,7 +96,7 @@ public class Environmental{
         	}
         }
         
-     // For each floor
+        // For each floor
         for (int i=0; i<nFloor; i++){
     		// Generate menu for each floor
         	JMenu fileMenu = new JMenu(house.getFloorList().get(i).getName());
@@ -190,7 +190,6 @@ public class Environmental{
         EnvFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         EnvFrm.setVisible(true);
     }
-    
 
     /**
      * @param iFloor index of Floor
