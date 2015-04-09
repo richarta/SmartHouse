@@ -121,7 +121,7 @@ public class Room {
 		return lightList;
 	}
 
-	public ArrayList<Radio> getListRadio(){
+	public ArrayList<Radio> getRadioList(){
 
 		//return radio list
 		return radioList;

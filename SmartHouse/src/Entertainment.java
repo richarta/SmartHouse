@@ -251,8 +251,8 @@ public class Entertainment{
 					room.getTelevisionList().get(i).setStatus(false);
 				}
 
-				for (int i=0; i<room.getListRadio().size(); i++){
-					room.getListRadio().get(i).setStatus(false);
+				for (int i=0; i<room.getRadioList().size(); i++){
+					room.getRadioList().get(i).setStatus(false);
 				}
 
 				actionLabel.setText("Power Saver is activated ");
@@ -344,9 +344,9 @@ public class Entertainment{
 		}
 		
 		// Radio		
-		for(int k=0; k<room.getListRadio().size(); k++){
-			Radio Radio = room.getListRadio().get(k);
-			JLabel radiolbl = new JLabel(room.getListRadio().get(k).getName());
+		for(int k=0; k<room.getRadioList().size(); k++){
+			Radio Radio = room.getRadioList().get(k);
+			JLabel radiolbl = new JLabel(room.getRadioList().get(k).getName());
 			JRadioButton onButton = new JRadioButton("On");
 			JRadioButton offButton = new JRadioButton("Off");
 			ButtonGroup group = new ButtonGroup();

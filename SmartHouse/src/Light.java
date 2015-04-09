@@ -22,21 +22,21 @@ public class Light {
 		lightStatus = false;
 	}
 
-	public void setlightName(String nameLg){
+	public void setName(String nameLg){
 		this.nameLg = nameLg;
 		User.saveHouseStatus();
 	}
 
-	public String getlightName(){
+	public String getName(){
 		return nameLg;
 	}
 
-	public void setLightStatus(boolean lightStatus){
+	public void setStatus(boolean lightStatus){
 		this.lightStatus = lightStatus;
 		User.saveHouseStatus();
 	}
 
-	public boolean getLightStatus(){
+	public boolean getStatus(){
 		return lightStatus;
 	}
 

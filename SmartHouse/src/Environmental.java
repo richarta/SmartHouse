@@ -267,7 +267,7 @@ public class Environmental{
         		}
         		
         		for (int i=0; i<room.getLightList().size(); i++){
-        			room.getLightList().get(i).setLightStatus(false);
+        			room.getLightList().get(i).setStatus(false);
         		}
         		
         		actionLabel.setText("Power Saver is activated ");
@@ -278,11 +278,11 @@ public class Environmental{
 		// Lights
 		for(int k=0; k<room.getLightList().size(); k++){
 			Light light = room.getLightList().get(k);
-			JLabel lightlbl = new JLabel(room.getLightList().get(k).getlightName());
+			JLabel lightlbl = new JLabel(room.getLightList().get(k).getName());
 			JRadioButton onButton = new JRadioButton("On");
 			JRadioButton offButton = new JRadioButton("Off");
 			ButtonGroup group = new ButtonGroup();
-			JLabel imageLight = new JLabel(light.getLightStatus() ? img_lightON : img_lightOFF);
+			JLabel imageLight = new JLabel(light.getStatus() ? img_lightON : img_lightOFF);
 			
 			lightlbl.setBounds(47, 59+30*k, 150, 16);		
 			panel.add(lightlbl);
@@ -295,9 +295,9 @@ public class Environmental{
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageLight.setIcon(img_lightON);
-	            		light.setLightStatus(true);
+	            		light.setStatus(true);
 
-	            		actionLabel.setText(light.getlightName() + " is ON ");
+	            		actionLabel.setText(light.getName() + " is ON ");
 	            	}
 	            }
 	        });
@@ -308,16 +308,16 @@ public class Environmental{
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageLight.setIcon(img_lightOFF);
-	            		light.setLightStatus(false);
+	            		light.setStatus(false);
 	            		
-	            		actionLabel.setText(light.getlightName() + " is OFF ");
+	            		actionLabel.setText(light.getName() + " is OFF ");
 	            	}
 	            }
 	        });
 			offBtnList.add(offButton);
 			panel.add(offButton);
 			
-			if (light.getLightStatus())
+			if (light.getStatus())
 				onButton.setSelected(true);
 			else
 				offButton.setSelected(true);
