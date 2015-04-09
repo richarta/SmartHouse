@@ -748,6 +748,7 @@ public class Personalize extends JPanel{
 						
 						//Save house
 						User.setHouse(house);
+						User.saveHouseStatus();
 						
 						//call selection menu class
 						new SelectionMenu();

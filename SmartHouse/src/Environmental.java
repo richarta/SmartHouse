@@ -41,11 +41,11 @@ public class Environmental{
    } //*/
 	
 	// Initialize
-	private House house = new House();
-	//private House house = User.getHouse();
+	//private House house = new House();
+	private House house;
 		
-	private int nFloor = 2;
-	// private int nFloor = house.getFloorList().size();
+	// private int nFloor = 2;
+	private int nFloor;
 	
     private int iFloorChoosed;
     private int iRoomChoosed;
@@ -54,14 +54,18 @@ public class Environmental{
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
     private JPanel panel = new JPanel();
-    private JPanel [][] roomPanels = new JPanel[nFloor][10];
+    private JPanel [][] roomPanels;
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     JButton helpbtn = new JButton("Help");
     
-    public Environmental() {	    	
+    public Environmental() {	
+    	house = User.getHouse();
+    	nFloor = house.getFloorList().size();
+    	roomPanels = new JPanel[nFloor][10];
     	// Sample House
+    	/**
     	house.addFloor("Floor1");
     	house.addFloor("Floor2");
     	house.getFloorList().get(0).addRoom("dining");
@@ -82,7 +86,7 @@ public class Environmental{
     	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@4");
     	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@5");
     	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@6");
-    	
+    	*/
     	//
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);
