@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 public abstract class User {
 
 	private static House house;
-	public static String username;
+	private static String username;
 	private static String pass;
 	public Login m_Login;
 

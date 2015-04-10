@@ -750,7 +750,6 @@ public class Personalize extends JPanel{
 					public void mouseClicked(MouseEvent e){
 						
 						//Save house
-						User.setHouse(house);
 						User.saveHouseStatus();
 						
 						//call selection menu class
