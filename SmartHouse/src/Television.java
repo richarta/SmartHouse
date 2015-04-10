@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 
 /**
  * @author YoungJin
  * @version 1.0
  * @created 25-Mar-2015
  */
-public class Television {
+public class Television implements Serializable{
 
 	private int channel;
 	private String nameTv;

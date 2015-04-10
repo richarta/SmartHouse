@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Floor {
+public class Floor implements Serializable{
 	
 	//declare variables
 	private String nameFl;

@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 
 /**
  * @author Abraham
  * @version 1.0
  * @created 26-Feb-2015 6:23:20 PM
  */
-public class Light {
+public class Light implements Serializable{
 
 	private String nameLg;
 	private boolean lightStatus;
