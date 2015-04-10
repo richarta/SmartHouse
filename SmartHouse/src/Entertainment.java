@@ -47,6 +47,7 @@ public class Entertainment{
 	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
+    private int nMaxRoom = 0;
     private JFrame EntFrm = new JFrame();
     private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
@@ -63,8 +64,15 @@ public class Entertainment{
     	// Call House
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
-    	roomPanels = new JPanel[nFloor][10];
     	
+    	// Find the max number of room in one floor, and make roomPanel list
+    	for (int i=0; i<nFloor; i++){
+    		if  (house.getFloorList().get(i).getRoomList().size() > nMaxRoom)
+    			nMaxRoom = house.getFloorList().get(i).getRoomList().size();
+    	}
+    	roomPanels = new JPanel[nFloor][nMaxRoom];
+    	
+    	// Initialize the frame
     	EntFrm.getContentPane().setLayout(null);
     	EntFrm.setResizable(false);
        
@@ -145,7 +153,8 @@ public class Entertainment{
 		EntFrm.getContentPane().add(menuBtn);
 		
 		// Main menu label
-		dirLabel.setBounds(180, 100, 500, 40);
+		dirLabel.setBounds(0, 100, 802, 40);
+		dirLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		dirLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		EntFrm.getContentPane().add(dirLabel);
 		
@@ -186,7 +195,7 @@ public class Entertainment{
 		JLabel lblChannel = new JLabel("Channel");
 		JLabel lblChannel_2 = new JLabel("Channel");
 		JLabel actionLabel = new JLabel("");
-		JButton psBtn = new JButton("Power Saver is OFF");
+		JButton psBtn = new JButton("Power Saver");
 		ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
 		ImageIcon img_tvON = new ImageIcon("icon/tv_on.png");
     	ImageIcon img_tvOFF = new ImageIcon("icon/tv_off.png");

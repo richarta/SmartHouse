@@ -43,6 +43,7 @@ public class Security{
 	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
+    private int nMaxRoom = 0;
     private JFrame SecFrm = new JFrame();
     private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
@@ -56,12 +57,19 @@ public class Security{
     JButton helpbtn = new JButton("Help");
     
     public Security() {	    	
+    	
     	// Call House
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
-    	roomPanels = new JPanel[nFloor][10];
     	
-    	//
+    	// Find the max number of room in one floor, and make roomPanel list
+    	for (int i=0; i<nFloor; i++){
+    		if  (house.getFloorList().get(i).getRoomList().size() > nMaxRoom)
+    			nMaxRoom = house.getFloorList().get(i).getRoomList().size();
+    	}
+    	roomPanels = new JPanel[nFloor][nMaxRoom];
+    	
+    	// Initialize the frame
     	SecFrm.getContentPane().setLayout(null);
     	SecFrm.setResizable(false);
     	SecFrm.getContentPane().setLayout(null);
@@ -144,7 +152,8 @@ public class Security{
 		SecFrm.getContentPane().add(menuBtn);
 		
 		// Main menu label
-		dirLabel.setBounds(180, 100, 500, 40);
+		dirLabel.setBounds(0, 100, 802, 40);
+		dirLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		dirLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		SecFrm.getContentPane().add(dirLabel);
 		

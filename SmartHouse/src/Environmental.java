@@ -46,6 +46,7 @@ public class Environmental{
 	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
+    private int nMaxRoom = 0;
     private JFrame EnvFrm = new JFrame();
     private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
@@ -62,9 +63,15 @@ public class Environmental{
     	// Call House
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
-    	roomPanels = new JPanel[nFloor][10];
 
-    	//
+    	// Find the max number of room in one floor, and make roomPanel list
+    	for (int i=0; i<nFloor; i++){
+    		if  (house.getFloorList().get(i).getRoomList().size() > nMaxRoom)
+    			nMaxRoom = house.getFloorList().get(i).getRoomList().size();
+    	}
+    	roomPanels = new JPanel[nFloor][nMaxRoom];
+    	
+    	// Initialize the frame
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);
     	EnvFrm.getContentPane().setLayout(null);
@@ -146,8 +153,10 @@ public class Environmental{
         });
 		EnvFrm.getContentPane().add(menuBtn);
 		
+		
 		// Main menu label
-		dirLabel.setBounds(180, 100, 500, 40);
+		dirLabel.setBounds(0, 100, 802, 40);
+		dirLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		dirLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		EnvFrm.getContentPane().add(dirLabel);
 		
@@ -163,7 +172,7 @@ public class Environmental{
 				help();
 			}
 		});
-		EnvFrm.add(helpbtn);
+		EnvFrm.getContentPane().add(helpbtn);
 		
         // Set Frame
         EnvFrm.setTitle("Environmental Controls");
