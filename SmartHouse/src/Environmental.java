@@ -185,10 +185,10 @@ public class Environmental{
         JLabel actionLabel = new JLabel("");
     	JButton psBtn = new JButton("Power Saver");
     	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
-    	ImageIcon img_lightON = new ImageIcon("light_on.png");
-    	ImageIcon img_lightOFF = new ImageIcon("light_off.png");
-    	ImageIcon img_faucetON = new ImageIcon("faucet_on.png");
-    	ImageIcon img_faucetOFF = new ImageIcon("faucet_off.png");
+    	ImageIcon img_lightON = new ImageIcon("icon/light_on.png");
+    	ImageIcon img_lightOFF = new ImageIcon("icon/light_off.png");
+    	ImageIcon img_faucetON = new ImageIcon("icon/faucet_on.png");
+    	ImageIcon img_faucetOFF = new ImageIcon("icon/faucet_off.png");
     	
 		panel.setLayout(null);
 		

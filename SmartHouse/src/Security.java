@@ -181,10 +181,10 @@ public class Security{
     	JLabel actionLabel = new JLabel("");
     	JButton lockBtn = new JButton("Lock Down");
     	ArrayList <JRadioButton> lockBtnList = new ArrayList<JRadioButton>();
-    	ImageIcon img_doorUnlocked = new ImageIcon("door_unlocked.png");
-    	ImageIcon img_doorLocked = new ImageIcon("door_locked.png");
-    	ImageIcon img_windowUnlocked = new ImageIcon("window_unlocked.png");
-    	ImageIcon img_windowLocked = new ImageIcon("window_locked.png");
+    	ImageIcon img_doorUnlocked = new ImageIcon("icon/door_unlocked.png");
+    	ImageIcon img_doorLocked = new ImageIcon("icon/door_locked.png");
+    	ImageIcon img_windowUnlocked = new ImageIcon("icon/window_unlocked.png");
+    	ImageIcon img_windowLocked = new ImageIcon("icon/window_locked.png");
     	
 		panel.setLayout(null);
 		

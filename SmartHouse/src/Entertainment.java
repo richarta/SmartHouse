@@ -185,10 +185,10 @@ public class Entertainment{
 		JLabel actionLabel = new JLabel("");
 		JButton psBtn = new JButton("Power Saver is OFF");
 		ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
-		ImageIcon img_tvON = new ImageIcon("tv_on.png");
-    	ImageIcon img_tvOFF = new ImageIcon("tv_off.png");
-    	ImageIcon img_radioON = new ImageIcon("radio_on.png");
-    	ImageIcon img_radioOFF = new ImageIcon("radio_off.png");
+		ImageIcon img_tvON = new ImageIcon("icon/tv_on.png");
+    	ImageIcon img_tvOFF = new ImageIcon("icon/tv_off.png");
+    	ImageIcon img_radioON = new ImageIcon("icon/radio_on.png");
+    	ImageIcon img_radioOFF = new ImageIcon("icon/radio_off.png");
 		
 		Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
 		
