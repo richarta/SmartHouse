@@ -74,8 +74,6 @@ public class Environmental{
     	// Initialize the frame
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);
-    	EnvFrm.getContentPane().setLayout(null);
-    	EnvFrm.setResizable(false);
        
         // Generate a panel for each room
         for (int i=0; i<nFloor; i++){

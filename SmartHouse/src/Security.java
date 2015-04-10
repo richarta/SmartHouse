@@ -225,11 +225,11 @@ public class Security{
             	}
             		
             	for (int i=0; i<room.getWindowList().size(); i++){
-            		room.getWindowList().get(i).setLock(false);
+            		room.getWindowList().get(i).setLock(true);
             	}
             		
             	for (int i=0; i<room.getDoorList().size(); i++){
-            		room.getDoorList().get(i).setLock(false);
+            		room.getDoorList().get(i).setLock(true);
             	}
             	
             	actionLabel.setText("Lockdown is activated ");
