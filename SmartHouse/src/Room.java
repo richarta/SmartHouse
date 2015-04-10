@@ -46,6 +46,7 @@ public class Room implements Serializable{
 		
 		//set name of room
 		setName(nameRm);
+		addThermostat("Thermostat");
 	}
 
 	/**

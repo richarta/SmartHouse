@@ -23,10 +23,13 @@ public class Personalize extends JPanel{
 	private static JComboBox<String> cbFloors = new JComboBox<String>();
 	private static JComboBox<String> cbRooms = new JComboBox<String>();
 	private static JComboBox<String> cbAdditions = new JComboBox<String>();
-	private static House house = new House();
+	private static House house;
 	
 	public Personalize() {
-	
+		// House setting
+		User.setHouse(new House());
+		house = User.getHouse();
+		
 		//Make username and password frame and pane
 		JFrame frameUNPW = new JFrame("Username and Password");
 		JPanel panelUNPW = new JPanel();
@@ -108,7 +111,7 @@ public class Personalize extends JPanel{
 				
 				//Move to new GUI
 				addHouse();
-
+				
 				//Save username and password in database
 				
 			}
