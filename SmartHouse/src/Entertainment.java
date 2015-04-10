@@ -30,6 +30,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.border.EtchedBorder;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
 
@@ -47,6 +48,7 @@ public class Entertainment{
     private int iFloorChoosed;
     private int iRoomChoosed;
     private JFrame EntFrm = new JFrame();
+    private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
@@ -136,6 +138,7 @@ public class Entertainment{
 		menuBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	EntFrm.setVisible(false);
+            	helpf.setVisible(false);
             	new SelectionMenu();
             }
         });
@@ -155,7 +158,7 @@ public class Entertainment{
 		helpbtn.setBounds(330, 410, 150, 23);
 		helpbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e4) {
-				SelectionMenu.help();
+				help();
 			}
 		});
 		EntFrm.add(helpbtn);
@@ -404,4 +407,45 @@ public class Entertainment{
 		actionLabel.setText("");
 		return panel;
 	}
+
+    /**
+     * Pop-up help.
+     */
+    private void help(){
+		helpf.setTitle("HELP - Entertainmnet Control");
+		helpf.setSize(640, 220);
+		helpf.getContentPane().setLayout(null);
+		
+		JLabel lbl1 = new JLabel("<Hello and welcome to your SmartHouse Entertainment Control Panel!>");
+		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbl1.setBounds(0,13,622,15);
+		helpf.getContentPane().add(lbl1, BorderLayout.NORTH);
+		
+		JLabel lbl2 = new JLabel("You can change settings that include televisions, radios, and lock down mode.");
+		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl2.setBounds(0, 41, 622, 15);
+		helpf.getContentPane().add(lbl2);
+		
+		JLabel lbl3 = new JLabel("[Television] You can turn on/off or change channel and volume of televisions.");
+		lbl3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl3.setBounds(0, 90, 622, 15);
+		helpf.getContentPane().add(lbl3);
+		
+		JLabel lbl4 = new JLabel("[Radio] You can turn on/off or change channel and volume of radios.");
+		lbl4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl4.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl4.setBounds(0, 110, 622, 15);
+		helpf.getContentPane().add(lbl4);
+		
+		JLabel lbl5 = new JLabel("[Power saver] Turn off every televsion and radio.");
+		lbl5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl5.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl5.setBounds(0, 130, 622, 15);
+		helpf.getContentPane().add(lbl5);
+		
+		helpf.setVisible(true);
+    }
 }

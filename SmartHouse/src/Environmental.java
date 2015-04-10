@@ -29,6 +29,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.border.EtchedBorder;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
  
@@ -46,6 +47,7 @@ public class Environmental{
     private int iFloorChoosed;
     private int iRoomChoosed;
     private JFrame EnvFrm = new JFrame();
+    private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
@@ -138,6 +140,7 @@ public class Environmental{
 		menuBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	EnvFrm.setVisible(false);
+            	helpf.setVisible(false);
             	new SelectionMenu();
             }
         });
@@ -157,7 +160,7 @@ public class Environmental{
 		helpbtn.setBounds(330, 410, 150, 23);
 		helpbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e4) {
-				SelectionMenu.help();
+				help();
 			}
 		});
 		EnvFrm.add(helpbtn);
@@ -357,4 +360,51 @@ public class Environmental{
 		actionLabel.setText("");
 		return panel;
 	}
+    
+    /**
+     * Pop-up help
+     */
+    private void help(){
+		helpf.setTitle("HELP - Environmental Control");
+		helpf.setSize(640, 240);
+		helpf.getContentPane().setLayout(null);
+		
+		JLabel lbl1 = new JLabel("<Hello and welcome to your SmartHouse Environmentnal Control Panel!>");
+		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbl1.setBounds(0,13,622,15);
+		helpf.getContentPane().add(lbl1, BorderLayout.NORTH);
+		
+		JLabel lbl2 = new JLabel("You can change settings that include lights, faucets, temperature and power saver mode.");
+		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl2.setBounds(0, 41, 622, 15);
+		helpf.getContentPane().add(lbl2);
+		
+		JLabel lbl3 = new JLabel("[Light] You can turn on/off the lights.");
+		lbl3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl3.setBounds(0, 90, 622, 15);
+		helpf.getContentPane().add(lbl3);
+		
+		JLabel lbl4 = new JLabel("[Faucet] You can turn on/off the faucets.");
+		lbl4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl4.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl4.setBounds(0, 110, 622, 15);
+		helpf.getContentPane().add(lbl4);
+		
+		JLabel lbl5 = new JLabel("[Thermostat] You can adjust temperature.");
+		lbl5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl5.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl5.setBounds(0, 130, 622, 15);
+		helpf.getContentPane().add(lbl5);
+		
+		JLabel lbl6 = new JLabel("[Power saver] Turn off every light and faucet. Adjust room temperature as 70F");
+		lbl6.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl6.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl6.setBounds(0, 150, 622, 15);
+		helpf.getContentPane().add(lbl6);
+		
+		helpf.setVisible(true);
+    }
 }
