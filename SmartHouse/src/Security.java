@@ -38,12 +38,8 @@ public class Security{
     } //*/
 	
 	// Initialize
-	private House house = new House();
-	//private House house = User.getHouse();
-		
-	private int nFloor = 2;
-	// private int nFloor = house.getFloorList().size();
-	
+	private House house;		
+	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
     private JFrame SecFrm = new JFrame();
@@ -51,31 +47,17 @@ public class Security{
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
     private JPanel panel = new JPanel();
-    private JPanel [][] roomPanels = new JPanel[nFloor][10];
+    private JPanel [][] roomPanels;
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     JButton helpbtn = new JButton("Help");
     
     public Security() {	    	
-    	// Sample House
-    	house.addFloor("Floor1");
-    	house.addFloor("Floor2");
-    	house.getFloorList().get(0).addRoom("dining");
-    	house.getFloorList().get(0).addRoom("Living");
-    	house.getFloorList().get(1).addRoom("bed");
-    	house.getFloorList().get(0).getRoomList().get(0).addDoor("Dor");
-    	house.getFloorList().get(0).getRoomList().get(0).addDoor("Dor2");
-    	house.getFloorList().get(0).getRoomList().get(1).addDoor("Door");
-    	house.getFloorList().get(0).getRoomList().get(1).addDoor("Door2");
-    	house.getFloorList().get(1).getRoomList().get(0).addDoor("Dooor");
-    	house.getFloorList().get(1).getRoomList().get(0).addDoor("Dooor2");
-    	house.getFloorList().get(0).getRoomList().get(0).addWindow("Window1");
-    	house.getFloorList().get(0).getRoomList().get(0).addWindow("Window2");
-    	house.getFloorList().get(0).getRoomList().get(1).addWindow("Window3");
-    	house.getFloorList().get(1).getRoomList().get(0).addWindow("Window4");
-    	house.getFloorList().get(1).getRoomList().get(0).addWindow("Window5");
-    	house.getFloorList().get(1).getRoomList().get(0).addWindow("Window6");
+    	// Call House
+    	house = User.getHouse();
+    	nFloor = house.getFloorList().size();
+    	roomPanels = new JPanel[nFloor][10];
     	
     	//
     	SecFrm.getContentPane().setLayout(null);

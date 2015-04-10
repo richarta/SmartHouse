@@ -41,12 +41,8 @@ public class Environmental{
    } //*/
 	
 	// Initialize
-	//private House house = new House();
 	private House house;
-		
-	// private int nFloor = 2;
 	private int nFloor;
-	
     private int iFloorChoosed;
     private int iRoomChoosed;
     private JFrame EnvFrm = new JFrame();
@@ -60,33 +56,12 @@ public class Environmental{
     private final JPanel panel_2 = new JPanel();
     JButton helpbtn = new JButton("Help");
     
-    public Environmental() {	
+    public Environmental() {
+    	// Call House
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
     	roomPanels = new JPanel[nFloor][10];
-    	// Sample House
-    	/**
-    	house.addFloor("Floor1");
-    	house.addFloor("Floor2");
-    	house.getFloorList().get(0).addRoom("dining");
-    	house.getFloorList().get(0).addRoom("Living");
-    	house.getFloorList().get(1).addRoom("bed");
-    	house.getFloorList().get(0).getRoomList().get(0).addThermostat("Thermo");
-    	house.getFloorList().get(0).getRoomList().get(1).addThermostat("Thermo");
-    	house.getFloorList().get(1).getRoomList().get(0).addThermostat("Thermo");
-    	house.getFloorList().get(0).getRoomList().get(0).addLight("Light1");
-    	house.getFloorList().get(0).getRoomList().get(0).addLight("Light2");
-    	house.getFloorList().get(0).getRoomList().get(1).addLight("Light3");
-    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light4");
-    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light5");
-    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light6");
-    	house.getFloorList().get(0).getRoomList().get(0).addFaucet("Faucet@1");
-    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@2");
-    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@3");
-    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@4");
-    	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@5");
-    	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@6");
-    	*/
+
     	//
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);

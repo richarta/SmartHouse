@@ -42,13 +42,8 @@ public class Entertainment{
     } //*/
 	
 	// Initialize
-	
-	private House house = new House();
-	//private House house = User.getHouse();
-	
-	private int nFloor = 2;
-	// private int nFloor = house.getFloorList().size();
-	
+	private House house;
+	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
     private JFrame EntFrm = new JFrame();
@@ -56,31 +51,17 @@ public class Entertainment{
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
     private JPanel panel = new JPanel();
-    private JPanel [][] roomPanels = new JPanel[nFloor][10];
+    private JPanel [][] roomPanels;
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     JButton helpbtn = new JButton("Help");
     
     public Entertainment() {
-    	// Sample House
-    	house.addFloor("Floor1");
-    	house.addFloor("Floor2");
-    	house.getFloorList().get(0).addRoom("dining");
-    	house.getFloorList().get(0).addRoom("Living");
-    	house.getFloorList().get(1).addRoom("bed");
-    	house.getFloorList().get(0).getRoomList().get(0).addRadio("Radio1");
-    	house.getFloorList().get(0).getRoomList().get(0).addRadio("Radio2");
-    	house.getFloorList().get(0).getRoomList().get(1).addRadio("Radio3");
-    	house.getFloorList().get(1).getRoomList().get(0).addRadio("Radio4");
-    	house.getFloorList().get(1).getRoomList().get(0).addRadio("Radio5");
-    	house.getFloorList().get(1).getRoomList().get(0).addRadio("Radio6");
-    	house.getFloorList().get(0).getRoomList().get(0).addTelevision("TV@1");
-    	house.getFloorList().get(0).getRoomList().get(1).addTelevision("TV@2");
-    	house.getFloorList().get(0).getRoomList().get(1).addTelevision("TV@3");
-    	house.getFloorList().get(0).getRoomList().get(1).addTelevision("TV@4");
-    	house.getFloorList().get(1).getRoomList().get(0).addTelevision("TV@5");
-    	house.getFloorList().get(1).getRoomList().get(0).addTelevision("TV@6");
+    	// Call House
+    	house = User.getHouse();
+    	nFloor = house.getFloorList().size();
+    	roomPanels = new JPanel[nFloor][10];
     	
     	EntFrm.getContentPane().setLayout(null);
     	EntFrm.setResizable(false);
