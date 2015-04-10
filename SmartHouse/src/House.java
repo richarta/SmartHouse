@@ -6,9 +6,10 @@
  * Date: 24 March 2015
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class House{
+public class House implements Serializable{
 	
 	//Declare variables
 	private ArrayList<Floor> floorList = new ArrayList<>();

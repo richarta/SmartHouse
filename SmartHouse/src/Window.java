@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 
 /**
  * @author Abraham
  * @version 1.0
  * @created 26-Feb-2015 6:23:39 PM
  */
-public class Window {
+public class Window implements Serializable{
 
 	private boolean lockWid;
 	private String nameWid;

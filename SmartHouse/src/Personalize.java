@@ -22,10 +22,13 @@ public class Personalize extends JPanel{
 	private static JComboBox<String> cbFloors = new JComboBox<String>();
 	private static JComboBox<String> cbRooms = new JComboBox<String>();
 	private static JComboBox<String> cbAdditions = new JComboBox<String>();
-	private static House house = new House();
+	private static House house;
 	
 	public Personalize() {
-	
+		// House setting
+		User.setHouse(new House());
+		house = User.getHouse();
+		
 		//Make username and password frame and pane
 		JFrame frameUNPW = new JFrame("Username and Password");
 		JPanel panelUNPW = new JPanel();
@@ -107,7 +110,7 @@ public class Personalize extends JPanel{
 				
 				//Move to new GUI
 				addHouse();
-
+				
 				//Save username and password in database
 				
 			}
@@ -746,7 +749,7 @@ public class Personalize extends JPanel{
 					public void mouseClicked(MouseEvent e){
 						
 						//Save house
-						User.setHouse(house);
+						User.saveHouseStatus();
 						
 						//call selection menu class
 						new SelectionMenu();
@@ -915,22 +918,22 @@ public class Personalize extends JPanel{
 								case 0:
 									break;
 								case 1:
-									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getlightName());
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getName());
 									break;
 								case 2:
-									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getlightName());
-									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getlightName());
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getName());
 									break;
 								case 3:
-									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getlightName());
-									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getlightName());
-									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(2).getlightName());
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(2).getName());
 									break;
 								case 4:
-									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getlightName());
-									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getlightName());
-									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(2).getlightName());
-									label_2.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(3).getlightName());
+									lblAdditionName.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(0).getName());
+									label.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(1).getName());
+									label_1.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(2).getName());
+									label_2.setText(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(3).getName());
 									break;
 								}
 								break;

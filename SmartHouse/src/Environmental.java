@@ -41,12 +41,8 @@ public class Environmental{
    } //*/
 	
 	// Initialize
-	private House house = new House();
-	//private House house = User.getHouse();
-		
-	private int nFloor = 2;
-	// private int nFloor = house.getFloorList().size();
-	
+	private House house;
+	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
     private JFrame EnvFrm = new JFrame();
@@ -54,35 +50,18 @@ public class Environmental{
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
     private JPanel panel = new JPanel();
-    private JPanel [][] roomPanels = new JPanel[nFloor][10];
+    private JPanel [][] roomPanels;
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     JButton helpbtn = new JButton("Help");
     
-    public Environmental() {	    	
-    	// Sample House
-    	house.addFloor("Floor1");
-    	house.addFloor("Floor2");
-    	house.getFloorList().get(0).addRoom("dining");
-    	house.getFloorList().get(0).addRoom("Living");
-    	house.getFloorList().get(1).addRoom("bed");
-    	house.getFloorList().get(0).getRoomList().get(0).addThermostat("Thermo");
-    	house.getFloorList().get(0).getRoomList().get(1).addThermostat("Thermo");
-    	house.getFloorList().get(1).getRoomList().get(0).addThermostat("Thermo");
-    	house.getFloorList().get(0).getRoomList().get(0).addLight("Light1");
-    	house.getFloorList().get(0).getRoomList().get(0).addLight("Light2");
-    	house.getFloorList().get(0).getRoomList().get(1).addLight("Light3");
-    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light4");
-    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light5");
-    	house.getFloorList().get(1).getRoomList().get(0).addLight("Light6");
-    	house.getFloorList().get(0).getRoomList().get(0).addFaucet("Faucet@1");
-    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@2");
-    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@3");
-    	house.getFloorList().get(0).getRoomList().get(1).addFaucet("Faucet@4");
-    	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@5");
-    	house.getFloorList().get(1).getRoomList().get(0).addFaucet("Faucet@6");
-    	
+    public Environmental() {
+    	// Call House
+    	house = User.getHouse();
+    	nFloor = house.getFloorList().size();
+    	roomPanels = new JPanel[nFloor][10];
+
     	//
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);
@@ -96,7 +75,7 @@ public class Environmental{
         	}
         }
         
-     // For each floor
+        // For each floor
         for (int i=0; i<nFloor; i++){
     		// Generate menu for each floor
         	JMenu fileMenu = new JMenu(house.getFloorList().get(i).getName());
@@ -190,7 +169,6 @@ public class Environmental{
         EnvFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         EnvFrm.setVisible(true);
     }
-    
 
     /**
      * @param iFloor index of Floor
@@ -207,10 +185,10 @@ public class Environmental{
         JLabel actionLabel = new JLabel("");
     	JButton psBtn = new JButton("Power Saver");
     	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
-    	ImageIcon img_lightON = new ImageIcon("light_on.png");
-    	ImageIcon img_lightOFF = new ImageIcon("light_off.png");
-    	ImageIcon img_faucetON = new ImageIcon("faucet_on.png");
-    	ImageIcon img_faucetOFF = new ImageIcon("faucet_off.png");
+    	ImageIcon img_lightON = new ImageIcon("icon/light_on.png");
+    	ImageIcon img_lightOFF = new ImageIcon("icon/light_off.png");
+    	ImageIcon img_faucetON = new ImageIcon("icon/faucet_on.png");
+    	ImageIcon img_faucetOFF = new ImageIcon("icon/faucet_off.png");
     	
 		panel.setLayout(null);
 		
@@ -267,7 +245,7 @@ public class Environmental{
         		}
         		
         		for (int i=0; i<room.getLightList().size(); i++){
-        			room.getLightList().get(i).setLightStatus(false);
+        			room.getLightList().get(i).setStatus(false);
         		}
         		
         		actionLabel.setText("Power Saver is activated ");
@@ -278,11 +256,11 @@ public class Environmental{
 		// Lights
 		for(int k=0; k<room.getLightList().size(); k++){
 			Light light = room.getLightList().get(k);
-			JLabel lightlbl = new JLabel(room.getLightList().get(k).getlightName());
+			JLabel lightlbl = new JLabel(room.getLightList().get(k).getName());
 			JRadioButton onButton = new JRadioButton("On");
 			JRadioButton offButton = new JRadioButton("Off");
 			ButtonGroup group = new ButtonGroup();
-			JLabel imageLight = new JLabel(light.getLightStatus() ? img_lightON : img_lightOFF);
+			JLabel imageLight = new JLabel(light.getStatus() ? img_lightON : img_lightOFF);
 			
 			lightlbl.setBounds(47, 59+30*k, 150, 16);		
 			panel.add(lightlbl);
@@ -295,9 +273,9 @@ public class Environmental{
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageLight.setIcon(img_lightON);
-	            		light.setLightStatus(true);
+	            		light.setStatus(true);
 
-	            		actionLabel.setText(light.getlightName() + " is ON ");
+	            		actionLabel.setText(light.getName() + " is ON ");
 	            	}
 	            }
 	        });
@@ -308,16 +286,16 @@ public class Environmental{
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		imageLight.setIcon(img_lightOFF);
-	            		light.setLightStatus(false);
+	            		light.setStatus(false);
 	            		
-	            		actionLabel.setText(light.getlightName() + " is OFF ");
+	            		actionLabel.setText(light.getName() + " is OFF ");
 	            	}
 	            }
 	        });
 			offBtnList.add(offButton);
 			panel.add(offButton);
 			
-			if (light.getLightStatus())
+			if (light.getStatus())
 				onButton.setSelected(true);
 			else
 				offButton.setSelected(true);

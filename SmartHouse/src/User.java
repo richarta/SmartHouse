@@ -25,13 +25,7 @@ public abstract class User {
 	public void finalize() throws Throwable {
 
 	}
-	/**
-	 * 
-	 * @param nameRm
-	 * @param nameDv
-	 * @param status
-	 * @param typeDv
-	 */
+
 	
 	public static void saveHouseStatus(){
 		

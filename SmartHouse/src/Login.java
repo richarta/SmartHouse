@@ -99,6 +99,7 @@ public class Login extends JFrame
 					//open main menu
 					SelectionMenu menu = new SelectionMenu();
 					User.openHouseStatus(user);
+					User.setUsername(user);
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "You have entered an invalid username or password.", "alert", JOptionPane.ERROR_MESSAGE);				}

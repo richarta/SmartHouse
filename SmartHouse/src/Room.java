@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @version 1.0
  * @created 26-Feb-2015 6:23:26 PM
  */
-public class Room {
+public class Room implements Serializable{
 
 	private ArrayList<Door> doorList = new ArrayList<>();
 	private ArrayList<Faucet> faucetList = new ArrayList<>();
@@ -45,6 +46,7 @@ public class Room {
 		
 		//set name of room
 		setName(nameRm);
+		addThermostat("Thermostat");
 	}
 
 	/**
@@ -121,7 +123,7 @@ public class Room {
 		return lightList;
 	}
 
-	public ArrayList<Radio> getListRadio(){
+	public ArrayList<Radio> getRadioList(){
 
 		//return radio list
 		return radioList;
