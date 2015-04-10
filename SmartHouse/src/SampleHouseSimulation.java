@@ -193,7 +193,7 @@ public class SampleHouseSimulation {
 		else
 			livWindow1.setIcon(iconWUL);
 		
-		if (house.getFloorList().get(0).getRoomList().get(2).getWindowList().get(0).getLock())
+		if (house.getFloorList().get(0).getRoomList().get(2).getWindowList().get(1).getLock())
 			livWindow2.setIcon(iconWL);
 		else
 			livWindow2.setIcon(iconWUL);
