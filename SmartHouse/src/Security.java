@@ -1,8 +1,8 @@
-/*
+/**
  * Course: SE 300-01
  * Term: Spring 2015
  * Assignment: SmartHouse Project
- * Author: Young J. Park, Andrew
+ * @author: Young J. Park, Andrew
  * Date: 09 April 2015
  */
 import java.awt.Font;
@@ -59,6 +59,7 @@ public class Security{
     public Security() {	    	
     	
     	// Call House
+    	User.openHouseStatus();
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
     	

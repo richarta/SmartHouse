@@ -1,8 +1,8 @@
-/*
- * Course: SE 300-01
+/**
+ * Course: SE 300-01 
  * Term: Spring 2015
  * Assignment: SmartHouse Project
- * Author: Young J. Park
+ * @author: Young J. Park
  * Date: 09 April 2015
  */
 
@@ -60,7 +60,9 @@ public class Environmental{
     JButton helpbtn = new JButton("Help");
     
     public Environmental() {
+    	
     	// Call House
+    	User.openHouseStatus();
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
 
@@ -193,6 +195,7 @@ public class Environmental{
     	JLabel lightLabel = new JLabel("Lights");
     	JLabel faucetLabel = new JLabel("Faucets");
         JLabel actionLabel = new JLabel("");
+        JButton setBtn = new JButton("Set Temperature");
     	JButton psBtn = new JButton("Power Saver");
     	ArrayList <JRadioButton> offBtnList = new ArrayList<JRadioButton>();
     	ImageIcon img_lightON = new ImageIcon("icon/light_on.png");
@@ -212,7 +215,7 @@ public class Environmental{
 		panel.add(faucetLabel);
 		
 		actionLabel.setFont(new Font("Tahoma", Font.ITALIC, 13));
-		actionLabel.setBounds(580, 410, 200, 23);
+		actionLabel.setBounds(480, 410, 300, 23);
 		actionLabel.setHorizontalAlignment(SwingConstants.TRAILING);
 		panel.add(actionLabel);
 		
@@ -229,12 +232,21 @@ public class Environmental{
 		tempSlider.setBounds(580,50,200,50);
 		tempSlider.addChangeListener(new ChangeListener(){
 			public void stateChanged (ChangeEvent e){
-				room.getThermostat().setTemp(tempSlider.getValue());
 	            tempLabel.setText("Temerature (" + tempSlider.getValue() + "F)");
-	            actionLabel.setText("Temperature was changed ");
 			}
 		});
 		panel.add(tempSlider);
+		
+		setBtn.setBackground(new Color(50, 50, 113));
+		setBtn.setForeground(Color.WHITE);
+		setBtn.setBounds(615,110,130,20);
+		setBtn.addActionListener (new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	actionLabel.setText("Desired temperature is changed ");
+            	room.getThermostat().setTemp(tempSlider.getValue());
+            }
+        });
+		panel.add(setBtn);
 		
 		// Power saver
 		psBtn.setBackground(new Color(60, 179, 113));

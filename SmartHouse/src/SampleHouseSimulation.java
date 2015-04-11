@@ -1,14 +1,29 @@
+/**
+ * Course: SE 300-01 
+ * Term: Spring 2015
+ * Assignment: SmartHouse Project
+ * @author: Young J. Park
+ * Date: 10 April 2015
+ */
+
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.WindowAdapter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-
+import javax.swing.SwingConstants;
 
 public class SampleHouseSimulation {
 	private static JFrame sample = new JFrame();
+	private static JFrame securityAlarm = new JFrame();
 	private static JLabel r1Light1 = new JLabel("");
 	private static JLabel r1Door1 = new JLabel("");
 	private static JLabel r1Window1 = new JLabel("");
@@ -22,7 +37,14 @@ public class SampleHouseSimulation {
 	private static JLabel livWindow1 = new JLabel("");
 	private static JLabel livWindow2 = new JLabel("");
 	private static JLabel lblNewLabel = new JLabel("");
+	private static JLabel temp = new JLabel("Temperature");
+	private static JLabel r1Temp = new JLabel("");
+	private static JLabel kitTemp = new JLabel("");
+	private static JLabel livTemp = new JLabel("");
 	private static House house;
+	private static int r1CT = -100;
+	private static int kitCT = -100;
+	private static int livCT = -100;
 	private static ImageIcon iconLON = new ImageIcon("samplehouse/light_on.png");
 	private static ImageIcon iconLOFF = new ImageIcon("samplehouse/light_off.png");
 	private static ImageIcon iconFON = new ImageIcon("samplehouse/faucet_on.png");
@@ -35,28 +57,40 @@ public class SampleHouseSimulation {
 	private static ImageIcon iconWL = new ImageIcon("samplehouse/window_lock.png");
 	private static ImageIcon iconDUL = new ImageIcon("samplehouse/door_unlock.png");
 	private static ImageIcon iconDL = new ImageIcon("samplehouse/door_lock.png");
+	private static ImageIcon iconBG = new ImageIcon("samplehouse/floor1.jpg");
 	
 	public static void main (String [] args){
 		buildHouse();
 		
-		int i =0;
 		while(true){
-			i++;
 			changeStatus();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+			double r = Math.random();
+			System.out.println(r);
+			if (r < 0.1){
+				popUpSecurityAlarm();
+				changeStatus();
+				break;
 			}
 		}
 	}
 	
+	/**
+	 * Builds GUI for sample house simulation
+	 */
 	private static void buildHouse(){
 		sample.setVisible(true);
 		sample.setResizable(false);
+		sample.setSize(880, 519); //646,519
+		sample.setTitle("Sample House Simulation");
 		sample.getContentPane().setLayout(null);
-
+		sample.addWindowListener(new WindowAdapter() {
+			public void windowClosing(java.awt.event.WindowEvent arg0) {
+				System.out.println("Simulation Closed");
+				System.exit(0);
+			}
+        });
+		
 		r1Light1.setIcon(iconLOFF);
 		r1Light1.setBounds(197, 273, 50, 50);
 		sample.getContentPane().add(r1Light1);
@@ -105,22 +139,53 @@ public class SampleHouseSimulation {
 		livWindow2.setBounds(578, 273, 50, 50);
 		sample.getContentPane().add(livWindow2);		
 		
-		lblNewLabel.setIcon(new ImageIcon("samplehouse/floor1.jpg"));
+		temp.setBounds(695,15,120,20);
+		temp.setHorizontalAlignment(SwingConstants.CENTER);
+		temp.setFont(new Font("Tahoma", Font.BOLD, 15));
+		sample.getContentPane().add(temp);
+		
+		r1Temp.setBounds(645,55,220,20);
+		r1Temp.setHorizontalAlignment(SwingConstants.CENTER);
+		r1Temp.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sample.getContentPane().add(r1Temp);
+		
+		kitTemp.setBounds(645,75,220,20);
+		kitTemp.setText("Kitchen Temperature =   F");
+		kitTemp.setHorizontalAlignment(SwingConstants.CENTER);
+		kitTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sample.getContentPane().add(kitTemp);
+		
+		livTemp.setBounds(645,95,220,20);
+		livTemp.setText("Living Room Temperature =   F");
+		livTemp.setHorizontalAlignment(SwingConstants.CENTER);
+		livTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sample.getContentPane().add(livTemp);
+		
+		lblNewLabel.setIcon(iconBG);
 		lblNewLabel.setBounds(0, 0, 640, 480);
 		sample.getContentPane().add(lblNewLabel);
-		sample.setSize(658, 531);
-		sample.setTitle("Sample House Simulation");
 	}
 	
+	/**
+	 * Updates the status of sample house
+	 */
 	private static void changeStatus(){	
+		// Wait for changing
 		try {
-
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// Open sample house
+		try {
 			//open file
 			FileInputStream saveFile = new FileInputStream("samplehouse.sav");
-
+			
 			//open input stream
 			ObjectInputStream save = new ObjectInputStream(saveFile);
-
+			
 			//read object
 			house = (House) save.readObject();
 
@@ -138,6 +203,47 @@ public class SampleHouseSimulation {
 			e.printStackTrace();
 		}
 		
+		// Set temperature
+		if (r1CT == -100)
+			r1CT = house.getFloorList().get(0).getRoomList().get(0).getThermostat().getTemp();
+		else if(r1CT < house.getFloorList().get(0).getRoomList().get(0).getThermostat().getTemp())
+			r1CT++;
+		else if(r1CT > house.getFloorList().get(0).getRoomList().get(0).getThermostat().getTemp())
+			r1CT--;
+		
+		if (r1CT == house.getFloorList().get(0).getRoomList().get(0).getThermostat().getTemp())
+			r1Temp.setFont(new Font("Tahoma", Font.BOLD, 13));
+		else
+			r1Temp.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		r1Temp.setText("Room1 Temperature = "+ r1CT +"F");
+		
+		if (kitCT == -100)
+			kitCT = house.getFloorList().get(0).getRoomList().get(1).getThermostat().getTemp();
+		else if(kitCT < house.getFloorList().get(0).getRoomList().get(1).getThermostat().getTemp())
+			kitCT++;
+		else if(kitCT > house.getFloorList().get(0).getRoomList().get(1).getThermostat().getTemp())
+			kitCT--;
+		
+		if (kitCT == house.getFloorList().get(0).getRoomList().get(1).getThermostat().getTemp())
+			kitTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
+		else
+			kitTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		kitTemp.setText("Kitchen Temperature = "+ kitCT +"F");
+		
+		if (livCT == -100)
+			livCT = house.getFloorList().get(0).getRoomList().get(2).getThermostat().getTemp();
+		else if(livCT < house.getFloorList().get(0).getRoomList().get(2).getThermostat().getTemp())
+			livCT++;
+		else if(livCT > house.getFloorList().get(0).getRoomList().get(2).getThermostat().getTemp())
+			livCT--;
+		
+		if (livCT == house.getFloorList().get(0).getRoomList().get(2).getThermostat().getTemp())
+			livTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
+		else
+			livTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		livTemp.setText("Living Room Temperature = "+ livCT +"F");
+		
+		// Set icons
 		if (house.getFloorList().get(0).getRoomList().get(0).getLightList().get(0).getStatus())
 			r1Light1.setIcon(iconLON);
 		else
@@ -197,5 +303,47 @@ public class SampleHouseSimulation {
 			livWindow2.setIcon(iconWL);
 		else
 			livWindow2.setIcon(iconWUL);
+	}
+	
+	private static void popUpSecurityAlarm(){
+		securityAlarm.setVisible(true);
+		securityAlarm.setTitle("Security Alarm");
+		securityAlarm.setSize(450, 100);
+		securityAlarm.getContentPane().setLayout(null);
+		
+		JLabel lbl1 = new JLabel("Invader Found! Lock all the doors and windows");
+		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbl1.setBounds(0,15,422,15);
+		securityAlarm.getContentPane().add(lbl1, BorderLayout.NORTH);
+		
+		for (int i =0; i<house.getFloorList().size(); i++){
+			for (int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
+				for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++)
+					house.getFloorList().get(i).getRoomList().get(j).getDoorList().get(k1).setLock(true);
+				for (int k2=0; k2<house.getFloorList().get(i).getRoomList().get(j).getWindowList().size(); k2++)
+					house.getFloorList().get(i).getRoomList().get(j).getWindowList().get(k2).setLock(true);
+			}
+		}
+		
+		try {
+			FileOutputStream saveFile = new FileOutputStream("samplehouse.sav");
+			
+			//create object to save objects to file
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			
+			//save floor information
+			save.writeObject(house);
+			
+			//close file
+			save.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

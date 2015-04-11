@@ -1,8 +1,8 @@
-/*
+/**
  * Course: SE 300-01
  * Term: Spring 2015
  * Assignment: SmartHouse Project
- * Author: Young J. Park
+ * @author: Young J. Park
  * Date: 09 April 2015
  */
 
@@ -61,7 +61,9 @@ public class Entertainment{
     JButton helpbtn = new JButton("Help");
     
     public Entertainment() {
+    	
     	// Call House
+    	User.openHouseStatus();
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
     	

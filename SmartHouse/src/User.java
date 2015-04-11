@@ -78,6 +78,34 @@ public abstract class User {
 			e.printStackTrace();
 		}
 	}
+
+	public static void openHouseStatus(){
+
+		try {
+
+			//open file
+			FileInputStream saveFile = new FileInputStream(username + ".sav");
+
+			//open input stream
+			ObjectInputStream save = new ObjectInputStream(saveFile);
+
+			//read object
+			house = (House) save.readObject();
+
+			//close file
+			save.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public static House getHouse(){
 		
