@@ -1,8 +1,8 @@
-/*
+/**
  * Course: SE 300-01
  * Term: Spring 2015
  * Assignment: SmartHouse Project
- * Author: Young J. Park, Andrew
+ * @author: Young J. Park, Andrew
  * Date: 09 April 2015
  */
 import java.awt.Font;
@@ -25,6 +25,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
  
@@ -42,7 +43,9 @@ public class Security{
 	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
+    private int nMaxRoom = 0;
     private JFrame SecFrm = new JFrame();
+    private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
@@ -54,12 +57,20 @@ public class Security{
     JButton helpbtn = new JButton("Help");
     
     public Security() {	    	
+    	
     	// Call House
+    	User.openHouseStatus();
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
-    	roomPanels = new JPanel[nFloor][10];
     	
-    	//
+    	// Find the max number of room in one floor, and make roomPanel list
+    	for (int i=0; i<nFloor; i++){
+    		if  (house.getFloorList().get(i).getRoomList().size() > nMaxRoom)
+    			nMaxRoom = house.getFloorList().get(i).getRoomList().size();
+    	}
+    	roomPanels = new JPanel[nFloor][nMaxRoom];
+    	
+    	// Initialize the frame
     	SecFrm.getContentPane().setLayout(null);
     	SecFrm.setResizable(false);
     	SecFrm.getContentPane().setLayout(null);
@@ -135,13 +146,15 @@ public class Security{
 		menuBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	SecFrm.setVisible(false);
+            	helpf.setVisible(false);
             	new SelectionMenu();
             }
         });
 		SecFrm.getContentPane().add(menuBtn);
 		
 		// Main menu label
-		dirLabel.setBounds(180, 100, 500, 40);
+		dirLabel.setBounds(0, 100, 802, 40);
+		dirLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		dirLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		SecFrm.getContentPane().add(dirLabel);
 		
@@ -154,7 +167,7 @@ public class Security{
 		helpbtn.setBounds(330, 410, 150, 23);
 		helpbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e4) {
-				SelectionMenu.help();
+				help();
 			}
 		});
 		SecFrm.add(helpbtn);
@@ -213,11 +226,11 @@ public class Security{
             	}
             		
             	for (int i=0; i<room.getWindowList().size(); i++){
-            		room.getWindowList().get(i).setLock(false);
+            		room.getWindowList().get(i).setLock(true);
             	}
             		
             	for (int i=0; i<room.getDoorList().size(); i++){
-            		room.getDoorList().get(i).setLock(false);
+            		room.getDoorList().get(i).setLock(true);
             	}
             	
             	actionLabel.setText("Lockdown is activated ");
@@ -326,4 +339,45 @@ public class Security{
 		actionLabel.setText("");
 		return panel;
 	}
+    
+    /**
+     * Pop-up help.
+     */
+    private void help(){
+		helpf.setTitle("HELP - Security Control");
+		helpf.setSize(640, 220);
+		helpf.getContentPane().setLayout(null);
+		
+		JLabel lbl1 = new JLabel("<Hello and welcome to your SmartHouse Security Control Panel!>");
+		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbl1.setBounds(0,13,622,15);
+		helpf.getContentPane().add(lbl1, BorderLayout.NORTH);
+		
+		JLabel lbl2 = new JLabel("You can change settings that include doors, windows, and lock down mode.");
+		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl2.setBounds(0, 41, 622, 15);
+		helpf.getContentPane().add(lbl2);
+		
+		JLabel lbl3 = new JLabel("[Doors] You can lock/unlock of doors.");
+		lbl3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl3.setBounds(0, 90, 622, 15);
+		helpf.getContentPane().add(lbl3);
+		
+		JLabel lbl4 = new JLabel("[Windows] You can lock/unlock of windows.");
+		lbl4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl4.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl4.setBounds(0, 110, 622, 15);
+		helpf.getContentPane().add(lbl4);
+		
+		JLabel lbl5 = new JLabel("[Lock down] Lock every door and window.");
+		lbl5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl5.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl5.setBounds(0, 130, 622, 15);
+		helpf.getContentPane().add(lbl5);
+		
+		helpf.setVisible(true);
+    }
 }
