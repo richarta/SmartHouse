@@ -123,7 +123,9 @@ public class Room implements Serializable{
 
 	/**
 	 * 
-	 * @param nameDr
+	 * @param index
+	 * 
+	 * Removes Door in Door list at specified index
 	 */
 	public void removeDoor(int index){
 		getDoorList().remove(index);
