@@ -16,7 +16,6 @@ public abstract class User {
 	private static House house;
 	private static String username;
 	private static String pass;
-	public Login m_Login;
 
 	public User(){
 
