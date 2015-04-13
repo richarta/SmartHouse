@@ -38,5 +38,21 @@ public class LoginTest {
 			fail("Login failed due to no file");
 		}
 	}
+	
+	public void testIncorrectLogin() throws IOException{
+		try{
+			assertEquals(false, User.checkLogin("false", "abc123"));
+		}
+		catch(IOException e){
+		}
+	}
+	public void testIncorrectPassword() throws IOException{
+		try{
+			assertEquals(false, User.checkLogin("test", "123abc"));
+		}
+		catch(IOException e){
+			fail("Login failed due to no file");
+		}
+	}
 
 }
