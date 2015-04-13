@@ -1,8 +1,7 @@
 
 /**
- * @author Abraham
- * @version 1.0
- * @created 26-Feb-2015 6:23:20 PM
+ * @author Shane
+ *
  */
 public class Light {
 
@@ -29,6 +28,7 @@ public class Light {
 
 	public String getlightName(){
 		return nameLg;
+		
 	}
 
 	public void setLightStatus(boolean lightStatus){
