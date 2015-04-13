@@ -19,7 +19,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-
+/**
+ * @author Timothy
+ *
+ */
 public class Login extends JFrame 
 {
 
@@ -27,17 +30,20 @@ public class Login extends JFrame
 	private String pass;
 	
 	public Login(){
+	//Create the frame for the login panel
 	JFrame frame = new JFrame();
 	frame.setSize(500, 297);
-		
+	//Set panel layout and create panel (done by windowBuilder)	
 	SpringLayout sl_mainPanel = new SpringLayout();
 	JPanel mainPanel = new JPanel(sl_mainPanel);
 
-
+	//Add login button
 	JButton loginB = new JButton("Login");
+	//Add password label
 	JLabel userPass = new JLabel("Password");
 	sl_mainPanel.putConstraint(SpringLayout.WEST, userPass, 77, SpringLayout.WEST, mainPanel);
 	sl_mainPanel.putConstraint(SpringLayout.SOUTH, userPass, -173, SpringLayout.SOUTH, mainPanel);
+	//Add register button
 	JButton register = new JButton("Register");
 	register.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
@@ -45,6 +51,7 @@ public class Login extends JFrame
 	});
 	sl_mainPanel.putConstraint(SpringLayout.WEST, register, 244, SpringLayout.WEST, mainPanel);
 	sl_mainPanel.putConstraint(SpringLayout.SOUTH, register, -161, SpringLayout.SOUTH, mainPanel);
+	//Create username field
 	JTextField userField = new JTextField(20);
 	sl_mainPanel.putConstraint(SpringLayout.SOUTH, loginB, -100, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, userField, 60, SpringLayout.NORTH, mainPanel);
@@ -56,14 +63,14 @@ public class Login extends JFrame
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, userPass, 0, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.EAST, register, 0, SpringLayout.EAST, userField);
 	sl_mainPanel.putConstraint(SpringLayout.EAST, userPass, 0, SpringLayout.EAST, userField);
-
+	//Create password field
 	JPasswordField passField = new JPasswordField(20);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, passField, -64, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.WEST, passField, 0, SpringLayout.WEST, userField);
 	sl_mainPanel.putConstraint(SpringLayout.SOUTH, passField, -75, SpringLayout.NORTH, userField);
 	mainPanel.setLayout(null);
 	mainPanel.setVisible(true);
-	
+	//Add username field to pane;
 	userField.setBounds(188, 82, 160, 25);
 	mainPanel.add(userField);
 	
@@ -81,7 +88,7 @@ public class Login extends JFrame
 	loginB.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
 			
-			//Check username/pass
+			//Check username/pass from text fields
 			user = userField.getText();
 			pass = passField.getText();
 						
@@ -92,6 +99,7 @@ public class Login extends JFrame
 					//open main menu
 					SelectionMenu menu = new SelectionMenu();
 					User.openHouseStatus(user);
+					User.setUsername(user);
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "You have entered an invalid username or password.", "alert", JOptionPane.ERROR_MESSAGE);				}
@@ -128,6 +136,12 @@ public class Login extends JFrame
 	frame.setVisible(true);
 	}
 
+	/**
+	 * @param u - username taken from login field
+	 * @param p - password taken from password field
+	 * @return
+	 * @throws IOException - checks for file not found as username check
+	 */
 	public boolean loginCheck(String u, String p) throws IOException{
 		 if(User.checkLogin(u, p))
 		 {
@@ -135,22 +149,6 @@ public class Login extends JFrame
 		 }
 		 else 
 			 return false;
-
-	}
-
-	public void loginfail(){
-
-	}
-
-	public void loginsucceed(){
-
-	}
-
-	public void personalizeHousefile(){
-
-	}
-
-	public void selectionPage(){
 
 	}
 

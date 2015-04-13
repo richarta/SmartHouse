@@ -1,9 +1,9 @@
-/*
- * Course: SE 300-01 
+/**
+ * Course: SE 300-01
  * Term: Spring 2015
  * Assignment: SmartHouse Project
- * Author: Young J. Park
- * Date: 01 April 2015
+ * @author: Young J. Park, Andrew
+ * Date: 09 April 2015
  */
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,12 +22,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
-
+import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
  
+
 public class Security{
 	
 	// Test Launching GUI
@@ -37,46 +39,38 @@ public class Security{
     } //*/
 	
 	// Initialize
-	private House house = new House();
-	//private House house = User.getHouse();
-		
-	private int nFloor = 2;
-	// private int nFloor = house.getFloorList().size();
-	
+	private House house;		
+	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
+    private int nMaxRoom = 0;
     private JFrame SecFrm = new JFrame();
+    private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
     private JPanel panel = new JPanel();
-    private JPanel [][] roomPanels = new JPanel[nFloor][10];
+    private JPanel [][] roomPanels;
     private JButton menuBtn = new JButton("Return to Menu");
-    private JLabel roomLabel = new JLabel("Select the Room from Menu");
+    private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     JButton helpbtn = new JButton("Help");
     
     public Security() {	    	
-    	// Sample House
-    	house.addFloor("Floor1");
-    	house.addFloor("Floor2");
-    	house.getFloorList().get(0).addRoom("dining");
-    	house.getFloorList().get(0).addRoom("Living");
-    	house.getFloorList().get(1).addRoom("bed");
-    	house.getFloorList().get(0).getRoomList().get(0).addDoor("Dor");
-    	house.getFloorList().get(0).getRoomList().get(0).addDoor("Dor2");
-    	house.getFloorList().get(0).getRoomList().get(1).addDoor("Door");
-    	house.getFloorList().get(0).getRoomList().get(1).addDoor("Door2");
-    	house.getFloorList().get(1).getRoomList().get(0).addDoor("Dooor");
-    	house.getFloorList().get(1).getRoomList().get(0).addDoor("Dooor2");
-    	house.getFloorList().get(0).getRoomList().get(0).addWindow("Window1");
-    	house.getFloorList().get(0).getRoomList().get(0).addWindow("Window2");
-    	house.getFloorList().get(0).getRoomList().get(1).addWindow("Window3");
-    	house.getFloorList().get(1).getRoomList().get(0).addWindow("Window4");
-    	house.getFloorList().get(1).getRoomList().get(0).addWindow("Window5");
-    	house.getFloorList().get(1).getRoomList().get(0).addWindow("Window6");
     	
-    	//
+    	// Call House
+    	User.openHouseStatus();
+    	house = User.getHouse();
+    	nFloor = house.getFloorList().size();
+    	
+    	// Find the max number of room in one floor, and make roomPanel list
+    	for (int i=0; i<nFloor; i++){
+    		if  (house.getFloorList().get(i).getRoomList().size() > nMaxRoom)
+    			nMaxRoom = house.getFloorList().get(i).getRoomList().size();
+    	}
+    	roomPanels = new JPanel[nFloor][nMaxRoom];
+    	
+    	// Initialize the frame
     	SecFrm.getContentPane().setLayout(null);
     	SecFrm.setResizable(false);
     	SecFrm.getContentPane().setLayout(null);
@@ -119,10 +113,11 @@ public class Security{
 	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
-	    	            	roomLabel.setText("["+house.getFloorList().get(0).getName()+"] " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName() + " is selected]");
-	    	            	roomLabel.setBounds(610, 410, 200, 23);
-	    	        		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-	    	        		SecFrm.getContentPane().add(roomLabel);
+	    	            	// Change the title to show room selected
+	    	            	String s = house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName();
+	    	            	SecFrm.setTitle("Environmental Controls - " + s);
+	    	        		
+	    	        		dirLabel.setVisible(false);
 	    	        		
 	    	            	SecFrm.getContentPane().add(panel);
 	    	            	SecFrm.repaint();
@@ -151,25 +146,28 @@ public class Security{
 		menuBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	SecFrm.setVisible(false);
+            	helpf.setVisible(false);
             	new SelectionMenu();
             }
         });
 		SecFrm.getContentPane().add(menuBtn);
 		
-		// room label
-		roomLabel.setBounds(180, 100, 500, 40);
-		roomLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		SecFrm.getContentPane().add(roomLabel);
+		// Main menu label
+		dirLabel.setBounds(0, 100, 802, 40);
+		dirLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		dirLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		SecFrm.getContentPane().add(dirLabel);
+		
+		// Border
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		panel_2.setBounds(12, 391, 778, 2);
-		
 		SecFrm.getContentPane().add(panel_2);
 		
 		// help button
 		helpbtn.setBounds(330, 410, 150, 23);
 		helpbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e4) {
-				SelectionMenu.help();
+				help();
 			}
 		});
 		SecFrm.add(helpbtn);
@@ -193,12 +191,13 @@ public class Security{
     	JPanel panel = new JPanel();
     	JLabel doorLabel = new JLabel("Doors");
     	JLabel windowLabel = new JLabel("Windows");
+    	JLabel actionLabel = new JLabel("");
     	JButton lockBtn = new JButton("Lock Down");
     	ArrayList <JRadioButton> lockBtnList = new ArrayList<JRadioButton>();
-    	ImageIcon img_doorON = new ImageIcon("door_on.png");
-    	ImageIcon img_doorOFF = new ImageIcon("door_off.png");
-    	ImageIcon img_windowON = new ImageIcon("window_on.png");
-    	ImageIcon img_windowOFF = new ImageIcon("window_off.png");
+    	ImageIcon img_doorUnlocked = new ImageIcon("icon/door_unlocked.png");
+    	ImageIcon img_doorLocked = new ImageIcon("icon/door_locked.png");
+    	ImageIcon img_windowUnlocked = new ImageIcon("icon/window_unlocked.png");
+    	ImageIcon img_windowLocked = new ImageIcon("icon/window_locked.png");
     	
 		panel.setLayout(null);
 		
@@ -208,8 +207,13 @@ public class Security{
 		panel.add(doorLabel);
 		
 		windowLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		windowLabel.setBounds(305, 30, 90, 16);
+		windowLabel.setBounds(405, 30, 90, 16);
 		panel.add(windowLabel);
+		
+		actionLabel.setFont(new Font("Tahoma", Font.ITALIC, 13));
+		actionLabel.setBounds(580, 410, 200, 23);
+		actionLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		panel.add(actionLabel);
 		
 		// Lockdown
 		lockBtn.setBackground(new Color(60, 179, 113));
@@ -222,12 +226,14 @@ public class Security{
             	}
             		
             	for (int i=0; i<room.getWindowList().size(); i++){
-            		room.getWindowList().get(i).setLock(false);
+            		room.getWindowList().get(i).setLock(true);
             	}
             		
             	for (int i=0; i<room.getDoorList().size(); i++){
-            		room.getDoorList().get(i).setLock(false);
+            		room.getDoorList().get(i).setLock(true);
             	}
+            	
+            	actionLabel.setText("Lockdown is activated ");
             }
         });
 		panel.add(lockBtn);
@@ -236,10 +242,10 @@ public class Security{
 		for(int k=0; k<room.getDoorList().size(); k++){
 			Door door = room.getDoorList().get(k);
 			JLabel doorlbl = new JLabel(room.getDoorList().get(k).getName());
-			JRadioButton unlockButton = new JRadioButton("Unlock");
-			JRadioButton lockButton = new JRadioButton("Lock");
+			JRadioButton unlockButton = new JRadioButton("Unlocked");
+			JRadioButton lockButton = new JRadioButton("Locked");
 			ButtonGroup group = new ButtonGroup();
-			JLabel imageDoor = new JLabel(img_doorOFF);
+			JLabel imageDoor = new JLabel(door.getLock() ? img_doorLocked : img_doorUnlocked);
 			
 			doorlbl.setBounds(47, 59+30*k, 150, 16);		
 			panel.add(doorlbl);
@@ -247,23 +253,25 @@ public class Security{
 			imageDoor.setBounds(27, 59+30*k, 15, 15);
 			panel.add(imageDoor);
 			
-			unlockButton.setBounds(115, 55+30*k, 70, 25);
+			unlockButton.setBounds(115, 55+30*k, 85, 25);
 			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		imageDoor.setIcon(img_doorON);
-	            		door.setLock(true);
+	            		imageDoor.setIcon(img_doorUnlocked);
+	            		door.setLock(false);
+	            		actionLabel.setText(door.getName() + " is unlocked ");
 	            	}
 	            }
 	        });
 			panel.add(unlockButton);
 
-			lockButton.setBounds(190, 55+30*k, 63, 25);
+			lockButton.setBounds(200, 55+30*k, 85, 25);
 			lockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		imageDoor.setIcon(img_doorOFF);
-	            		door.setLock(false);
+	            		imageDoor.setIcon(img_doorLocked);
+	            		door.setLock(true);
+	            		actionLabel.setText(door.getName() + " is locked ");
 	            	}
 	            }
 	        });
@@ -271,9 +279,9 @@ public class Security{
 			panel.add(lockButton);
 			
 			if (door.getLock())
-				unlockButton.setSelected(true);
-			else
 				lockButton.setSelected(true);
+			else
+				unlockButton.setSelected(true);
 			
 			group.add(unlockButton);
 			group.add(lockButton);
@@ -283,34 +291,36 @@ public class Security{
 		for(int k=0; k<room.getWindowList().size(); k++){
 			Window window = room.getWindowList().get(k);
 			JLabel windowlbl = new JLabel(room.getWindowList().get(k).getName());
-			JRadioButton unlockButton = new JRadioButton("Unlock");
-			JRadioButton lockButton = new JRadioButton("Lock");
+			JRadioButton unlockButton = new JRadioButton("Unlocked");
+			JRadioButton lockButton = new JRadioButton("Locked");
 			ButtonGroup group = new ButtonGroup();
-			JLabel imageWindow = new JLabel(img_windowOFF);
+			JLabel imageWindow = new JLabel(window.getLock() ? img_windowLocked : img_windowUnlocked);
 			
-			windowlbl.setBounds(305, 59+30*k, 150, 16);		
+			windowlbl.setBounds(425, 59+30*k, 150, 16);		
 			panel.add(windowlbl);
 			
-			imageWindow.setBounds(365, 59+30*k, 15, 15);
+			imageWindow.setBounds(405, 59+30*k, 15, 15);
 			panel.add(imageWindow);
 			
-			unlockButton.setBounds(393, 55+30*k, 70, 25);
+			unlockButton.setBounds(495, 55+30*k, 85, 25);
 			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		window.setLock(true);
-	            		imageWindow.setIcon(img_windowON);
+	            		window.setLock(false);
+	            		imageWindow.setIcon(img_windowUnlocked);
+	            		actionLabel.setText(window.getName() + " is unlocked ");
 	            	}
 	            }
 	        });
 			panel.add(unlockButton);
 
-			lockButton.setBounds(460, 55+30*k, 63, 25);
+			lockButton.setBounds(580, 55+30*k, 85, 25);
 			lockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		window.setLock(false);
-	            		imageWindow.setIcon(img_windowOFF);
+	            		window.setLock(true);
+	            		imageWindow.setIcon(img_windowLocked);
+	            		actionLabel.setText(window.getName() + " is locked ");
 	            	}
 	            }
 	        });
@@ -318,219 +328,56 @@ public class Security{
 			panel.add(lockButton);
 			
 			if (window.getLock())
-				unlockButton.setSelected(true);
-			else
 				lockButton.setSelected(true);
+			else
+				unlockButton.setSelected(true);
 			
 			group.add(unlockButton);
 			group.add(lockButton);
 		}
 		
+		actionLabel.setText("");
 		return panel;
 	}
+    
+    /**
+     * Pop-up help.
+     */
+    private void help(){
+		helpf.setTitle("HELP - Security Control");
+		helpf.setSize(640, 220);
+		helpf.getContentPane().setLayout(null);
+		
+		JLabel lbl1 = new JLabel("<Hello and welcome to your SmartHouse Security Control Panel!>");
+		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbl1.setBounds(0,13,622,15);
+		helpf.getContentPane().add(lbl1, BorderLayout.NORTH);
+		
+		JLabel lbl2 = new JLabel("You can change settings that include doors, windows, and lock down mode.");
+		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl2.setBounds(0, 41, 622, 15);
+		helpf.getContentPane().add(lbl2);
+		
+		JLabel lbl3 = new JLabel("[Doors] You can lock/unlock of doors.");
+		lbl3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl3.setBounds(0, 90, 622, 15);
+		helpf.getContentPane().add(lbl3);
+		
+		JLabel lbl4 = new JLabel("[Windows] You can lock/unlock of windows.");
+		lbl4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl4.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl4.setBounds(0, 110, 622, 15);
+		helpf.getContentPane().add(lbl4);
+		
+		JLabel lbl5 = new JLabel("[Lock down] Lock every door and window.");
+		lbl5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl5.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl5.setBounds(0, 130, 622, 15);
+		helpf.getContentPane().add(lbl5);
+		
+		helpf.setVisible(true);
+    }
 }
-
-// Andrew's Code
-/**
-import java.awt.BorderLayout; 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JSlider;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
-
-import java.awt.Color;
-import java.awt.SystemColor;
-
-public class Security extends JFrame
-{
-	public void finalize() throws Throwable {	}
-	
-	private static JFrame frame = new JFrame("Security");
-
-
-	//Temporary main for testing
-	/*public static void main(String[] args) {
-		new Security();
-
-	}
-	private ArrayList<JMenu> menus = new ArrayList<JMenu>();
-	private ArrayList<JPanel> floorPanel = new ArrayList<JPanel>();
-	private int iFloorChoosed;
-	private int nFloor=3;//House.getfloorlist.size();
-	private String name1= "door ";
-	private String name2= "window ";
-
-	JButton menubtn;
-	JButton lockdown;
-	JPanel center;
-	JPanel east;
-	JPanel south;
-
-	public Security()
-	{
-		JFrame frame;
-		frame.getContentPane().setLayout(new BorderLayout());
-
-		for(int i=0;i<nFloor;i++)
-		{
-			//create tab for floor
-			JMenu fileMenu = new JMenu("Floor"+(i+1));
-			menus.add(fileMenu);
-			//create panel for this tab
-			JPanel panel = new JPanel();
-			floorPanel.add(panel); 
-			//add doors to panel
-
-			for(int k=0;k<User.getHouse().getFloorList().get(i).getRoomList().get(j).getDoorList().size();k++)
-			{
-				String name=User.getHouse().getFloorList().get(i).getRoomList().get(j).getDoorList().get(k).getName()
-						panel.add(addItem(name1+k));
-			}
-			//add windows to panel
-			for(int k=0;k<User.getHouse().getFloorList().get(i).getRoomList().get(j).getWindowList().size();k++)
-			{
-				String name=User.getHouse().getFloorList().get(i).getRoomList().get(j).getDoorList().get(k).getName()
-						panel.add(addItem(name2+k));
-			}
-
-
-
-
-			// Generate menu-item for each Floor
-			JRadioButtonMenuItem radioBtnMenu = new JRadioButtonMenuItem();
-			radioBtnMenu.setName("Floor "+i); // give a name to room. e.g. Second room on first floor is "12". Third room of second floor is "23"
-
-			// If you click each room, JFrame shows a panel for the selected room
-			radioBtnMenu.addItemListener(new ItemListener() {
-				public void itemStateChanged(ItemEvent e) {
-					if (e.getStateChange() == ItemEvent.SELECTED){
-
-						// Get floor and room index
-						iFloorChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(0));
-
-
-						// Remove JPanel
-						frame.remove(panel);
-						frame.repaint();
-						frame.revalidate();
-
-						// Show new JPanel
-
-						panel.setBounds(0, 0, 800, 500);
-
-
-						frame.getContentPane().add(panel);
-						frame.repaint();
-						frame.revalidate();
-					}
-				}
-			});
-
-			// Group buttons and add into menu
-
-			fileMenu.add(radioBtnMenu);
-		}
-
-		// Add menu into menu bar
-		//	menus.add(fileMenu);
-
-
-
-
-		//Create and set up the window.
-
-		center = floorPanel.get(1);
-		center.setVisible(true);
-		east = new JPanel();
-		east.setVisible(true);
-		south = new JPanel();
-		south.setVisible(true);
-
-		frame = new JFrame("Security");
-
-
-
-
-
-		frame.getContentPane().add(south, BorderLayout.SOUTH);
-		frame.getContentPane().add(east, BorderLayout.EAST);
-		frame.getContentPane().add(center, BorderLayout.CENTER);
-		center.setLayout(new GridLayout(0,1));
-		menubtn=new JButton("Menu");
-		lockdown=new JButton("Lockdown");
-		lockdown.setPreferredSize(new Dimension(100,75));
-		menubtn.setPreferredSize(new Dimension(100,75));
-		east.add(lockdown);east.add(menubtn);
-		south.add(new JTextField(40));
-
-		frame.setSize(new Dimension(636, 345));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-		//Display the window
-		frame.pack();
-		frame.setVisible(true);
-	}
-
-
-	//public Sec.Alert(){	}
-
-	//public Sec.Control.Doors(){	}
-
-	//public Sec.Control.Lockdown(){	}
-
-	//public Sec.Control.Windows(){	}
-
-	//public Sec.Menu.Button(){	}
-
-	private static JPanel addItem(String d)
-	{
-		//Create items
-		JPanel item = new JPanel(new FlowLayout());
-		item.setPreferredSize(new Dimension(400, 50));
-		item.add(new JLabel(d+"  "));
-		JRadioButton lock = new JRadioButton("Lock");
-		JRadioButton unlock = new JRadioButton("Unlock");
-		JRadioButton open = new JRadioButton("open");
-		JRadioButton close = new JRadioButton("Close");
-		ButtonGroup group = new ButtonGroup();
-		group.add(lock);
-		group.add(unlock);
-		ButtonGroup group2 = new ButtonGroup();
-		group2.add(open);
-		group2.add(close);
-		item.add(lock);
-		item.add(unlock);
-		item.add(close);
-		item.add(open);
-		item.setVisible(true);
-		return item;
-	}
-}
-*/

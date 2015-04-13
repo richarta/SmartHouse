@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 
 
 
@@ -6,7 +8,7 @@
  * @version 1.0
  * @created 26-Feb-2015 6:23:12 PM
  */
-public class Faucet {
+public class Faucet implements Serializable{
 
 	private String nameFa;
 	private boolean status;

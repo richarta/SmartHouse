@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 
 
 
@@ -6,7 +8,7 @@
  * @version 1.0
  * @created 25-Mar-2015
  */
-public class Thermostat {
+public class Thermostat implements Serializable{
 
 	private String nameTh;
 	private int temperature;

@@ -16,7 +16,6 @@ public abstract class User {
 	private static House house;
 	private static String username;
 	private static String pass;
-	public Login m_Login;
 
 	public User(){
 
@@ -25,13 +24,7 @@ public abstract class User {
 	public void finalize() throws Throwable {
 
 	}
-	/**
-	 * 
-	 * @param nameRm
-	 * @param nameDv
-	 * @param status
-	 * @param typeDv
-	 */
+
 	
 	public static void saveHouseStatus(){
 		
@@ -73,6 +66,34 @@ public abstract class User {
 			//close file
 			save.close();
 			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void openHouseStatus(){
+
+		try {
+
+			//open file
+			FileInputStream saveFile = new FileInputStream(username + ".sav");
+
+			//open input stream
+			ObjectInputStream save = new ObjectInputStream(saveFile);
+
+			//read object
+			house = (House) save.readObject();
+
+			//close file
+			save.close();
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,6 +150,13 @@ public abstract class User {
 		return true;
 	}
 	
+	/**
+	 * @author Timothy Bernier
+	 * @param u - username from login to compare to .txt file name
+	 * @param p - password from login to compare to .txt password
+	 * @return - boolean to confirm if login matches .txt parameters
+	 * @throws IOException - check for fileNotFoundException, if found login failed
+	 */
 	public static boolean checkLogin(String u, String p) throws IOException
 	{
 		try{

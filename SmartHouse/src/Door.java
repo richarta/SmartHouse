@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 
 /**
  * @author YoungJin
  * @version 1.0
  * @created 25-Mar-2015
  */
-public class Door {
+public class Door implements Serializable{
 
 	private boolean lock;
 	private String nameDr;
@@ -24,6 +26,7 @@ public class Door {
 	 * @param nameDr
 	 */
 	public Door(String nameDr){
+		lock = true;
 		this.nameDr = nameDr;
 	}
 
