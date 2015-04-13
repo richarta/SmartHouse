@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//Shane was here
-
 /**
  * @author Abraham
  * @version 1.0
@@ -19,15 +17,6 @@ public class Room implements Serializable{
 	private ArrayList<Radio> radioList = new ArrayList<>();
 	private ArrayList<Television> televisionList = new ArrayList<>();
 	private ArrayList<Window> windowList = new ArrayList<>();
-	public Thermostat m_Thermostat;
-	public Window m_Window;
-	public Door m_Door;
-	public Television m_Television;
-	public Radio m_Radio;
-	public Faucet m_Faucet;
-	public Light m_Light;
-
-
 
 	public void finalize() throws Throwable {
 
@@ -46,15 +35,6 @@ public class Room implements Serializable{
 		
 		//set name of room
 		setName(nameRm);
-		addThermostat("Thermostat");
-	}
-
-	/**
-	 * 
-	 * @param nameDr
-	 */
-	public void addThermostat(String nameTh){
-		m_Thermostat = new Thermostat(nameTh);
 	}
 	
 	public void addDoor(String nameDr){
@@ -101,10 +81,6 @@ public class Room implements Serializable{
 		windowList.add(new Window(nameWd));
 	}
 	
-	public Thermostat getThermostat(){
-		return m_Thermostat;
-	}
-	
 	public ArrayList<Door> getDoorList(){
 		
 		//return door list
@@ -149,48 +125,48 @@ public class Room implements Serializable{
 	 * 
 	 * @param nameDr
 	 */
-	public void removeDoor(String nameDr){
-
+	public void removeDoor(int index){
+		getDoorList().remove(index);
 	}
 
 	/**
 	 * 
 	 * @param nameFa
 	 */
-	public void removeFaucet(String nameFa){
-
+	public void removeFaucet(int index){
+		getFaucetList().remove(index);
 	}
 
 	/**
 	 * 
 	 * @param nameLg
 	 */
-	public void removeLight(String nameLg){
-
+	public void removeLight(int index){
+		getLightList().remove(index);
 	}
 
 	/**
 	 * 
 	 * @param nameRd
 	 */
-	public void removeRadio(String nameRd){
-
+	public void removeRadio(int index){
+		getRadioList().remove(index);
 	}
 
 	/**
 	 * 
 	 * @param nameTv
 	 */
-	public void removeTelevision(String nameTv){
-
+	public void removeTelevision(int index){
+		getTelevisionList().remove(index);
 	}
 
 	/**
 	 * 
 	 * @param nameWd
 	 */
-	public void removeWindow(String nameWd){
-
+	public void removeWindow(int index){
+		getWindowList().remove(index);
 	}
 
 	/**

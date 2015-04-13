@@ -297,12 +297,56 @@ public class Personalize extends JPanel{
 		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addDoor(textField.getText());
 	}
 	
-	public static void removeDoor(){
+	public static void removeDoor(String doorName){
 		
+		//Navigate through door names to compare strings
+		for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().size(); ++i){
+			
+			if (doorName.equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(i).getName())){
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).removeDoor(i);
+			}
+		}
 	}
 	
-	public static void changeDoorGUI(){
+	public static void changeDoorGUI(int index){
 		
+		//disable personalize frame
+		framePersonalize.setEnabled(false);
+		
+		//Create frame, panel and layout for change floor GUI
+		JFrame changeNameRM = new JFrame("Change Door Name");
+		JPanel panelNameRM = new JPanel();
+		panelNameRM.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameRM.add(new JLabel("New name of Door: "));
+		panelNameRM.add(tfNewName);
+		panelNameRM.add(btSave);
+		
+		//Add panel to frame
+		changeNameRM.getContentPane().add(panelNameRM);
+		
+		//Adjust frame
+		changeNameRM.pack();
+		changeNameRM.setVisible(true);
+		changeNameRM.setLocationRelativeTo(null);
+		changeNameRM.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Change name of door in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(index).setName(tfNewName.getText());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameRM.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
 	}
 	
 	public static void addWindow(){
@@ -311,12 +355,56 @@ public class Personalize extends JPanel{
 		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addWindow(textField.getText());
 	}
 	
-	public static void removeWindow(){
+	public static void removeWindow(String windowName){
 		
+		//Navigate through window names to compare strings
+		for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().size(); ++i){
+			
+			if (windowName.equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(i).getName())){
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).removeWindow(i);
+			}
+		}
 	}
 	
-	public static void changeWindowGUI(){
+	public static void changeWindowGUI(int index){
 		
+		//disable personalize frame
+		framePersonalize.setEnabled(false);
+		
+		//Create frame, panel and layout for change floor GUI
+		JFrame changeNameRM = new JFrame("Change Window Name");
+		JPanel panelNameRM = new JPanel();
+		panelNameRM.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameRM.add(new JLabel("New name of Window: "));
+		panelNameRM.add(tfNewName);
+		panelNameRM.add(btSave);
+		
+		//Add panel to frame
+		changeNameRM.getContentPane().add(panelNameRM);
+		
+		//Adjust frame
+		changeNameRM.pack();
+		changeNameRM.setVisible(true);
+		changeNameRM.setLocationRelativeTo(null);
+		changeNameRM.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Change name of door in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(index).setName(tfNewName.getText());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameRM.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
 	}
 	
 	public static void addTV(){
@@ -325,12 +413,56 @@ public class Personalize extends JPanel{
 		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addTelevision(textField.getText());
 	}
 	
-	public static void removeTV(){
+	public static void removeTV(String nameTelevision){
 		
+		//Navigate through TV names to compare strings
+		for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().size(); ++i){
+			
+			if (nameTelevision.equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(i).getName())){
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).removeTelevision(i);
+			}
+		}
 	}
 	
-	public static void changeTVGUI(){
+	public static void changeTVGUI(int index){
 		
+		//disable personalize frame
+		framePersonalize.setEnabled(false);
+		
+		//Create frame, panel and layout for change floor GUI
+		JFrame changeNameRM = new JFrame("Change Television Name");
+		JPanel panelNameRM = new JPanel();
+		panelNameRM.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameRM.add(new JLabel("New name of TV: "));
+		panelNameRM.add(tfNewName);
+		panelNameRM.add(btSave);
+		
+		//Add panel to frame
+		changeNameRM.getContentPane().add(panelNameRM);
+		
+		//Adjust frame
+		changeNameRM.pack();
+		changeNameRM.setVisible(true);
+		changeNameRM.setLocationRelativeTo(null);
+		changeNameRM.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Change name of door in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(index).setName(tfNewName.getText());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameRM.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
 	}
 	
 	public static void addLight(){
@@ -339,12 +471,56 @@ public class Personalize extends JPanel{
 		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addLight(textField.getText());
 	}
 	
-	public static void removeLight(){
+	public static void removeLight(String nameLight){
 		
+		//Navigate through Light names to compare strings
+		for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().size(); ++i){
+			
+			if (nameLight.equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(i).getName())){
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).removeLight(i);
+			}
+		}
 	}
 	
-	public static void changeLightGUI(){
+	public static void changeLightGUI(int index){
 		
+		//disable personalize frame
+		framePersonalize.setEnabled(false);
+		
+		//Create frame, panel and layout for change floor GUI
+		JFrame changeNameRM = new JFrame("Change Light Name");
+		JPanel panelNameRM = new JPanel();
+		panelNameRM.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameRM.add(new JLabel("New name of Light: "));
+		panelNameRM.add(tfNewName);
+		panelNameRM.add(btSave);
+		
+		//Add panel to frame
+		changeNameRM.getContentPane().add(panelNameRM);
+		
+		//Adjust frame
+		changeNameRM.pack();
+		changeNameRM.setVisible(true);
+		changeNameRM.setLocationRelativeTo(null);
+		changeNameRM.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Change name of door in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(index).setName(tfNewName.getText());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameRM.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
 	}
 	
 	public static void addRadio(){
@@ -353,12 +529,56 @@ public class Personalize extends JPanel{
 		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addRadio(textField.getText());
 	}
 	
-	public static void removeRadio(){
+	public static void removeRadio(String nameRadio){
 		
+		//Navigate through Radio names to compare strings
+		for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().size(); ++i){
+			
+			if (nameRadio.equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(i).getName())){
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).removeRadio(i);
+			}
+		}
 	}
 	
-	public static void changeRadioGUI(){
+	public static void changeRadioGUI(int index){
 		
+		//disable personalize frame
+		framePersonalize.setEnabled(false);
+		
+		//Create frame, panel and layout for change floor GUI
+		JFrame changeNameRM = new JFrame("Change Radio Name");
+		JPanel panelNameRM = new JPanel();
+		panelNameRM.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameRM.add(new JLabel("New name of Radio: "));
+		panelNameRM.add(tfNewName);
+		panelNameRM.add(btSave);
+		
+		//Add panel to frame
+		changeNameRM.getContentPane().add(panelNameRM);
+		
+		//Adjust frame
+		changeNameRM.pack();
+		changeNameRM.setVisible(true);
+		changeNameRM.setLocationRelativeTo(null);
+		changeNameRM.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Change name of door in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(index).setName(tfNewName.getText());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameRM.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
 	}
 	
 	public static void addFaucet(){
@@ -367,12 +587,56 @@ public class Personalize extends JPanel{
 		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addFaucet(textField.getText());
 	}
 	
-	public static void removeFaucet(){
+	public static void removeFaucet(String nameFaucet){
 		
+		//Navigate through Faucet names to compare strings
+		for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().size(); ++i){
+			
+			if (nameFaucet.equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(i).getName())){
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).removeFaucet(i);
+			}
+		}
 	}
 	
-	public static void changeFaucetGUI(){
+	public static void changeFaucetGUI(int index){
 		
+		//disable personalize frame
+		framePersonalize.setEnabled(false);
+		
+		//Create frame, panel and layout for change floor GUI
+		JFrame changeNameRM = new JFrame("Change Faucet Name");
+		JPanel panelNameRM = new JPanel();
+		panelNameRM.setLayout(new FlowLayout());
+		
+		//Create and add Components
+		JTextField tfNewName = new JTextField(20);
+		JButton btSave = new JButton("Save");
+		panelNameRM.add(new JLabel("New name of Faucet: "));
+		panelNameRM.add(tfNewName);
+		panelNameRM.add(btSave);
+		
+		//Add panel to frame
+		changeNameRM.getContentPane().add(panelNameRM);
+		
+		//Adjust frame
+		changeNameRM.pack();
+		changeNameRM.setVisible(true);
+		changeNameRM.setLocationRelativeTo(null);
+		changeNameRM.setResizable(false);
+		
+		//Add Listener
+		btSave.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//Change name of door in house class
+				house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(index).setName(tfNewName.getText());
+				
+				//Hide the change name GUI and display the personalize GUI
+				changeNameRM.dispose();
+				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
+			}
+		});
 	}
 	
 	public static void addHouse(){
@@ -789,6 +1053,93 @@ public class Personalize extends JPanel{
 					}
 				});
 				
+				//Remove addition button listener
+				btnRemove.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Call remove method of proper selected addition
+						switch(cbAdditions.getSelectedIndex()){
+							case 0: //Door
+								removeDoor(textField.getText());
+								break;
+							case 1: //Window
+								removeWindow(textField.getText());
+								break;
+							case 2: //Light
+								removeLight(textField.getText());
+								break;
+							case 3: //Television
+								removeTV(textField.getText());
+								break;
+							case 4: //Radio
+								removeRadio(textField.getText());
+								break;
+							case 5: //Faucet
+								removeFaucet(textField.getText());
+								break;
+						}
+						
+					}
+				});
+
+				//Change addition name button listener
+				btnChangeNM.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						
+						//Call change method of proper selected addition
+						switch(cbAdditions.getSelectedIndex()){
+							case 0: //Door
+								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().size(); ++i){
+									
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(i).getName())){
+										changeDoorGUI(i);
+									}
+								}
+								break;
+							case 1: //Window
+								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().size(); ++i){
+									
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(i).getName())){
+										changeWindowGUI(i);
+									}
+								}							
+								break;
+							case 2: //Light
+								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().size(); ++i){
+									
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(i).getName())){
+										changeLightGUI(i);
+									}
+								}
+								break;
+							case 3: //Television
+								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().size(); ++i){
+									
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(i).getName())){
+										changeTVGUI(i);
+									}
+								}
+								break;
+							case 4: //Radio
+								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().size(); ++i){
+									
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(i).getName())){
+										changeRadioGUI(i);
+									}
+								}
+								break;
+							case 5: //Faucet
+								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().size(); ++i){
+									
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(i).getName())){
+										changeFaucetGUI(i);
+									}
+								}
+								break;
+						}
+					}
+				});
+
 				//Set up proper rooms in room combo box when a floor is selected
 				cbFloors.addItemListener(new ItemListener(){
 					public void itemStateChanged(ItemEvent e){
