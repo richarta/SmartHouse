@@ -34,6 +34,7 @@ public class House implements Serializable{
 		
 		//set basic name of house
 		nameHs = "HOUSE";
+		addThermostat("Thermostat");
 	}
 
 	/**Add Floor to House method

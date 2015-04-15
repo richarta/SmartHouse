@@ -66,11 +66,9 @@ public class SampleHouseSimulation {
 			changeStatus();
 			
 			double r = Math.random();
-			System.out.println(r);
 			if (r < 0.1){
+				System.out.println(r);
 				popUpSecurityAlarm();
-				changeStatus();
-				break;
 			}
 		}
 	}
@@ -79,6 +77,7 @@ public class SampleHouseSimulation {
 	 * Builds GUI for sample house simulation
 	 */
 	private static void buildHouse(){
+		// Build house panel
 		sample.setVisible(true);
 		sample.setResizable(false);
 		sample.setSize(880, 519); //646,519
@@ -91,6 +90,7 @@ public class SampleHouseSimulation {
 			}
         });
 		
+		// Set the locations of icon
 		r1Light1.setIcon(iconLOFF);
 		r1Light1.setBounds(197, 273, 50, 50);
 		sample.getContentPane().add(r1Light1);
@@ -181,7 +181,7 @@ public class SampleHouseSimulation {
 		// Open sample house
 		try {
 			//open file
-			FileInputStream saveFile = new FileInputStream("samplehouse.sav");
+			FileInputStream saveFile = new FileInputStream("young.sav");
 			
 			//open input stream
 			ObjectInputStream save = new ObjectInputStream(saveFile);
@@ -197,7 +197,7 @@ public class SampleHouseSimulation {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// System.out.println("reached here");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -205,39 +205,39 @@ public class SampleHouseSimulation {
 		
 		// Set temperature
 		if (r1CT == -100)
-			r1CT = house.getFloorList().get(0).getRoomList().get(0).getThermostat().getTemp();
-		else if(r1CT < house.getFloorList().get(0).getRoomList().get(0).getThermostat().getTemp())
+			r1CT = house.getThermostat().getTemp();
+		else if(r1CT < house.getThermostat().getTemp())
 			r1CT++;
-		else if(r1CT > house.getFloorList().get(0).getRoomList().get(0).getThermostat().getTemp())
+		else if(r1CT > house.getThermostat().getTemp())
 			r1CT--;
 		
-		if (r1CT == house.getFloorList().get(0).getRoomList().get(0).getThermostat().getTemp())
+		if (r1CT == house.getThermostat().getTemp())
 			r1Temp.setFont(new Font("Tahoma", Font.BOLD, 13));
 		else
 			r1Temp.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		r1Temp.setText("Room1 Temperature = "+ r1CT +"F");
 		
 		if (kitCT == -100)
-			kitCT = house.getFloorList().get(0).getRoomList().get(1).getThermostat().getTemp();
-		else if(kitCT < house.getFloorList().get(0).getRoomList().get(1).getThermostat().getTemp())
+			kitCT = house.getThermostat().getTemp();
+		else if(kitCT < house.getThermostat().getTemp())
 			kitCT++;
-		else if(kitCT > house.getFloorList().get(0).getRoomList().get(1).getThermostat().getTemp())
+		else if(kitCT > house.getThermostat().getTemp())
 			kitCT--;
 		
-		if (kitCT == house.getFloorList().get(0).getRoomList().get(1).getThermostat().getTemp())
+		if (kitCT == house.getThermostat().getTemp())
 			kitTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
 		else
 			kitTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		kitTemp.setText("Kitchen Temperature = "+ kitCT +"F");
 		
 		if (livCT == -100)
-			livCT = house.getFloorList().get(0).getRoomList().get(2).getThermostat().getTemp();
-		else if(livCT < house.getFloorList().get(0).getRoomList().get(2).getThermostat().getTemp())
+			livCT = house.getThermostat().getTemp();
+		else if(livCT < house.getThermostat().getTemp())
 			livCT++;
-		else if(livCT > house.getFloorList().get(0).getRoomList().get(2).getThermostat().getTemp())
+		else if(livCT > house.getThermostat().getTemp())
 			livCT--;
 		
-		if (livCT == house.getFloorList().get(0).getRoomList().get(2).getThermostat().getTemp())
+		if (livCT == house.getThermostat().getTemp())
 			livTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
 		else
 			livTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -305,7 +305,11 @@ public class SampleHouseSimulation {
 			livWindow2.setIcon(iconWUL);
 	}
 	
+	/**
+	 * Pop-up security alarm
+	 */
 	private static void popUpSecurityAlarm(){
+		// Initialize the panel
 		securityAlarm.setVisible(true);
 		securityAlarm.setTitle("Security Alarm");
 		securityAlarm.setSize(450, 100);
@@ -317,6 +321,7 @@ public class SampleHouseSimulation {
 		lbl1.setBounds(0,15,422,15);
 		securityAlarm.getContentPane().add(lbl1, BorderLayout.NORTH);
 		
+		// Lock all the doors and windows
 		for (int i =0; i<house.getFloorList().size(); i++){
 			for (int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
 				for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++)
@@ -326,8 +331,9 @@ public class SampleHouseSimulation {
 			}
 		}
 		
+		// Save the change
 		try {
-			FileOutputStream saveFile = new FileOutputStream("samplehouse.sav");
+			FileOutputStream saveFile = new FileOutputStream("young.sav");
 			
 			//create object to save objects to file
 			ObjectOutputStream save = new ObjectOutputStream(saveFile);
