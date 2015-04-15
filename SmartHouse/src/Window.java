@@ -2,9 +2,8 @@ import java.io.Serializable;
 
 
 /**
- * @author Abraham
- * @version 1.0
- * @created 26-Feb-2015 6:23:39 PM
+ * @author Shane
+ *
  */
 public class Window implements Serializable{
 

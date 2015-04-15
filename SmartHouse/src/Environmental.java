@@ -190,8 +190,8 @@ public class Environmental{
     public JPanel generateEnvRoomPanel(int iFloor, int iRoom){
     	Room room = house.getFloorList().get(iFloor).getRoomList().get(iRoom);
     	JPanel panel = new JPanel();
-    	JLabel tempLabel = new JLabel("Temerature (" + room.getThermostat().getTemp() + "F)");
-    	JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, room.getThermostat().getTemp());
+    	JLabel tempLabel = new JLabel("Temerature (" + house.getThermostat().getTemp() + "F)");
+    	JSlider tempSlider = new JSlider(JSlider.HORIZONTAL, 20, 100, house.getThermostat().getTemp());
     	JLabel lightLabel = new JLabel("Lights");
     	JLabel faucetLabel = new JLabel("Faucets");
         JLabel actionLabel = new JLabel("");
@@ -243,7 +243,7 @@ public class Environmental{
 		setBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	actionLabel.setText("Desired temperature is changed ");
-            	room.getThermostat().setTemp(tempSlider.getValue());
+            	house.getThermostat().setTemp(tempSlider.getValue());
             }
         });
 		panel.add(setBtn);
@@ -254,7 +254,7 @@ public class Environmental{
 		psBtn.setBounds(305, 350, 200, 30);
 		psBtn.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        		room.getThermostat().setTemp(70);
+        		house.getThermostat().setTemp(70);
         		tempSlider.setValue(70);
         		tempLabel.setText("Temerature (70F)");
 		
