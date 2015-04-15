@@ -2,9 +2,8 @@ import java.io.Serializable;
 
 
 /**
- * @author Abraham
- * @version 1.0
- * @created 26-Feb-2015 6:23:20 PM
+ * @author Shane
+ *
  */
 public class Light implements Serializable{
 
@@ -31,6 +30,7 @@ public class Light implements Serializable{
 
 	public String getName(){
 		return nameLg;
+		
 	}
 
 	public void setStatus(boolean lightStatus){
