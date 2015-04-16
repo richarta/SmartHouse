@@ -54,7 +54,7 @@ public class Security{
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
-    JButton helpbtn = new JButton("Help");
+    private JButton helpbtn = new JButton("Help");
     
     public Security() {	    	
     	
