@@ -8,9 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
-public class LoginTest {
-
+ public class LoginTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		User.setUsername("test");
@@ -43,6 +41,7 @@ public class LoginTest {
 		try{
 			assertEquals(false, User.checkLogin("false", "abc123"));
 		}
+		//Catch fileNotFoundException to confirm failed login
 		catch(IOException e){
 		}
 	}
