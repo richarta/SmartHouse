@@ -181,7 +181,7 @@ public class SampleHouseSimulation {
 		// Open sample house
 		try {
 			//open file
-			FileInputStream saveFile = new FileInputStream("young.sav");
+			FileInputStream saveFile = new FileInputStream("smp.sav");
 			
 			//open input stream
 			ObjectInputStream save = new ObjectInputStream(saveFile);
@@ -333,7 +333,7 @@ public class SampleHouseSimulation {
 		
 		// Save the change
 		try {
-			FileOutputStream saveFile = new FileOutputStream("young.sav");
+			FileOutputStream saveFile = new FileOutputStream("smp.sav");
 			
 			//create object to save objects to file
 			ObjectOutputStream save = new ObjectOutputStream(saveFile);
