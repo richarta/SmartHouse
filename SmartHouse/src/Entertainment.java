@@ -77,7 +77,7 @@ public class Entertainment{
     	            public void itemStateChanged(ItemEvent e) {
     	            	if (e.getStateChange() == ItemEvent.SELECTED){
     	            		User.openHouseStatus();
-    	            		User.getHouse();
+    	            		house = User.getHouse();
     	            		
     	            		// Get floor and room index
 	    	            	iFloorChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(0));

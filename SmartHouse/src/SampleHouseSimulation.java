@@ -39,6 +39,10 @@ public class SampleHouseSimulation {
 	private static JLabel lblNewLabel = new JLabel("");
 	private static JLabel temp = new JLabel("Temperature");
 	private static JLabel houseTemp = new JLabel("");
+	private static JLabel armed = new JLabel("Security State");
+	private static JLabel combat = new JLabel("");
+	private static JLabel houseInfo = new JLabel("House Information");
+	private static JLabel houseName = new JLabel("");
 	private static House house;
 	private static int houseCT = -100;
 	private static ImageIcon iconLON = new ImageIcon("samplehouse/light_on.png");
@@ -134,18 +138,37 @@ public class SampleHouseSimulation {
 		
 		livWindow2.setIcon(iconWL);
 		livWindow2.setBounds(578, 273, 50, 50);
-		sample.getContentPane().add(livWindow2);		
+		sample.getContentPane().add(livWindow2);			
+
+		houseInfo.setBounds(680,15,150,20);
+		houseInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		houseInfo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		sample.getContentPane().add(houseInfo);
 		
-		temp.setBounds(695,15,120,20);
+		houseName.setBounds(645,55,220,20);
+		houseName.setHorizontalAlignment(SwingConstants.CENTER);
+		houseName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sample.getContentPane().add(houseName);
+		
+		temp.setBounds(695,215,120,20);
 		temp.setHorizontalAlignment(SwingConstants.CENTER);
 		temp.setFont(new Font("Tahoma", Font.BOLD, 15));
 		sample.getContentPane().add(temp);
 		
-		houseTemp.setBounds(645,55,220,20);
+		houseTemp.setBounds(645,255,220,20);
 		houseTemp.setHorizontalAlignment(SwingConstants.CENTER);
 		houseTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		sample.getContentPane().add(houseTemp);
 		
+		armed.setBounds(695,415,120,20);
+		armed.setHorizontalAlignment(SwingConstants.CENTER);
+		armed.setFont(new Font("Tahoma", Font.BOLD, 15));
+		sample.getContentPane().add(armed);
+		
+		combat.setBounds(645,455,220,20);
+		combat.setHorizontalAlignment(SwingConstants.CENTER);
+		combat.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sample.getContentPane().add(combat);
 		
 		lblNewLabel.setIcon(iconBG);
 		lblNewLabel.setBounds(0, 0, 640, 480);
@@ -197,11 +220,13 @@ public class SampleHouseSimulation {
 		else if(houseCT > house.getThermostat().getTemp())
 			houseCT--;
 		
-		if (houseCT == house.getThermostat().getTemp())
-			houseTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
-		else
-			houseTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		houseTemp.setText("House Temperature = "+ houseCT +"F");
+		
+		// Set combat status
+		combat.setText("House is" + (house.getCombat() ? " armed":" disarmed"));
+		
+		// SET house Info
+		houseName.setText("House Name : " + house.getName());
 		
 		// Set icons
 		if (house.getFloorList().get(0).getRoomList().get(0).getLightList().get(0).getStatus())

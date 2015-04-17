@@ -40,7 +40,6 @@ public class Environmental{
 	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
-    private int nMaxRoom = 0;
     private JFrame EnvFrm = new JFrame();
     private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
@@ -80,7 +79,7 @@ public class Environmental{
     	            public void itemStateChanged(ItemEvent e) {
     	            	if (e.getStateChange() == ItemEvent.SELECTED){
     	            		User.openHouseStatus();
-    	            		User.getHouse();
+    	            		house = User.getHouse();
     	            		
     	            		// Get floor and room index
 	    	            	iFloorChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(0));
