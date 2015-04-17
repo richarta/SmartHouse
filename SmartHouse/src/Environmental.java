@@ -3,7 +3,7 @@
  * Term: Spring 2015
  * Assignment: SmartHouse Project
  * @author: Young J. Park
- * Date: 09 April 2015
+ * Date: 01 April 2015
  */
 
 import java.awt.Font;
@@ -34,13 +34,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
  
 public class Environmental{
-	
-	// Test Launching GUI
-	/**
-	public static void main(String[] args) {
-       new Environmental();
-   } //*/
-	
+
 	// Initialize
 	private House house;
 	private int nFloor;
@@ -53,7 +47,6 @@ public class Environmental{
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
     private JPanel panel = new JPanel();
-    private JPanel [][] roomPanels;
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
@@ -65,24 +58,10 @@ public class Environmental{
     	User.openHouseStatus();
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
-
-    	// Find the max number of room in one floor, and make roomPanel list
-    	for (int i=0; i<nFloor; i++){
-    		if  (house.getFloorList().get(i).getRoomList().size() > nMaxRoom)
-    			nMaxRoom = house.getFloorList().get(i).getRoomList().size();
-    	}
-    	roomPanels = new JPanel[nFloor][nMaxRoom];
     	
     	// Initialize the frame
     	EnvFrm.getContentPane().setLayout(null);
     	EnvFrm.setResizable(false);
-       
-        // Generate a panel for each room
-        for (int i=0; i<nFloor; i++){
-        	for(int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
-        	roomPanels[i][j] = generateEnvRoomPanel(i,j);
-        	}
-        }
         
         // For each floor
         for (int i=0; i<nFloor; i++){
@@ -100,7 +79,9 @@ public class Environmental{
         		radioBtnMenu.addItemListener(new ItemListener() {
     	            public void itemStateChanged(ItemEvent e) {
     	            	if (e.getStateChange() == ItemEvent.SELECTED){
-	    	            	
+    	            		User.openHouseStatus();
+    	            		User.getHouse();
+    	            		
     	            		// Get floor and room index
 	    	            	iFloorChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(0));
 	    	            	iRoomChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(1));
@@ -111,7 +92,7 @@ public class Environmental{
 	    	            	EnvFrm.revalidate();
 	    	            	
 	    	            	// Show new JPanel
-	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
+	    	            	panel = generateEnvRoomPanel(iFloorChoosed,iRoomChoosed);
 	    	            	panel.setBounds(0, 0, 800, 500);
    	            	
 	    	            	// Change the title to show room selected

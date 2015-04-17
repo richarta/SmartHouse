@@ -3,15 +3,15 @@
  * Term: Spring 2015
  * Assignment: SmartHouse Project
  * @author: Young J. Park, Andrew
- * Date: 09 April 2015
+ * Date: 17 April 2015
  */
-import java.awt.Font;
+
+import java.awt.Font; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,42 +19,39 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
  
-
 public class Security{
-	
-	// Test Launching GUI
-	/**
-	public static void main(String[] args) {
-       new Security();
-    } //*/
 	
 	// Initialize
 	private House house;		
 	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
-    private int nMaxRoom = 0;
     private JFrame SecFrm = new JFrame();
     private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
     private JPanel panel = new JPanel();
-    private JPanel [][] roomPanels;
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
     private JButton helpbtn = new JButton("Help");
+    private JButton armbtn = new JButton("Arm");
+    private JButton disarmbtn = new JButton("Disarm");
+    private JLabel actionLabel = new JLabel("");
+    private boolean visibled = false;
+    private int option;
+    private Object[] options = {"Lock Down House", "Dismiss"};
     
     public Security() {	    	
     	
@@ -63,25 +60,11 @@ public class Security{
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
     	
-    	// Find the max number of room in one floor, and make roomPanel list
-    	for (int i=0; i<nFloor; i++){
-    		if  (house.getFloorList().get(i).getRoomList().size() > nMaxRoom)
-    			nMaxRoom = house.getFloorList().get(i).getRoomList().size();
-    	}
-    	roomPanels = new JPanel[nFloor][nMaxRoom];
-    	
     	// Initialize the frame
     	SecFrm.getContentPane().setLayout(null);
     	SecFrm.setResizable(false);
     	SecFrm.getContentPane().setLayout(null);
     	SecFrm.setResizable(false);
-       
-        // Generate a panel for each room
-        for (int i=0; i<nFloor; i++){
-        	for(int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
-        	roomPanels[i][j] = generateSecRoomPanel(i,j);
-        	}
-        }
         
      // For each floor
         for (int i=0; i<nFloor; i++){
@@ -99,7 +82,10 @@ public class Security{
         		radioBtnMenu.addItemListener(new ItemListener() {
     	            public void itemStateChanged(ItemEvent e) {
     	            	if (e.getStateChange() == ItemEvent.SELECTED){
-	    	            	
+    	            		User.openHouseStatus();
+    	            		house = User.getHouse();
+    	            		visibled = false;
+    	            		
     	            		// Get floor and room index
 	    	            	iFloorChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(0));
 	    	            	iRoomChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(1));
@@ -110,7 +96,7 @@ public class Security{
 	    	            	SecFrm.revalidate();
 	    	            	
 	    	            	// Show new JPanel
-	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
+	    	            	panel = generateSecRoomPanel(iFloorChoosed,iRoomChoosed);
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
 	    	            	// Change the title to show room selected
@@ -122,6 +108,7 @@ public class Security{
 	    	            	SecFrm.getContentPane().add(panel);
 	    	            	SecFrm.repaint();
 	    	            	SecFrm.revalidate();
+	    	            	visibled = true;
     	            	}
     	            }
     	        });
@@ -170,14 +157,37 @@ public class Security{
 				help();
 			}
 		});
-		SecFrm.add(helpbtn);
-		
+		SecFrm.add(helpbtn);		
+
+		// arm button
+		armbtn.setBounds(20, 440, 150, 23);
+		armbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e4) {
+				house.setCombat(true);
+				User.saveHouseStatus();
+				actionLabel.setText("House is armed ");
+			}
+		});
+		SecFrm.add(armbtn);
+
+		// disarm button
+		disarmbtn.setBounds(330, 440, 150, 23);
+		disarmbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e4) {
+				house.setCombat(false);
+				actionLabel.setText("House is disarmed ");
+				User.saveHouseStatus();
+			}
+		});
+		SecFrm.add(disarmbtn);
+
         // Set Frame
         SecFrm.setTitle("Security Controls");
         SecFrm.setLocation(120, 120);
         SecFrm.setSize(820,530);
         SecFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SecFrm.setVisible(true);
+        visibled = true;
     }
     
 
@@ -191,7 +201,6 @@ public class Security{
     	JPanel panel = new JPanel();
     	JLabel doorLabel = new JLabel("Doors");
     	JLabel windowLabel = new JLabel("Windows");
-    	JLabel actionLabel = new JLabel("");
     	JButton lockBtn = new JButton("Lock Down");
     	ArrayList <JRadioButton> lockBtnList = new ArrayList<JRadioButton>();
     	ImageIcon img_doorUnlocked = new ImageIcon("icon/door_unlocked.png");
@@ -214,30 +223,30 @@ public class Security{
 		actionLabel.setBounds(580, 410, 200, 23);
 		actionLabel.setHorizontalAlignment(SwingConstants.TRAILING);
 		panel.add(actionLabel);
-		
+
 		// Lockdown
 		lockBtn.setBackground(new Color(60, 179, 113));
 		lockBtn.setForeground(Color.BLACK);
 		lockBtn.setBounds(305, 350, 200, 30);
 		lockBtn.addActionListener (new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	for (int i=0; i<lockBtnList.size(); i++){
-            		lockBtnList.get(i).setSelected(true);
-            	}
-            		
-            	for (int i=0; i<room.getWindowList().size(); i++){
-            		room.getWindowList().get(i).setLock(true);
-            	}
-            		
-            	for (int i=0; i<room.getDoorList().size(); i++){
-            		room.getDoorList().get(i).setLock(true);
-            	}
-            	
-            	actionLabel.setText("Lockdown is activated ");
-            }
-        });
-		panel.add(lockBtn);
-		
+			public void actionPerformed(ActionEvent e) {
+				for (int i=0; i<lockBtnList.size(); i++){
+					lockBtnList.get(i).setSelected(true);
+				}
+
+				for (int i=0; i<room.getWindowList().size(); i++){
+					room.getWindowList().get(i).setLock(true);
+				}
+
+				for (int i=0; i<room.getDoorList().size(); i++){
+					room.getDoorList().get(i).setLock(true);
+				}
+
+				actionLabel.setText("Lockdown is activated ");
+			}
+		});
+		panel.add(lockBtn);	
+
 		// Doors
 		for(int k=0; k<room.getDoorList().size(); k++){
 			Door door = room.getDoorList().get(k);
@@ -257,9 +266,52 @@ public class Security{
 			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		imageDoor.setIcon(img_doorUnlocked);
-	            		door.setLock(false);
-	            		actionLabel.setText(door.getName() + " is unlocked ");
+	            		boolean first = true;
+	            		if(house.getCombat() && visibled && first){
+		            		
+	            			option = JOptionPane.showOptionDialog(null, "Break in Alert", "Warning",
+	            					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
+	            					null, options, options[0]); 
+	            			if (option == 0){
+	            				first = false;
+	            				
+	            				// Lock all the doors and windows
+	            				for (int i =0; i<house.getFloorList().size(); i++){
+	            					for (int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
+	            						for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++)
+	            							house.getFloorList().get(i).getRoomList().get(j).getDoorList().get(k1).setLock(true);
+	            						for (int k2=0; k2<house.getFloorList().get(i).getRoomList().get(j).getWindowList().size(); k2++)
+	            							house.getFloorList().get(i).getRoomList().get(j).getWindowList().get(k2).setLock(true);
+	            					}
+	            				}
+	            				
+	            				for (int i=0; i<lockBtnList.size(); i++){
+	                        		lockBtnList.get(i).setSelected(true);
+	                        	}
+	                        		
+	                        	for (int i=0; i<room.getWindowList().size(); i++){
+	                        		room.getWindowList().get(i).setLock(true);
+	                        	}
+	                        		
+	                        	for (int i=0; i<room.getDoorList().size(); i++){
+	                        		room.getDoorList().get(i).setLock(true);
+	                        	}
+	                        	
+	                        	actionLabel.setText("Lock everything ");
+	            			}
+	            			else if (option == 1){
+	            				actionLabel.setText("Warning was dismissed");
+	            				imageDoor.setIcon(img_doorUnlocked);
+		            			door.setLock(false);
+		            			actionLabel.setText(door.getName() + " is unlocked ");
+	            			}
+	            		}
+	            		
+	            		else{
+	            			imageDoor.setIcon(img_doorUnlocked);
+	            			door.setLock(false);
+	            			actionLabel.setText(door.getName() + " is unlocked ");
+	            		}
 	            	}
 	            }
 	        });
@@ -268,7 +320,7 @@ public class Security{
 			lockButton.setBounds(200, 55+30*k, 85, 25);
 			lockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
-	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            	if(e.getStateChange() == ItemEvent.SELECTED){ 		
 	            		imageDoor.setIcon(img_doorLocked);
 	            		door.setLock(true);
 	            		actionLabel.setText(door.getName() + " is locked ");
@@ -306,9 +358,52 @@ public class Security{
 			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		window.setLock(false);
-	            		imageWindow.setIcon(img_windowUnlocked);
-	            		actionLabel.setText(window.getName() + " is unlocked ");
+	            		boolean first = true;
+	            		if(house.getCombat() && visibled && first){
+		            		
+	            			option = JOptionPane.showOptionDialog(null, "Break in Alert", "Warning",
+	            					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
+	            					null, options, options[0]); 
+	            			if (option == 0){
+	            				first = false;
+	            				
+	            				// Lock all the doors and windows
+	            				for (int i =0; i<house.getFloorList().size(); i++){
+	            					for (int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
+	            						for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++)
+	            							house.getFloorList().get(i).getRoomList().get(j).getDoorList().get(k1).setLock(true);
+	            						for (int k2=0; k2<house.getFloorList().get(i).getRoomList().get(j).getWindowList().size(); k2++)
+	            							house.getFloorList().get(i).getRoomList().get(j).getWindowList().get(k2).setLock(true);
+	            					}
+	            				}
+	            				
+	            				for (int i=0; i<lockBtnList.size(); i++){
+	                        		lockBtnList.get(i).setSelected(true);
+	                        	}
+	                        		
+	                        	for (int i=0; i<room.getWindowList().size(); i++){
+	                        		room.getWindowList().get(i).setLock(true);
+	                        	}
+	                        		
+	                        	for (int i=0; i<room.getDoorList().size(); i++){
+	                        		room.getDoorList().get(i).setLock(true);
+	                        	}
+	                        	
+	                        	actionLabel.setText("Lock everything ");
+	            			}
+	            			else if (option == 1){
+	            				actionLabel.setText("Warning was dismissed");
+	            				window.setLock(false);
+	    	            		imageWindow.setIcon(img_windowUnlocked);
+	    	            		actionLabel.setText(window.getName() + " is unlocked ");
+	            			}
+	            		}
+	            		
+	            		else{
+	            			window.setLock(false);
+		            		imageWindow.setIcon(img_windowUnlocked);
+		            		actionLabel.setText(window.getName() + " is unlocked ");
+	            		}
 	            	}
 	            }
 	        });

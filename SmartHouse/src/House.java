@@ -22,7 +22,8 @@ public class House implements Serializable{
 	private ArrayList<Floor> floorList = new ArrayList<>();
 	private String nameHs;
 	private Thermostat thermostat = new Thermostat();
-
+	private boolean combat = false;
+	
 	public void finalize() throws Throwable {
 
 	}
@@ -100,5 +101,13 @@ public class House implements Serializable{
 		
 		//set name of house
 		nameHs = newName;
+	}
+	
+	public boolean getCombat(){
+		return combat;
+	}
+	
+	public void setCombat(boolean newCombat){
+		combat = newCombat;
 	}
 }//end House

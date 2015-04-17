@@ -3,7 +3,7 @@
  * Term: Spring 2015
  * Assignment: SmartHouse Project
  * @author: Young J. Park
- * Date: 09 April 2015
+ * Date: 01 April 2015
  */
 
 import java.awt.Font;
@@ -12,11 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -29,32 +27,23 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.border.EtchedBorder;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
 
 public class Entertainment{
 	
-	// Test Launching GUI
-	/**
-	public static void main(String[] args) {
-       new Entertainment();
-    } //*/
-	
 	// Initialize
 	private House house;
 	private int nFloor;
     private int iFloorChoosed;
     private int iRoomChoosed;
-    private int nMaxRoom = 0;
     private JFrame EntFrm = new JFrame();
     private JFrame helpf = new JFrame();
     private JMenuBar menuBar = new JMenuBar();
     private ButtonGroup grop = new ButtonGroup();
     private ArrayList<JMenu> menus = new ArrayList<JMenu>();
     private JPanel panel = new JPanel();
-    private JPanel [][] roomPanels;
     private JButton menuBtn = new JButton("Return to Menu");
     private JLabel dirLabel = new JLabel("Select the Room from Menu");
     private final JPanel panel_2 = new JPanel();
@@ -67,25 +56,11 @@ public class Entertainment{
     	house = User.getHouse();
     	nFloor = house.getFloorList().size();
     	
-    	// Find the max number of room in one floor, and make roomPanel list
-    	for (int i=0; i<nFloor; i++){
-    		if  (house.getFloorList().get(i).getRoomList().size() > nMaxRoom)
-    			nMaxRoom = house.getFloorList().get(i).getRoomList().size();
-    	}
-    	roomPanels = new JPanel[nFloor][nMaxRoom];
-    	
     	// Initialize the frame
     	EntFrm.getContentPane().setLayout(null);
     	EntFrm.setResizable(false);
-       
-        // Generate a panel for each room
-        for (int i=0; i<nFloor; i++){
-        	for(int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
-        	roomPanels[i][j] = generateEntRoomPanel(i,j);
-        	}
-        }
         
-     // For each floor
+        // For each floor
         for (int i=0; i<nFloor; i++){
     		// Generate menu for each floor
         	JMenu fileMenu = new JMenu(house.getFloorList().get(i).getName());
@@ -101,7 +76,9 @@ public class Entertainment{
         		radioBtnMenu.addItemListener(new ItemListener() {
     	            public void itemStateChanged(ItemEvent e) {
     	            	if (e.getStateChange() == ItemEvent.SELECTED){
-	    	            	
+    	            		User.openHouseStatus();
+    	            		User.getHouse();
+    	            		
     	            		// Get floor and room index
 	    	            	iFloorChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(0));
 	    	            	iRoomChoosed = Character.getNumericValue(radioBtnMenu.getName().charAt(1));
@@ -112,7 +89,7 @@ public class Entertainment{
 	    	            	EntFrm.revalidate();
 	    	            	
 	    	            	// Show new JPanel
-	    	            	panel = roomPanels[iFloorChoosed][iRoomChoosed];
+	    	            	panel = generateEntRoomPanel(iFloorChoosed, iRoomChoosed);
 	    	            	panel.setBounds(0, 0, 800, 500);
 	    	            	
 	    	            	// Change the title to show room selected

@@ -38,13 +38,9 @@ public class SampleHouseSimulation {
 	private static JLabel livWindow2 = new JLabel("");
 	private static JLabel lblNewLabel = new JLabel("");
 	private static JLabel temp = new JLabel("Temperature");
-	private static JLabel r1Temp = new JLabel("");
-	private static JLabel kitTemp = new JLabel("");
-	private static JLabel livTemp = new JLabel("");
+	private static JLabel houseTemp = new JLabel("");
 	private static House house;
-	private static int r1CT = -100;
-	private static int kitCT = -100;
-	private static int livCT = -100;
+	private static int houseCT = -100;
 	private static ImageIcon iconLON = new ImageIcon("samplehouse/light_on.png");
 	private static ImageIcon iconLOFF = new ImageIcon("samplehouse/light_off.png");
 	private static ImageIcon iconFON = new ImageIcon("samplehouse/faucet_on.png");
@@ -65,11 +61,12 @@ public class SampleHouseSimulation {
 		while(true){
 			changeStatus();
 			
+			/*
 			double r = Math.random();
 			if (r < 0.1){
 				System.out.println(r);
 				popUpSecurityAlarm();
-			}
+			}*/
 		}
 	}
 	
@@ -144,22 +141,11 @@ public class SampleHouseSimulation {
 		temp.setFont(new Font("Tahoma", Font.BOLD, 15));
 		sample.getContentPane().add(temp);
 		
-		r1Temp.setBounds(645,55,220,20);
-		r1Temp.setHorizontalAlignment(SwingConstants.CENTER);
-		r1Temp.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		sample.getContentPane().add(r1Temp);
+		houseTemp.setBounds(645,55,220,20);
+		houseTemp.setHorizontalAlignment(SwingConstants.CENTER);
+		houseTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sample.getContentPane().add(houseTemp);
 		
-		kitTemp.setBounds(645,75,220,20);
-		kitTemp.setText("Kitchen Temperature =   F");
-		kitTemp.setHorizontalAlignment(SwingConstants.CENTER);
-		kitTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		sample.getContentPane().add(kitTemp);
-		
-		livTemp.setBounds(645,95,220,20);
-		livTemp.setText("Living Room Temperature =   F");
-		livTemp.setHorizontalAlignment(SwingConstants.CENTER);
-		livTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		sample.getContentPane().add(livTemp);
 		
 		lblNewLabel.setIcon(iconBG);
 		lblNewLabel.setBounds(0, 0, 640, 480);
@@ -204,44 +190,18 @@ public class SampleHouseSimulation {
 		}
 		
 		// Set temperature
-		if (r1CT == -100)
-			r1CT = house.getThermostat().getTemp();
-		else if(r1CT < house.getThermostat().getTemp())
-			r1CT++;
-		else if(r1CT > house.getThermostat().getTemp())
-			r1CT--;
+		if (houseCT == -100)
+			houseCT = house.getThermostat().getTemp();
+		else if(houseCT < house.getThermostat().getTemp())
+			houseCT++;
+		else if(houseCT > house.getThermostat().getTemp())
+			houseCT--;
 		
-		if (r1CT == house.getThermostat().getTemp())
-			r1Temp.setFont(new Font("Tahoma", Font.BOLD, 13));
+		if (houseCT == house.getThermostat().getTemp())
+			houseTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
 		else
-			r1Temp.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		r1Temp.setText("Room1 Temperature = "+ r1CT +"F");
-		
-		if (kitCT == -100)
-			kitCT = house.getThermostat().getTemp();
-		else if(kitCT < house.getThermostat().getTemp())
-			kitCT++;
-		else if(kitCT > house.getThermostat().getTemp())
-			kitCT--;
-		
-		if (kitCT == house.getThermostat().getTemp())
-			kitTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
-		else
-			kitTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		kitTemp.setText("Kitchen Temperature = "+ kitCT +"F");
-		
-		if (livCT == -100)
-			livCT = house.getThermostat().getTemp();
-		else if(livCT < house.getThermostat().getTemp())
-			livCT++;
-		else if(livCT > house.getThermostat().getTemp())
-			livCT--;
-		
-		if (livCT == house.getThermostat().getTemp())
-			livTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
-		else
-			livTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		livTemp.setText("Living Room Temperature = "+ livCT +"F");
+			houseTemp.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		houseTemp.setText("House Temperature = "+ houseCT +"F");
 		
 		// Set icons
 		if (house.getFloorList().get(0).getRoomList().get(0).getLightList().get(0).getStatus())
@@ -305,9 +265,7 @@ public class SampleHouseSimulation {
 			livWindow2.setIcon(iconWUL);
 	}
 	
-	/**
-	 * Pop-up security alarm
-	 */
+	/*
 	private static void popUpSecurityAlarm(){
 		// Initialize the panel
 		securityAlarm.setVisible(true);
@@ -352,4 +310,5 @@ public class SampleHouseSimulation {
 			e.printStackTrace();
 		}
 	}
+	*/
 }
