@@ -199,13 +199,16 @@ public class Personalize extends JPanel{
 	public static void addFloor(){
 		
 		//add floor in house class
-		house.addFloor(getTfNameFL().getText());
+		//if (){
+			
+		//}
+		house.addFloor(tfNameFL.getText());
 		
 		//Add floor to combo box
-		cbFloors.addItem(getTfNameFL().getText());
+		cbFloors.addItem(tfNameFL.getText());
 		
 		//Erase text from floor name text field
-		getTfNameFL().setText("");
+		tfNameFL.setText("");
 		
 		//Set newly created floor as selected index
 		cbFloors.setSelectedIndex(cbFloors.getItemCount() - 1);
@@ -265,14 +268,14 @@ public class Personalize extends JPanel{
 	public static void addRoom(){
 		
 		//add room to house class
-		house.getFloorList().get(cbFloors.getSelectedIndex()).addRoom(getTfNameRM().getText());
+		house.getFloorList().get(cbFloors.getSelectedIndex()).addRoom(tfNameRM.getText());
 		
 		//Add room to combo box
-		cbRooms.addItem(getTfNameRM().getText());
+		cbRooms.addItem(tfNameRM.getText());
 		cbRooms.setSelectedIndex(cbRooms.getItemCount() - 1);
 		
 		//Erase text from room name text field
-		getTfNameRM().setText("");
+		tfNameRM.setText("");
 	}
 
 	public static void removeRoom(){
@@ -329,7 +332,7 @@ public class Personalize extends JPanel{
 	public static void addDoor(){
 		
 		//add door to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addDoor(getTextField().getText());
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addDoor(textField.getText());
 	}
 	
 	public static void removeDoor(String doorName){
@@ -387,7 +390,7 @@ public class Personalize extends JPanel{
 	public static void addWindow(){
 		
 		//add window to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addWindow(getTextField().getText());
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addWindow(textField.getText());
 	}
 	
 	public static void removeWindow(String windowName){
@@ -445,7 +448,7 @@ public class Personalize extends JPanel{
 	public static void addTV(){
 		
 		//add television to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addTelevision(getTextField().getText());
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addTelevision(textField.getText());
 	}
 	
 	public static void removeTV(String nameTelevision){
@@ -503,7 +506,7 @@ public class Personalize extends JPanel{
 	public static void addLight(){
 		
 		//add light to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addLight(getTextField().getText());
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addLight(textField.getText());
 	}
 	
 	public static void removeLight(String nameLight){
@@ -561,7 +564,7 @@ public class Personalize extends JPanel{
 	public static void addRadio(){
 		
 		//add radio to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addRadio(getTextField().getText());
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addRadio(textField.getText());
 	}
 	
 	public static void removeRadio(String nameRadio){
@@ -619,7 +622,7 @@ public class Personalize extends JPanel{
 	public static void addFaucet(){
 		
 		//add faucet to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addFaucet(getTextField().getText());
+		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addFaucet(textField.getText());
 	}
 	
 	public static void removeFaucet(String nameFaucet){
@@ -754,21 +757,21 @@ public class Personalize extends JPanel{
 				sl_panelFloor.putConstraint(SpringLayout.WEST, lblNewFloor, 10, SpringLayout.WEST, panelFloor);
 				panelFloor.add(lblNewFloor);
 				
-				setTfNameFL(new JTextField());
-				sl_panelFloor.putConstraint(SpringLayout.NORTH, getTfNameFL(), 11, SpringLayout.NORTH, panelFloor);
-				sl_panelFloor.putConstraint(SpringLayout.WEST, getTfNameFL(), 6, SpringLayout.EAST, lblNewFloor);
-				panelFloor.add(getTfNameFL());
-				getTfNameFL().setColumns(10);
+				tfNameFL = new JTextField();
+				sl_panelFloor.putConstraint(SpringLayout.NORTH, tfNameFL, 11, SpringLayout.NORTH, panelFloor);
+				sl_panelFloor.putConstraint(SpringLayout.WEST, tfNameFL, 6, SpringLayout.EAST, lblNewFloor);
+				panelFloor.add(tfNameFL);
+				tfNameFL.setColumns(10);
 				
 				JButton btnAddFloor = new JButton("Add Floor");
-				sl_panelFloor.putConstraint(SpringLayout.EAST, getTfNameFL(), -6, SpringLayout.WEST, btnAddFloor);
+				sl_panelFloor.putConstraint(SpringLayout.EAST, tfNameFL, -6, SpringLayout.WEST, btnAddFloor);
 				sl_panelFloor.putConstraint(SpringLayout.NORTH, btnAddFloor, 8, SpringLayout.NORTH, panelFloor);
 				sl_panelFloor.putConstraint(SpringLayout.EAST, btnAddFloor, -10, SpringLayout.EAST, panelFloor);
 				panelFloor.add(btnAddFloor);
 				
-				sl_panelFloor.putConstraint(SpringLayout.NORTH, cbFloors, 6, SpringLayout.SOUTH, getTfNameFL());
-				sl_panelFloor.putConstraint(SpringLayout.WEST, cbFloors, 0, SpringLayout.WEST, getTfNameFL());
-				sl_panelFloor.putConstraint(SpringLayout.EAST, cbFloors, 0, SpringLayout.EAST, getTfNameFL());
+				sl_panelFloor.putConstraint(SpringLayout.NORTH, cbFloors, 6, SpringLayout.SOUTH, tfNameFL);
+				sl_panelFloor.putConstraint(SpringLayout.WEST, cbFloors, 0, SpringLayout.WEST, tfNameFL);
+				sl_panelFloor.putConstraint(SpringLayout.EAST, cbFloors, 0, SpringLayout.EAST, tfNameFL);
 				panelFloor.add(cbFloors);
 				
 				JButton btnRemoveFL = new JButton("Remove Selected Floor");
@@ -802,16 +805,16 @@ public class Personalize extends JPanel{
 				sl_panelRoom.putConstraint(SpringLayout.NORTH, btnAddRoom, -4, SpringLayout.NORTH, lblNewRoom);
 				panelRoom.add(btnAddRoom);
 				
-				setTfNameRM(new JTextField());
-				sl_panelRoom.putConstraint(SpringLayout.NORTH, getTfNameRM(), -3, SpringLayout.NORTH, lblNewRoom);
-				sl_panelRoom.putConstraint(SpringLayout.WEST, getTfNameRM(), 2, SpringLayout.EAST, lblNewRoom);
-				sl_panelRoom.putConstraint(SpringLayout.EAST, getTfNameRM(), -6, SpringLayout.WEST, btnAddRoom);
-				panelRoom.add(getTfNameRM());
-				getTfNameRM().setColumns(10);
+				tfNameRM = new JTextField();
+				sl_panelRoom.putConstraint(SpringLayout.NORTH, tfNameRM, -3, SpringLayout.NORTH, lblNewRoom);
+				sl_panelRoom.putConstraint(SpringLayout.WEST, tfNameRM, 2, SpringLayout.EAST, lblNewRoom);
+				sl_panelRoom.putConstraint(SpringLayout.EAST, tfNameRM, -6, SpringLayout.WEST, btnAddRoom);
+				panelRoom.add(tfNameRM);
+				tfNameRM.setColumns(10);
 				
-				sl_panelRoom.putConstraint(SpringLayout.NORTH, cbRooms, 6, SpringLayout.SOUTH, getTfNameRM());
-				sl_panelRoom.putConstraint(SpringLayout.WEST, cbRooms, 0, SpringLayout.WEST, getTfNameRM());
-				sl_panelRoom.putConstraint(SpringLayout.EAST, cbRooms, 0, SpringLayout.EAST, getTfNameRM());
+				sl_panelRoom.putConstraint(SpringLayout.NORTH, cbRooms, 6, SpringLayout.SOUTH, tfNameRM);
+				sl_panelRoom.putConstraint(SpringLayout.WEST, cbRooms, 0, SpringLayout.WEST, tfNameRM);
+				sl_panelRoom.putConstraint(SpringLayout.EAST, cbRooms, 0, SpringLayout.EAST, tfNameRM);
 				panelRoom.add(cbRooms);
 				
 				JButton btnRemoveRM = new JButton("Remove Room");
@@ -875,13 +878,13 @@ public class Personalize extends JPanel{
 				sl_panelAdditions.putConstraint(SpringLayout.WEST, lblAdditionName, 0, SpringLayout.WEST, lblAddition);
 				panelAdditions.add(lblAdditionName);
 				
-				setTextField(new JTextField());
-				sl_panelAdditions.putConstraint(SpringLayout.EAST, getTextField(), -137, SpringLayout.EAST, panelAdditions);
-				sl_panelAdditions.putConstraint(SpringLayout.WEST, getTextField(), 10, SpringLayout.WEST, panelAdditions);
-				sl_panelAdditions.putConstraint(SpringLayout.NORTH, btnAdd, 6, SpringLayout.SOUTH, getTextField());
-				sl_panelAdditions.putConstraint(SpringLayout.NORTH, getTextField(), 6, SpringLayout.SOUTH, cbAdditions);
-				panelAdditions.add(getTextField());
-				getTextField().setColumns(10);
+				textField = new JTextField();
+				sl_panelAdditions.putConstraint(SpringLayout.EAST, textField, -137, SpringLayout.EAST, panelAdditions);
+				sl_panelAdditions.putConstraint(SpringLayout.WEST, textField, 10, SpringLayout.WEST, panelAdditions);
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, btnAdd, 6, SpringLayout.SOUTH, textField);
+				sl_panelAdditions.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, cbAdditions);
+				panelAdditions.add(textField);
+				textField.setColumns(10);
 				
 				JLabel label = new JLabel("");
 				sl_panelAdditions.putConstraint(SpringLayout.NORTH, label, 6, SpringLayout.SOUTH, lblAdditionName);
@@ -1063,7 +1066,7 @@ public class Personalize extends JPanel{
 						switch(cbAdditions.getSelectedIndex()){
 						case 0: //Door
 							addDoor();
-							getTextField().setText("");
+							textField.setText("");
 							cbAdditions.setSelectedIndex(-1);
 							lblAddition.setText("");
 							lblAdditionName.setText("");
@@ -1073,7 +1076,7 @@ public class Personalize extends JPanel{
 							break;
 						case 1: //Window
 							addWindow();
-							getTextField().setText("");
+							textField.setText("");
 							cbAdditions.setSelectedIndex(-1);
 							lblAddition.setText("");
 							lblAdditionName.setText("");
@@ -1083,7 +1086,7 @@ public class Personalize extends JPanel{
 							break;
 						case 2: //Light
 							addLight();
-							getTextField().setText("");
+							textField.setText("");
 							cbAdditions.setSelectedIndex(-1);
 							lblAddition.setText("");
 							lblAdditionName.setText("");
@@ -1093,7 +1096,7 @@ public class Personalize extends JPanel{
 							break;
 						case 3: //Television
 							addTV();
-							getTextField().setText("");
+							textField.setText("");
 							cbAdditions.setSelectedIndex(-1);
 							lblAddition.setText("");
 							lblAdditionName.setText("");
@@ -1103,7 +1106,7 @@ public class Personalize extends JPanel{
 							break;
 						case 4: //Radio
 							addRadio();
-							getTextField().setText("");
+							textField.setText("");
 							cbAdditions.setSelectedIndex(-1);
 							lblAddition.setText("");
 							lblAdditionName.setText("");
@@ -1113,7 +1116,7 @@ public class Personalize extends JPanel{
 							break;
 						case 5: //Faucet
 							addFaucet();
-							getTextField().setText("");
+							textField.setText("");
 							cbAdditions.setSelectedIndex(-1);
 							lblAddition.setText("");
 							lblAdditionName.setText("");
@@ -1132,8 +1135,8 @@ public class Personalize extends JPanel{
 						//Call remove method of proper selected addition
 						switch(cbAdditions.getSelectedIndex()){
 							case 0: //Door
-								removeDoor(getTextField().getText());
-								getTextField().setText("");
+								removeDoor(textField.getText());
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1142,8 +1145,8 @@ public class Personalize extends JPanel{
 								label_2.setText("");
 								break;
 							case 1: //Window
-								removeWindow(getTextField().getText());
-								getTextField().setText("");
+								removeWindow(textField.getText());
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1152,8 +1155,8 @@ public class Personalize extends JPanel{
 								label_2.setText("");
 								break;
 							case 2: //Light
-								removeLight(getTextField().getText());
-								getTextField().setText("");
+								removeLight(textField.getText());
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1162,8 +1165,8 @@ public class Personalize extends JPanel{
 								label_2.setText("");
 								break;
 							case 3: //Television
-								removeTV(getTextField().getText());
-								getTextField().setText("");
+								removeTV(textField.getText());
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1172,8 +1175,8 @@ public class Personalize extends JPanel{
 								label_2.setText("");
 								break;
 							case 4: //Radio
-								removeRadio(getTextField().getText());
-								getTextField().setText("");
+								removeRadio(textField.getText());
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1182,8 +1185,8 @@ public class Personalize extends JPanel{
 								label_2.setText("");
 								break;
 							case 5: //Faucet
-								removeFaucet(getTextField().getText());
-								getTextField().setText("");
+								removeFaucet(textField.getText());
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1205,11 +1208,11 @@ public class Personalize extends JPanel{
 							case 0: //Door
 								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().size(); ++i){
 									
-									if (getTextField().getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(i).getName())){
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getDoorList().get(i).getName())){
 										changeDoorGUI(i);
 									}
 								}
-								getTextField().setText("");
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1220,11 +1223,11 @@ public class Personalize extends JPanel{
 							case 1: //Window
 								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().size(); ++i){
 									
-									if (getTextField().getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(i).getName())){
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getWindowList().get(i).getName())){
 										changeWindowGUI(i);
 									}
 								}
-								getTextField().setText("");
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1235,11 +1238,11 @@ public class Personalize extends JPanel{
 							case 2: //Light
 								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().size(); ++i){
 									
-									if (getTextField().getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(i).getName())){
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getLightList().get(i).getName())){
 										changeLightGUI(i);
 									}
 								}
-								getTextField().setText("");
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1250,11 +1253,11 @@ public class Personalize extends JPanel{
 							case 3: //Television
 								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().size(); ++i){
 									
-									if (getTextField().getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(i).getName())){
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getTelevisionList().get(i).getName())){
 										changeTVGUI(i);
 									}
 								}
-								getTextField().setText("");
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1265,11 +1268,11 @@ public class Personalize extends JPanel{
 							case 4: //Radio
 								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().size(); ++i){
 									
-									if (getTextField().getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(i).getName())){
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getRadioList().get(i).getName())){
 										changeRadioGUI(i);
 									}
 								}
-								getTextField().setText("");
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
@@ -1280,11 +1283,11 @@ public class Personalize extends JPanel{
 							case 5: //Faucet
 								for (int i = 0; i < house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().size(); ++i){
 									
-									if (getTextField().getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(i).getName())){
+									if (textField.getText().equalsIgnoreCase(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).getFaucetList().get(i).getName())){
 										changeFaucetGUI(i);
 									}
 								}
-								getTextField().setText("");
+								textField.setText("");
 								cbAdditions.setSelectedIndex(-1);
 								lblAddition.setText("");
 								lblAdditionName.setText("");
