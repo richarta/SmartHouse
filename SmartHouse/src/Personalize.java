@@ -25,6 +25,8 @@ public class Personalize extends JPanel{
 	private static JComboBox<String> cbAdditions = new JComboBox<String>();
 	private static House house = new House();
 	
+	
+	
 	//Methods needed for Junit tests
 	public static JTextField getTfNameFL() {
 		return tfNameFL;
