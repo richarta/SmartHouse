@@ -17,8 +17,7 @@ public class Television implements Serializable{
 
 	}
 	/**
-	 * 
-	 * @param nameTv name of television
+	 * @param nameTv name of a television
 	 */
 	public Television(String nameTv){
 		this.nameTv = nameTv;
@@ -34,26 +33,38 @@ public class Television implements Serializable{
 		volume = 50;
 	}
 
+	/**
+	 * @return the channel of a television
+	 */
 	public int getChannel(){
 		return channel;
 	}
 
+	/**
+	 * @return the name of a television 
+	 */
 	public String getName(){
 		return nameTv;
 	}
 
+	/**
+	 * @return the status of a television
+	 */
 	public boolean getStatus(){
 		return status;
 	}
 
+	/**
+	 * @return the volume of a television
+	 */
 	public int getVolume(){
 		return volume;
 	}
 
 	/**
 	 * 
-	 * @param newChannel new channel of television
-	 * @return 
+	 * @param newChannel new channel of a television
+	 * Set channel of a television
 	 */
 	public void setChannel(int newChannel){
 		channel = newChannel;
@@ -62,8 +73,8 @@ public class Television implements Serializable{
 
 	/**
 	 * 
-	 * @param newName new name of television
-	 * @return 
+	 * @param newName new name of a television
+	 * Set name of a television
 	 */
 	public void setName(String newName){
 		nameTv = newName;
@@ -71,7 +82,7 @@ public class Television implements Serializable{
 	}
 
 	/**
-	 * @param newStatus new status of television
+	 * @param newStatus new status of a television
 	 */
 	public void setStatus(boolean newStatus){
 		status = newStatus;
@@ -79,9 +90,8 @@ public class Television implements Serializable{
 	}
 
 	/**
-	 * 
-	 * @param newVolume new volume of television
-	 * @return 
+	 * @param newVolume new volume of a television
+	 * Set volume of a television
 	 */
 	public void setVolume(int newVolume){
 		volume = newVolume;

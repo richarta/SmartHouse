@@ -1,6 +1,5 @@
 import java.io.Serializable;
 
-
 /**
  * @author YoungJin
  * @version 1.0
@@ -17,8 +16,7 @@ public class Radio implements Serializable{
 
 	}
 	/**
-	 * 
-	 * @param nameRd name of Radio
+	 * @param nameRd the name of a radio
 	 */
 	public Radio(String nameRd){
 		this.nameRd = nameRd;
@@ -34,26 +32,36 @@ public class Radio implements Serializable{
 		volume = 50;
 	}
 
+	/**
+	 * @return the channel of a radio
+	 */
 	public int getChannel(){
 		return channel;
 	}
 
+	/**
+	 * @return the name of a radio
+	 */
 	public String getName(){
 		return nameRd;
 	}
 
+	/**
+	 * @return the status (on/off) of a radio
+	 */
 	public boolean getStatus(){
 		return status;
 	}
 
+	/**
+	 * @return the volume of a radio
+	 */
 	public int getVolume(){
 		return volume;
 	}
 
-	/**
-	 * 
-	 * @param newChannel new channel of radio
-	 * @return 
+	/** 
+	 * @param newChannel new channel of a radio
 	 */
 	public void setChannel(int newChannel){
 		channel = newChannel;
@@ -62,7 +70,7 @@ public class Radio implements Serializable{
 
 	/**
 	 * 
-	 * @param newName new name of radio
+	 * @param newName new name of a radio
 	 * @return 
 	 */
 	public void setName(String newName){
@@ -71,7 +79,8 @@ public class Radio implements Serializable{
 	}
 
 	/**
-	 * @param newStatus new status of radio
+	 * @param newStatus new status of a radio
+	 * Set status of a radio
 	 */
 	public void setStatus(boolean newStatus){
 		status = newStatus;
@@ -80,8 +89,8 @@ public class Radio implements Serializable{
 
 	/**
 	 * 
-	 * @param newVolume new volume of radio
-	 * @return 
+	 * @param newVolume new volume of a radio
+	 * Set volume of a radio
 	 */
 	public void setVolume(int newVolume){
 		volume = newVolume;

@@ -6,16 +6,12 @@
  * Date: 10 April 2015
  */
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -23,7 +19,6 @@ import javax.swing.SwingConstants;
 
 public class SampleHouseSimulation {
 	private static JFrame sample = new JFrame();
-	private static JFrame securityAlarm = new JFrame();
 	private static JLabel r1Light1 = new JLabel("");
 	private static JLabel r1Door1 = new JLabel("");
 	private static JLabel r1Window1 = new JLabel("");
@@ -64,13 +59,6 @@ public class SampleHouseSimulation {
 		
 		while(true){
 			changeStatus();
-			
-			/*
-			double r = Math.random();
-			if (r < 0.1){
-				System.out.println(r);
-				popUpSecurityAlarm();
-			}*/
 		}
 	}
 	
@@ -289,51 +277,4 @@ public class SampleHouseSimulation {
 		else
 			livWindow2.setIcon(iconWUL);
 	}
-	
-	/*
-	private static void popUpSecurityAlarm(){
-		// Initialize the panel
-		securityAlarm.setVisible(true);
-		securityAlarm.setTitle("Security Alarm");
-		securityAlarm.setSize(450, 100);
-		securityAlarm.getContentPane().setLayout(null);
-		
-		JLabel lbl1 = new JLabel("Invader Found! Lock all the doors and windows");
-		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbl1.setBounds(0,15,422,15);
-		securityAlarm.getContentPane().add(lbl1, BorderLayout.NORTH);
-		
-		// Lock all the doors and windows
-		for (int i =0; i<house.getFloorList().size(); i++){
-			for (int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
-				for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++)
-					house.getFloorList().get(i).getRoomList().get(j).getDoorList().get(k1).setLock(true);
-				for (int k2=0; k2<house.getFloorList().get(i).getRoomList().get(j).getWindowList().size(); k2++)
-					house.getFloorList().get(i).getRoomList().get(j).getWindowList().get(k2).setLock(true);
-			}
-		}
-		
-		// Save the change
-		try {
-			FileOutputStream saveFile = new FileOutputStream("smp.sav");
-			
-			//create object to save objects to file
-			ObjectOutputStream save = new ObjectOutputStream(saveFile);
-			
-			//save floor information
-			save.writeObject(house);
-			
-			//close file
-			save.close();
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	*/
 }

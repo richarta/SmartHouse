@@ -1,8 +1,5 @@
 import java.io.Serializable;
 
-
-
-
 /**
  * @author YoungJin
  * @version 1.0
@@ -20,7 +17,7 @@ public class Thermostat implements Serializable{
 	}
 	/**
 	 * 
-	 * @param nameTh name of thermostat
+	 * @param nameTh name of a thermostat
 	 */
 	public Thermostat(String nameTh){
 		this.nameTh = nameTh;
@@ -32,18 +29,24 @@ public class Thermostat implements Serializable{
 		temperature = 80;
 	}
 
+	/**
+	 * @return the name of a thermostat
+	 */
 	public String getName(){
 		return nameTh;
 	}
 
+	/**
+	 * @return the temperature of a thermostat 
+	 */
 	public int getTemp(){
 		return temperature;
 	}
 
 	/**
 	 * 
-	 * @param newName new name of thermostat
-	 * @return 
+	 * @param newName new name of a thermostat
+	 * @return the name of a thermostat
 	 */
 	public void setName(String newName){
 		nameTh = newName;
@@ -52,8 +55,8 @@ public class Thermostat implements Serializable{
 
 	/**
 	 * 
-	 * @param newTemp new temperature of thermostat
-	 * @return 
+	 * @param newTemp new temperature of a thermostat
+	 * Set temperature of a thermostat
 	 */
 	public void setTemp(int newTemp){
 		temperature = newTemp;
