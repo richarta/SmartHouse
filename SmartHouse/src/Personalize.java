@@ -196,22 +196,61 @@ public class Personalize extends JPanel{
 		});
 	}
 
+	public static void invalidInputGUI(){
+		
+		//disable personalize frame
+		framePersonalize.setEnabled(false);
+		
+		//Create Frame and panel
+		JFrame frameInvalid = new JFrame("Invalid Entry");
+		frameInvalid.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		//create and add components
+		JLabel lblErrorYouDid = new JLabel("ERROR: You did not have a valid entry in a text field. Retry!");
+		frameInvalid.getContentPane().add(lblErrorYouDid);
+		JButton btnOkay = new JButton("OKAY");
+		frameInvalid.getContentPane().add(btnOkay);
+		
+		//set size of frame
+		frameInvalid.setBounds(0, 0, 400, 100);
+		frameInvalid.setResizable(false);
+		frameInvalid.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		//set frame visible and center
+		frameInvalid.setVisible(true);
+		frameInvalid.setLocationRelativeTo(null);
+		
+		//okay button listener
+		btnOkay.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				
+				//dispose invalid frame and enable personalize frame
+				frameInvalid.dispose();
+				framePersonalize.setEnabled(true);
+			}
+		});
+		
+	}
+
 	public static void addFloor(){
 		
-		//add floor in house class
-		//if (){
+		//add floor in house class if there is something in textfield
+		if (tfNameFL.getText().length() == 0){
+			invalidInputGUI();
+		}
+		else{
 			
-		//}
-		house.addFloor(tfNameFL.getText());
+			house.addFloor(tfNameFL.getText());
 		
-		//Add floor to combo box
-		cbFloors.addItem(tfNameFL.getText());
+			//Add floor to combo box
+			cbFloors.addItem(tfNameFL.getText());
 		
-		//Erase text from floor name text field
-		tfNameFL.setText("");
+			//Erase text from floor name text field
+			tfNameFL.setText("");
 		
-		//Set newly created floor as selected index
-		cbFloors.setSelectedIndex(cbFloors.getItemCount() - 1);
+			//Set newly created floor as selected index
+			cbFloors.setSelectedIndex(cbFloors.getItemCount() - 1);
+		}
 	}
 	
 	public static void removeFloor(){
@@ -267,15 +306,21 @@ public class Personalize extends JPanel{
 	
 	public static void addRoom(){
 		
-		//add room to house class
-		house.getFloorList().get(cbFloors.getSelectedIndex()).addRoom(tfNameRM.getText());
+		if(tfNameRM.getText().length() == 0){
+			invalidInputGUI();
+		}
+		else {
 		
-		//Add room to combo box
-		cbRooms.addItem(tfNameRM.getText());
-		cbRooms.setSelectedIndex(cbRooms.getItemCount() - 1);
+			//add room to house class
+			house.getFloorList().get(cbFloors.getSelectedIndex()).addRoom(tfNameRM.getText());
 		
-		//Erase text from room name text field
-		tfNameRM.setText("");
+			//Add room to combo box
+			cbRooms.addItem(tfNameRM.getText());
+			cbRooms.setSelectedIndex(cbRooms.getItemCount() - 1);
+		
+			//Erase text from room name text field
+			tfNameRM.setText("");
+		}
 	}
 
 	public static void removeRoom(){
@@ -936,15 +981,24 @@ public class Personalize extends JPanel{
 						}
 						
 						//Call add floor method
-						//addFloor();
+						addFloor();
 						
-						//Enable change floor name and remove floor button
-						btnChangeFL.setEnabled(true);
-						btnRemoveFL.setEnabled(true);
-						
-						//Change frame size
-						framePersonalize.setBounds(0, 0, 450, 280);
-						framePersonalize.setLocationRelativeTo(null);
+						if (house.getFloorList().size() == 0){
+							
+							//Format personalize frame
+							framePersonalize.setBounds(0, 0, 450, 175);
+							framePersonalize.setLocationRelativeTo(null);
+						}
+						else {
+							
+							//Enable change floor name and remove floor button
+							btnChangeFL.setEnabled(true);
+							btnRemoveFL.setEnabled(true);
+							
+							//Format personalize frame
+							framePersonalize.setBounds(0, 0, 450, 280);
+							framePersonalize.setLocationRelativeTo(null);
+						}
 					}
 				});
 				
@@ -994,17 +1048,34 @@ public class Personalize extends JPanel{
 						//Call add floor method
 						addRoom();
 						
-						//Enable change floor name and remove floor button
-						btnChangeRoomName.setEnabled(true);
-						btnRemoveRM.setEnabled(true);
-						btnFinish.setEnabled(true);
+						if(house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().size() > 0){
+							
+							//Enable change floor name and remove floor button
+							btnChangeRoomName.setEnabled(true);
+							btnRemoveRM.setEnabled(true);
+							btnFinish.setEnabled(true);
 						
-						//Change frame size
-						framePersonalize.setBounds(0, 0, 450, 440);
-						framePersonalize.setLocationRelativeTo(null);
+							//Change frame size
+							framePersonalize.setBounds(0, 0, 450, 440);
+							framePersonalize.setLocationRelativeTo(null);
 						
-						//set addition selected listener
-						cbAdditions.setSelectedIndex(-1);
+							//set addition selected listener
+							cbAdditions.setSelectedIndex(-1);
+						}
+						else{
+							
+							//disable necessary buttons
+							btnChangeRoomName.setEnabled(false);
+							btnRemoveRM.setEnabled(false);
+							btnFinish.setEnabled(false);
+							
+							//adjust personalize frame
+							framePersonalize.setBounds(0, 0, 450, 280);
+							framePersonalize.setLocationRelativeTo(null);
+							
+							//set index for rooms 
+							cbRooms.setSelectedIndex(-1);
+						}
 					}
 				});
 
