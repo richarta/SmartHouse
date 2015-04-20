@@ -33,7 +33,7 @@ import java.awt.SystemColor;
 
 public class Entertainment{
 	
-	// Initialize 
+	// Initialize
 	private House house;
 	private int nFloor;
     private int iFloorChoosed;
