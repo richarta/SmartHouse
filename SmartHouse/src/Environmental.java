@@ -270,7 +270,7 @@ public class Environmental{
 			imageLight.setBounds(27, 59+30*k, 15, 15);
 			panel.add(imageLight);
 			
-			onButton.setBounds(115, 55+30*k, 51, 25);
+			onButton.setBounds(175, 55+30*k, 51, 25);
 			onButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
@@ -283,7 +283,7 @@ public class Environmental{
 	        });
 			panel.add(onButton);
 
-			offButton.setBounds(170, 55+30*k, 63, 25);
+			offButton.setBounds(230, 55+30*k, 63, 25);
 			offButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
@@ -305,6 +305,7 @@ public class Environmental{
 			group.add(onButton);
 			group.add(offButton);
 		}
+		
 		// Faucets
 		for(int k=0; k<room.getFaucetList().size(); k++){
 			Faucet faucet = room.getFaucetList().get(k);
@@ -320,7 +321,7 @@ public class Environmental{
 			imageFaucet.setBounds(305, 59+30*k, 15, 15);
 			panel.add(imageFaucet);
 			
-			onButton.setBounds(393, 55+30*k, 51, 25);
+			onButton.setBounds(453, 55+30*k, 51, 25);
 			onButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
@@ -333,7 +334,7 @@ public class Environmental{
 	        });
 			panel.add(onButton);
 
-			offButton.setBounds(448, 55+30*k, 63, 25);
+			offButton.setBounds(508, 55+30*k, 63, 25);
 			offButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
