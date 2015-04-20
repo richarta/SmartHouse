@@ -7,7 +7,7 @@ import org.junit.Test;
 
 
 /**
- * @author YoungJin
+ * @author YoungJin Park
  *
  */
 public class parkTest {
