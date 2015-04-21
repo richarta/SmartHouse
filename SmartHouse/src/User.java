@@ -126,7 +126,7 @@ public abstract class User {
 		//create text file with username title
 		File file = new File(username + ".txt");
 		if(file.exists()){
-			
+			throw(new FileNotFoundException());
 		}
 		else{
 			PrintWriter printwriter = new PrintWriter(file);

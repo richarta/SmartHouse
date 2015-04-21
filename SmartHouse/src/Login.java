@@ -31,7 +31,7 @@ public class Login extends JFrame
 	
 	public Login(){
 	//Create the frame for the login panel
-	JFrame frame = new JFrame();
+	JFrame frame = new JFrame("Login");
 	frame.setSize(500, 297);
 	//Set panel layout and create panel (done by windowBuilder)	
 	SpringLayout sl_mainPanel = new SpringLayout();
@@ -53,6 +53,7 @@ public class Login extends JFrame
 	sl_mainPanel.putConstraint(SpringLayout.SOUTH, register, -161, SpringLayout.SOUTH, mainPanel);
 	//Create username field
 	JTextField userField = new JTextField(20);
+	sl_mainPanel.putConstraint(SpringLayout.EAST, register, 34, SpringLayout.EAST, userField);
 	sl_mainPanel.putConstraint(SpringLayout.SOUTH, loginB, -100, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, userField, 60, SpringLayout.NORTH, mainPanel);
 	sl_mainPanel.putConstraint(SpringLayout.WEST, userField, 164, SpringLayout.WEST, mainPanel);
@@ -61,7 +62,6 @@ public class Login extends JFrame
 	sl_mainPanel.putConstraint(SpringLayout.WEST, loginB, 0, SpringLayout.WEST, userField);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, register, 0, SpringLayout.NORTH, userField);
 	sl_mainPanel.putConstraint(SpringLayout.NORTH, userPass, 0, SpringLayout.NORTH, userField);
-	sl_mainPanel.putConstraint(SpringLayout.EAST, register, 0, SpringLayout.EAST, userField);
 	sl_mainPanel.putConstraint(SpringLayout.EAST, userPass, 0, SpringLayout.EAST, userField);
 	//Create password field
 	JPasswordField passField = new JPasswordField(20);
@@ -71,7 +71,7 @@ public class Login extends JFrame
 	mainPanel.setLayout(null);
 	mainPanel.setVisible(true);
 	//Add username field to pane;
-	userField.setBounds(188, 82, 160, 25);
+	userField.setBounds(188, 82, 165, 25);
 	mainPanel.add(userField);
 	
 
@@ -79,7 +79,7 @@ public class Login extends JFrame
 	mainPanel.add(userPass);
 
 	
-	passField.setBounds(188, 118, 160, 25);
+	passField.setBounds(188, 118, 165, 25);
 	mainPanel.add(passField);
 
 	loginB.setBounds(188, 154, 80, 25);
@@ -111,7 +111,7 @@ public class Login extends JFrame
 		}
 	}); 
 	
-	register.setBounds(268, 154, 80, 25);
+	register.setBounds(268, 154, 85, 25);
 	mainPanel.add(register);
 	register.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
@@ -133,6 +133,8 @@ public class Login extends JFrame
 	mainPanel.add(lblUsername);
 	
 	frame.getContentPane().add(mainPanel);
+	frame.setLocationRelativeTo(null);
+	frame.setResizable(false);
 	frame.setVisible(true);
 	}
 
