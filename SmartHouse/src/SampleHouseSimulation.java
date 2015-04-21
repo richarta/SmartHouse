@@ -178,7 +178,7 @@ public class SampleHouseSimulation {
 		// Open sample house
 		try {
 			//open file
-			FileInputStream saveFile = new FileInputStream("smp.sav");
+			FileInputStream saveFile = new FileInputStream("sample.sav");
 			
 			//open input stream
 			ObjectInputStream save = new ObjectInputStream(saveFile);

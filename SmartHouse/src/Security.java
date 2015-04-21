@@ -101,7 +101,7 @@ public class Security{
 	    	            	
 	    	            	// Change the title to show room selected
 	    	            	String s = house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName();
-	    	            	SecFrm.setTitle("Environmental Controls - " + s);
+	    	            	SecFrm.setTitle("Security Controls - " + s);
 	    	        		
 	    	        		dirLabel.setVisible(false);
 	    	        		
@@ -216,7 +216,7 @@ public class Security{
 		panel.add(doorLabel);
 		
 		windowLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		windowLabel.setBounds(405, 30, 90, 16);
+		windowLabel.setBounds(27, 206, 90, 16);
 		panel.add(windowLabel);
 		
 		actionLabel.setFont(new Font("Tahoma", Font.ITALIC, 13));
@@ -253,6 +253,9 @@ public class Security{
 			JLabel doorlbl = new JLabel(room.getDoorList().get(k).getName());
 			JRadioButton unlockButton = new JRadioButton("Unlocked");
 			JRadioButton lockButton = new JRadioButton("Locked");
+			JRadioButton openButton = new JRadioButton("Open");
+			JRadioButton closeButton = new JRadioButton("Close");
+			ButtonGroup group2 = new ButtonGroup();
 			ButtonGroup group = new ButtonGroup();
 			JLabel imageDoor = new JLabel(door.getLock() ? img_doorLocked : img_doorUnlocked);
 			
@@ -262,13 +265,13 @@ public class Security{
 			imageDoor.setBounds(27, 59+30*k, 15, 15);
 			panel.add(imageDoor);
 			
-			unlockButton.setBounds(115, 55+30*k, 85, 25);
+			
+			unlockButton.setBounds(200, 55+30*k, 90, 25);
 			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
 	            		boolean first = true;
 	            		if(house.getCombat() && visibled && first){
-		            		
 	            			option = JOptionPane.showOptionDialog(null, "Break in Alert", "Warning",
 	            					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
 	            					null, options, options[0]); 
@@ -278,23 +281,19 @@ public class Security{
 	            				// Lock all the doors and windows
 	            				for (int i =0; i<house.getFloorList().size(); i++){
 	            					for (int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
-	            						for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++)
+	            						for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++){
 	            							house.getFloorList().get(i).getRoomList().get(j).getDoorList().get(k1).setLock(true);
-	            						for (int k2=0; k2<house.getFloorList().get(i).getRoomList().get(j).getWindowList().size(); k2++)
+	            							house.getFloorList().get(i).getRoomList().get(j).getDoorList().get(k1).setClosed(true);
+	            						}
+	            						for (int k2=0; k2<house.getFloorList().get(i).getRoomList().get(j).getWindowList().size(); k2++){
 	            							house.getFloorList().get(i).getRoomList().get(j).getWindowList().get(k2).setLock(true);
+	            							house.getFloorList().get(i).getRoomList().get(j).getWindowList().get(k2).setClosed(true);
+	            						}
 	            					}
 	            				}
 	            				
 	            				for (int i=0; i<lockBtnList.size(); i++){
 	                        		lockBtnList.get(i).setSelected(true);
-	                        	}
-	                        		
-	                        	for (int i=0; i<room.getWindowList().size(); i++){
-	                        		room.getWindowList().get(i).setLock(true);
-	                        	}
-	                        		
-	                        	for (int i=0; i<room.getDoorList().size(); i++){
-	                        		room.getDoorList().get(i).setLock(true);
 	                        	}
 	                        	
 	                        	actionLabel.setText("Lock everything ");
@@ -317,18 +316,59 @@ public class Security{
 	        });
 			panel.add(unlockButton);
 
-			lockButton.setBounds(200, 55+30*k, 85, 25);
+			lockButton.setBounds(300, 55+30*k, 90, 25);
 			lockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
-	            	if(e.getStateChange() == ItemEvent.SELECTED){ 		
-	            		imageDoor.setIcon(img_doorLocked);
-	            		door.setLock(true);
-	            		actionLabel.setText(door.getName() + " is locked ");
+	            	if(e.getStateChange() == ItemEvent.SELECTED){ 	
+	            		if(!door.getClosed()){
+	            			unlockButton.setSelected(true);
+	            		}
+	            		else{
+	            			imageDoor.setIcon(img_doorLocked);
+	            			door.setLock(true);
+	            			actionLabel.setText(door.getName() + " is locked ");
+	            		}
 	            	}
 	            }
 	        });
 			lockBtnList.add(lockButton);
 			panel.add(lockButton);
+			
+			openButton.setBounds(400,55+30*k,90,25);
+			openButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		if(door.getLock()){
+	            			closeButton.setSelected(true);
+	            		}
+	            		else{
+	            			door.setClosed(false);
+	            			actionLabel.setText(door.getName() + " is open ");
+	            		}
+	            	}
+	            }
+	        });
+			panel.add(openButton);
+			
+			closeButton.setBounds(500,55+30*k,90,25);
+			closeButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		door.setClosed(true);
+	            		actionLabel.setText(door.getName() + " is closed ");
+	            	}
+	            }
+	        });
+			lockBtnList.add(closeButton);
+			panel.add(closeButton);
+			
+			if (door.getClosed())
+				closeButton.setSelected(true);
+			else
+				openButton.setSelected(true);
+			
+			group2.add(closeButton);
+			group2.add(openButton);
 			
 			if (door.getLock())
 				lockButton.setSelected(true);
@@ -345,16 +385,19 @@ public class Security{
 			JLabel windowlbl = new JLabel(room.getWindowList().get(k).getName());
 			JRadioButton unlockButton = new JRadioButton("Unlocked");
 			JRadioButton lockButton = new JRadioButton("Locked");
+			JRadioButton openButton = new JRadioButton("Open");
+			JRadioButton closeButton = new JRadioButton("Close");
+			ButtonGroup group2 = new ButtonGroup();
 			ButtonGroup group = new ButtonGroup();
 			JLabel imageWindow = new JLabel(window.getLock() ? img_windowLocked : img_windowUnlocked);
 			
-			windowlbl.setBounds(425, 59+30*k, 150, 16);		
+			windowlbl.setBounds(47, 235+30*k, 150, 16);		
 			panel.add(windowlbl);
 			
-			imageWindow.setBounds(405, 59+30*k, 15, 15);
+			imageWindow.setBounds(27, 235+30*k, 15, 15);
 			panel.add(imageWindow);
 			
-			unlockButton.setBounds(495, 55+30*k, 85, 25);
+			unlockButton.setBounds(200, 231+30*k, 90, 25);
 			unlockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
@@ -370,23 +413,19 @@ public class Security{
 	            				// Lock all the doors and windows
 	            				for (int i =0; i<house.getFloorList().size(); i++){
 	            					for (int j=0; j<house.getFloorList().get(i).getRoomList().size(); j++){
-	            						for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++)
+	            						for (int k1=0; k1<house.getFloorList().get(i).getRoomList().get(j).getDoorList().size(); k1++){
 	            							house.getFloorList().get(i).getRoomList().get(j).getDoorList().get(k1).setLock(true);
-	            						for (int k2=0; k2<house.getFloorList().get(i).getRoomList().get(j).getWindowList().size(); k2++)
+	            							house.getFloorList().get(i).getRoomList().get(j).getDoorList().get(k1).setClosed(true);
+	            						}
+	            						for (int k2=0; k2<house.getFloorList().get(i).getRoomList().get(j).getWindowList().size(); k2++){
 	            							house.getFloorList().get(i).getRoomList().get(j).getWindowList().get(k2).setLock(true);
+	            							house.getFloorList().get(i).getRoomList().get(j).getWindowList().get(k2).setClosed(true);
+	            						}
 	            					}
 	            				}
 	            				
 	            				for (int i=0; i<lockBtnList.size(); i++){
 	                        		lockBtnList.get(i).setSelected(true);
-	                        	}
-	                        		
-	                        	for (int i=0; i<room.getWindowList().size(); i++){
-	                        		room.getWindowList().get(i).setLock(true);
-	                        	}
-	                        		
-	                        	for (int i=0; i<room.getDoorList().size(); i++){
-	                        		room.getDoorList().get(i).setLock(true);
 	                        	}
 	                        	
 	                        	actionLabel.setText("Lock everything ");
@@ -409,18 +448,59 @@ public class Security{
 	        });
 			panel.add(unlockButton);
 
-			lockButton.setBounds(580, 55+30*k, 85, 25);
+			lockButton.setBounds(300, 231+30*k, 90, 25);
 			lockButton.addItemListener(new ItemListener() {
 	            public void itemStateChanged(ItemEvent e) {
 	            	if(e.getStateChange() == ItemEvent.SELECTED){
-	            		window.setLock(true);
-	            		imageWindow.setIcon(img_windowLocked);
-	            		actionLabel.setText(window.getName() + " is locked ");
+	            		if(!window.getClosed()){
+	            			unlockButton.setSelected(true);
+	            		}
+	            		else{
+	            			window.setLock(true);
+	            			imageWindow.setIcon(img_windowLocked);
+	            			actionLabel.setText(window.getName() + " is locked ");
+	            		}
 	            	}
 	            }
 	        });
 			lockBtnList.add(lockButton);
 			panel.add(lockButton);
+			
+			openButton.setBounds(400,231+30*k,90,25);
+			openButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		if(window.getLock()){
+	            			closeButton.setSelected(true);
+	            		}
+	            		else{
+	            			window.setClosed(false);
+	            			actionLabel.setText(window.getName() + " is open ");
+	            		}
+	            	}
+	            }
+	        });
+			panel.add(openButton);
+			
+			closeButton.setBounds(500,231+30*k,90,25);
+			closeButton.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	            	if(e.getStateChange() == ItemEvent.SELECTED){
+	            		window.setClosed(true);
+	            		actionLabel.setText(window.getName() + " is closed ");
+	            	}
+	            }
+	        });
+			lockBtnList.add(closeButton);
+			panel.add(closeButton);
+			
+			if (window.getClosed())
+				closeButton.setSelected(true);
+			else
+				openButton.setSelected(true);
+			
+			group2.add(closeButton);
+			group2.add(openButton);
 			
 			if (window.getLock())
 				lockButton.setSelected(true);

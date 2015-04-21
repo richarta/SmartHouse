@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Door implements Serializable{
 
 	private boolean lock;
+	private boolean closed;
 	private String nameDr;
 
 
@@ -17,6 +18,7 @@ public class Door implements Serializable{
 	}
 	public Door() {
 		lock = true;
+		closed = true;
 		nameDr = "Door";
 	}
 
@@ -25,6 +27,7 @@ public class Door implements Serializable{
 	 */
 	public Door(String nameDr){
 		lock = true;
+		closed = true;
 		this.nameDr = nameDr;
 	}
 
@@ -33,6 +36,13 @@ public class Door implements Serializable{
 	 */
 	public boolean getLock(){
 		return lock;
+	}
+	
+	/**
+	 * @return the closed state of a door
+	 */
+	public boolean getClosed(){
+		return closed;
 	}
 
 	/**
@@ -48,6 +58,15 @@ public class Door implements Serializable{
 	 */
 	public void setLock(boolean newLock){
 		lock = newLock;
+		User.saveHouseStatus();
+	}
+	
+	/**
+	 * @param newclosed new closed state of a door
+	 * Set closed state of a door
+	 */
+	public void setClosed(boolean newclosed){
+		closed = newclosed;
 		User.saveHouseStatus();
 	}
 

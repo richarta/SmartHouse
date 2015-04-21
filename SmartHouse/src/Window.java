@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Window implements Serializable{
 
 	private boolean lockWid;
+	private boolean closed;
 	private String nameWid;
 
 	public void finalize() throws Throwable {
@@ -16,11 +17,17 @@ public class Window implements Serializable{
 	public Window(){
 		nameWid = "Window";
 		lockWid = true;
+		closed = true;
 	}
 	
 	public Window(String nameWid){
 		this.nameWid = nameWid;
 		lockWid = true;
+		closed = true;
+	}
+	
+	public boolean getClosed(){
+		return closed;
 	}
 	
 	public boolean getLock(){
@@ -33,6 +40,11 @@ public class Window implements Serializable{
 
 	public void setLock(boolean lock){
 		this.lockWid = lock;
+		User.saveHouseStatus();
+	}
+	
+	public void setClosed(boolean newClosed){
+		closed = newClosed;
 		User.saveHouseStatus();
 	}
 	
