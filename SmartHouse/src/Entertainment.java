@@ -410,7 +410,7 @@ public class Entertainment{
 		lbl1.setBounds(0,13,622,15);
 		helpf.getContentPane().add(lbl1, BorderLayout.NORTH);
 		
-		JLabel lbl2 = new JLabel("You can change settings that include televisions, radios, and lock down mode.");
+		JLabel lbl2 = new JLabel("You can change settings that include televisions, radios, and power saver mode.");
 		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lbl2.setBounds(0, 41, 622, 15);
