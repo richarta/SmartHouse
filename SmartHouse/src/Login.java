@@ -31,7 +31,7 @@ public class Login extends JFrame
 	
 	public Login(){
 	//Create the frame for the login panel
-	JFrame frame = new JFrame();
+	JFrame frame = new JFrame("Login");
 	frame.setSize(500, 297);
 	//Set panel layout and create panel (done by windowBuilder)	
 	SpringLayout sl_mainPanel = new SpringLayout();
@@ -133,6 +133,8 @@ public class Login extends JFrame
 	mainPanel.add(lblUsername);
 	
 	frame.getContentPane().add(mainPanel);
+	frame.setLocationRelativeTo(null);
+	frame.setResizable(false);
 	frame.setVisible(true);
 	}
 

@@ -69,7 +69,7 @@ public class Personalize extends JPanel{
 		JLabel labelUsername = new JLabel("Username:");
 		JLabel labelPassword = new JLabel("Password:");
 		JTextField textfieldUsername = new JTextField(20);
-		JTextField textfieldPassword = new JTextField(20);
+		JPasswordField textfieldPassword = new JPasswordField(20);
 		SpringLayout sl_panelUNPW = new SpringLayout();
 			
 		//Adjust Placement of components
