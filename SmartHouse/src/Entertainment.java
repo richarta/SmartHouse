@@ -94,7 +94,7 @@ public class Entertainment{
 	    	            	
 	    	            	// Change the title to show room selected
 	    	            	String s = house.getFloorList().get(iFloorChoosed).getName()+", " + house.getFloorList().get(iFloorChoosed).getRoomList().get(iRoomChoosed).getName();
-	    	            	EntFrm.setTitle("Environmental Controls - " + s);
+	    	            	EntFrm.setTitle("Entertainment Controls - " + s);
 	    	        		
 	    	        		dirLabel.setVisible(false);
 	    	        		
