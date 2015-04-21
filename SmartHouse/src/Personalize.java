@@ -122,28 +122,101 @@ public class Personalize extends JPanel{
 		buttonSave.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				
-				//Pass username and password textfield to user method
-				try {
-					User.setUsername(textfieldUsername.getText());
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				//check for username and password
+				if (textfieldUsername.getText().length() == 0 || textfieldPassword.getText().length() == 0){
+					
+					//disable username password frame
+					frameUNPW.setEnabled(false);
+					textfieldUsername.setText("");
+					textfieldPassword.setText("");
+					
+					//Create Frame and panel
+					JFrame frameInvalid = new JFrame("Invalid Username");
+					frameInvalid.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+					
+					//create and add components
+					JLabel lblErrorYouDid = new JLabel("You did not enter a username and/or a password. Enter a valid username and/or password.");
+					frameInvalid.getContentPane().add(lblErrorYouDid);
+					JButton btnOkay = new JButton("OKAY");
+					frameInvalid.getContentPane().add(btnOkay);
+					
+					//set size of frame
+					frameInvalid.setBounds(0, 0, 550, 100);
+					frameInvalid.setResizable(false);
+					frameInvalid.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+					
+					//set frame visible and center
+					frameInvalid.setVisible(true);
+					frameInvalid.setLocationRelativeTo(null);
+					
+					//okay button listener
+					btnOkay.addMouseListener(new MouseAdapter(){
+						public void mouseClicked(MouseEvent e){
+							
+							//dispose invalid frame and display username password frame
+							frameInvalid.dispose();
+							frameUNPW.setEnabled(true);
+							frameUNPW.setVisible(true);
+						}
+					});
 				}
+				else{
+					
+					//Pass username and password textfield to user method
+					try {
+						
+						User.setUsername(textfieldUsername.getText());
+						
+						//dispose username and password GUI
+						frameUNPW.dispose();
+					
+						//Move to new GUI
+						addHouse();
+					} catch (FileNotFoundException e1) {
+						
+						//disable username password frame and set text fields
+						frameUNPW.setEnabled(false);
+						textfieldUsername.setText("");
+						textfieldPassword.setText("");
+
+						//Create Frame and panel
+						JFrame frameInvalid = new JFrame("Invalid Username");
+						frameInvalid.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+						
+						//create and add components
+						JLabel lblErrorYouDid = new JLabel("The username you entered is already in use! Enter a new username.");
+						frameInvalid.getContentPane().add(lblErrorYouDid);
+						JButton btnOkay = new JButton("OKAY");
+						frameInvalid.getContentPane().add(btnOkay);
+						
+						//set size of frame
+						frameInvalid.setBounds(0, 0, 400, 100);
+						frameInvalid.setResizable(false);
+						frameInvalid.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+						
+						//set frame visible and center
+						frameInvalid.setVisible(true);
+						frameInvalid.setLocationRelativeTo(null);
+						
+						//okay button listener
+						btnOkay.addMouseListener(new MouseAdapter(){
+							public void mouseClicked(MouseEvent e){
+								
+								//Dispose of frame and enable username password frame
+								frameInvalid.dispose();
+								frameUNPW.setEnabled(true);
+								frameUNPW.setVisible(true);
+							}
+						});
+					}
+				}				
 				try {
 					User.setPassword(textfieldPassword.getText());
-				} catch (FileNotFoundException e1) {
+				}
+				catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				//dispose username and password GUI
-				frameUNPW.dispose();
-				
-				//Move to new GUI
-				addHouse();
-				
-				//Save username and password in database
-				
 			}
 		});
 	}
@@ -227,6 +300,7 @@ public class Personalize extends JPanel{
 				//dispose invalid frame and enable personalize frame
 				frameInvalid.dispose();
 				framePersonalize.setEnabled(true);
+				framePersonalize.setVisible(true);
 			}
 		});
 		
@@ -376,8 +450,15 @@ public class Personalize extends JPanel{
 	
 	public static void addDoor(){
 		
-		//add door to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addDoor(textField.getText());
+		if(textField.getText().length() == 0){
+			
+			invalidInputGUI();
+		}
+		else {
+			
+			//add door to house instance
+			house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addDoor(textField.getText());
+		}
 	}
 	
 	public static void removeDoor(String doorName){
@@ -434,8 +515,14 @@ public class Personalize extends JPanel{
 	
 	public static void addWindow(){
 		
-		//add window to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addWindow(textField.getText());
+		if(textField.getText().length() == 0){
+			
+			invalidInputGUI();
+		}
+		else {
+			//add window to house instance
+			house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addWindow(textField.getText());
+		}
 	}
 	
 	public static void removeWindow(String windowName){
@@ -492,8 +579,14 @@ public class Personalize extends JPanel{
 	
 	public static void addTV(){
 		
-		//add television to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addTelevision(textField.getText());
+		if(textField.getText().length() == 0){
+			
+			invalidInputGUI();
+		}
+		else {
+			//add television to house instance
+			house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addTelevision(textField.getText());
+		}
 	}
 	
 	public static void removeTV(String nameTelevision){
@@ -550,8 +643,14 @@ public class Personalize extends JPanel{
 	
 	public static void addLight(){
 		
-		//add light to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addLight(textField.getText());
+		if(textField.getText().length() == 0){
+			
+			invalidInputGUI();
+		}
+		else {
+			//add light to house instance
+			house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addLight(textField.getText());
+		}
 	}
 	
 	public static void removeLight(String nameLight){
@@ -608,8 +707,14 @@ public class Personalize extends JPanel{
 	
 	public static void addRadio(){
 		
-		//add radio to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addRadio(textField.getText());
+		if(textField.getText().length() == 0){
+			
+			invalidInputGUI();
+		}
+		else {
+			//add radio to house instance
+			house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addRadio(textField.getText());
+		}
 	}
 	
 	public static void removeRadio(String nameRadio){
@@ -666,8 +771,14 @@ public class Personalize extends JPanel{
 	
 	public static void addFaucet(){
 		
-		//add faucet to house instance
-		house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addFaucet(textField.getText());
+		if(textField.getText().length() == 0){
+			
+			invalidInputGUI();
+		}
+		else {
+			//add faucet to house instance
+			house.getFloorList().get(cbFloors.getSelectedIndex()).getRoomList().get(cbRooms.getSelectedIndex()).addFaucet(textField.getText());
+		}
 	}
 	
 	public static void removeFaucet(String nameFaucet){
